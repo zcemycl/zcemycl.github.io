@@ -17,49 +17,7 @@
 		Gaussian Process<br>
 		</p>
 		<p>
-A homography \(H\) maps a set of points \(\mathrm{x}=(x,y,1)^\top\) to another set of points \(\mathrm{x}^\prime = (x',y',1)^\top\) up to a scalar.
-
-\begin{align}
-\mathrm{x}^\prime &\sim H\mathrm{x}\\
-\lambda
-\begin{pmatrix}
-x'\\ y'\\ 1
-\end{pmatrix} &= \begin{pmatrix}
-h_{11} & h_{12} & h_{13}\\
-h_{21} & h_{22} & h_{23}\\
-h_{31} & h_{32} & h_{33}\\
-\end{pmatrix}
-\begin{pmatrix}
-x \\ y \\ 1
-\end{pmatrix}\\
-\lambda x' &= h_{11}x+h_{12}y+h_{13}\\
-\lambda y' &= h_{21}x+h_{22}y+h_{23}\\
-\lambda &= h_{31}x+h_{32}y+h_{33}
-\end{align}
-
-
-Therefore, \(x'\) and \(y'\) are given by,
-
-\begin{align}
-x' &= \frac{h_{11}x+h_{12}y+h_{13}}{h_{31}x+h_{32}y+h_{33}} = \frac{h_{11}x_1+h_{12}x_2+h_{13}}{h_{31}x_1+h_{32}x_2+h_{33}} = x_1'\\
-y' &= \frac{h_{21}x+h_{22}y+h_{23}}{h_{31}x+h_{32}y+h_{33}} = \frac{h_{21}x_1+h_{22}x_2+h_{23}}{h_{31}x_1+h_{32}x_2+h_{33}} = x_2'
-\end{align}
-
-Rearranging the terms above, 
-
-\begin{align}
--h_{11}x_1-h_{12}x_2-h_{13}+h_{31}x_1x_1'+h_{32}x_2x_1'+h_{33}x_3x_1'&= 0 \\
--h_{21}x_1-h_{22}x_2-h_{23}+h_{31}x_1x_2'+h_{32}x_2x_2'+h_{33}x_3x_2'&= 0 \\
-\begin{pmatrix} a_x\\a_y \end{pmatrix} h &= 0 
-\end{align}
-
-where 
-
-\begin{align}
-a_x &= (-x_1,-x_2,-1,0,0,0,x_1x_1',x_2x_1',x_1') \\
-a_y &= (0,0,0,-x_1,-x_2,-x_3,x_1x_2',x_2x_2',x_2') \\
-h &= (h_{11},h_{12},h_{13},h_{21},h_{22},h_{23},h_{31},h_{32},h_{33})^\top
-\end{align}
+		<object data="maths/2dhomo.txt"></object>
 		</p>
 	</body>
 </html>
