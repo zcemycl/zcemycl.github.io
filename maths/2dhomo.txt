@@ -1,3 +1,11 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+                <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	</head>
+	<body>
 A homography \(H\) maps a set of points \(\mathrm{x}=(x,y,1)^\top\) to another set of points \(\mathrm{x}^\prime = (x',y',1)^\top\) up to a scalar.
 
 \begin{align}
@@ -42,3 +50,5 @@ a_x &= (-x_1,-x_2,-1,0,0,0,x_1x_1',x_2x_1',x_1') \\
 a_y &= (0,0,0,-x_1,-x_2,-x_3,x_1x_2',x_2x_2',x_2') \\
 h &= (h_{11},h_{12},h_{13},h_{21},h_{22},h_{23},h_{31},h_{32},h_{33})^\top
 \end{align}
+	</body>
+</html>
