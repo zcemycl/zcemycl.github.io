@@ -1,50 +1,44 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8"/>
-		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-		<title>Yui's Tech Blog</title>
-	</head>
-	<body>
-		<header>
-			<h1>About</h1>
-		</header>
-		<section>
-			<h3>Projects</h3>
-					<a href="https://github.com/zcemycl/Matlab-GAN">Matlab-GAN</a>
-					<br>
-					<a href="https://github.com/zcemycl/Robotics">Robotics</a>
-					<br>
-		</section>
-		<h3>Work Experiences</h3>
-		<p>
-		AI Consultant,DreamsAI<br>
-		Deep Learning Software Engineer Intern, Mathworks<br>
-		Student Research Assistant, Cambridge University Engineering Department<br>
-		Final Year Student Research Assistant, Biomedical Ultrasound Group, UCL<br>
-		Research Intern, Proton Therapy Group, UCL<br>
-		<h3>Blog</h3>
-		<p>
-		<a href="ai/ai.html">Artificial Intelligence</a><br>
-		<a href="mp/mp.html">Mathematics and Physics</a><br>
-		<a href="">Tech Explorations</a><br>
-        <div class="sketchfab-embed-wrapper">
-            <iframe title="A 3D model" width="640" height="480" src="https://sketchfab.com/models/9124006751bb43019b734023b482cc35/embed?autostart=1&amp;ui_controls=0&amp;ui_infos=0&amp;ui_inspector=0&amp;ui_stop=0&amp;ui_watermark=0&amp;ui_watermark_link=0" frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-            <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;">
-                <a href="https://sketchfab.com/3d-models/baked-ao-demo-lizard-mage-9124006751bb43019b734023b482cc35?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Baked AO Demo: Lizard Mage</a>
-                by <a href="https://sketchfab.com/Sketchfab?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
-                on <a href="https://sketchfab.com?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
-            </p>
-        </div>
+{% extends "layout.html" %}
+{% block content %}
 
-		</p>
-		<h3>Educations</h3>
-		<p>
-		MPhil Machine Learning and Machine Intelligence, University of Cambridge 
-		<br>
-		BSc Physics with Medical Physics, University College London
-		<br>
-		</p>
-	</body>
-</html>
+<header>
+    <h1>About</h1>
+</header>
+<section>
+    <h3>Projects</h3>
+        <a href="https://github.com/zcemycl/Matlab-GAN">Matlab-GAN</a>
+        <br>
+        <a href="https://github.com/zcemycl/Robotics">Robotics</a>
+        <br>
+</section>
+<h3>Work Experiences</h3>
+<p>
+AI Consultant,DreamsAI<br>
+Deep Learning Software Engineer Intern, Mathworks<br>
+Student Research Assistant, Cambridge University Engineering Department<br>
+Final Year Student Research Assistant, Biomedical Ultrasound Group, UCL<br>
+Research Intern, Proton Therapy Group, UCL<br>
+<h3>Blog</h3>
+<p>
+<a href="ai/ai.html">Artificial Intelligence</a><br>
+<a href="mp/mp.html">Mathematics and Physics</a><br>
+<a href="">Tech Explorations</a><br>
+<div class="sketchfab-embed-wrapper">
+    <iframe title="A 3D model" width="640" height="480" src="https://sketchfab.com/models/9124006751bb43019b734023b482cc35/embed?autostart=1&amp;ui_controls=0&amp;ui_infos=0&amp;ui_inspector=0&amp;ui_stop=0&amp;ui_watermark=0&amp;ui_watermark_link=0" frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+    <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;">
+        <a href="https://sketchfab.com/3d-models/baked-ao-demo-lizard-mage-9124006751bb43019b734023b482cc35?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Baked AO Demo: Lizard Mage</a>
+        by <a href="https://sketchfab.com/Sketchfab?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
+        on <a href="https://sketchfab.com?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
+    </p>
+</div>
+
+</p>
+<h3>Educations</h3>
+<p>
+MPhil Machine Learning and Machine Intelligence, University of Cambridge 
+<br>
+BSc Physics with Medical Physics, University College London
+<br>
+</p>
+
+{% endblock content %}
