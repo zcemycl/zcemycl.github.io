@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="static/behavior.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="static/behavior.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width; initial-scale=1.0">
 </head>
@@ -26,7 +28,7 @@
             <div class="content_collapse" style="max-height:100%; padding: 0 10px 5px 10px">
                 <p>Collection of MATLAB implementations of Generative Adversarial Networks (GANs) suggested in research papers. This repository contains codes to investigate different architectures of GAN models.</p>
                 <figure>
-                    <img src="https://raw.githubusercontent.com/zcemycl/Matlab-GAN/master/CycleGAN/CycleGAN.gif" alt="example for robotics" class="center" style="width: 100%" />
+                    <img src="https://raw.githubusercontent.com/zcemycl/Matlab-GAN/master/CycleGAN/CycleGAN.gif" alt="example for gan" class="center" style="width:70%; display:block; margin:auto;" />
                 </figure>
                 <button style="font-size:12px; float: right;" onclick="window.location.href='https://github.com/zcemycl/Matlab-GAN'">View in GitHub <i class="fa fa-github-square"></i></button>
             </div> 
@@ -35,7 +37,7 @@
             <div class="content_collapse" style="max-height:100%; padding: 0 10px 5px 10px">
                 <p>Collection of Python implementations of Robotics and Computer Vision theories.</p>
                 <figure>
-                    <img src="https://raw.githubusercontent.com/zcemycl/Robotics/master/Aerial%20Robotics/quadcopter2D.gif" alt="example for robotics" class="center"/>
+                    <img src="https://raw.githubusercontent.com/zcemycl/Robotics/master/Aerial%20Robotics/quadcopter2D.gif" alt="example for robotics" class="center" style="width:70%; display:block; margin:auto;"/>
                 </figure>
                 <button style="font-size:12px; float: right;" onclick="window.location.href='https://github.com/zcemycl/Robotics'">View in GitHub <i class="fa fa-github-square"></i></button>
             </div> 
@@ -92,11 +94,25 @@
 
         <button type="button" class="collapsible">Artificial Intelligence</button>
             <div class="content_collapse" style="max-height:100%; padding: 0 10px 5px 10px">
+                <img src="https://raw.githubusercontent.com/zcemycl/ProbabilisticPerspectiveMachineLearning/master/Probabilistic%20Machine%20Learning/Introduction%20to%20Probabilistic%20Machine%20Learning/logevidFit.png" style="width:20%; height:30%; display:block; margin:auto;">
+                <p>
+                    Marginal Likelihood is given by,
+                        $$p(\mathbf{y}|\mathbf{x},\mathcal{M}) = \mathcal{N}(\mathbf{y};\mathbf{0},\sigma^2_\mathbf{w}\mathbf{\Phi\Phi^\top}+\sigma^2_\mathbf{n}\mathbf{I})$$
+                </p>
                 <button style="font-size:12px; float: right;" onclick="window.location.href='ai/ai.html'">See More</button>
             </div> 
 
         <button type="button" class="collapsible">Mathematics and Physics</button>
             <div class="content_collapse" style="max-height:100%; padding: 0 10px 5px 10px">
+                <figure>
+                    <img src="https://raw.githubusercontent.com/zcemycl/PhysicsSimulation/master/orbit_moon_earth_sun/ezgif.com-video-to-gif.gif" alt="example for physics" class="center" style="width:50%; display:block; margin:auto;"/>
+                </figure>
+                <p>
+                    Planetry motion solution is given by,
+                    $$u = \frac{m|K|}{L^2}\sqrt{(1+\frac{2EL^2}{mK^2})}\cos\theta -\frac{mK}{L^2}$$
+                    where \(K=-GMm\) and \(L = mr^2\dot{\theta}\).
+                </p>
+
                 <button style="font-size:12px; float: right;" onclick="window.location.href='mp/mp.html'">See More</button>
             </div> 
 
@@ -118,8 +134,10 @@
     </div>
 
     <div id="Updates" class="tabcontent">
-        [08:21 16/08/2020 UK] Reorganize the main content page elements, Projects and Qualifications. <br>       
+        [11:15 16/08/2020 UK] Update Blog Tag, adjust gif and image size. <br>
         [08:53 16/08/2020 UK] Add LinkedIn and Github Icons with links. <br>
+        [08:21 16/08/2020 UK] Reorganize the main content page elements, Projects and Qualifications. <br>       
+
     </div>
 
 
