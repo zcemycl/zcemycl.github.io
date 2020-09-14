@@ -1,6 +1,6 @@
 /* For center content */
 .content {
-    max-width: 100%;
+    max-width: 70%;
     margin: auto;
 }
 
@@ -8,8 +8,8 @@
 @import url('https://fonts.googleapis.com/css?family=Lobster&display=swap') repeat scroll 0 0 rgba(0, 0, 0 , 0);
 
 .wrapper {
-  background-color:black;
-  color: white;
+  background: url("https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3450&q=80");
+  color: black;
   width: 100%;
   height: 100vh;
   justify-content: center;
@@ -38,8 +38,7 @@ label, p, a, h1, div {
 .tab {
   overflow: hidden;
   border: 1px solid #ccc;
-  background-color: black;
-  border-radius:10px
+  background-color: #f1f1f1;
 }
 
 /* Style the buttons inside the tab */
@@ -52,19 +51,16 @@ label, p, a, h1, div {
   padding: 14px 16px;
   transition: 0.3s;
   font-size: 17px;
-  color:white;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
   background-color: #ddd;
-  color:black;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: #aaa;
-  color:black;
+  background-color: #ccc;
 }
 
 /* Style the tab content */
@@ -73,20 +69,6 @@ label, p, a, h1, div {
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
-  border-radius:0 0 10px 10px;
-  -webkit-animation: fadeEffect 0.5s;
-  animation: fadeEffect 0.5s;
-}
-/* Go from zero to full opacity */
-@-webkit-keyframes fadeEffect {
-  0% {opacity: 0; height:0}
-  25% {opacity: 0; height:1}
-  100% {opacity: 1; height:1}
-}
-@keyframes fadeEffect {
-  0% {opacity: 0; height:0}
-  25% {opacity: 0; height:1}
-  100% {opacity: 1; height:1}
 }
 
 /* Collapsible */
@@ -101,7 +83,6 @@ label, p, a, h1, div {
   text-align: left;
   outline: none;
   font-size: 15px;
-  border-radius:5px 5px 0 0 ;
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
@@ -113,7 +94,7 @@ label, p, a, h1, div {
 /* Style the collapsible content. Note: hidden by default */
 .content_collapse {
   padding: 0 18px;
-  background-color: black;
+  background-color: white;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;

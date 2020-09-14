@@ -13,7 +13,6 @@ function openCity(evt, cityName) {
   evt.currentTarget.className += " active";
 }
 
-
 /* Collapsible */
 var coll = document.getElementsByClassName("collapsible");
 var i;
@@ -33,5 +32,4 @@ for (i = 0; i < coll.length; i++) {
 
 
 
-document.getElementById("defaultOpen").click();
 

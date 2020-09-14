@@ -3,18 +3,15 @@
 <head>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="stylesheet" href="../static/behavior.css">
+    <link rel="stylesheet" href="static/behavior.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        body{background-color:black;color:white}
-    </style>
     <meta name="viewport" content="width=device-width; initial-scale=1.0">
 </head>
 <body class="content wrapper">
-    <div style="background-color:black; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+    <div style="background-color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
 
-    <a href="https://www.linkedin.com/in/yui-chun-leung-48524b134" target="_blank" style="float:right;border-radius:5px" class="fa fa-linkedin"></a>
-    <a href="https://github.com/zcemycl" target="_blank" style="float:right;border-radius:5px;border-color:grey;border-style:solid;border-width:1px" class="fa fa-github"></a>
+    <a href="https://www.linkedin.com/in/yui-chun-leung-48524b134" style="float:right;" class="fa fa-linkedin"></a>
+    <a href="https://github.com/zcemycl" style="float:right;" class="fa fa-github"></a>
     <h3>Yui Chun Leung, Leo 梁睿雋 </h3>
     <h2>About</h2>
     <p>I am a Machine Learning Engineer at RE5Q. I have a broad interest in Machine Learning, particularly Robotics and Computer Vision. Below are further information about me. This github.io also acts as my Pensieve. </p>
@@ -23,12 +20,11 @@
         <button class="tablinks" onclick="openCity(event,'Projects')">Projects</button>
         <button class="tablinks" onclick="openCity(event,'Qualifications')">Qualifications</button>
         <button class="tablinks" onclick="openCity(event,'Blog')">Blog</button>
-        <button class="tablinks" id="defaultOpen" onclick="openCity(event,'Updates')">Updates</button>
-        <button class="tablinks" style="float: right;" onclick="window.location.href=''">Back</button>
+        <button class="tablinks" onclick="openCity(event,'Updates')">Updates</button>
     </div>
 
-    <div id="Projects" class="tabcontent">
-        <button type="button" class="collapsible active">Matlab-GAN</button>
+    <div id="Projects" class="tabcontent" style="display:block;">
+        <button type="button" class="collapsible">Matlab-GAN</button>
             <div class="content_collapse" style="max-height:100%; padding: 0 10px 5px 10px">
                 <p>Collection of MATLAB implementations of Generative Adversarial Networks (GANs) suggested in research papers. This repository contains codes to investigate different architectures of GAN models.</p>
                 <figure>
@@ -37,7 +33,7 @@
                 <button style="font-size:12px; float: right;" onclick="window.location.href='https://github.com/zcemycl/Matlab-GAN'">View in GitHub <i class="fa fa-github-square"></i></button>
             </div> 
  
-        <button type="button" class="collapsible active">Python-Robotics</button>
+        <button type="button" class="collapsible">Python-Robotics</button>
             <div class="content_collapse" style="max-height:100%; padding: 0 10px 5px 10px">
                 <p>Collection of Python implementations of Robotics and Computer Vision theories.</p>
                 <figure>
@@ -96,7 +92,7 @@
 
     <div id="Blog" class="tabcontent">
 
-        <button type="button" class="collapsible active">Tech Explorations</button>
+        <button type="button" class="collapsible">Tech Explorations</button>
             <div class="content_collapse" style="max-height:100%; padding: 0 10px 5px 10px">
                 <div class="sketchfab-embed-wrapper">
                     <iframe title="A 3D model" style="display:block; margin:auto;" width="80%" height="auto" src="https://sketchfab.com/models/9124006751bb43019b734023b482cc35/embed?autostart=1&amp;ui_controls=0&amp;ui_infos=0&amp;ui_inspector=0&amp;ui_stop=0&amp;ui_watermark=0&amp;ui_watermark_link=0" frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
@@ -106,18 +102,20 @@
                         on <a href="https://sketchfab.com?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
                     </p>
                 </div>
+                <button style="font-size:12px; float: right;" onclick="window.location.href='templates/techX/techX.html'">See More</button>
             </div> 
 
-        <button type="button" class="collapsible active">Artificial Intelligence</button>
+        <button type="button" class="collapsible">Artificial Intelligence</button>
             <div class="content_collapse" style="max-height:100%; padding: 0 10px 5px 10px">
                 <img src="https://raw.githubusercontent.com/zcemycl/ProbabilisticPerspectiveMachineLearning/master/Probabilistic%20Machine%20Learning/Introduction%20to%20Probabilistic%20Machine%20Learning/logevidFit.png" style="width:20%; height:30%; display:block; margin:auto;">
                 <p>
                     Marginal Likelihood is given by,
                         $$p(\mathbf{y}|\mathbf{x},\mathcal{M}) = \mathcal{N}(\mathbf{y};\mathbf{0},\sigma^2_\mathbf{w}\mathbf{\Phi\Phi^\top}+\sigma^2_\mathbf{n}\mathbf{I})$$
                 </p>
+                <button style="font-size:12px; float: right;" onclick="window.location.href='templates/ai/ai.html'">See More</button>
             </div> 
 
-        <button type="button" class="collapsible active">Mathematics and Physics</button>
+        <button type="button" class="collapsible">Mathematics and Physics</button>
             <div class="content_collapse" style="max-height:100%; padding: 0 10px 5px 10px">
                 <figure>
                     <img src="https://raw.githubusercontent.com/zcemycl/PhysicsSimulation/master/orbit_moon_earth_sun/ezgif.com-video-to-gif.gif" alt="example for physics" class="center" style="width:50%; display:block; margin:auto;"/>
@@ -127,6 +125,8 @@
                     $$u = \frac{m|K|}{L^2}\sqrt{(1+\frac{2EL^2}{mK^2})}\cos\theta -\frac{mK}{L^2}$$
                     where \(K=-GMm\) and \(L = mr^2\dot{\theta}\).
                 </p>
+
+                <button style="font-size:12px; float: right;" onclick="window.location.href='templates/mp/mp.html'">See More</button>
             </div> 
 
 
@@ -143,13 +143,13 @@
         [08:53 16/08/2020 UK] Add LinkedIn and Github Icons with links. <br>
         [08:21 16/08/2020 UK] Reorganize the main content page elements, Projects and Qualifications. <br>       
 
-
+        <button style="font-size:12px; float: right;" onclick="window.location.href=''">Back</button>
     </div>
 
 
 
     </div>
 
-    <script src="../static/behavior.js"></script>
+    <script src="static/behavior.js"></script>
 </body>
 </html>
