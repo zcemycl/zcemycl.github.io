@@ -17,7 +17,20 @@
 
     <h3>Arm Camera Calibration</h3>
     <hr>
+
     <img src="../../resources/magic_dobot.jpg" style="width:90vw">
+    <p>
+    The Dobot Magician does not come with a camera, and the one Dobot sold is too expensive. To reduce the cost, I synchronized the camera with the arm via opencv. The followings are the steps to calibrate, 
+    </p>
+    <ol>
+    <li> Use chessboard to calibrate the instrinsic properties of the camera used.</li>
+    <li> Undistort the curved camera view.</li> 
+    <li> Imagine mapping the input from the screen to the motion of the arm is an homography problem, to reduce 2d-to-3d problem into 2d-2d problem, calibrate depth first.</li>
+    <li> Then \(\lambda \mathrm{x}^\prime = \mathbf{H}\mathrm{x}\), we need to know \(\mathbf{H}\), so we need 9 pairs of correspondents \(\{\mathrm{x}^\prime,\mathrm{x}\}\).</li>
+    </ol>
+    <p>
+    After the calibration, now if you click on the screen with the mouse, the yellow sticker will follow accurately. 
+    </p>
     <video width="90%" controls autoplay loop>
         <source src="../../resources/Calibration.webm" type="video/webm">
     </video>
