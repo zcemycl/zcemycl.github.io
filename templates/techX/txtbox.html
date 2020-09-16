@@ -1,22 +1,80 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width; initial-scale=1.0">
     <style>
       body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
       /*h3{color:#00ff2b}*/
       a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+      }
+
     </style>
 </head>
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
 
-    <h3>Topic</h3>
+    <h3>Resizeable Textbox</h3>
     <hr>
+    <form method="POST" action="" enctype="multipart/form-data">
+        <textarea rows="4" name="text" placeholder="Cambridge is a mental hospital." style="width:50%"></textarea>
+        <button type="submit" name="submit_form_button" >Submit</button>
+        <div id="filetext">
+        </div>
+    </form>
+
+    <script>
+      var textarea = document.querySelector('textarea');
+
+      textarea.addEventListener('keydown', autosize);
+
+      function autosize(){
+        var el = this;
+        setTimeout(function(){
+          el.style.cssText = 'height:auto; padding:0';
+          // for box-sizing other than "content-box" use:
+          // el.style.cssText = '-moz-box-sizing:content-box';
+          el.style.cssText = 'height:' + el.scrollHeight + 'px';
+        },0);
+      }
+    </script>
+    <p>HTML script</p>
+    <pre>
+        <code>
+&lthtml&gt
+&lthead&gt&lt/head&gt
+&ltbody&gt
+
+&ltform method="POST" action="" enctype="multipart/form-data"&gt
+    &lttextarea rows="4" name="text" placeholder="Cambridge is a mental hospital." style="width:50%"&gt&lt/textarea&gt
+    &ltbutton type="submit" name="submit_form_button" &gtSubmit&lt/button&gt
+    &ltdiv id="filetext"&gt
+    &lt/div&gt
+&lt/form&gt
+
+&ltscript&gt
+  var textarea = document.querySelector('textarea');
+
+  textarea.addEventListener('keydown', autosize);
+
+  function autosize(){
+    var el = this;
+    setTimeout(function(){
+      el.style.cssText = 'height:auto; padding:0';
+      // for box-sizing other than "content-box" use:
+      // el.style.cssText = '-moz-box-sizing:content-box';
+      el.style.cssText = 'height:' + el.scrollHeight + 'px';
+    },0);
+  }
+&lt/script&gt
+&lt/body&gt
+&lt/html&gt
+        </code>
+    </pre>
     <h3>References</h3>
     <hr>
     </div>
