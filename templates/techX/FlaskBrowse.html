@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('input[type="file"]').change(function(e){
+            var fileName = e.target.files[0].name;
+            var filetext = document.getElementById('filetext');
+            filetext.innerHTML = fileName;
+        });
+      });
+    </script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Separate Browse button and text</h3>
+    <hr> 
+
+    <form method="POST" action="" enctype="multipart/form-data">
+        <label>
+        <input id="my_file" name="abc" type="file" style="display:none;"/>
+        <img src="http://upload.wikimedia.org/wikipedia/commons/c/ca/Button-Lightblue.svg" style="width:20%">
+        </label>
+        <button type="submit" name="submit_form_button" >Submit</button>
+        <div id="filetext">
+        </div>
+    </form>
+         
+    <p>HTML head</p>
+    <pre>
+      <code>
+&ltscript src="https://code.jquery.com/jquery-1.12.4.min.js"&gt&lt/script&gt
+&ltscript&gt
+$(document).ready(function(){
+  $('input[type="file"]').change(function(e){
+      var fileName = e.target.files[0].name;
+      var filetext = document.getElementById('filetext');
+      filetext.innerHTML = fileName;
+  });
+});
+&lt/script&gt
+      </code>
+    </pre>
+    <p>HTML body</p>
+    <pre>
+      <code>
+&ltform method="POST" action="" enctype="multipart/form-data"&gt
+    &ltlabel&gt
+    &ltinput id="my_file" name="abc" type="file" style="display:none;"/&gt
+    &ltimg src="http://upload.wikimedia.org/wikipedia/commons/c/ca/Button-Lightblue.svg" style="width:20%"&gt
+    &lt/label&gt
+    &ltbutton type="submit" name="submit_form_button" &gtSubmit&lt/button&gt
+    &ltdiv id="filetext"&gt
+    &lt/div&gt
+&lt/form&gt
+      </code>
+    </pre>
+    Python Flask Code
+    <pre>
+      <code>
+import flask
+from flask import Flask,render_template,request,url_for
+from PIL import Image
+import numpy as np
+
+app = Flask(__name__)
+app.config.from_object(__name__)
+app.config['SECRET_KEY'] = 'LegendaryKey'
+
+@app.route('/',methods=['GET','POST'])
+def hello():
+    print(request.form)
+    print(request.data)
+    print(request.args)
+    print(request.files)
+    print('Valuess---------',request.values)
+    if 'submit_form_button' in list(request.form.keys()):
+        i = Image.open(request.files['abc'])
+        img = np.asarray(i)
+        print(img.shape)
+    return render_template('index.html')
+
+if __name__ == "__main__":
+    app.run(debug=True,host='localhost',port=1080)
+
+      </code>
+    </pred>
+    <hr>
+    <h3>References</h3>
+    <hr>
+    </div>
+
+    
+</body>
+</html>
