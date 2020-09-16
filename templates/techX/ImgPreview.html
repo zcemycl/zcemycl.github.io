@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+      }
+    </style>
+    <script type="text/javascript">
+      function preview_image(event) 
+      {
+       var reader = new FileReader();
+       reader.onload = function()
+       {
+        var output = document.getElementById('output_image');
+        output.src = reader.result;
+       }
+       reader.readAsDataURL(event.target.files[0]);
+      }
+
+    </script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Picture Preview</h3>
+    <hr> 
+        <form method="POST" action="" enctype="multipart/form-data">
+         <input type="file" name="abc" accept="image/*" onchange="preview_image(event)">
+         <button type="submit" name="submit_form_button" >Submit</button>
+         <img id="output_image" width="90%"/>
+        </form>
+
+         
+    <p>HTML script</p>
+    <pre>
+      <code>
+&lthtml&gt
+&lthead&gt
+    &ltscript type="text/javascript"&gt
+      function preview_image(event) 
+      {
+       var reader = new FileReader();
+       reader.onload = function()
+       {
+        var output = document.getElementById('output_image');
+        output.src = reader.result;
+       }
+       reader.readAsDataURL(event.target.files[0]);
+      }
+    &lt/script&gt
+&lt/head&gt
+&ltbody&gt
+&ltform method="POST" action="" enctype="multipart/form-data"&gt
+ &ltinput type="file" name="abc" accept="image/*" onchange="preview_image(event)"&gt
+ &ltbutton type="submit" name="submit_form_button" &gtSubmit&lt/button&gt
+ &ltimg id="output_image" width="90%"/&gt
+&lt/form&gt
+
+&lt/body&gt
+&lt/html&gt
+~
+      </code>
+    </pred>
+    <hr>
+    <h3>References</h3>
+    <hr>
+    </div>
+
+    
+</body>
+</html>
