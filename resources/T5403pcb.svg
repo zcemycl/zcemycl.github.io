@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="30.24px"
+   height="30.24px"
+   viewBox="0 0 30.24 30.24"
+   enable-background="new 0 0 30.24 30.24"
+   xml:space="preserve"
+   sodipodi:docname="T5403pcb.svg"
+   inkscape:version="1.0.1 (1.0.1+r73)"
+   inkscape:label="silkscreen"><metadata
+   id="metadata4805"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+   id="defs4803" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1146"
+   inkscape:window-height="1025"
+   id="namedview4801"
+   showgrid="false"
+   inkscape:zoom="6.7644892"
+   inkscape:cx="1.2776401"
+   inkscape:cy="25.801588"
+   inkscape:window-x="774"
+   inkscape:window-y="27"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="silkscreen" />
+
+<g
+   id="silkscreen"
+   transform="matrix(1.0260395,0,0,0.00178876,-31.198973,20.029114)"><line
+     fill="none"
+     stroke="#ffffff"
+     stroke-width="19.5552"
+     x1="-10.15855"
+     y1="-9999.1748"
+     x2="-10.15855"
+     y2="9579.8652"
+     id="line8681" /><line
+     fill="none"
+     stroke="#ffffff"
+     stroke-width="1.2433"
+     x1="-0.26260418"
+     y1="10398.747"
+     x2="78.885201"
+     y2="10398.747"
+     id="line8683" /><line
+     fill="none"
+     stroke="#ffffff"
+     stroke-width="21.238"
+     x1="75.476089"
+     y1="9850.3047"
+     x2="75.476089"
+     y2="-13243.501"
+     id="line8685" /><line
+     fill="none"
+     stroke="#ffffff"
+     stroke-width="0.75"
+     x1="4.3981671"
+     y1="-12503.97"
+     x2="15.198168"
+     y2="-12503.97"
+     id="line8687" /><line
+     fill="none"
+     stroke="#ffffff"
+     stroke-width="2.02454"
+     x1="-1.4247007"
+     y1="-12554.422"
+     x2="77.279091"
+     y2="-12554.422"
+     id="line8689" /></g><g
+   id="copper0"
+   style="display:inline;fill:#f9f9f9">
+	<g
+   id="copper1"
+   style="fill:#f9f9f9">
+		<circle
+   id="connector5pin"
+   fill="none"
+   stroke="#ffbf00"
+   stroke-width="1.79003"
+   cx="13.223963"
+   cy="33.984478"
+   r="2.4612899"
+   style="fill:#f9f9f9" />
+		
+		<ellipse
+   id="connector1pin"
+   fill="none"
+   stroke="#ffbf00"
+   stroke-width="1.68756"
+   cx="-11.43354"
+   cy="35.49157"
+   style="fill:#f9f9f9"
+   rx="2.3384092"
+   ry="2.3025074"
+   transform="rotate(6.4426655)" />
+		<circle
+   id="connector2pin"
+   fill="none"
+   stroke="#ffbf00"
+   stroke-width="1.71331"
+   cx="-5.8901134"
+   cy="33.984478"
+   r="2.3558061"
+   style="fill:#f9f9f9" />
+		<circle
+   id="connector3pin"
+   fill="none"
+   stroke="#ffbf00"
+   stroke-width="1.71369"
+   cx="3.5950027"
+   cy="33.984478"
+   r="2.3563244"
+   style="fill:#f9f9f9" />
+		<circle
+   id="connector4pin"
+   fill="none"
+   stroke="#ffbf00"
+   stroke-width="1.7998"
+   cx="32.835579"
+   cy="33.984478"
+   r="2.4747305"
+   style="fill:#f9f9f9" />
+		<circle
+   id="connector6pin"
+   fill="none"
+   stroke="#ffbf00"
+   stroke-width="1.80312"
+   cx="23.020609"
+   cy="33.984478"
+   r="2.4792967"
+   style="fill:#f9f9f9" />
+		<circle
+   id="connector7pin"
+   fill="none"
+   stroke="#ffbf00"
+   stroke-width="1.84558"
+   cx="42.730152"
+   cy="33.984478"
+   r="2.5376685"
+   style="fill:#f9f9f9" />
+	<path
+   id="rect5372"
+   style="fill:#f7bd13;fill-opacity:1;stroke:none;stroke-width:1.46986"
+   d="m -28.2181,30.781841 v 6.405278 h 6.633066 v -6.405278 z m 3.317993,1.585801 a 1.6732908,1.6165397 0 0 1 1.6736,1.616838 1.6732908,1.6165397 0 0 1 -1.6736,1.616839 1.6732908,1.6165397 0 0 1 -1.673601,-1.616839 1.6732908,1.6165397 0 0 1 1.673601,-1.616838 z" /></g>
+</g>
+
+
+
+<g
+   id="keepout" /><g
+   id="soldermask" /><g
+   id="outline" /></svg>
