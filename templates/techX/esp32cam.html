@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>ESP32 Camera</h3>
+    <hr>
+    <h4>Required for uploading:</h4>
+    <div style="text-align:center">
+        <img src="https://diyi0t.com/wp-content/uploads/2019/08/Arduino-Mega-Pinout.png" style="width:20%">
+        <img src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2020/03/ESP32-CAM-pinout-new.png?ssl=1" style="width:40%">
+    </div>
+    <div><h4>Connections when uploading sketch</h4></div>
+    <div style="text-align:center">
+        <img src="../../resources/esp32cambefore.png" style="width:50%">
+    </div>
+    <ul>    
+        <li>Board: ESP32 Wrover Module</li>
+        <li>Upload Speed: 115200</li>
+        <li>Flash Frequency: 40Hz</li>
+        <li>Flash Mode: QIO</li>
+        <li>Partition Scheme: HUGE APP(3MB...)</li>
+        <li>Programmer: AVR ISP</li>
+    </ul>
+    <div><h4>Connections after uploading sketch</h4></div>
+    <div style="text-align:center">
+        <img src="../../resources/esp32camafter.png" style="width:50%">
+    </div>
+    <div><h4>Troubleshootings</h4></div>
+    <ol>
+        <li>Make sure Tools Settings are correct</li>
+        <li>If you cannot upload, try to press reset button on the arduino mega and behind the esp32 and release them</li>
+        <li>When the serial monitor is opened, you can only see the previous sketch printing instead of the currently uploaded one, try to press reset button on the arduino mega and behind the esp32 and release them. Don't forget to disconnect GND and GPIO0 pins of ESP32, and GND and RESET pins of mega before that. </li>
+        <li>If you see Camera init failed, try not inserting the camera module into ESP32 deeply.</li>
+    </ol>
+    <h3>References</h3>
+    <hr>
+    </div>
+
+    
+</body>
+</html>
