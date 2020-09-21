@@ -35,7 +35,14 @@
     <li>Insert the SD card with raspi image into Raspberry Pi board.</li>
     <li>Connect a display, keyboard and power supply to the Raspberry Pi board. It will power up automatically.</li>
     <li>When the login screen appears, login with user name <code>pi</code> and password <code>raspberry</code>.</li>
-
+    <li>Configure the raspberry pi software by <code>sudo raspi-config</code>.</li>
+        <ul>   
+        <li>Localisation Options &#8594 Change Timezone &#8594 Europe &#8594 London</li>
+        <li>Localisation Options &#8594 Wi-Fi Country &#8594 GB Britain (UK) [**This will disable internal WiFi]</li>
+        <li>Advanced Options &#8594 Expand Filesystem [**Expand the memory]</li>
+        <li>** Do not Update (get disable by COEX)</li>
+        </ul>
+    <li>Reboot to update the configuration settings by <code>sudo reboot</code>.</li>
     </ol>
     Optional
     <ol>
