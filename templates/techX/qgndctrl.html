@@ -26,12 +26,41 @@
     <hr>    
     <div style="text-align:center;">
       <video width="60%" controls autoplay loop>
-          <source src="../../resources/Initialsetup2.mp4" type="video/mp4">
+          <source src="../../resources/initalsetup2.mp4" type="video/mp4">
       </video>
     </div>
+    <h4>Flashing the flight controller (FCU)</h4>
+    Steps:
+    <ol>
+    <li>Insert the SD card with FAT32 filesystem into your flight controller (FCU).</li>
+    <li>Download and install <a href="https://docs.qgroundcontrol.com/master/en/getting_started/download_and_install.html">QGroundControl</a> in your laptop.</li>  
+    <li>Open the QGroundControl software. Open the Vehicle Setup tab and select the Firmware menu.</li>
+    <li>Download the modified version of PX4 by CopterExpress for the Clover drone. Download the latest stable version <a href="https://github.com/CopterExpress/Firmware/releases/download/v1.8.2-clever.10/px4fmu-v4_default.px4">v1.8.2-clever.10</a></li>
+    <li>Connect your flight controller to your PC over USB.</li>
+    <li>Wait for the FCU to connect to QGroundControl</li>
+    <li>Select PX4 Flight Stack (Firmware Setup) in the right bar.</li>
+    <li>Check Advanced Settings checkbox.</li>
+    <li>Select Custom fireware file from dropdown menu.</li>
+    <li>Press OK and select the file v1.8.2-clever.10.</li>
+    </ol>
+    <h4>Configuring the flight controller</h4>
+    Steps:
+    <ol>
+    <li>After flashing, the parameters will be shown up, such as Airframe, Radio, Sensors, Flight Modes, etc.</li>
+    <li>Open Vehicle Setup tab. Select the Airframe menu.</li>
+    <li>Select the Quadrotor X airframe type.</li>
+    <li>Select the Generic Quadrotor X from the dropdown menu.</li>
+    <li>Return to the top of the list and press Apply and Restart button, confirm by pressing Apply.</li>
+    <li>Wait for the settings to be applied and for the flight controller to restart.</li>
+    <li>Go to Parameters. Setting the configuraions as stated in link 2.</li>
+    </ol>
 
     <h3>References</h3>
     <hr>
+    <ol>
+    <li><a href="https://docs.qgroundcontrol.com/master/en/getting_started/download_and_install.html">QGroundControl Download and Install</a> </li>
+    <li><a href="https://clover.coex.tech/en/setup.html">COEX Initial setup</a></li>
+    </ol>
     </div>
 
     
