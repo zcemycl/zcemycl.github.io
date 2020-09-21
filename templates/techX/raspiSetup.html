@@ -43,19 +43,26 @@
         <li>** Do not Update (get disable by COEX)</li>
         </ul>
     <li>Reboot to update the configuration settings by <code>sudo reboot</code>.</li>   
-    <li>Configure the font size of the terminal by <code>sudo dpkg-reconfigure console-setup</code> to launch Package Configuration.</li>
-        <ul>
-        <li>UTF-8 &#8594 Guess optimal character set &#8594 Terminus &#8594 16x32</li>
-        </ul>
+    <li>Configure the font size of the terminal by <code>sudo dpkg-reconfigure console-setup</code> to launch Package Configuration. UTF-8 &#8594 Guess optimal character set &#8594 Terminus &#8594 16x32</li>
     <li>You can see the terminal text becomes bigger now.</li>
     <li>Configure Wi-Fi Settings from Access point mode to Client mode.</li>
         <ul>
-        <li></li>
+        <li>Disable the <code>dnsmasq</code> service by <code>sudo systemctl stop dnsmasq</code> and <code>sudo systemctl disable dnsmasq</code>.</li>
+        <li>Enable DHCP client on the wireless interface to obtain IP address. Remove these lines from <code>/etc/dhcpcd.conf</code> file. By <code>sudo vim /etc/dhcpcd.conf</code>, press d+d to delete the select line, <code>interface wlan0</code> and <code>static ip_address=192.168.11.1/24</code>. </li>
+        <li>Delete WiFi dictionary in <code>/etc/wpa_supplicant/wpa_supplicant.conf</code>. Add your own WiFi.</li>
+        <li>Restart the <code>dhcpcd</code> service by <code>sudo systemctl restart dhcpcd</code>.</li>
+        <li>Restart. <code>sudo reboot</code></li>
         </ul>
     </ol>
-    Optional
+
+You can now ssh from your laptop to the raspi. If your laptop and raspi are in the same Wifi, open your terminal, type <code>ssh pi@192.168.x.xxx</code> (check your laptop ip via <code>ifconfig | grep inet</code>. Search your pi address via <code>nmap -sP 192.168.x.0/24</code>.) Login via password <code>raspberry</code>.
+
+    <h4>Optional -- LED strip</h4>
     <ol>
-    <li>Turn off LED strip. </li>
+    <li>Disable LED strip support in <code>~/catkin_ws/src/clover/clover/launch/clover.launch</code> by <code>&ltname="led" default="false"/&gt</code>. </li>
+    <li>Change number of LEDs turned on in <code>~/catkin_ws/src/clover/clover/launch/led.launch</code>, by <code>&ltparam name="led_count" value="30"/&gt</code>. </li>
+    <li>Change pinout to LED strip in <code>~/catkin_ws/src/clover/clover/launch/led.launch</code>, by <code>&ltparam name="gpio_pin" value="21"/&gt</code>. </li>
+    <li>Disable LED strip notifications set in <code>~/catkin_ws/src/clover/clover/launch/led.launch</code>, by <code>&ltarg name="led_notify" default="false"/&gt</code>. </li>
     </ol>
 
 
