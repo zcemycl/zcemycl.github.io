@@ -1,6 +1,6 @@
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(60, 1, 1, 1000);
-camera.position.set(0, 0, 500);
+var camera = new THREE.PerspectiveCamera(60, 30, 30, 1000);
+camera.position.set(0, 0, 700);
 var renderer = new THREE.WebGLRenderer({
   antialias: true
 });
