@@ -45,8 +45,6 @@ function resize(renderer) {
   const width = canvas.clientWidth;
   const height = canvas.clientHeight;
   const needResize = canvas.width !== width || canvas.height !== height;
-  if (needResize) {
-    renderer.setSize(width, height, false);
-  }
+  renderer.setSize(width/2, height, false);
   return needResize;
 }
