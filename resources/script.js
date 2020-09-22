@@ -26,9 +26,6 @@ loader.load( './scene.gltf', function ( gltf ) {
 
 } );
 
-
-
-
 render();
 
 function render() {
