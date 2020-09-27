@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Media Query</h3>
+    <hr>
+    <p>This is for responsive web design, and will show how to hide the sidebar when the screen is reduced to lower than 640px.</p>
+    <p>You can either resize your window or switch to portrait mode to see how the following codes affect the layout.</p>
+    <h4>Javascript</h4>
+    <p>The first function is to close the sidebar of the small window, and reopen the sidebar of the big window if the user is resizing the body window.</p>
+    <p>The second function is to open the sidebar of the small window if the user clicks the menu icon.</p>
+    <p>The third function is to close the sidebar of the small window if the user clicks the close (X) icon on the sidebar.</p>
+    <pre><code>
+function sidebartransition(){
+  var w = window.outerWidth;
+  var sidebar = document.getElementsByClassName('sidebar')[0];
+  console.log(w);
+  if (w>=640) {openNav();sidebar.style.display = 'block';}
+  else {closeNav();}
+}
+
+function openNav(){
+  var sidebar = document.getElementsByClassName('sidebar')[0];
+  sidebar.style.display = "block";
+}
+function closeNav(){
+  var sidebar = document.getElementsByClassName('sidebar')[0];
+  sidebar.style.display = "none";
+}
+    </pre></code>
+    <h4>HTML</h4>
+    <pre><code>
+&ltbody onresize="sidebartransition()"&gt
+  &ltdiv class="content"&gt
+    &ltdiv class="sidebar"&gt
+      &lta href="javascript:void(0)" class="closebtn" onclick="closeNav()"&gt&times;&lt/a&gt
+    &lt/div&gt
+  &lt/div&gt
+  &ltdiv style="position:absolute;float:right;right:20px;bottom:10px;"&gt
+    &ltdiv&gt&lta onclick="openNav()" class="fa fa-bars bar"&gt&lt/a&gt&lt/div&gt
+  &lt/div&gt
+&lt/body&gt
+    </pre></code>
+    <h4>CSS</h4>
+    <pre><code>
+/*big screen*/
+.content{padding:0% 5%;height:95vh; }
+.sidebar{width:20%;height:100%; float:left; overflow-y:scroll}
+.iframecontent{width:80%;height:100%;float:left}
+a.bar{text-align:center;padding:0;width:30px;font-size:30px;display:none;}
+a.up{text-align:center;padding:0;width:30px;font-size:30px;color:lightgreen}
+a.closebtn{display:none;}
+/*small screen*/
+@media only screen and (max-width:640px){
+.content{padding:0;height:95vh; }
+.sidebar{position:absolute;width:20%;height:100%;right:10px;bottom:10px;overflow-y:scroll;z-index:1;background-color:black;padding:0 20px 0 5px;border-left:1px solid white;display:none;}
+.iframecontent{width:100%;height:100%;float:left}
+a.closebtn{position:fixed;text-align:center;float:right;padding:5px;margin-right:5px;font-size:20px;display:block;width:20px;background-color:red;float:right;right:5px;bottom:5px;}
+a.bar{.bar;border:1px solid white;display:block;}
+}
+
+    </pre></code>
+    <h3>References</h3>
+    <hr>
+    </div>
+
+    
+</body>
+</html>
