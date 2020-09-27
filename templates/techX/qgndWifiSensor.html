@@ -32,9 +32,31 @@
           <source src="../../resources/sensor.mp4" type="video/mp4">
       </video>
     </div>
+    <ol>
+    <li>Follow the instruction from Using QGroundControl via Wi-Fi.</li>
+    <li>SSH into the raspberry pi, change the parameter <code>gcs_bridge</code> in <code>~/catkin_ws/src/clover/clover/launch/clover.launch</code> to <code>tcp</code>.</li>
+    <li>Restart the <code>clover</code> service by <code>sudo systemctl restart clover</code>.</li>
+    <li>Get to QGroundControl program, choose the Application settings &#8594 Comm Links &#8594 Add. </li>
+      <ul>
+      <li>Change the random Name.</li>
+      <li>Type to TCP.</li>
+      <li>Host Address is your raspi ip address.</li>
+      <li>TCP Port to 5760.</li>
+      </ul>
+    <li>Press OK. Then click Connect.</li>
+    <li>Follow Sensor Calibration instruction. If the flight controller is COEX Pix, specify <code>ROTATION_ROLL_180_YAW_90</code>.</li>
+    <li>When calibrating the Compass, please hold still in specific orientation. The status should change from <code>Incomplete</code> to <code>Rotate</code>. Then start to rotate your drone until <code>Rotate</code> to <code>Complete</code>.</li>
+    <li>While calibrating other sensors, they only require to hold still the drone in specific orientation.</li>
+    <li>Reboot via Vehicle Setup &#8594 Parameters &#8594 Tools &#8594 Reboot.</li>
+    </ol>
 
     <h3>References</h3>
     <hr>
+    <ol>
+    <li><a href="https://clover.coex.tech/en/gcs_bridge.html">COEX Using QGroundControl over Wi-Fi</a></li>
+    <li><a href="https://clover.coex.tech/en/calibration.html">COEX Sensor calibration</a></li>
+    </ol>
+
     </div>
 
     
