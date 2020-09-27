@@ -2,7 +2,14 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
   <style>
+    /*debug*/
+    /*body,h3,h4,h5,a,div{border:1px solid white;}*/
+    /*Big screen*/
     body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;} 
     h3{background-color:#00008B;padding:2%;text-align:center}
     h4{margin-top:0px;margin-bottom:2px;border-radius:0 5px 5px 0;padding:5% 5% 5% 0;border-color:white;border-style:solid;border-width:1px;border-left:none;word-wrap:break-word;}
@@ -16,13 +23,45 @@
     button{width:100%;background-color:black;color:white;border-radius:5px}
     button:hover{background-color:white;color:black}
     hr{border:0;clear:both;display:block;top:5%;width:100%;background-color:white;height:1px}
+    a.bar{text-align:center;padding:0;width:30px;font-size:30px;display:none;}
+    a.up{text-align:center;padding:0;width:30px;font-size:30px;color:lightgreen}
+    a.closebtn{display:none;}
+    /*small screen*/
+    @media only screen and (max-width:640px){
+    .content{padding:0;height:95vh; }
+    .sidebar{position:absolute;width:20%;height:100%;right:10px;bottom:10px;overflow-y:scroll;z-index:1;background-color:black;padding:0 20px 0 5px;border-left:1px solid white;display:none;}
+    .iframecontent{width:100%;height:100%;float:left}
+    a.closebtn{position:fixed;text-align:center;float:right;padding:5px;margin-right:5px;font-size:20px;display:block;width:20px;background-color:red;float:right;right:5px;bottom:5px;}
+    a.bar{.bar;display:block;}
+    }
   </style>
+  <script>
+  function sidebartransition(){
+    var w = window.outerWidth;
+    var sidebar = document.getElementsByClassName('sidebar')[0];
+    console.log(w);
+    if (w>=640) {openNav();sidebar.style.display = 'block';}
+    else {closeNav();}
+  }
 
+  function openNav(){
+    var sidebar = document.getElementsByClassName('sidebar')[0];
+    sidebar.style.display = "block";
+  }
+  function closeNav(){
+    var sidebar = document.getElementsByClassName('sidebar')[0];
+    sidebar.style.display = "none";
+  }
+
+  </script>
 </head>
-<body>
+<body onresize="sidebartransition()">
   <div class="content">
     <div class="sidebar">
-      <h3 style="background-color:#00008B;padding:2%;text-align:center">Blog</h3>
+
+      <h3 style="background-color:#00008B;padding:2%;text-align:center;margin-bottom:0;">Blog</h3>
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <hr>
       <h4>Tech Explore</h4>
       <h5>Advanced Flask</h5>
         <div><a href="templates/techX/FlaskBrowse.html" target="pagecontent">Separate Browse Button and Text</a></div>
@@ -75,14 +114,18 @@
       <hr>
       <h4>Maths and Physics</h4>
       <hr>
-      <button class="tablinks" onclick="window.location.href=''">Back</button>
 
     </div>
 
     <iframe src="./main.html" class="iframecontent" name="pagecontent" frameBorder="0" border-left="solid">#document</iframe>
   </div>
-    
-
+   
+  <div style="position:absolute;float:right;right:20px;bottom:10px;">
+    <div><a onclick="openNav()" class="fa fa-bars bar"></a></div>
+    <br>
+    <div><a href="./index.html" class="fa fa-toggle-up up"></a></div>
+  </div>
+ 
   <script>
   </script>
 
