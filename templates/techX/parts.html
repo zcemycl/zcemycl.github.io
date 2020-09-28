@@ -18,7 +18,7 @@
         white-space:pre-wrap;
         word-wrap:break-word;
       }
-     
+      tr,th,td{border:1px solid white;}
     </style>
 </head>
 <body class="content wrapper">
@@ -41,8 +41,88 @@
           <figcaption>Left: Power Distribution Board (PDB), Right: COEX Pix Flight Controller (FCU)</figcaption>
         </figure>
     </div>
+    <h4>Components</h4>
+    <div style="text-align:center">
+    <table style="border:1px solid white;width:100%">
+        <tr>
+            <td>Flight Controller COEX Pix</td>
+            <td>2 SD Cards 16Gb and 64Gb for FCU and Raspi</td>
+            <td>Raspberry Pi 4 Model B 1Gb Board</td>
+            <td>RPi 4 Radiator Kit (2pcs)</td>
+        </tr>
+        <tr>
+            <td>Power distribution board COEX PDB</td>
+            <td>Brushless motor COEX BR2306 2400kV</td>
+            <td>Speed Controller ESC 25A</td>
+            <td>Dalprop Cyclone T5046C (pair) (propellor)</td>
+        </tr>
+        <tr>
+            <td>RC transmitter COEX i6x with receiver</td>
+            <td>Li-po Tattu 3S LiPo 2300 mAh 45C (battery)</td>
+            <td>RPi 4 Cam OV5647 Wide Angle Lens</td>
+            <td>Laser Rangefinder CJMCU-531</td>
+        </tr>
+    </table>
+    </div>
     <h4>Connections</h4>
-    <table>
+
+    <table style="border:1px solid white;width:100%">
+        <tr>
+            <th>Boards</th>
+            <th>Destinations</th>
+            <th>Details</th>
+        </tr>
+        <tr>
+            <td rowspan="5">COEX PDB</td>
+            <td>4 BLDC Motors</td>
+            <td>ESC +/- connect to ESC red and black wires respectively. And ESC 3 teeth pins to 3 black wires from BLDC motor. </td>
+        </tr>
+        <tr>
+            <td>LiPo Battery</td>
+            <td>BAT +/- to battery via XT60 connector.</td>
+        </tr>
+        <tr>
+            <td>COEX Pix FCU</td>
+            <td>5 pins cable.</td>
+        </tr>
+        <tr>
+            <td>Raspi 4B</td>
+            <td>5V and gnd connections to raspi GPIO 4 and 6 respectively. This is to supply power to raspberry pi.</td>
+        </tr>
+        <tr>
+            <td>LED strip (optional)</td>
+            <td>5V and gnd from PDB to strip 5V and gnd.</td>
+        </tr>
+        <tr>
+            <td rowspan="4">COEX Pix FCU</td>
+            <td>4 BLDC Motors</td>
+            <td>connect to ESC black white wires for signals. White wire should face upwards.</td>
+        </tr>
+        <tr>
+            <td>16Gb SD Card</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Raspi 4B</td>
+            <td>USB C port of FCU to USB port of Raspi.</td>
+        </tr>
+        <tr>
+            <td>RC receiver</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td rowspan="3">Raspi 4B</td>
+            <td>Camera Module</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Laser Rangefinder</td>
+            <td>GPIO 1,3,5,9 to rangefinder VCC,SDA,SCL,GND respectively,</td>
+        </tr>
+        <tr>
+            <td>LED strip (optional)</td>
+            <td>Raspi GPIO21 to LED strip signal.</td>
+        </tr>
     </table>
     <hr>
     <h3>References</h3>
