@@ -10,6 +10,16 @@
       body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
       /*h3{color:#00ff2b}*/
       a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+
     </style>
 </head>
 <body class="content wrapper">
@@ -17,14 +27,40 @@
 
     <h3>BLDC Motor with Arduino</h3>
     <hr>
+    <h4>Demo</h4>
     <div style="text-align:center;">
       <video width="60%" controls autoplay loop>
           <source src="../../resources/bldcmotors.mp4" type="video/mp4">
       </video>
     </div>
+    <h4>Connections</h4>
+    There is a mistake from the reference article, the 5V pin at the middle of esc can be not connected to 5V of arduino mega, if esc is connected to the battery. So either ways of connections can be used. 
+    <div style="text-align:center;">
+      <img src="../../resources/escbldc1.png" style="width:30%">
+      <img src="../../resources/escbldc2.png" style="width:30%">
+    </div>
+    <h4>Code</h4>
+    <pre><code>
+#include <Servo.h>
+Servo ESC; 
+void setup()
+{
+ESC.attach(11); 
+}
+void loop()
+{
+int throttle = analogRead(A1); 
+throttle = map(throttle, 0, 1023, 0, 180); 
+ESC.write(throttle);
+}
+    </code></pre>
+    
     <hr>   
     <h3>References</h3>
     <hr>
+    <ol>
+    <li><a href="https://tocircuit.com/en/brushless-dc-motor-with-arduino/">Brushless DC Motor with Arduino</a></li>
+    </ol>
     </div>
 
     

@@ -10,6 +10,7 @@
       body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
       /*h3{color:#00ff2b}*/
       a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      table{width:100%;}
       pre code {
         color:white;
         border: 1px solid #999;
@@ -24,13 +25,32 @@
 
     <h3>Trial of takeoff</h3>
     <hr>
-    Unsuccessful takeoff
-    <div style="text-align:center;">
-      <video style="height:30%;width:40%"controls autoplay loop>
-          <source src="../../resources/trialtakeoff.mp4" type="video/mp4">
-      </video>
+    <table>
+      <tr>
+        <th>Unsuccessful takeoff</th>
+        <th>Successful takeoff</th>
+      </tr>
+      <tr>
+        <td>
+          <div style="text-align:center;">
+            <video style="height:50vh"controls>
+                <source src="../../resources/trialtakeoff.mp4" type="video/mp4">
+            </video>
+          </div>
+        </td>
+        <td>
+          <div style="text-align:center;">
+            <video style="height:50vh"controls autoplay>
+                <source src="../../resources/successTakeoff.mp4" type="video/mp4">
+            </video>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <h4>Troubleshootings</h4>
+    <div style="text-align:center">
+      <img style="width:30%" src="../../resources/reversebldc.png">
     </div>
-    Troubleshootings
     <ul>
     <li>Check the wind from the propellors. If you hold up the drone, the wind is going upwards, propellors might be installed reversed. Don't trust the mark on the propellors.</li>
     <li>The motor can rotate in the wrong direction. It can be solved by, resoldering the three black wires from BLDC motor to ESC. Reverse two of three wires.</li>
@@ -39,12 +59,7 @@
     <ul>
     <li>If you tilt the drone by lowering down the motor n below center frame, that motor will output greater power. I believe that, it is just a typical negative feedback loop.</li>
     </ul>
-    Successful takeoff
-    <div style="text-align:center;">
-      <video style="height:30%;width:40%"controls autoplay loop>
-          <source src="../../resources/successTakeoff.mp4" type="video/mp4">
-      </video>
-    </div>
+
     <h3>References</h3>
     <hr>
     </div>
