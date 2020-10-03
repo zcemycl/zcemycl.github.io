@@ -58,15 +58,22 @@
           <li>Leave the black block behind.</li>
         </ul></li>
       <li>Prepare a live USB of Ubuntu.<ul>
-        <img src="https://rufus.ie/pics/rufus_en.png" style="width:40%">
+        <div style="text-align:center;"><img src="https://rufus.ie/pics/rufus_en.png" style="width:40%"></div>
         <li>Choose the right image of Ubuntu. Desktop image &#8594 64-bit PC (AMD64)desktop image to download.</li>
         <li>Download rufus, a software to flash the Ubuntu image into the USB.</li>
         <li>Click rufus, select Device, press SELECT to choose file for Boot selection. Press START. Eject.</li>
       </ul></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
+      <li>Disable fast startup in Windows<ul>
+        <li>Start &#8594 Type Control Panel &#8594 Hardware and Sound &#8594 Power Options &#8594 Choose what the power button does &#8594 Uncheck Turn on fast start-up</li>
+      </ul></li>
+      <li>Disable secureboot in Windows<ul>
+        <li>Start &#8594 Type Change advanced start-up options &#8594 Press Restart now</li>
+        <li>You can see Blue Screen. Press Troubleshoot &#8594 Advanced options &#8594 UEFI Firmware settings &#8594 Restart &#8594 See the ugly interface.</li>
+        <li>Go to Boot or Security Tab (sometimes Security Boot is not in Boot but Security) &#8594 Disable Secure Boot &#8594 F10 to exit saving changes</li>
+      </ul></li>
+      <li>Installing Ubuntu along with Windows<ul>
+        <li>Boot from USB by plugging in USB, shutdown. Turn on again with pressing F12 &#8594 Boot Manager &#8594 Linpus lite (Generic Flash Disk) &#8594 Install Ubuntu &#8594 Purple screen with ubuntu logo &#8594 Typical Install process &#8594 English, Wifi, Updates, Install Ubuntu alongside Windows Boot Manager OR Something else (to choose partition). Lastly, restart and choose ubuntu to reboot. You can choose windows if you want. </li>
+      </ul></li>
     </ol>
     <h3>References</h3>
     <hr>
@@ -75,7 +82,8 @@
       <li><a href="https://itsfoss.com/install-ubuntu-1404-dual-boot-mode-windows-8-81-uefi/">How To Install Ubuntu Alongside Windows 10</a></li>
       <li><a href="https://releases.ubuntu.com/16.04/">Ubuntu 16.04.7 LTS (Xenial Xerus)</a></li>
       <li><a href="https://rufus.ie/">Rufus Create bootable USB drives the easy way</a></li>
-      <li><a href=""></a></li>
+      <li><a href="https://itsfoss.com/disable-uefi-secure-boot-in-windows-8/">How to Disable UEFI Secure Boot in Windows 8 & 8.1 (also 10)</a></li>
+      <li><a href="https://www.tecmint.com/install-ubuntu-alongside-with-windows-dual-boot/">How to Install Ubuntu Alongside With Windows 10 or 8 in Dual-Boot</a></li>
     </ol>
     </div>
 
