@@ -48,15 +48,34 @@
     <h4>GPU Support</h4>
     <p>Don't have to worry about the GPU driver. After installing Ubuntu, you can go to <code>Software & Updates</code> and choose to install <code>Additional Drivers</code> from NVIDIA Corporation. Lastly, you can check the connection via <code>nvidia-smi</code> and switch from integrated graphics to cuda <code>prime-select query|intel|nvidia</code>. </p>
     <p>One of the disadvantages of using ubuntu over windows is that, you cannot use intel integrated graphics and nvidia at the same time. </p> 
-    <p>One fo the advantages of using ubuntu over windows is that, you can use one internal and one external gpu (thunderbolt usb-c) at the same time. But windows can't.</p>
+    <p>One of the advantages of using ubuntu over windows is that, you can use one internal and one external gpu (thunderbolt usb-c) at the same time. But windows can't.</p>
     <h4>Steps</h4>
     <ol>
+      <li>Make a partition in your laptop to install Ubuntu.
+        <ul>
+          <li>Windows+R to open Run window. Type <code>Diskmgmt.msc</code> and Enter.</li>
+          <li>Select the blue block and right click to choose <code>Shrink Volume</code> or <code>Extend Volume</code>.</li>
+          <li>Leave the black block behind.</li>
+        </ul></li>
+      <li>Prepare a live USB of Ubuntu.<ul>
+        <img src="https://rufus.ie/pics/rufus_en.png" style="width:40%">
+        <li>Choose the right image of Ubuntu. Desktop image &#8594 64-bit PC (AMD64)desktop image to download.</li>
+        <li>Download rufus, a software to flash the Ubuntu image into the USB.</li>
+        <li>Click rufus, select Device, press SELECT to choose file for Boot selection. Press START. Eject.</li>
+      </ul></li>
+      <li></li>
+      <li></li>
+      <li></li>
       <li></li>
     </ol>
     <h3>References</h3>
     <hr>
     <ol>
       <li><a href="http://wiki.ros.org/gazebo_ros_pkgs/">Gazebo ROS packages</a></li>
+      <li><a href="https://itsfoss.com/install-ubuntu-1404-dual-boot-mode-windows-8-81-uefi/">How To Install Ubuntu Alongside Windows 10</a></li>
+      <li><a href="https://releases.ubuntu.com/16.04/">Ubuntu 16.04.7 LTS (Xenial Xerus)</a></li>
+      <li><a href="https://rufus.ie/">Rufus Create bootable USB drives the easy way</a></li>
+      <li><a href=""></a></li>
     </ol>
     </div>
 
