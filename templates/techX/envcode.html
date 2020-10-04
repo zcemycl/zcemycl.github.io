@@ -34,14 +34,28 @@
     <h4>C/C++</h4>
     My Ubuntu 16.04 system has installed GCC already. But it is still worthy to check by <code>sudo apt install g++</code>.
     <h4>Anaconda and Python</h4>
-    It is convenient to install python via Anaconda. One of the concerns I often have is that, whether or not tensorflow and pytorch can communicate with my Graphic card in the laptop. We also have to install some packages manually. 
-
-
+    <p>It is convenient to install python via Anaconda. One of the concerns I often have is that, whether or not tensorflow and pytorch can communicate with my Graphic card in the laptop. We also have to install some packages manually. </p>
+    <p>Steps</p>
+    <ol>
+    <li>Download the Anaconda installer for Linux. Does not matter if it comes with Python 3.6, 3.7 or 3.8.</li>
+    <li>Bash the .sh script. Usually you downloaded it in your Downloads folder.
+    <pre><code>
+bash ~/Downloads/Anacondaxxxxxx.sh
+    </code></pre>
+    And type yes and click enter for everything to go.
+</li>
+    </ol>
+    Sometimes you have python2.7 and python3.5 preinstalled. You can just use them via <code>python2</code> or <code>python3</code>. So now you should install your packages by <code>pip</code> or <code>pip3</code>.
+    <p>Some common packages are,</p>
+    <code>numpy pandas opencv-python nltk Flask virtualenv tensorflow torch torchvision </code>
+    <p>Please be cautious about tensorflow and pytorch gpu installation. It requires very specific version of cuda and gpu driver,etc. </p>
     <h3>References</h3>
     <hr>
     <ol>
     <li><a href="https://linuxconfig.org/how-to-install-g-the-c-compiler-on-ubuntu-18-04-bionic-beaver-linux">How to install G++ the C++ compiler on Ubuntu 18.04</a></li>
-    <li><a href=""></a></li>
+    <li><a href="https://medium.com/@menuram1126/how-to-install-anaconda-on-ubuntu-16-04-538009ca7936">How to install Anaconda on Ubuntu 16.04</a></li>
+    <li><a href="https://www.tensorflow.org/install/gpu">Tensorflow gpu installation</a></li>
+    <li><a href="https://pytorch.org/get-started/locally/">Start Locally | PyTorch</a></li>
     </ol>
     </div>
 
