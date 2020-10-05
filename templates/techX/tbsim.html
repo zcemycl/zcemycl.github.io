@@ -17,6 +17,32 @@
 
     <h3>Simulation</h3>
     <hr>
+    <h4>Troubleshootings</h4>
+    <ol>
+    <li>Resource not found: gazebo_ros. This is probably due to the fact that, I install npm for threejs, it contradicts with some packages of ros. <ul><li>sudo apt-get install ros-{version}-gazebo-ros-pkgs ros-{version}-gazebo-ros-control</li></ul></li>
+    <li>ERROR: cannot launch node of type [rviz/rviz]: rviz<ul><li>sudo apt install ros-{version}-rviz</li></ul></li>
+    <li>ERROR: cannot launch node of type [robot_state_publisher/robot_state_publisher]: robot_state_publisher<ul><li>sudo apt install ros-{version}-robot-state-publisher</li></ul></li>
+    <li>ERROR: cannot launch node of type [gmapping/slam_gmapping]: gmapping
+<ul><li>sudo apt install ros-{version}-gmapping</li></ul></li>
+    </ol>
+    <h4>Empty World with Manual control</h4>
+    Primary Steps
+    <ol>
+    <li>Initiate ROS system.<code>roscore</code></li>
+    <li>Call the gazebo simulation world.<code>roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch</code></li>
+    <li>Set up the behaviors of robot. <code>roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch</code></li>
+    <li>Visualize published topics while simulation is running. <code>roslaunch turtlebot3_gazebo turtlebot3_gazebo_rviz.launch</code></li>
+    </ol>
+    <h4>TurtleBot3 World</h4>
+    Replace the 2nd step with <code>roslaunch turtlebot3_gazebo turtlebot3_world.launch</code>.
+    <h4>TurtleBot3 House</h4>
+    Replace the 2nd step with <code>roslaunch turtlebot3_gazebo turtlebot3_house.launch</code>.
+    <h4>TurtleBot3 Collision Avoidance</h4>
+    Replace the 3rd step with <code>roslaunch turtlebot3_gazebo turtlebot3_simulation.launch</code>.
+    <h4>Virtual SLAM</h4>
+    Replace the 4th step with <code>roslaunch turtlebot3_slam turtlebot3_slam.launch slam_methods:=gmapping</code>.
+    <br>
+    <br>
     <div style="text-align:center;">
       <video width="60%" controls autoplay loop>
           <source src="../../resources/turtlebot3.mp4" type="video/mp4">
@@ -25,6 +51,9 @@
 
     <h3>References</h3>
     <hr>
+    <ol>
+    <li><a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/#turtlebot">ROBOTIS e-Manual TurtleBot3</a></li>
+    </ol>
     </div>
 
     
