@@ -62,7 +62,13 @@ catkin_make
 sudo apt-get install ros-$ROS_DISTRO-universal-robot
 sudo apt-get install ros-kinetic-ur-gazebo ros-kinetic-ur5-moveit-config ros-kinetic-ur-kinematics
     </code></pre>
-    <h4>Tiago</h4>
+    <s><h4>Tiago [FAILED]</h4></s>
+    <p>Put <a href="https://raw.githubusercontent.com/pal-robotics/tiago_tutorials/kinetic-devel/tiago_public.rosinstall">tiago_public.rosinstall</a> in folder tiago_public_ws.</p>
+    <pre><code>
+mkdir ~/tiago_public_ws
+cd ~/tiago_public_ws
+rosinstall src /opt/ros/kinetic tiago_public.rosinstall
+    </code></pre>
     <h3>References</h3>
     <ol>
     <li><a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/pc_setup/#install-ubuntu-on-remote-pc">TurtleBot3 ROS1 PC Setup</a></li>
@@ -72,6 +78,7 @@ sudo apt-get install ros-kinetic-ur-gazebo ros-kinetic-ur5-moveit-config ros-kin
     <li><a href="http://wiki.ros.org/ur_gazebo">ur_gazebo - ROS Wiki</a></li>
     <li><a href="https://github.com/ros-industrial/universal_robot">ros-industrial/universal_robot</a></li>
     <li><a href="http://wiki.ros.org/Robots/TIAGo/Tutorials/Installation/TiagoSimulation">Installing TIAGo Simulation</a></li>
+
     </ol>
     <hr>
     </div>
