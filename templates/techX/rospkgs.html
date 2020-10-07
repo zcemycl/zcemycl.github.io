@@ -44,8 +44,19 @@ cd ~/catkin_ws/src/
 git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
 cd ~/catkin_ws && catkin_make
 echo "export TURTLEBOT3_MODEL=burger" > ~/.bashrc
+pip install rospkg
     </code></pre>
     <h4>Hector Quadrotor</h4>
+    <code><pre>
+cd ~/catkin_src
+wstool init src https://raw.github.com/tu-darmstadt-ros-pkg/hector_quadrotor/kinetic-devel/tutorials.rosinstall
+sudo apt-get install ros-kinetic-geographic-info
+sudo apt-get install ros-kinetic-ros-control
+sudo apt-get install ros-kinetic-gazebo-ros-control
+sudo apt-get install ros-kinetic-joy [**installed in turtlebot3]
+sudo apt-get install ros-kinetic-teleop-twist-keyboard
+catkin_make
+    </code></pre>
     <h4>Universal Robots</h4>
     <h4>Tiago</h4>
     <h3>References</h3>
