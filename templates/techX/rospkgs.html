@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Install ROS packages</h3>
+    <hr>
+    <h4>TurtleBot3</h4>
+    <pre><code>
+sudo apt-get update
+sudo apt-get upgrade
+wget https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_tools/master/install_ros_kinetic.sh && chmod 755 ./install_ros_kinetic.sh && bash ./install_ros_kinetic.sh
+sudo apt-get install ros-kinetic-joy ros-kinetic-teleop-twist-joy ros-kinetic-teleop-twist-keyboard ros-kinetic-laser-proc ros-kinetic-rgbd-launch ros-kinetic-depthimage-to-laserscan ros-kinetic-rosserial-arduino ros-kinetic-rosserial-python ros-kinetic-rosserial-server ros-kinetic-rosserial-client ros-kinetic-rosserial-msgs ros-kinetic-amcl ros-kinetic-map-server ros-kinetic-move-base ros-kinetic-urdf ros-kinetic-xacro ros-kinetic-compressed-image-transport ros-kinetic-rqt-image-view ros-kinetic-gmapping ros-kinetic-navigation ros-kinetic-interactive-markers
+cd ~/catkin_ws/src/
+git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+git clone -b kinetic-devel https://github.com/ROBOTIS-GIT/turtlebot3.git
+cd ~/catkin_ws && catkin_make
+cd ~/catkin_ws/src/
+git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+cd ~/catkin_ws && catkin_make
+echo "export TURTLEBOT3_MODEL=burger" > ~/.bashrc
+    </code></pre>
+    <h4></h4>
+    <h3>References</h3>
+    <ol>
+    <li><a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/pc_setup/#install-ubuntu-on-remote-pc">TurtleBot3 ROS1 PC Setup</a></li>
+    <li><a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/#ros-1-simulation">TurtleBot3 ROS1 Simulation</a></li>
+    <li><a href="https://darienmt.com/autonomous-flight/2018/10/20/flying-ros-and-hector.html">Flying with ROS and Hector -- Hector quadrotor package</a></li>
+    <li><a href="http://wiki.ros.org/ur_gazebo">ur_gazebo - ROS Wiki</a></li>
+    <li><a href="http://wiki.ros.org/Robots/TIAGo/Tutorials/Installation/TiagoSimulation">Installing TIAGo Simulation</a></li>
+    </ol>
+    <hr>
+    </div>
+
+    
+</body>
+</html>
