@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:auto;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Annotation</h3>
+    <hr>
+    <h4>Prodigy</h4>
+    <h5>Syntax for calling out annotation ui</h5>
+    <table>
+      <tr>
+        <th>Basic:</th>
+        <th rowspan="4">prodigy</th>
+        <th>recipe</th>
+        <th>dataset</th>
+        <th>source</th>
+        <th>--label</th>
+      </tr>
+      <tr>
+        <td>Text Classification:</td>
+        <td>textcat.manual</td>
+        <td>news_topics</td>
+        <td>./**.jsonl</td>
+        <td>--label A,B,C</td>
+      </tr>
+      <tr>
+        <td>Image Segmentation</td>
+        <td>image.manual</td>
+        <td>photo_objects</td>
+        <td>./imfolder</td>
+        <td>--label A,B,C</td>
+      </tr>
+      <tr>
+        <td>Audio and Video</td>
+        <td>audio.manual</td>
+        <td>speaker_data</td>
+        <td>./recordings</td>
+        <td>--label A,B,C</td>
+      </tr>
+    </table>
+    <p>The dataset name is a name defined by the user.</p>
+    <h5>Custom Recipe</h5>
+    
+    <table>
+      <tr>
+        <th>Custom:</th>
+        <th rowspan="2">prodigy</th>
+        <th>recipe</th>
+        <th>dataset</th>
+        <th>source</th>
+        <th>-F</th>
+      </tr>
+      <tr>
+        <td></td>
+        <td>my-custom-recipe</td>
+        <td>my_dataset</td>
+        <td>./imfolder</td>
+        <td>-F recipe.py</td>
+      </tr>
+    </table>
+    <p>The recipe name is defined in the python script by the decorator name <code>@prodigy.recipe("my-custom-recipe")</code>. The script should have the following basic format,</p>
+    <pre><code>
+import prodigy
+from prodigy.components.loaders import Images
+
+@prodigy.recipe("image-bbox")
+def image_label(dataset,images_path):
+    def get_stream(images_path):
+        readsth...
+        data...
+        yield {data}
+    return {"dataset": dataset,
+            "stream":  get_stream(),
+            "view_id": "",
+            "config":  (optional, {"labels" or "host", etc.})}
+    </code></pre>
+You can choose use their ui by changing <code>view_id</code>, for example, <code>image</code>, <code>image_manual</code>, etc. Or you can use a set of them via 
+<code>blocks</code>. The labels are defined in <code>config</code>, and host ip address as well.
+    <h5>Key bindings</h5>
+    <table>
+      <tr>
+        <th>Basic</th>
+        <th>Image</th>
+        <th>Audio</th>
+      </tr>
+      <tr>
+        <td>
+          <ul>
+          <li><code>accept</code>:<code>A</code></li>
+          <li><code>reject</code>:<code>X</code></li>
+          <li><code>Ignore</code>:<code>SPACE</code></li>
+          <li><code>undo</code>:<code>BACKSPACE/DEL</code></li>
+          <li><code>option 1-9</code>:<code>1-9</code></li>
+          </ul>
+        </td>
+        <td><ul>
+          <li><code>rect</code>:<code>R</code></li>
+          <li><code>polygon</code>:<code>T,P</code></li>
+          <li><code>freehand</code>:<code>F</code></li>
+          <li><code>delete</code>:<code>D</code></li>
+          <li><code>reset</code>:<code>Q</code></li>
+        </ul></td>
+        <td><ul>
+          <li><code>play/pause</code>:<code>ENTER</code></li>
+          <li><code>zoom</code>:<code>Z</code></li>
+          <li><code>loop</code>:<code>L</code></li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+
+
+    <h3>References</h3>
+    <hr>
+    </div>
+
+    
+</body>
+</html>
