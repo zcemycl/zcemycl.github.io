@@ -62,23 +62,6 @@ with open(tmp.name,'wb') as f:
     </code></pre>
     </li>
     </ol>
-    <h4>Cloud Computing EC2</h4>
-    To create your ec2 service,
-    <ol>
-    <li>Check your IPv4 in session ‘Before you start’ → Click ‘Check IP’. https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/authorizing-access-to-an-instance.html </li>
-    <li>Sometimes if you want a GPU support, you may need to request a limit increase. https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html May take few days or less to process your request. </li>
-    <li>Click services → launch instance → choose an AMI (suggestion: Deep Learning AMI (Ubuntu) 18.04) → choose an instance type (GPU instance: g4dn.4xlarge, have to request limit increase for ‘Running Dedicated g4dn Hosts’).</li>
-    <li>→ Configure Security Group. Remember to enter your IPv4 to make your ssh quicker. </li>
-    <li>Review and Launch.</li>
-    </ol>
-    To ssh ec2 service, 
-    <ol>
-    <li>To ssh into your ec2 service, you need pem key and Public DNS (IPv4) which can be found from your launched instances. </li>
-    <li>Change to the directory where your pem key exists.</li>
-    <li>Run command <code>chmod 400 aws-ec2-leo.pem</code>.</li>
-    <li>SSH via, <code>ssh -i aws-ec2-leo.pem ubuntu@ec2-xx-xxx-xxx-xxx.eu-west-2.compute-amazonaws.com</code></li>
-    <li>Upload your file to ec2 instance by <code>scp -i key.pem [TARGET] ubuntu@PublicDNS</code>.</li>
-    </ol>
     <h3>References</h3>
     <hr>
     </div>
