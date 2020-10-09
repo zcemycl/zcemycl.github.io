@@ -99,8 +99,10 @@ def image_label(dataset,images_path):
             "view_id": "",
             "config":  (optional, {"labels" or "host", etc.})}
     </code></pre>
-You can choose use their ui by changing <code>view_id</code>, for example, <code>image</code>, <code>image_manual</code>, etc. Or you can use a set of them via 
-<code>blocks</code>. The labels are defined in <code>config</code>, and host ip address as well.
+<p>You can choose use their ui by changing <code>view_id</code>, for example, <code>image</code>, <code>image_manual</code>, etc. Or you can use a set of them via 
+<code>blocks</code>. The labels are defined in <code>config</code>, and host ip address as well.</p>
+<p>To generate a transcript, run <code>prodigy db-out dataset > **.jsonl</code>.</p>
+
     <h5>Key bindings</h5>
     <table>
       <tr>
