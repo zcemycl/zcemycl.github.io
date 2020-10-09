@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Amazon Web Services Setup</h3>
+    <hr>
+    <p>Amazon Web Services (AWS, empowered by nginx) is a subsidiary of Amazon providing on-demand cloud computing platforms and APIs to individuals, companies, and governments, on a metered pay-as-you-go basis. Some useful services are S3 for data storage, EC2 for virtual machine, and RobotMaker for ros development. Here I will discuss how to set up it to accelerate your development.</p>
+    <ol>
+    <li>Create your account and Sign in to the Console in https://aws.amazon.com</li>
+    <li>Adjust your service region. This affects where the service-providing cluster is set up. (Global/London/USA/etc.) </li>
+    <li>Download your security pem key file. This ensures that you can access to your services under security. <ul><li>Click Profile icon &#8594 My Security Credentials &#8594 Create new access key &#8594 Download pem file</li></ul></li>
+    </ol>
+    <h3>References</h3>
+    <hr>
+    </div>
+
+    
+</body>
+</html>
