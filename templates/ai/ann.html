@@ -19,9 +19,9 @@
         word-wrap:break-word;
 
       }
-      table{width:100%}
-      td,tr,th{border:1px solid white;}
-      td,th{width:auto;}
+      table{width:90vw;overflow-x:scroll;table-layout:fixed;word-wrap:break-word;}
+      tr{border:1px solid white;}
+      td,th{border:1px solid white;width:15%;}
 
     </style>
 </head>
@@ -34,33 +34,31 @@
     <h5>Syntax for calling out annotation ui</h5>
     <table>
       <tr>
-        <th>Basic:</th>
-        <th rowspan="4">prodigy</th>
-        <th>recipe</th>
-        <th>dataset</th>
-        <th>source</th>
-        <th>--label</th>
+        <th style="width:15%">Basic</th>
+        <th style="width:15%"rowspan="4">prodigy</th>
+        <th style="width:15%">recipe</th>
+        <th style="width:15%">dataset</th>
+        <th style="width:15%">source</th>
+        <th style="width:15%">--label</th>
       </tr>
       <tr>
-        <td>Text Classification:</td>
-        <td>textcat.manual</td>
-        <td>news_topics</td>
-        <td>./**.jsonl</td>
-        <td>--label A,B,C</td>
+        <td style="width:15%">Text Classification</td>
+        <td style="width:15%">textcat.manual</td>
+        <td style="width:15%">news_topics</td>
+        <td style="width:15%">./**.jsonl</td>
+        <td style="width:15%" rowspan="3">--label A,B,C</td>
       </tr>
       <tr>
-        <td>Image Segmentation</td>
-        <td>image.manual</td>
-        <td>photo_objects</td>
-        <td>./imfolder</td>
-        <td>--label A,B,C</td>
+        <td style="width:15%">Image Segmentation</td>
+        <td style="width:15%">image.manual</td>
+        <td style="width:15%">photo_objects</td>
+        <td style="width:15%">./imfolder</td>
       </tr>
       <tr>
-        <td>Audio and Video</td>
-        <td>audio.manual</td>
-        <td>speaker_data</td>
-        <td>./recordings</td>
-        <td>--label A,B,C</td>
+        <td style="width:15%">Audio and Video</td>
+        <td style="width:15%">audio.manual</td>
+        <td style="width:15%">speaker_data</td>
+        <td style="width:15%">./recordings</td>
       </tr>
     </table>
     <p>The dataset name is a name defined by the user.</p>
@@ -68,7 +66,7 @@
     
     <table>
       <tr>
-        <th>Custom:</th>
+        <th>Custom</th>
         <th rowspan="2">prodigy</th>
         <th>recipe</th>
         <th>dataset</th>
@@ -76,7 +74,7 @@
         <th>-F</th>
       </tr>
       <tr>
-        <td></td>
+        <td>Image</td>
         <td>my-custom-recipe</td>
         <td>my_dataset</td>
         <td>./imfolder</td>
