@@ -11,6 +11,60 @@
       /*h3{color:#00ff2b}*/
       a{color:#337AB7;font-weight:bold;text-decoration:none;}
     </style>
+    <script>
+window.MathJax = {
+  jax: ["input/TeX","output/CommonHTML"],
+  CommonHTML: { linebreaks: {automatic: true}},
+  SVG: { linebreaks: {automatic: true}},
+  "HTML-CSS": { linebreaks: {automatic: true}},
+  extensions: ["tex2jax.js", "asciimath2jax.js", "mml2jax.js", "MathMenu.js", "MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js", "AMSsymbols.js", "autoload-all.js"]
+  },
+  tex2jax: {
+    inlineMath: [
+      ['$', '$'],
+      ["\\(", "\\)"]
+    ],
+    processEscapes: true
+  },
+  AuthorInit: function() {MathJax.Hub.Register.MessageHook("End Process", function (message) {
+            var timeout = false, // holder for timeout id
+            delay = 250; // delay after event is "complete" to run callback
+            var reflowMath = function() {
+              var dispFormulas = document.getElementsByClassName("formula");
+              if (dispFormulas){
+              for (var i=0; i<dispFormulas.length; i++){
+                var dispFormula = dispFormulas[i];
+                var child = dispFormula.getElementsByClassName("MathJax_Preview")[0].nextSibling.firstChild;
+                var isMultiline = MathJax.Hub.getAllJax(dispFormula)[0].root.isMultiline;
+                if(dispFormula.offsetWidth < child.offsetWidth || isMultiline){
+                  MathJax.Hub.Queue(["Rerender", MathJax.Hub, dispFormula]);
+                }
+              }
+            }
+            };
+            window.addEventListener('resize', function() {
+                // clear the timeout
+              clearTimeout(timeout);
+              // start timing for event "completion"
+              timeout = setTimeout(reflowMath, delay);
+            });
+          });
+  }
+};
+
+(function(d, script) {
+  script = d.createElement('script');
+  script.type = 'text/javascript';
+  script.async = true;
+  script.onload = function() {
+    // remote script has loaded
+  };
+  script.src = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js';
+  d.getElementsByTagName('head')[0].appendChild(script);
+}(document));
+    </script>
 </head>
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
@@ -21,7 +75,9 @@
     <p>
     The Discriminator \(D\) and Generator \(G\) play a two-player minmax game with value function \(V(G,D)\): 
     </p>
+    <div class="formula">
     $$\min_G\max_D V(G,D) = \mathbf{E}_{x\sim p_{data}(x)}[\log D(x)]+\mathbf{E}_{z\sim p(z)}[\log(1-D(G(z)))]$$
+    </div>
     Given sample minibatch of \(m\) noise samples \(\{z^{(n)}\}_{i=1}^m\) from noise prior \(p_g(z)\), and sample minibatch of \(m\) examples \(\{x^{(n)}\}_{i=1}^m\) from data generating distribution \(p_{data}(x)\).
 
     The discriminator loss is given by, 
