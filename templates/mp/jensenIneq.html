@@ -3,9 +3,7 @@
 <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
-    <script type="text/javascript" async
-      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-    </script>
+
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -26,6 +24,7 @@
       table{width:100%}
       td,tr,th{border:1px solid white;}
       td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
 
     </style>
 </head>
@@ -34,10 +33,34 @@
 
     <h3>Jensen's inequality</h3>
     <hr>
+    Prove that, 
+    <div class="formula">
+    $$f(\sum^M_{m=1}\lambda_mx_m)\geq\sum^M_{m=1}\lambda_mf(x_m)$$
+
+    </div>
+    <p>\(f()\) is any concave function and \(\sum^M_{m=1}\lambda_m=1\) for \(\{\lambda_m\}^M_{m=1} \geq 0\).</p>
+    <p>Similarly, the inequality gets reversed for convex function. </p>
+    <h4>Proof</h4>
+    Given that, if \(a\leq c\leq b\), \(f(c)=f((1-\lambda)a+\lambda b)\geq (1-\lambda)f(a)+\lambda f(b)\). Recursively,
+    <div class="formula">
+    \begin{equation}
+    f(\sum^M_{m=1}\lambda_mx_m)=f(\lambda_1x_1+\sum^M_{m=2}\lambda_mx_m)=f\bigg(\frac{\lambda_1x_1}{\sum^M_{m=1}\lambda_m}+\frac{\sum^M_{m=2}\lambda_mx_m}{\sum^M_{m=2}\lambda_m}\frac{\sum^M_{m=2}\lambda_m}{\sum^M_{m=1}\lambda_m}\bigg)\\
+    = f\bigg(p_1x_1+(1-p_1)\frac{\sum^M_{m=2}\lambda_mx_m}{\sum^M_{m=2}\lambda_m}\bigg)\geq p_1f(x_1)+(1-p_1)f\bigg(\frac{\sum^M_{m=2}\lambda_mx_m}{\sum^M_{m=2}\lambda_m}\bigg) \\
+    = \lambda_1f(x_1)+\sum^M_{m=2}\lambda_mf\bigg(\frac{\sum^M_{m=2}\lambda_mx_m}{\sum^M_{m=2}\lambda_m}\bigg) =  \lambda_1f(x_1)+\sum^M_{m=2}\lambda_mf\bigg(\frac{\lambda_2x_2+\sum^M_{m=3}\lambda_mx_m}{\sum^M_{m=2}\lambda_m}\bigg) \\
+    = \lambda_1f(x_1)+\sum^M_{m=2}\lambda_mf\bigg(\frac{\lambda_2x_2}{\sum^M_{m=2}\lambda_m}+\frac{\sum^M_{m=3}\lambda_mx_m}{\sum^M_{m=3}\lambda_m}\frac{\sum^M_{m=3}\lambda_m}{\sum^M_{m=2}\lambda_m}\bigg) \\
+    =  \lambda_1f(x_1)+\sum^M_{m=2}\lambda_mf\bigg(p_2x_2+(1-p_2)\frac{\sum^M_{m=3}\lambda_mx_m}{\sum^M_{m=3}\lambda_m}\bigg) \\
+    \geq  \lambda_1f(x_1)+\sum^M_{m=2}\lambda_m\bigg(p_2f(x_2)+(1-p_2)f\bigg(\frac{\sum^M_{m=3}\lambda_mx_m}{\sum^M_{m=3}\lambda_m}\bigg)\bigg) \\
+    =  \lambda_1f(x_1)+\lambda_2f(x_2)+\sum^M_{m=3}\lambda_mf\bigg(\frac{\sum^M_{m=3}\lambda_mx_m}{\sum^M_{m=3}\lambda_m}\bigg) = \cdots \geq \sum^M_{m=1}\lambda_mf(x_m)
+    \end{equation}
+    </div>
     <h3>References</h3>
     <hr>
     </div>
-<script type="text/javascript" src="../../static/eqresp.js"></script>
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
 
     
 </body>
