@@ -117,6 +117,7 @@ window.MathJax = {
       Another formulation: The generator \(G\) takes an input a random noise vector \(z\) and outputs an image \(X_{fake}=G(z)\). The discriminator \(D\) receives as input either a training image or a synthesized image from the generator and outputs a probability distribution \(P(S|X) = D(X)\) over possible image sources. The discriminator is trained to maximize the log-likelihood it assigns to the correct source:
     <div class="formula">
       $$L = E[\log P(S=real|X_{real})]+E[\log P(S=fake|X_{fake})]$$
+    </div>
       For ACGAN, every generated sample has a corresponding class label \(c\sim p_c\) in addition to the noise \(z\). \(G\) uses both to generate images \(X_{fake}=G(c,z)\). The discriminator gives both a probability distribution over sources and a probability distribution over the class labels, \(P(S|X),P(C|X) = D(X)\). THe objective function has two parts: the log-likelihood of the correct source \(L_S\) and the log-likelihood of the correct class \(L_C\). 
     <div class="formula">
       $$L_S = E[\log P(S=real|X_{real})]+E[\log P(S=fake|X_{fake})]$$
