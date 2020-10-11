@@ -12,7 +12,22 @@
       a{color:#337AB7;font-weight:bold;text-decoration:none;}
       div.formula{overflow-x:scroll;border:1px solid white;}
     </style>
-    <script type="text/javascript">
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    // enable automatic line breaks (might look ugly)
+    CommonHTML: { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true } },
+    SVG: { linebreaks: { automatic: true } },
+
+    // enable $ for inline math -> use \$ for ordinary dollar-sign
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      processEscapes: true
+    },
+  });
+</script>
+
+<script type="text/javascript">
 window.MathJax = {
   jax: ["input/TeX","output/CommonHTML"],
   CommonHTML: { linebreaks: {automatic: true}},
@@ -65,7 +80,7 @@ window.MathJax = {
   script.src = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js';
   d.getElementsByTagName('head')[0].appendChild(script);
 }(document));
-    </script>
+</script>
 </head>
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
