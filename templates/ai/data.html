@@ -27,9 +27,35 @@
 </head>
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
-
-    <h3>Data</h3>
+    
+    <h3>Data Collection</h3>
     <hr>
+    <h4>Tools</h4>
+    <ol>
+    <li>requests</li>
+    <pre><code>
+import requests
+content = requests.get(urlpage)
+    </code></pre>
+    <p>It gives the whole html of the static page content.</p>
+    <li>Beautiful Soup</li>
+    <pre><code>
+import requests
+from bs4 import BeautifulSoup
+content = requests.get(urlpage)
+soup = BeautifulSoup(content.content,'html.parser')
+table = soup.find('table',{'class':'wikitable sortable'})
+    </code></pre>
+    <p>It is used to scrape static pages.</p>
+    <li>Selenium</li>
+    <p>It can be used to automate web browser interaction with Python.</p>
+    <li>github repo google-images-download</li>
+    <p>Terminal: </p>
+    <pre><code>
+python3 bing_scraper.py --search 'living room' --limit 100 --download --chromedriver /home/yui/Downloads/chromedriver_linux64/chromedriver
+    </code></pre>
+    <li>TWINT - Twitter Intelligence Tool</li>
+    </ol>
     <h3>References</h3>
     <ol>
     <li><a href="">YouTube Face Dataset</a></li>
@@ -38,6 +64,7 @@
     <li><a href="">Trillionpair Dataset</a></li>
     <li><a href="">SESYD Dataset for floorplan</a></li>
     <li><a href="">MNIST</a></li>
+    <li><a href="https://towardsdatascience.com/image-scraping-with-python-a96feda8af2d">Image Scraping with Python</a></li>
     </ol>
     <hr>
     </div>
