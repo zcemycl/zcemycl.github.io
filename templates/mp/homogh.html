@@ -29,8 +29,15 @@
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
 
-    <h3>Topic</h3>
+    <h3>Homographies</h3>
     <hr>
+    <p>A homography \(\mathrm{H}\) maps a set of points \(\mathbf{x}=(x\quad y\quad 1)^\top\) to another set of points \(\mathbf{x}^\prime = (x^\prime\quad y^\prime\quad 1)^\top\).</p>
+    <div class="formula">
+    \begin{align*}
+        \mathbf{x}^\prime &\sim \mathrm{H}\mathbf{x} \\ 
+        \lambda\begin{pmatrix}x^\prime\\y^\prime\\ 1 \end{pmatrix} &= \begin{pmatrix}h_{11}&h_{12}&h_{13}\\h_{21}&h_{22}&h_{23}\\h_{31}&h_{32}&h_{33}\\ \end{pmatrix}\begin{pmatrix}x\\y\\ 1 \end{pmatrix}\\
+    \end{align*}
+    </div>
     <h3>References</h3>
     <hr>
     </div>
@@ -38,7 +45,7 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
     <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
-
+    
     
 </body>
 </html>
