@@ -36,8 +36,34 @@
     \begin{align*}
         \mathbf{x}^\prime &\sim \mathrm{H}\mathbf{x} \\ 
         \lambda\begin{pmatrix}x^\prime\\y^\prime\\ 1 \end{pmatrix} &= \begin{pmatrix}h_{11}&h_{12}&h_{13}\\h_{21}&h_{22}&h_{23}\\h_{31}&h_{32}&h_{33}\\ \end{pmatrix}\begin{pmatrix}x\\y\\ 1 \end{pmatrix}\\
+        \lambda x^\prime &= h_{11}x+h_{12}y+h_{13} \\
+        \lambda y^\prime &= h_{21}x+h_{22}y+h_{23} \\ 
+        \lambda &= h_{31}x+h_{32}y+h_{33} \\ 
+        \text{So,} &\\
+        x^\prime &= \frac{h_{11}x+h_{12}y+h_{13}}{h_{31}x+h_{32}y+h_{33}} \\
+        y^\prime &= \frac{h_{21}x+h_{22}y+h_{23}}{h_{31}x+h_{32}y+h_{33}} \\ 
     \end{align*}
     </div>
+    <p>Rewriting \((x,y,x^\prime,y^\prime) \rightarrow (x_1,x_2,x^\prime_1,x^\prime_2)\), the equation in the linear form, </p>
+    <div class="formula">
+    \begin{align*}
+        -h_{11}x_1-h_{12}x_2-h_{13}+h_{31}x_1x_1^\prime+h_{32}x_2x_1^\prime+h_{33}x_3x_1^\prime &= 0 \\
+        -h_{21}x_1-h_{22}x_2-h_{23}+h_{31}x_1x_2^\prime+h_{32}x_2x_2^\prime+h_{33}x_3x_2^\prime &= 0 \\
+    \end{align*}
+    </div>
+    <p>Now the equations become,</p>
+    <div class="formula">
+        $$\begin{pmatrix}a_x\\a_y\end{pmatrix}h = 0$$
+    </div>
+    <p>where,</p>
+    <div class="formula">
+    \begin{align*}
+        a_x &= (-x_1 -x_2 -1 \quad 0 \quad 0 \quad 0 \quad x_1x_1^\prime \quad x_2x_1^\prime \quad x_1^\prime)\\
+        a_y &= ( \quad 0 \quad 0 \quad 0 \quad -x_1 -x_2 -1\quad x_1x_2^\prime \quad x_2x_2^\prime \quad x_2^\prime)\\
+        h &= (h_{11}\quad h_{12}\quad h_{13}\quad h_{21}\quad h_{22}\quad h_{23}\quad  h_{31}\quad h_{32}\quad h_{33})^\top \\
+    \end{align*}
+    </div>
+    <p>The matrix has 8 dof, each point gives 2 sets of equations, 4 points are requiered to solve the matrix \(h\) uniquely with SVD (Singular Value Decomposition).</p>
     <h3>References</h3>
     <hr>
     </div>
