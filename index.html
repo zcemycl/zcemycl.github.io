@@ -33,6 +33,11 @@
     .iframecontent{width:100%;height:100%;float:left}
     a.closebtn{position:fixed;text-align:center;float:right;padding:5px;margin-right:5px;font-size:20px;display:block;width:20px;background-color:red;float:right;right:5px;bottom:5px;}
     a.bar{.bar;border:1px solid white;display:block;}
+    #mySearch {
+    width: 10vw;
+    font-size: 18px;
+    border: 1px solid #ddd;
+      }
     }
   </style>
   <script>
@@ -52,15 +57,33 @@
     var sidebar = document.getElementsByClassName('sidebar')[0];
     sidebar.style.display = "none";
   }
+  function myFunction() {
+    // Declare variables
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("mySearch");
+    filter = input.value.toLowerCase();
 
+    li = document.getElementsByTagName("a");
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+      a = li[i];
+      console.log(a.target);
+      if (a.innerHTML.toLowerCase().indexOf(filter) > -1 && a.target) {
+        li[i].style.display = "";
+      } else if (a.innerHTML.toLowerCase().indexOf(filter) <= -1 && a.target){
+        li[i].style.display = "none";
+      }
+    }
+  }
   </script>
 </head>
 <body onresize="sidebartransition()">
   <div class="content">
-    <div class="sidebar">
-
-      <h3 style="background-color:#00008B;padding:2%;text-align:center;margin-bottom:0;">Blog</h3>
+    <div id="mymenu" class="sidebar">
+      <br>
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category" style="width:80%">
       <hr>
       <h4>Tech Explore</h4>
       <h5>Advanced Flask</h5>
