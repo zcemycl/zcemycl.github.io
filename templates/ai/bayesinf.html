@@ -50,6 +50,22 @@ $$f_\mathbb{w}(x) = w_0+w_1x+w_2x^2+\cdots+w_Mx^M$$
     </div>
     <h4>Noise</h4>
     Ideally without noise, \(\mathbb{y}=\mathbb{f}_\mathbb{w}(\mathbb{x})\), the best fit parameters are given by, 
+    <div class="formula">
+    \begin{align*}
+    E(\mathbb{w}) &= (\mathbb{y}-\Phi\mathbb{w})^\top(\mathbb{y}-\Phi\mathbb{w}) \\
+    &= \mathbb{y}^\top\mathbb{y}-2\mathbb{y}^\top\Phi\mathbb{w}-\mathbb{w}^\top\Phi^\top\Phi\mathbb{w} \\
+    \frac{\partial E}{\partial\mathbb{w}} &= 2\Phi^\top\Phi\mathbb{w}-2\Phi^\top\mathbb{y} = 0\\
+    \mathbb{w}&=(\Phi^\top\Phi)^{-1}\Phi^\top\mathbb{y}\\
+    \end{align*}
+    </div>
+    <p>However, this can lead to overfitting under noisy environment. To reduce the effect of overfitting, the regularization is used to penalize the weight as follows, \(E(\mathbb{w} =  (\mathbb{y}-\Phi\mathbb{w})^\top(\mathbb{y}-\Phi\mathbb{w}))+\lambda\mathbb{w}^\top\mathbb{w}\). This can be justified by bayesian inference. </p>
+    <h4>Posterior Regularization</h4>
+    <p>Bayes' rule states that, \(p(a|b)=\frac{p(b|a)p(a))}{p(b)}=\frac{p(a,b)}{p(b)}\). To find the best fit parameters for the model, we would like to maximize the posterior parameter distribution \(p(\mathbb{w}|\mathbb{x},\mathbb{y},\mathcal{M})\) given the training data, </p>
+    <div class="formula">
+    \begin{align*}
+    p(\mathbb{w}|\mathbb{x},\mathbb{y},\mathcal{M})&= \frac{}{}\\
+    \end{align*}
+    </div>
     <h3>References</h3>
     <hr>
     </div>
