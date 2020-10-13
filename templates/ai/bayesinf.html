@@ -67,6 +67,21 @@ $$f_\mathbb{w}(x) = w_0+w_1x+w_2x^2+\cdots+w_Mx^M$$
     &= \frac{p(\mathbb{w})p(\mathbb{y|x,w})p(\mathbb{x})}{p(\mathbb{y|x})p(\mathbb{x})} = \frac{\overbrace{p(\mathbb{w}|\mathcal{M})}^{prior}\overbrace{p(\mathbb{y|x,w},\mathcal{M})}^{likelihood}}{\underbrace{p(\mathbb{y|x,\mathcal{M}})}_{marginal\quad likelihood}}
     \end{align*}
     </div>
+    <p>To estimate which model (degree of polynomial) is the best, the marginal likelihood is used.</p>
+    <div class="formula">
+    \begin{align*}
+    p(\mathbb{y|x},\mathcal{M})=\int p(\mathbb{y,w|x,\mathcal{M}})d\mathbb{w}=\int p(\mathbb{w|x,}\mathcal{M})p(\mathbb{y|x,w,}\mathcal{M})d\mathbb{w}
+    \end{align*}
+    </div>
+    <p>After the model is tuned, the predictive distribution is used.</p>
+    <div class="formula">
+    \begin{align*}
+    p(\mathbb{y_*|x_*,x,y,\mathcal{M}}) &= \int p(\mathbb{y_*,w|x_*,x,y,\mathcal{M}})d\mathbb{w} \\
+    &= \int p(\mathbb{y_*|w,x_*,\mathcal{M}})p(\mathbb{w|x,y,\mathcal{M}})d\mathbb{w}
+    \end{align*}
+    </div>
+    <h4>More derivations</h4>
+
     <h3>References</h3>
     <hr>
     </div>
