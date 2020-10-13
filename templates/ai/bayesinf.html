@@ -96,12 +96,26 @@ $$f_\mathbb{w}(x) = w_0+w_1x+w_2x^2+\cdots+w_Mx^M$$
     \mu &= (\Phi^\top\Phi+\frac{\sigma^2_n}{\sigma^{2}_w}\mathbb{I})^{-1}\Phi^\top\mathbb{y}\\
     \end{align*}
     </div>
-    <p>In terms of marginal likelihood,</p>
+    <p>In terms of marginal likelihood, since \(\mathbb{y=\Phi w+\epsilon}\) and \(\mathbb{dy=d\epsilon}\),</p>
     <div class="formula">
+    \begin{align*}
+    &p(\mathbb{y|x},\mathcal{M})=\int p(\mathbb{w|x,}\mathcal{M})p(\mathbb{y|x,w,}\mathcal{M})d\mathbb{w}\approx\mathcal{N}(\mathbb{y};\mu_{\mathbb{y|x}},\Sigma_{\mathbb{y|x}}) \\ 
+    &\mu_{\mathbb{y|x}} = \mathbb{\int dy\int dw}(\mathbb{y})p(\mathbb{w|x,}\mathcal{M})p(\mathbb{y|x,w,}\mathcal{M})\\
+    &=\mathbb{\int d\epsilon\int dw}(\mathbb{\Phi w+\epsilon})\mathcal{N}(\mathbb{w;0,\sigma^2_wI})\mathcal{N}(\mathbb{\epsilon;0,\sigma^2_n I}) = 0 \\
+    &\Sigma_{\mathbb{y|x}} = \mathbb{\int dy\int dw}(\mathbb{yy^\top})p(\mathbb{w|x,}\mathcal{M})p(\mathbb{y|x,w,}\mathcal{M})\\
+    &= \mathbb{\int d\epsilon\int dw}(\mathbb{\Phi ww^\top\Phi^\top+\epsilon\epsilon^\top}+2\epsilon w^\top\Phi^\top)\mathcal{N}(\mathbb{w;0,\sigma^2_wI})\mathcal{N}(\mathbb{\epsilon;0,\sigma^2_n I})\\
+    &= \mathbb{\sigma^2_w\Phi\Phi^\top+\sigma^2_nI}
+    \end{align*}
+
     </div>
-    <p>For predictive distribution,</p>
+    <p>For predictive distribution, \(\mathbb{y_*=\phi_* w+\epsilon}\),</p>
 
     <div class="formula">
+    \begin{align*}
+    &p(\mathbb{y_*|x_*,x,y,\mathcal{M}}) = \int p(\mathbb{y_*|w,x_*,\mathcal{M}})p(\mathbb{w|x,y,\mathcal{M}})d\mathbb{w} \approx \mathcal{N}(\mathbb{y_*};\mu_*,\Sigma_*)\\
+    &\mu_* = \\
+    &\Sigma_* = \\
+    \end{align*}
     </div>
 
     <h3>References</h3>
