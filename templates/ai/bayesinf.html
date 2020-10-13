@@ -108,16 +108,18 @@ $$f_\mathbb{w}(x) = w_0+w_1x+w_2x^2+\cdots+w_Mx^M$$
     \end{align*}
 
     </div>
-    <p>For predictive distribution, \(\mathbb{y_*=\phi_* w+\epsilon}\),</p>
+    <p>For predictive distribution, \(\mathbb{y_*=\phi_*^\top w+\epsilon}\),</p>
 
     <div class="formula">
     \begin{align*}
     &p(\mathbb{y_*|x_*,x,y,\mathcal{M}}) = \int p(\mathbb{y_*|w,x_*,\mathcal{M}})p(\mathbb{w|x,y,\mathcal{M}})d\mathbb{w} \approx \mathcal{N}(\mathbb{y_*};\mu_*,\Sigma_*)\\
-    &\mu_* = \\
-    &\Sigma_* = \\
+    &\mu_* = \mathbb{\int dy_*\int dw}(\mathbb{y_*})p(\mathbb{y_*|w,x_*,\mathcal{M}})p(\mathbb{w|x,y,\mathcal{M}})\\
+    &= \mathbb{\int d\epsilon\int dw}(\mathbb{\phi_*^\top w+\epsilon})\mathcal{N}(\mathbb{w;\mu,\Sigma})\mathcal{N}\mathbb{(\epsilon;0,\sigma^2_nI)}=\mathbb{\phi_*^\top\mu}\\
+    &\Sigma_* = \mathbb{\int d\epsilon\int dw}(\mathbb{\phi_*^\top ww^\top\phi_*+\epsilon\epsilon^\top+2\phi^\top_*w\epsilon^\top})\mathcal{N}(\mathbb{w;\mu,\Sigma})\mathcal{N}\mathbb{(\epsilon;0,\sigma^2_nI)}\\
+    &= \phi_*^\top\Sigma\phi_*+\sigma^2_n\mathbb{I}
     \end{align*}
     </div>
-
+    <p>Therefore, the weight should not be estimated by the maximum likelihood, but the maximum posterior.</p>
     <h3>References</h3>
     <hr>
     </div>
