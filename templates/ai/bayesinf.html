@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Bayesian Inference</h3>
+    <hr>
+    <h4>Model</h4>
+    <p>What's expected of a model is to predict a target \(y\) based on its input \(x\). So usually it involves the procedure of fitting (or training, learning based on the data), tuning the parameters, and predicting in the deployment. </p>   
+    <p>In the mathematical terminology, given a dataset \(\mathrm{D} = \{x_i,y_i\}^N_{i=1}=(\mathbb{x},\mathbb{y})\) of N pairs of inputs \(x_i\) and targets (outputs) \(y_i\), we would like to have a model \(\mathcal{M}\) with function \(f\) and parameters \(\theta\) to give accurate predictions.</p>
+    <p>For example, the polynomial regression,</p>
+    <div class="formula">
+$$f_\mathbb{w}(x) = w_0+w_1x+w_2x^2+\cdots+w_Mx^M$$
+    </div>
+    <p>Can be interpreted as follows, the model \(\mathcal{M}\) is assumed to be the polynomial regression model, the paramters \(\theta=(w_0,w_1,...,w_M,M)=(\mathbb{w},M)\), and using \(f_\mathbb{w}\sim y\).</p>
+    <p>To be more compact, the function can be rewritten in the form of basis functions, which is a transformation of the input \(\phi_j(x)=x^j\), so \(f_\mathbb{w}(x_i)=\sum^M_{j=1}w_j\phi_j(x_i)\). All the inputs and outputs can be stacked up in a matrix form \(\Phi_{ij}=\phi_j(x_i)\), </p>
+    <div class="formula">
+    $$\mathbb{f}_\mathbb{w}(\mathbb{x})=\begin{pmatrix}f_\mathbb{w}(x_1)\\f_\mathbb{w}(x_2)\\\vdots\\f_\mathbb{w}(x_N)\end{pmatrix}=\begin{pmatrix}1& \cdots & x_1^M\\\vdots &\ddots & \vdots\\1 & \cdots & x_N^M\end{pmatrix}\begin{pmatrix}w_0\\w_1\\\vdots\\w_M\end{pmatrix}=\Phi\mathbb{w}$$
+    </div>
+    <h4>Loss</h4>
+    <p>To estimate the performance of the model, a scalar L2 loss (error) is commonly used.</p>
+    <div class="formula">
+    $$E(\mathbb{w})=\sum^N_{i=1}e^2_i=\|\mathbb{e}\|^2=\mathbb{e}^\top\mathbb{e}=\sum^N_{i=1}\big(y_i-f(x_i)\big)^2=(\mathbb{y}-\mathbb{f})^\top(\mathbb{y}-\mathbb{f})$$
+    </div>
+    <h4>Noise</h4>
+    Ideally without noise, \(\mathbb{y}=\mathbb{f}_\mathbb{w}(\mathbb{x})\), the best fit parameters are given by, 
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+
+    
+</body>
+</html>
