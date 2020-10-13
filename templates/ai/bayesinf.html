@@ -81,6 +81,28 @@ $$f_\mathbb{w}(x) = w_0+w_1x+w_2x^2+\cdots+w_Mx^M$$
     \end{align*}
     </div>
     <h4>More derivations</h4>
+    <p>In terms of posterior parameter distribution, assume that the noise is normal distributed, \(y=f+\epsilon\), where \( \epsilon\sim\mathcal{N}(0,\sigma^2_n) \) so the likelihood \(p(\mathbb{y|x,w,\mathcal{M}})=\mathcal{N}(\mathbb{y;\Phi w,\sigma^2_n I})\), as well as the prior of the weight \(p(\mathbb{w}|\mathcal{M})=\mathcal{N}(\mathbb{w;0,\sigma^2_wI})\). Since the posterior is approximate to the product of prior and likelihood, it should be normally distributed too, i.e., \(p(\mathbb{w|x,y,\mathcal{M}})\sim\mathcal{N}(\mu,\Sigma)\). </p>
+    <div class="formula">
+    \begin{align*}
+    &\text{posterior}= \mathcal{N}(\mathbb{w};\mu,\Sigma) \approx e^{-\frac{1}{2}\mathbb{w}^\top\Sigma^{-1}\mathbb{w}+\mathbb{w}^\top\Sigma^{-1}\mu}\\
+    &\text{product of prior and likelihood}=\mathcal{N}(\mathbb{w;0,\sigma^2_wI})\mathcal{N}(\mathbb{y;\Phi w,\sigma^2_nI}) \\
+    &\approx e^{-\frac{1}{2}(\sigma^{-2}_\mathbb{w}\mathbb{w^\top w}+\sigma^{-2}_n\mathbb{(y-\Phi w)^\top(y-\Phi w)})} \approx e^{-\frac{1}{2}\mathbb{w^\top(\sigma^{-2}_n\Phi^\top\Phi+\sigma^{-2}_wI)}+\mathbb{\sigma^{-2}_n w^\top\Phi^\top y}}\\
+    \end{align*}
+    </div>
+    <p>Comparing the terms, </p>
+    <div class="formula">
+    \begin{align*}
+    \Sigma^{-1}&=\sigma^{-2}_n\Phi^\top\Phi+\sigma^{-2}_w\mathbb{I} \\ 
+    \mu &= (\Phi^\top\Phi+\frac{\sigma^2_n}{\sigma^{2}_w}\mathbb{I})^{-1}\Phi^\top\mathbb{y}\\
+    \end{align*}
+    </div>
+    <p>In terms of marginal likelihood,</p>
+    <div class="formula">
+    </div>
+    <p>For predictive distribution,</p>
+
+    <div class="formula">
+    </div>
 
     <h3>References</h3>
     <hr>
