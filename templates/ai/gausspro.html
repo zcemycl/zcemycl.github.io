@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Introduction of Gaussian Process</h3>
+    <hr>
+    <h4>Bayesian Inference</h4>
+    <p>At the weight space view, the target is estimated as follows, \(\mathbb{y=f+\epsilon=\Phi w+\epsilon}\), where \(\mathbb{w}\sim\mathcal{N}(0,\mathbb{\sigma^2_wI})\) and \(\epsilon\sim \mathcal{N}\mathbb{0,\sigma^2_nI})\). The posterior is given by,</p>
+    <div class="formula">
+    $$p(\mathbb{w|x,y,}\mathcal{M})=\mathcal{N}(\mathbb{w};(\Phi^\top\Phi+\mathbb{\frac{\sigma^2_n}{\sigma^2_w}I})^{-1}\mathbb{\Phi^\top y},\sigma_n^{-2}\Phi^\top\Phi+\sigma_w^{-2}\mathbb{I})$$
+    </div>
+    <p>The marginal likelihood is written as, </p>
+    <div class="formula">
+    $$p(\mathbb{y|x,}\mathcal{M})=\mathcal{N}(\mathbb{y;0,\sigma^2_w\Phi\Phi^\top+\sigma^2_nI})$$
+    </div>
+    <p>The predictive distribution is derived as follows,</p>
+    <div class="formula">
+    $$p(\mathbb{y_*|x_*,x,y,}\mathcal{M})=\mathcal{N}(\mathbb{y_*};\phi_*^\top(\Phi^\top\Phi + \mathbb{\frac{\sigma^2_n}{\sigma^2_w}I})^{-1}\Phi^\top\mathbb{y},\phi^\top_*(\sigma^{-2}_n\Phi^\top\Phi+\sigma^{-2}_w\mathbb{I})^{-1}\phi_*+\sigma^2_n\mathbb{I})$$
+    </div>
+
+    <h4>Function Space View</h4>
+    <p>Among all the expressions above, only the marginal likelihood seems to give the initial insight over the functional space given the inputs.</p>
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+
+    
+</body>
+</html>
