@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Notes for Computing in Medicine (UCL)</h3>
+    <hr>
+    <h4>Sampling</h4>
+    <p>\(x(t)\rightarrow\text{Analog to digital converter (ADC)}\rightarrow x[\underbrace{n}_{\text{index}}]=x(n\underbrace{T_s}_{\text{period}})=x(\underbrace{t_n}_{\text{time}})\)</p>
+    <p>Sampling converts an analog signal into a set of values specifying the signal amplitude over pre-set intervals.</p>
+    <p>Quantization converts the signal amplitude into one of a discrete set of values. (Quantization Error to estimate info loss)</p>
+    <h4>Aliasing</h4>
+    <p>A distortion or artifact that results when the signal reconstructed from samples different from the original continuous signal.</p>
+    <p>Nyquist Sampling Theorem: \(f_s\geq 2f_{max}\) to achieve anti-aliasing.</p>
+    <h4>Signal spectrum - Fourier Transform</h4>
+    <p>Properties: Linearity, Scaling and Convolution Theorem [conv in f then mult in t, conv in t then mult in f]. </p>
+    <p>Frequency domain</p>
+    $$\hat{f}(\omega)=\int^\infty_{-\infty}f(t)e^{-i\omega t}dt$$
+    <p>Time domain</p>
+    $$f(t)=\int^\infty_{-\infty}\hat{f}(\omega)e^{i\omega t}d\omega$$
+    <h4>Interpolation</h4>
+    The estimation of values between known data points.
+    <h4>Convolution operator</h4>
+    <p>Properties: commutativity, associativity, Distributive, Scaling, Identity and Derivatives.</p>
+    $$h(t)=f\otimes g=f*g=\int^\infty_{-\infty}f(\tau)g(t-\tau)d\tau$$
+    <h4>Dirac Delta Function (I miss it)</h4>
+    <p>Sifting for multiplication, Shifting for Shifting.</p>
+    $$\int^\infty_{-\infty}\delta(t)dt = 1$$
+    <p>where \(\delta(t)=\frac{1}{a\sqrt{\pi}}e^{-t^2/a^2} \text{,}a\rightarrow 0 \)</p>
+    <hr>
+    <h4>Discrete Convolution</h4>
+    <p>1D Convolution</p>
+    $$y[n]=x[n]\otimes y[n]=\sum^\infty_{k=-\infty}x[k]h[n-k]$$
+    <p>2D Convolution</p>
+    $$X\otimes G=\sum^\infty_{k=-\infty}\sum^\infty_{l=-\infty}X[i-k,j-l]G[k,l]$$
+    <p>Equivalence of linear filtering and convolution: \(Y=f[X;G]=X\otimes G_{flip}\).</p>
+    <p>Example: Identity filter \(\begin{pmatrix}0&0&0\\0&1&0\\0&0&0\end{pmatrix}\), Blurring filter \(\frac{1}{9}\begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}\), sharpening filter \(\frac{1}{9}\begin{pmatrix}1&1&1\\1&17&1\\1&1&1\end{pmatrix}\), sobel filter (for edge detection) \(\begin{pmatrix}1&2&1\\0&0&0\\-1&-2&-1\end{pmatrix}\).</p>
+
+
+    <h4></h4>
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+
+    
+</body>
+</html>
