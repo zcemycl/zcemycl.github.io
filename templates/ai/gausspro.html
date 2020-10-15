@@ -32,17 +32,50 @@
     <h3>Introduction of Gaussian Process</h3>
     <hr>
     <h4>Bayesian Inference</h4>
-    <p>At the weight space view, the target is estimated as follows, \(\mathbb{y=f+\epsilon=\Phi w+\epsilon}\), where \(\mathbb{w}\sim\mathcal{N}(0,\mathbb{\sigma^2_wI})\) and \(\epsilon\sim \mathcal{N}\mathbb{0,\sigma^2_nI})\). The posterior is given by,</p>
+    <p>At the weight space view, the target is estimated as follows, \(\mathbb{y=f+\epsilon=\Phi^\top w+\epsilon}\), where \(\mathbb{w}\sim\mathcal{N}(0,\mathbb{\Sigma_p})\) and \(\epsilon\sim \mathcal{N}\mathbb{0,\sigma^2_nI})\). The posterior is given by,</p>
     <div class="formula">
-    $$p(\mathbb{w|x,y,}\mathcal{M})=\mathcal{N}(\mathbb{w};(\Phi^\top\Phi+\mathbb{\frac{\sigma^2_n}{\sigma^2_w}I})^{-1}\mathbb{\Phi^\top y},\sigma_n^{-2}\Phi^\top\Phi+\sigma_w^{-2}\mathbb{I})$$
+    $$p(\mathbb{w|x,y,}\mathcal{M})=\mathcal{N}(\mathbb{w};\sigma^{-2}_n(\sigma^{-2}_n\Phi\Phi^\top+\mathbb{\Sigma_p^{-1}})^{-1}\mathbb{\Phi y},(\sigma_n^{-2}\Phi\Phi^\top+\Sigma_p^{-1})^{-1}) \\ 
+    = \mathcal{N}(\mathbb{w;\sigma^{-2}_n}A^{-1}\Phi y,A^{-1})$$
     </div>
     <p>The marginal likelihood is written as, </p>
     <div class="formula">
-    $$p(\mathbb{y|x,}\mathcal{M})=\mathcal{N}(\mathbb{y;0,\sigma^2_w\Phi\Phi^\top+\sigma^2_nI})$$
+    $$p(\mathbb{y|x,}\mathcal{M})=\mathcal{N}(\mathbb{y;0,\Phi^\top\Sigma_p\Phi+\sigma^2_nI})=\mathcal{N}(\mathbb{y;0,}K+\sigma^2_n\mathbb{I})$$
     </div>
     <p>The predictive distribution is derived as follows,</p>
     <div class="formula">
-    $$p(\mathbb{y_*|x_*,x,y,}\mathcal{M})=\mathcal{N}(\mathbb{y_*};\phi_*^\top(\Phi^\top\Phi + \mathbb{\frac{\sigma^2_n}{\sigma^2_w}I})^{-1}\Phi^\top\mathbb{y},\phi^\top_*(\sigma^{-2}_n\Phi^\top\Phi+\sigma^{-2}_w\mathbb{I})^{-1}\phi_*+\sigma^2_n\mathbb{I})$$
+    $$p(\mathbb{y_*|x_*,x,y,}\mathcal{M})=\mathcal{N}(\mathbb{y_*};\sigma^{-2}_n\phi_*^\top(\sigma^{-2}_n\Phi\Phi^\top + \mathbb{\Sigma_p^{-1}})^{-1}\Phi\mathbb{y},\phi^\top_*(\sigma^{-2}_n\Phi\Phi^\top+\Sigma_p^{-1})^{-1}\phi_*+\sigma^2_n\mathbb{I}) \\ = \mathcal{N}(\mathbb{y_*;\sigma^{-2}_n\phi_*^\top}A^{-1}\Phi\mathbb{y},\phi^\top_*A^{-1}\phi_*+\sigma^2_n\mathbb{I})$$
+    </div>
+    <p>Consider the definition of \(A\) and \(K\), the posterior and predictive can be rewritten, </p>
+    <div class="formula">
+    \begin{align*}
+    A&=\sigma^{-2}_n\Phi\Phi^\top+\Sigma_p^{-1} \\
+    A\Sigma_p &= \sigma^{-2}_n\Phi\Phi^\top\Sigma_p+\mathbb{I}\\
+    A\Sigma_p\Phi &= \sigma^{-2}_n\Phi\Phi^\top\Sigma_p\Phi+\Phi\\
+     &= \sigma^{-2}_n\Phi(K+\sigma^2_n\mathbb{I})\\
+    \Sigma_p\Phi(K+\sigma^2_n\mathbb{I})^{-1} &= \sigma^{-2}_nA^{-1}\Phi\\
+    \end{align*}
+    </div>
+    <p>and by matrix cookbook inverse (woodbury identity), \((A+CBC^\top)^{-1}=A^{-1}-A^{-1}C(B^{-1}+C^\top A^{-1}C)^{-1}C^\top A^{-1}\),</p>
+    <div class="formula">
+    \begin{align*}
+    A^{-1}&=(\Phi\sigma^{-2}_n\mathbb{I}\Phi^\top+\Sigma_p^{-1})^{-1} \\
+    &= \Sigma_p-\Sigma_p\Phi(\Phi^\top\Sigma_p\Phi+\sigma_n^2\mathbb{I})^{-1}\Phi^\top\Sigma_p
+    \end{align*}
+    </div>
+    <p>Therefore, the posterior is given by,</p>
+    <div class="formula">
+    \begin{align*}
+    p(\mathbb{w|x,y,\mathcal{M}}) = \mathcal{N}(  \Sigma_p\Phi(K+\sigma^2_n\mathbb{I})^{-1}y,\Sigma_p-\Sigma_p\Phi(K+\sigma_n^2\mathbb{I})^{-1}\Phi^\top\Sigma_p)
+    \end{align*}
+    </div>
+    
+    <p>The predictive becomes,</p>
+    
+    <div class="formula">
+    \begin{align*}
+    &p(\mathbb{y_*|x_*,x,y,}\mathcal{M})=\mathcal{N}(\mathbb{y_*;}\phi_*^\top\Sigma_p\Phi(K+\sigma^2_n\mathbb{I})^{-1}\mathbb{y},\phi_*^\top\Sigma_p\phi_*-\phi_*^\top\Sigma_p\Phi(K+\sigma^2_n\mathbb{I})^{-1}\Phi^\top\Sigma_p\phi_*+\sigma^2_n\mathbb{I}) \\
+    &=\mathcal{N}(\mathbb{y_*};K(\mathbb{x_*,x})(K+\sigma^2_n\mathbb{I})^{-1}\mathbb{y},K(\mathbb{x_*,x_*})+\sigma^2_n\mathbb{I}-K(\mathbb{x_*,x})(K+\sigma^2_n\mathbb{I})^{-1}K(\mathbb{x,x_*}))
+    \end{align*}
     </div>
 
     <h4>Function Space View</h4>
