@@ -44,11 +44,21 @@
     <div style="text-align:center;">
       <figure>
         <img src="https://www.allaboutcircuits.com/uploads/articles/5.1_Introduction_to_Integrated_Circuits3_.jpg" style="width:35%">
-        <figcaption>Integrated Circuit (IC) </figcaption>
+        <img src="https://www.jameco.com/Jameco/workshop/learning-center/voltage-regulator-fig1.jpg" style="width:15%">
+        <img src="https://components101.com/sites/default/files/component_pin/LM2904-Pinout.png" style="width:35%">
+        <figcaption>1: Integrated Circuit (IC), 2: Linear voltage regulator, 3: LM2904 voltage follower </figcaption>
       </figure>
     </div>
-
-
+    <p>Voltage divider: Just the resistors dividing the voltage. Voltage regulator: provide static output voltage from different input voltage. Voltage follower: give current gain. Voltage convertor: AC to DC or reverse.</p>
+    <p>TTL devices for logic ICs.</p>
+    <h4>Simulation LTSpice</h4>
+    <p>Installation</p>
+    <pre><code>
+sudo apt-get install wine-stable
+wget http://ltspice.linear-tech.com/software/LTspiceXVII.exe
+wine LTspiceXVII.exe
+wine ~/.wine/drive_c/Program\ Files/LTC/LTspiceXVII/XVIIx64.exe 
+    </code></pre>
 
     <div style="text-align:center;">
       <figure>
@@ -58,6 +68,9 @@
     </div>
     <h3>References</h3>
     <hr>
+    <ol>
+    <li><a href="https://www.nutsvolts.com/magazine/article/understanding_digital_logic_ics_part_1">Understanding Digital Logic ICS -- Part 1</a></li>
+    </ol>
     </div>
 
     
