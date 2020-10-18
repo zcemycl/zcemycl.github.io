@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Calibration</h3>
+    <hr>
+    <h4>Projection Matrix</h4>
+    <div class="formula">
+    $$\mathbf{w'}=P_{ps}\mathbf{X'}=P_cP_pP_r\mathbf{X'}\\
+    \begin{pmatrix}su\\sv\\s\end{pmatrix}=P_{ps}\begin{pmatrix}X\\Y\\Z\\1\end{pmatrix}$$
+    </div>
+    <p>where \(P_{ps}\) is the projection matrix, \(P_r\) the rigid body transformation from real world coordinates to camera coordinates, \(P_p\) the perspective projection from camera to image plane, and \(P_c\) CCD imaging matrix from image plane to pixel coordinates. \(K=P_cP_p\), \(P_{ps}=K[R|t]\), \(M=KR\).</p>
+    <div class="formula">
+    \begin{align*}
+    P_{ps}&=\begin{pmatrix}p_{11}&p_{12}&p_{13}&p_{14}\\p_{21}&p_{22}&p_{23}&p_{24}\\p_{31}&p_{32}&p_{33}&p_{34}\end{pmatrix} \\
+    
+    P_{r}&=\begin{pmatrix}r_{11}&r_{12}&r_{13}&T_x\\r_{21}&r_{22}&r_{23}&T_y\\r_{31}&r_{32}&r_{33}&T_z\end{pmatrix} \\
+    P_{p}&=\begin{pmatrix}f&0&0\\0&f&0\\0&0&1\end{pmatrix} \\
+    P_{c}&=\begin{pmatrix}k_u&0&u_0\\0&k_v&v_0\\0&0&1\end{pmatrix} \\
+    \end{align*}
+    </div>
+    <h4>SVD decomposition</h4>
+    <p>The projection matrix originally has 12 degrees of freedom (dof). However, \(p_{34}\) is constrainted to 1, so 11 dof left. Each correspondent gives 2 equations, so at least 6 distinct correspondents are required to solve the equation.</p>
+    <div class="formula">
+    \begin{align*}
+    \begin{pmatrix}
+    X&Y&Z&1&0&0&0&0&-uX&-uY&-uZ&-1\\
+    0&0&0&0&X&Y&Z&1&-vX&-vY&-vZ&-1\\
+    \end{pmatrix}
+    \begin{pmatrix}
+    p_{11}\\p_{12}\\p_{13}\\p_{14}\\p_{21}\\p_{22}\\p_{23}\\p_{24}\\
+p_{31}\\p_{32}\\p_{33}\\p_{34}\\
+    \end{pmatrix} = 0
+    \end{align*}    
+    </div>
+    <div class="formula">
+    
+    </div>
+    <h4>QR decomposition</h4>
+    <p>\(A=QR\) where \(Q\) is the orthogonal matrix and \(R\) the upper triangular matrix.</p>
+    <div class="formula">
+    $$M=KR\rightarrow M^{-1}=R^{-1}K^{-1}$$
+    </div>
+    <h3>References</h3>
+    <hr>
+    <ol>
+    <li><a href="https://www.robots.ox.ac.uk/~dwm/Courses/AIMS/AIMS-L3.pdf">Computer Vision Single and two-view geometry pdf</a></li>
+    <li><a href="https://www.robots.ox.ac.uk/~vgg/hzbook/HZfigures.html">Multiple View Geometry in Computer Vision</a></li>
+    </ol>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+
+    
+</body>
+</html>
