@@ -85,12 +85,40 @@
     &K_t = V_t^{t-1}C^\top(CV_t^{t-1}C^\top+R)^{-1}
     \end{align*}
     </div>
+    <p>For \(x^t_t\),</p>
     <div class="formula">
     \begin{align*}
+    &\arg\max_{x_t}p(x_t|y_{1:t})=\arg\min_{x_t}(y_t-Cx_t)^\top R^{-1}(y_t-Cx_t)+(x_t-x_t^{t-1})^\top (V_t^{t-1})^{-1}(x_t-x_t^{t-1})\\
+    &\approx\arg\min_{x_t}x^\top_t((V_t^{t-1})^{-1}+C^\top R^{-1}C)x_t-2x_t^\top(C^\top R^{-1}y_t+(V_t^{t-1})^{-1}x_t^{t-1}) \\
     \end{align*}
     </div>
+    <p>To find the expression, differentiate the equation (laxy typing \(V=V_t^{t-1},x=x_t^{t-1}\)), </p>
     <div class="formula">
     \begin{align*}
+    &\frac{\partial}{\partial x_t}\big(x^\top_t((V_t^{t-1})^{-1}+C^\top R^{-1}C)x_t-2x_t^\top(C^\top R^{-1}y_t+(V_t^{t-1})^{-1}x_t^{t-1})\big) \\
+    &=2(V^{-1}+C^\top R^{-1}C)x_t-2(C^\top R^{-1}y_t+V^{-1}x)=0\\
+    &x_t=(V^{-1}+C^\top R^{-1}C)^{-1}(C^\top R^{-1}y_t+V^{-1}x)\\
+    &=(V-VC^\top(R+CVC^\top)^{-1}CV)(C^\top R^{-1}y_t+V^{-1}x)\\
+    &=(V-K_tCV)(C^\top R^{-1}y_t+V^{-1}x)\\
+    &=x-K_tCx+(V-K_tCV)C^\top R^{-1}y_t\\
+    \end{align*}
+    </div>
+    <p>Consider the form of \(K_t\),</p>
+    <div class="formula">
+    \begin{align*}
+    K_t &= VC^\top(CVC^\top+R)^{-1} \\
+    K_t(CVC^\top+R) &=K_tCVC^\top+K_tR =VC^\top \\
+    (K_tC-I)VC^\top+K_tR &= 0 \\
+    K_tR &= (I-K_tC)VC^\top\\
+    K_t &=(V-K_tCV)C^\top R^{-1}\\
+    \end{align*}
+    </div>
+    <p>So, </p>
+    
+    <div class="formula">
+    \begin{align*}
+    x_t &= x-K_tCx+K_ty_t = x+K_t(y_t-Cx)\\
+    x_t &= x^{t-1}_t+K_t(y_t-Cx_t^{t-1})
     \end{align*}
     </div>
     <h3>References</h3>
