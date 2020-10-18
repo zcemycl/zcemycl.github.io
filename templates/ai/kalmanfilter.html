@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Kalman Filter</h3>
+    <hr>
+    <p>Consider the Hidden Markov Model structure, there are latent variables \(\{x_t\}^T_{t=1}\) and observation variables \(\{y_t\}^T_{t=1}\), where \(x_t,y_t\in \mathcal{R}^D\). The followings are the transition between latents, and the emission between latent and observed states, </p>
+    <div class="formula">
+    $$
+    x_t=Ax_{t+1}+\epsilon\leftarrow\epsilon\sim\mathcal{N}(0,Q) \\
+    p(x_t|x_{t-1}) = \mathcal{N}(x_t;Ax_{t-1},Q)\\
+    y_t=Cx_t+\sigma\leftarrow\sigma\sim\mathcal{N}(0,R) \\
+    p(y_t|x_t) = \mathcal{N}(y_t,Cx_t,R)
+    $$
+    </div>
+    <p>Update procedures, firstly predict the hidden state,</p>    
+
+    <div class="formula">
+    \begin{align*}
+    p(x_{t-1}|y_{1:t-1}) &= \mathcal{N}(x_{t-1};x^{t-1}_{t-1},V^{t-1}_{t-1}) \\
+    p(x_t|y_{1:t-1})&=\int p(x_t,x_{t-1}|y_{1:t-1}) dx_{t-1}=\int p(x_t|x_{t-1})p(x_{t-1}|y_{1:t-1}) dx_{t-1} \\
+    &=\mathcal{N}(x_t;x_t^{t-1},V_t^{t-1})
+    \end{align*}
+    </div>
+    <p>Derive the expressions of parameters,</p>
+    <div class="formula">
+    \begin{align*}
+
+    \end{align*}
+    </div>
+    <p>Update the observed state,</p>
+    <div class="formula">
+    \begin{align*}
+    p(x_t|y_{1:t})&=p(x_t|y_t,y_{1:t-1})\propto\underbrace{p(y_t|x_t)}_{\text{likelihood}}\underbrace{p(x_t|y_{1:t-1}}_{\text{prior}})=\mathcal{N}(x_t;x_t^t,V^t_t)
+    \end{align*}
+    </div>
+    <p>Derive the expressions of parameters,</p>
+    <div class="formula">
+    \begin{align*}
+
+    \end{align*}
+    </div>
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+
+    
+</body>
+</html>
