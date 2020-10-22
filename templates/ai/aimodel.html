@@ -19,9 +19,8 @@
         word-wrap:break-word;
 
       }
-      table{width:100%}
+      table{width:100%;table-layout:fixed;word-wrap:break-word;}
       td,tr,th{border:1px solid white;}
-      td,th{width:25%;}
       div.formula{overflow-x:scroll;border:1px solid white;}
 
     </style>
@@ -56,6 +55,117 @@
     <p>The main implementation difference betweem tensorflow and pytorch is that, whether or not the option of 'same' padding is supported.</p>
     <p>In tensorflow implementation, if padding='SAME' and stride=2 appear, it usually means the size of the input is cut in half, \(n_{i+1}=\frac{n_i}{2}\). In that case, assume that \(d=1\), the pytorch implementation should have \(p=\frac{f-2}{2}\). Even if \(f\) is odd, it does not matter, causing .5. Just round it down, for example, \(f=5,p=2\) and \(f=3,p=1\).</p>
     <p>If padding='SAME' and stride=1 appear, it means \(n_{i+1}=n_i\)</p>
+
+    <h4>Syntax Comparison</h4>
+    <table>
+    <tr>
+        <th>tf</th>
+        <th>torch</th>
+        <th>tf</th>
+        <th>torch</th>
+        <th>tf</th>
+        <th>torch</th>
+    </tr>
+    <tr>
+        <td><code>tf.layers.conv2d(x,f,k,s,p)</code></td>
+        <td><code>nn.Conv2d(f_,f,k,s,p)(x)</code></td>
+        <td><code>tf.reduce_sum</code></td>
+        <td><code>torch.sum</code></td>
+        <td><code>tf.reduce_mean</code></td>
+        <td><code>tf.mean</code></td>
+    </tr>
+    <tr>
+        <td><code>tf.reshape(x,)</code></td>
+        <td><code>x.view(,)</code></td>
+        <td><code>tf.layers.dense</code></td>
+        <td><code>torch.Linear</code></td>
+        <td><code>tf.image.resize_nearest_neighbor</code></td>
+        <td><code>F.interpolate</code></td>
+    </tr>
+    <tr>
+        <td><code>tf.gradients</code></td>
+        <td><code>torch.autograd.gradients</code></td>
+        <td><code>tf.clip_by_value</code></td>
+        <td><code>torch.clamp</code></td>
+        <td><code>tf.concat</code></td>
+        <td><code>torch.cat</code></td>
+    </tr>
+    </table>
+    <h4>Feature Extractions from pretrained network</h4>
+    <pre><code>
+def _initializeVGG(self,pretrained,freeze):
+    encmodel = models.vgg16(pretrained=pretrained)
+    if freeze:
+        for child in encmodel.children():
+            for param in child.parameters():
+                param.requires_grad = False
+    features = list(encmodel.features)[:31]
+    self.features = nn.ModuleList(features)
+
+    </code></pre>
+    <h4>Custom Kernel</h4>
+    <pre><code>
+def constant_kernel(self,shape,value=1,diag=False,
+        flip=False,trainable=False):
+    if not diag:
+        k = nn.Parameter(torch.ones(shape)*value,requires_grad=trainable)
+    else:
+        w = torch.eye(shape[2],shape[3])
+        if flip:
+            w = torch.reshape(w,(1,shape[2],shape[3]))
+            w = w.flip(0,1)
+        w = torch.reshape(w,shape)
+        k = nn.Parameter(w,requires_grad=trainable)
+    return k
+
+def context_conv2d(self,t,dim=1,size=7,diag=False,
+        flip=False,stride=1,trainable=False):
+    N,C,H,W = t.size(0),t.size(1),t.size(2),t.size(3)
+    in_dim = C
+    size = size if isinstance(size,(tuple,list)) else [size,size]
+    stride = stride if isinstance(stride,(tuple,list)) else [1,stride,stride,1]
+    shape = [dim,in_dim,size[0],size[1]]
+    w = self.constant_kernel(shape,diag=diag,flip=flip,trainable=trainable)
+    pad = ((np.array(shape[2:])-1)/2).astype(int)
+    conv = nn.Conv2d(1,1,shape[2:],1,list(pad),bias=False)
+    conv.weight = w
+    conv.to(self.device);
+    return conv(t)
+
+    </code></pre>
+    <h4>Stacking Layers</h4>
+    <p>With <code>nn.ModuleList</code> and <code>nn.Sequential</code>,</p>
+    <pre><code>
+class pix2pixDMap(nn.Module):
+    def __init__(self,units=64):
+        super(pix2pixDMap,self).__init__()
+        self.layers = []
+        f = units
+        nodelist = [6,f,2*f,4*f,8*f,1]
+        for idx in range(len(nodelist)-1):
+            norm = False if idx==0 or idx==len(nodelist)-2 else True
+            act = 'leaky' if idx != len(nodelist)-2 else None
+            kernel = 3 if idx >= len(nodelist)-2 else 4
+            stride = 1 if idx >= len(nodelist)-2 else 2
+            self.layers.append(self._discriminate(nodelist[idx],
+                nodelist[idx+1],k=kernel,s=stride,
+                batchnorm=norm,activation=act))
+        self.layers = nn.ModuleList(self.layers)
+    def _discriminate(self,in_,out,k=4,s=2,p=1,
+            batchnorm=True,activation='leaky'):
+        block = [nn.Conv2d(in_,out,k,s,p)]
+        if batchnorm:
+            block.append(nn.BatchNorm2d(out))
+        if activation == 'leaky':
+            block.append(nn.LeakyReLU(.2))
+        return nn.Sequential(*block)
+    def forward(self,x):
+        for idx,layer in enumerate(self.layers):
+            x = layer(x)
+        x = torch.sigmoid(x)
+        return x
+
+    </code></pre>
     <h3>References</h3> 
     <hr>
     </div>
