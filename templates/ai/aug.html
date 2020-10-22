@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Data Augmentation</h3>
+    <hr>
+    <p>Resize the image data such that the aspect ratio is still constant.</p>
+    <pre><code>
+def resizeRetainAspect(img,targetdim=(640,480)):
+    targetaspect = targetdim[0]/targetdim[1]
+    shape = img.shape[:2]
+    origaspect = shape[0]/shape[1]
+    if targetaspect == origaspect:
+        ratio = targetdim[0]/shape[0]
+        shift = 0
+        resizeimg = cv2.resize(img,targetdim[::-1])
+        return resizeimg,ratio,shift,None,resizeimg.shape[:2]
+    elif targetaspect &gt origaspect:
+        ratio = targetdim[1]/shape[1]
+        resizeimg = cv2.resize(img,
+                (targetdim[1],int(ratio*shape[0])))
+        padimg = np.zeros(targetdim+(3,),resizeimg.dtype)
+        shift = abs(targetdim[0]-resizeimg.shape[0])//2
+        padimg[shift:shift+resizeimg.shape[0],:,:] = resizeimg
+        description = 't &gt o'
+    elif targetaspect < origaspect:
+        ratio = targetdim[0]/shape[0]
+        resizeimg = cv2.resize(img,
+                (int(ratio*shape[1]),targetdim[0]))
+        padimg = np.zeros(targetdim+(3,),resizeimg.dtype)
+        shift = abs(targetdim[1]-resizeimg.shape[1])//2
+        padimg[:,shift:shift+resizeimg.shape[1],:] = resizeimg
+        description = 'o>t'
+    return padimg,ratio,shift,description,resizeimg.shape[:2]
+    </code></pre>
+    <p>New Coordinates of points after resizing</p>
+    <pre><code>
+bbox = []
+for x0,y0,x1,y1 in zip(x0l,y0l,x1l,y1l):
+    if d:
+        if d == "t>o":
+            x0,x1 = int(x0*r),int(x1*r)
+            r0,r1 = y0/h,y1/h
+            y0,y1 = int(r0*shp[0]+s),int(r1*shp[0]+s)
+        elif d == "o>t":
+            y0,y1 = int(y0*r),int(y1*r)
+            r0,r1 = x0/w,x1/w
+            x0,x1 = int(r0*shp[1]+s),int(r1*shp[1]+s)
+    else:
+        x0,y0,x1,y1 = int(x0*r),int(y0*r),int(x1*r),int(y1*r)
+    bbox.append([x0,y0,x1,y1])
+    </code></pre>
+    <p>Rotate 90,180,270 degrees</p>
+    <pre><code>
+def rotate(img,bbox,deg):
+    if deg == 0:
+        return img,bbox
+    tmpimg = Image.fromarray(img)
+    rot = np.array(tmpimg.rotate(deg))
+    rad = np.deg2rad(deg)
+    bbox_ = []
+    for box in bbox:
+        x0,y0,x1,y1 = box
+        x0_ = int(np.cos(rad)*(x0-320)+np.sin(rad)*(y0-320))+320
+        y0_ = int(np.cos(rad)*(y0-320)-np.sin(rad)*(x0-320))+320
+        x1_ = int(np.cos(rad)*(x1-320)+np.sin(rad)*(y1-320))+320
+        y1_ = int(np.cos(rad)*(y1-320)-np.sin(rad)*(x1-320))+320
+        bbox_.append([x0_,y0_,x1_,y1_])
+    return rot,bbox_
+    </code></pre>
+    <p>Flip x and y</p>
+    <pre><code>
+def flip(img,bbox,mode='x'):
+    h,w,_ = img.shape
+    if mode == 'x':
+        f = img[:,::-1,:]
+    elif mode == 'y':
+        f = img[::-1,:,:]
+    f = np.ascontiguousarray(f)
+    bbox_ = []
+    for box in bbox:
+        x0,y0,x1,y1 = box
+        if mode == 'x':
+            x0 = int(w-x0); x1 = int(w-x1)
+        elif mode == 'y':
+            y0 = int(h-y0); y1 = int(h-y1)
+        if x0>x1:
+            tmp = x0; x0 = x1; x1 = tmp
+        if y0>y1:
+            tmp = y0; y0 = y1; y1 = tmp
+        bbox_.append([x0,y0,x1,y1])
+    return f,bbox_
+    </code></pre>
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+
+    
+</body>
+</html>
