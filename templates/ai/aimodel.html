@@ -47,8 +47,16 @@
     </tr>
     </table>
     <h4></h4>
-    <p>Procedures to replicate models: See input parser &#8594 main &#8594 network &#8594 build layer by layer with fake input of certain dimension &8594 write loss &#8594 complete dataloader &#8594 optional add tensorboard &#8594 complete procedure, train and deploy.</p>
-    <h3>References</h3>
+    <p>Procedures to replicate models: See input parser &#8594 main &#8594 network &#8594 build layer by layer with fake input of certain dimension &#8594 write loss &#8594 complete dataloader &#8594 optional add tensorboard &#8594 complete procedure, train and deploy.</p>
+    
+    <h4>About Convolution</h4>    
+    <div class="formula">
+    $$n_{i+1} = \frac{n_i+2p-d(f-1)-1}{s}+1$$
+    </div>
+    <p>The main implementation difference betweem tensorflow and pytorch is that, whether or not the option of 'same' padding is supported.</p>
+    <p>In tensorflow implementation, if padding='SAME' and stride=2 appear, it usually means the size of the input is cut in half, \(n_{i+1}=\frac{n_i}{2}\). In that case, assume that \(d=1\), the pytorch implementation should have \(p=\frac{f-2}{2}\). Even if \(f\) is odd, it does not matter, causing .5. Just round it down, for example, \(f=5,p=2\) and \(f=3,p=1\).</p>
+    <p>If padding='SAME' and stride=1 appear, it means \(n_{i+1}=n_i\)</p>
+    <h3>References</h3> 
     <hr>
     </div>
     <script type="text/javascript" async
