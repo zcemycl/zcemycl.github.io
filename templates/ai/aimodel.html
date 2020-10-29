@@ -47,7 +47,45 @@
     </table>
     <h4></h4>
     <p>Procedures to replicate models: See input parser &#8594 main &#8594 network &#8594 build layer by layer with fake input of certain dimension &#8594 write loss &#8594 complete dataloader &#8594 optional add tensorboard &#8594 complete procedure, train and deploy.</p>
-    
+    <h4>Installation</h4>   
+    <p>Installation of Pytorch is easier than that of Tensorflow-gpu, you should alert to the fact that, tensorflow does not usually support the latest version of cuda. For example, now pytorch supports cuda 11, but tensorflow only supports cuda 10.1.</p>
+    <h5>Tensorflow</h5>
+    <p>Sometimes, it is complicated to get this working with gpu, please pay attention to the software requirements of <code>tensorflow-gpu</code>.</p>
+    <p>For Tensorflow-gpu == 2.3.0 and ubuntu 18.04 system, it requires cuda 10.1, libcudnn 7.6, nvidia-gpu driver &gt 418.x, etc. See details from the official website <a href="https://www.tensorflow.org/install/gpu">Tensorflow-GPU</a>.</p>
+    <pre><code>
+# Add NVIDIA package repositories
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-repo-ubuntu1804_10.1.243-1_amd64.deb
+sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+sudo dpkg -i cuda-repo-ubuntu1804_10.1.243-1_amd64.deb
+sudo apt-get update
+wget http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64/nvidia-machine-learning-repo-ubuntu1804_1.0.0-1_amd64.deb
+sudo apt install ./nvidia-machine-learning-repo-ubuntu1804_1.0.0-1_amd64.deb
+sudo apt-get update
+
+# Install NVIDIA driver
+sudo apt-get install --no-install-recommends nvidia-driver-450
+# Reboot. Check that GPUs are visible using the command: nvidia-smi
+
+# Install development and runtime libraries (~4GB)
+sudo apt-get install --no-install-recommends \
+    cuda-10-1 \
+    libcudnn7=7.6.5.32-1+cuda10.1  \
+    libcudnn7-dev=7.6.5.32-1+cuda10.1
+
+
+# Install TensorRT. Requires that libcudnn7 is installed above.
+sudo apt-get install -y --no-install-recommends libnvinfer6=6.0.1-1+cuda10.1 \
+    libnvinfer-dev=6.0.1-1+cuda10.1 \
+    libnvinfer-plugin6=6.0.1-1+cuda10.1
+    </code></pre>
+    <p>Common issues when installing is, </p>
+    <ol>
+    <li>Why <code>nvidia-smi</code> and <code>nvcc --version</code> show different cuda version? Has the cuda 10.1 been installed properly? Answer: trust the version from <code>nvcc</code>.</li>
+    <li>Installed tensorflow gpu, but cannot detect gpu? Answer, check if the software requirements are satisfied. Either reinstall tensorflow-gpu or cuda. <a href="https://medium.com/lsc-psd/tensorflow-2-1-doesnt-seem-to-see-my-gpu-even-though-cuda-10-1-with-solution-7b44297843a">TensorFlow 2.1 doesn’t recognize my GPU,though Cuda 10.1. (with Solution)</a></li>
+    <li>Error message: <code>W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libcudart.so.10.0'; dlerror: libcudart.so.10.0: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/cuda-10.1/lib64</code>, what does it mean? Answer: this may indicate your tensorflow-gpu requires cuda 10.0, but you only has 10.1. This is a version mismatch. Upgrade or downgrade either your tensorflow-gpu or cuda.</li>
+    </ol>
+    <h5>PyTorch</h5>
+    <p>PyTorch installation is simpler. It only requires to have the proper cuda version. Please refer to their official website <a href="https://pytorch.org/">PyTorch Distribution</a>.</p>
     <h4>About Convolution</h4>    
     <div class="formula">
     $$n_{i+1} = \frac{n_i+2p-d(f-1)-1}{s}+1$$
