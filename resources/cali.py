@@ -46,4 +46,4 @@ print(r)
 print(Pps[:,3:])
 print(mm(inv(r),Pps[:,3:]))
 
-
+pdb.set_trace()
