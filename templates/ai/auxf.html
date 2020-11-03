@@ -64,6 +64,14 @@
     <p>But it is difficult to estimate the component prior, rederive the log-likelihood in the form of KL divergence and Free Energy, </p>
     <div class="formula">
     \begin{align*}
+    &\mathcal{L}(\theta)=\log p(x|\theta)=\int_{dz}p(z|x;\theta)\log p(x|\theta)=\int_{dz}p(z|x;\theta)\log\frac{p(x,z|\theta)}{p(z|x;\theta)}=\bigg\langle\log\frac{p(x,z|\theta)}{p(z|x;\theta)}\bigg\rangle_{p(z|x;\theta)}\approx\bigg\langle\log\frac{p(x,z|\theta)}{p(z|x;\theta)}\bigg\rangle_{q(z|\hat{\theta})}=\bigg\langle\log\frac{p(x,z|\theta)}{q(z|\hat{\theta})}\bigg\rangle_{q(z|\hat{\theta})}+\bigg\langle\log\frac{q(z|\hat{\theta})}{p(z|x;\theta)}\bigg\rangle_{q(z|\hat{\theta})}=\mathcal{F}(q(z|\hat{\theta}),\theta)+\mathcal{KL}(q(z|\hat{\theta})\|p(z|x,\theta))\\
+    \end{align*}
+    </div>
+    <h4>Expectation Maximization Algorithm (EM algorithm)</h4>
+    <p></p>
+    <div class="formula">
+    \begin{align*}
+
     \end{align*}
     </div>
     <h3>References</h3>
