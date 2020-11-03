@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Latent Variable Generative Models</h3>
+    <hr>
+    <h4>Main 3 Bayesian Networks (BNs) for an observation \(x\rightarrow p(x)\)</h4>
+    <ul>
+    <li>Factor analysis: \(\int p(x|z)p(z)dz\)</li>
+    <li>Gaussian mixture model \(\sum^M_{m=1}P(c_m)p(x|c_m)\)</li>
+    <li>Discrete mixture model \(\sum^M_{m=1}P(c_m)P(x|c_m)\)</li>
+    </ul>
+    <p>Here will discuss how the model is linked to clustering.</p>
+    <p>Consider the gaussian mixture model, to fit the generative model requires to maximize the following marginal likelihood, </p>
+    <div class="formula">
+    \begin{align*}
+    p(x)&=\sum^M_{m=1}P(c_m)p(x|c_m)=\sum^M_{m=1}P(c_m)\mathcal{N}(x;\mu_m,\Sigma_m) \\
+    \hat{\theta}&=\arg\max_\theta \mathcal{L}(\theta)=\arg\max_\theta\sum^N_{i=1}\log p(x_i|\theta)
+    \end{align*}
+    </div>
+    <p>However, there is no closed-form solution to find the parameters which maximize the likelihood. One of the common alternatives is to iteratively update the parameters to maximize the likelihood,</p>
+    <p>The update must satisfy the following requirements, i.e. increase log likelihood iteratively, </p>
+    <div class="formula">
+    \begin{align*}
+    &\mathcal{L}(\theta^{(k+1)})-\mathcal{L}(\theta^{(k)})=\sum^N_{i=1}\big(\log p(x_i|\theta^{(k+1)})-\log p(x_i|\theta^{(k)})\big)=\sum^N_{i=1}\log\frac{p(x_i|\theta^{(k+1)})}{p(x_i|\theta^{(k)})}\geq 0 \\
+    &=\sum^N_{i=1}\log\frac{1}{p(x_i|\theta^{(k)})}\sum^M_{m=1}p(x_i,c_m|\theta^{(k+1)}) = \sum^N_{i=1}\log\frac{1}{p(x_i|\theta^{(k)})}\sum^M_{m=1}\frac{P(c_m|x_i,\theta^{(k)})p(x_i,c_m|\theta^{(k+1)})}{P(c_m|x_i,\theta^{(k)})}\\
+    &=\sum^N_{i=1}\log\sum^M_{m=1}P(c_m|x_i,\theta^{(k)})\frac{p(x_i,c_m|\theta^{(k+1)})}{p(x_i,c_m|\theta^{(k)})}\geq\sum^N_{i=1}\sum^M_{m=1}P(c_m|x_i,\theta^{(k)})\log\frac{p(x_i,c_m|\theta^{(k+1)})}{p(x_i,c_m|\theta^{(k)})} \\ 
+    &= \mathcal{Q}(\theta^{(k)},\theta^{(k+1)})-\mathcal{Q}(\theta^{(k)},\theta^{(k)})
+    \end{align*}
+    </div>
+    <p>Therefore, to optimize the parameters can be done by auxiliary function,</p>
+    <div class="formula">
+    \begin{align*}
+    \mathcal{L}(\theta^{(k+1)})-\mathcal{L}(\theta^{(k)})\geq \mathcal{Q}(\theta^{(k)},\theta^{(k+1)})-\mathcal{Q}(\theta^{(k)},\theta^{(k)})\geq 0 
+    \end{align*}
+    </div>
+    <p>But it is difficult to estimate the component prior, rederive the log-likelihood in the form of KL divergence and Free Energy, </p>
+    <div class="formula">
+    \begin{align*}
+    \end{align*}
+    </div>
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+
+    
+</body>
+</html>
