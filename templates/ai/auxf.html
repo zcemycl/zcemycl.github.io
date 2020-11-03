@@ -93,8 +93,11 @@
     &=\sum^N_{n=1}\sum^K_{k=1}q(z_n=k)\log\frac{\pi_k}{\sqrt{2\pi\sigma^2_k}}e^{-\frac{1}{2\sigma^2_k}(x_n-u_k)^2}+C\\
     &\mathcal{F}(q(z),\theta)=\sum^N_{n=1}\sum^K_{k=1}q(z_n=k)\bigg(\log\pi_k-\frac{1}{2}\log\sigma_k^2-\frac{1}{2\sigma^2_k}(x_n-u_k)^2\bigg)+C\\
     &\frac{\partial\mathcal{F}}{\partial\mu_j}=\\
+    &\mu_j = \frac{\sum^N_{n=1}q(z_n=j)x_n}{\sum^N_{n=1}q(z_n=j)}\\
     &\frac{\partial\mathcal{F}}{\partial\sigma^2_j}=\\
+    &\sigma^2_j = \frac{\sum^N_{n=1}q(z_n=j)(x_n-\mu_j)^2}{\sum^N_{n=1}q(z_n=j)}\\
     &\frac{\partial}{\partial\pi_j}\big(\mathcal{F}+\lambda(1-\sum_k\pi_k)\big)=\\
+    &\pi_j =\frac{1}{N} \sum^N_{n=1}q(z_n=j)\\
     \end{align*}
     </div>
 
