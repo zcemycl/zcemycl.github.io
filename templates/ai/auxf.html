@@ -38,6 +38,7 @@
     <li>Discrete mixture model \(\sum^M_{m=1}P(c_m)P(x|c_m)\)</li>
     </ul>
     <p>Here will discuss how the model is linked to clustering.</p>
+    <p>To sample from these networks, for example, GMM, sample a random value from uniform distribution \(\mathbb{U}(0,1)\). According to the range, which cluster \(m\) is picked to generate an observation from a Gaussian \(\mathcal{N}(\mu_m,\Sigma_m)\). Repeat this process 10000 times, you can have multiple clusters in the graph. In the way of reverse engineering, initialize multiple gaussians, collect any datapoints relevant to the gaussian, then update the new parameters. This is basically how the EM is working.</p>
     <p>Consider the gaussian mixture model, to fit the generative model requires to maximize the following marginal likelihood, </p>
     <div class="formula">
     \begin{align*}
@@ -100,7 +101,6 @@
     &\pi_j =\frac{1}{N} \sum^N_{n=1}q(z_n=j)\\
     \end{align*}
     </div>
-
     <p>Other EM related algorithm: Baum-Welch Estimation for HMM. </p>
     <h3>References</h3>
     <hr>
