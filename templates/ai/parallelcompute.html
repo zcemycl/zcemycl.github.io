@@ -33,9 +33,26 @@
     <hr>
     <ol>
     <li><code>tmux</code></li>
+    <p>I found that, if someone tries to run parallel computing in AWS, and calls cuda multiple times, the system will crash and the python session will terminate. </p>
+    <p>One of the possible solutions is to use <code>tmux</code>. It allows the user to open a computing session at the background, so that if the user logout of the aws, he or she can still login and see the same session again. </p>
+    <pre><code>
+tmux new -t session-name
+tmux attach -t session-name
+tmux kill-session -t session-name
+tmux new -d -s session-name "source web/bin/activate ; python3 main.py"
+    </code></pre>
     <li><code>multiprocessing</code></li>
+    <pre><code>
+import multiprocessing as mp
+print(mp.cpu_count())
+with mp.Pool(processes=4) as pool:
+    pool.map(f,range(10))
+def chunks(lst,cores):
+    return [lst[cores*i:cores*(i+1)] for i in range(len(lst)//cores+1)]
+    </code></pre>
     <li><code>os.environ["CUDA_VISIBLE_DEVICES"] = "1"</code></li>
     <li><code>torch .to(device)</code></li>
+    <p>It is possible to load the data through cpu, forward pass the data via model 1 by gpu 1, and forward pass the data via model 2 gpu 2. The user can do this by specifying the device. <code>device = 'cpu' or 'cuda:0' or 'cuda:1' or so on</code></p>
     </ol>
     <h3>References</h3>
     <hr>
