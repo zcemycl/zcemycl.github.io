@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Reinforcement Learning Introduction</h3>
+    <hr>
+    <h4>Definitions</h4>
+    <p>A policy defines the learning agent's way of behaving at a given time, mapping from perceived states of env to actions to be takes when in those states, i.e. lookup table or stochastic decision. \(\pi\quad \pi(s)\quad \pi(a|s)=p(a_t=a|s_t=s)\). Action is not necessarily the policy.</p>
+    <ul>
+    <li>Exploit current knowledge</li>
+    <li>Explore new actions</li>
+    </ul>
+    <p>A reward defines the goal in a rl problem, on each time step, the env sends to rl agent a single number. \(r_t \in \mathbb{R}\) The agent's sole objective is to maximize the total reward it recieves over the long term.</p>
+    <ul>
+    <li>Episodic tasks: interaction terminates after finite number of steps.</li>
+    $$R_t = r_{t+1}+r_{t+2}+\cdots+r_T$$
+    <li>Continuing tasks: interaction has no limit.</li>
+    $$R_t = r_{t+1}+\gamma r_{t+2}+\gamma^2 r_{t+3}+\cdots$$
+    <p>where \(\gamma\) is the dicount factor, \(0\leq\gamma < 1\). \(\gamma=0\) the agent is miopic, \(=1\) is farsighted.</p>
+    $$R_t = \sum^{T-t-1}_{k=0}\gamma^k r_{t+k+1}$$
+    </ul>
+    <p>A value of a state is the total amount of reward an agent can expect to accumulate over the future, starting from that state. \(v(s)\) Whereas  rewards  determine  the immediate,  intrinsic desirability of environmental states,  values indicate the long-term desirability of states after taking into account the states that are likely to follow, and the rewards available in those states.</p>
+    $$V(s)\leftarrow V(s)+\underbrace{\alpha}_{\text{step-size}}\big[\underbrace{V(s')-V(s)}_{\text{temporal-difference}}\big]$$
+    <p>The current value of the earlier state is adjusted to be closer to the value of the later state. The state value estimates the probability of winning.</p>
+    <p>A model explains how the environment behaves.</p>
+    <ul>
+    <li>Model-based methods use models and planning to solve rl problems.</li>
+    <li>Model-free methods are based on explicitly trial-and-error learners.</li>
+    <li>Evolutionary method: policy made only after many games, and only final outcome of each game is used.</li>
+    <li>Value function method: individual states are evaluated.</li>
+    </ul>
+    <p></p>
+    <p></p>
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+
+    
+</body>
+</html>
