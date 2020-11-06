@@ -61,8 +61,10 @@
     </ul>
     <p>RL History: Trial and error &#8594 temporal-difference learning &#8594 Actor-critic</p>
     <h4>N-Armed Bandit Problem</h4>
-
-    <p></p>
+    <p>The machine is repeatedly faced with a choice among n different options, or actions. After each choice, the machine receives a numerical reward chosen from a stationary probability distribution that depends on the action selected. The objective is to maximize the expected reward ovver some time period/steps. For example, slot machine with n choices, doctor choosing between experimental treatments.</p>
+    <p>If the value of the action is known, the n-armed bandit problem can be solved easily by selecting the action with highest value. But the challenge is how to estimate the value of the action.</p>
+    <p>Greedy action: choosing action based on its estimated value. (Exploiting the current knowledge of the values of the actions. High rewards in short term, maybe low in long term.)</p>
+    <p>Non-greedy action: improve the estimate of more actions. (Exploring. Low rewards in short term, maybe high in long term.)</p>
     <h3>References</h3>
     <hr>
     <ol>
