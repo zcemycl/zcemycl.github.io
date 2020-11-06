@@ -29,7 +29,7 @@
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
 
-    <h3>Readings</h3>
+    <h3>Multi-arm Bandits</h3>
     <hr>
     <h4>Action-Value Methods</h4>
     <p>The true value of action \(a\) as \(q(a)\), and the estimated value of t-th time step as \(Q_t(a)\). With the sample-average method, the true value of an action is the mean reward received when that action is selected. </p>
@@ -41,6 +41,25 @@
     <p>Estimate the convergence by the settings, \(T=2000\), \(q(a)\sim\mathcal{N}(0,1)\), \(a^* = \arg\max_a q(a)\)(true action, true action value). In the real world, select greedy or not by \(\mathbb{U}(0,1)\),</p>
     $$R_t = q(A_t)+\mathcal{N}(0,1) \\
     A_t = \begin{cases}\arg\max_a Q_t(a),&\text{if }1-\epsilon\\ \mathbb{U}(0,1),&\text{if }\epsilon \end{cases}$$
+    <pre><code>
+def nArmBandit(qa,ep,T=1000):
+    allq = 5*np.ones((10,1))
+    alln = np.zeros((10,1))
+    sumr = 0
+    pltavgr = [0]
+    for i in range(1,T):
+        greedy = (np.random.rand(1)<=1-ep)
+        if greedy:
+            a = np.argmax(allq)
+        else:
+            a = np.random.choice(10)
+        alln[a] += 1
+        r = trueQa[a]+np.random.randn(1)
+        allq[a] += r/alln[a]
+        sumr += r
+        pltavgr.append(sumr/i)
+    return pltavgr
+    </code></pre>
     <p>The \(\epsilon\)-greedy method is better when the reward variance is greater. With noisier rewards it takes more exploration to find the optimal action.</p>
     <p>Keeping track of each action and reward at a give time can lead to a problem of memory and computational requirements. Alternatively, the action value and k value are only necessary in another implementation, </p>
     $$
