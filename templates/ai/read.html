@@ -32,9 +32,38 @@
     <h3>Readings</h3>
     <hr>
     <h4>Action-Value Methods</h4>
-    <p>The true value of action \(a\) as \(q(a)\), and the estimated value of t-th time step as \(Q_t(a)\). The true value of an action is the mean reward received when that action is selected. </p>
+    <p>The true value of action \(a\) as \(q(a)\), and the estimated value of t-th time step as \(Q_t(a)\). With the sample-average method, the true value of an action is the mean reward received when that action is selected. </p>
     $$Q_t(a) = \frac{R_1+R_2+\cdots+R_{N_t(a)}}{N_t(a)}$$
-    <h4></h4>
+    <p>Simplest action selection rule is with the highest estimated action value, the greedy action is given by,</p>
+    $$A_t = \arg\max_aQ_t(a)$$
+    <p>Alternative is to introduce \(\epsilon\) which is a small probability to select randomly from amongst all the actions with equal probability. This is called \(\epsilon-greedy\) method.</p>
+    <h5>Experiment</h5>
+    <p>Estimate the convergence by the settings, \(T=2000\), \(q(a)\sim\mathcal{N}(0,1)\), \(a^* = \arg\max_a q(a)\)(true action, true action value). In the real world, select greedy or not by \(\mathbb{U}(0,1)\),</p>
+    $$R_t = q(A_t)+\mathcal{N}(0,1) \\
+    A_t = \begin{cases}\arg\max_a Q_t(a),&\text{if }1-\epsilon\\ \mathbb{U}(0,1),&\text{if }\epsilon \end{cases}$$
+    <p>The \(\epsilon\)-greedy method is better when the reward variance is greater. With noisier rewards it takes more exploration to find the optimal action.</p>
+    <p>Keeping track of each action and reward at a give time can lead to a problem of memory and computational requirements. Alternatively, the action value and k value are only necessary in another implementation, </p>
+    $$
+    \begin{align*}
+    Q_{k+1}&=\frac{1}{k}\sum^k_{i=1}R_i=\frac{1}{k}(R_k+\sum^{k-1}_{i=1}R_i)\\
+    &=\frac{1}{k}(R_k+(k-1)Q_k)\\
+    &=Q_k+\frac{1}{k}(R_k-Q_k)=Q_k+\alpha(R_k-Q_k)
+    \end{align*}
+    $$
+    <p>This update rule is a common form later on. NewEstimate \(\leftarrow\) OldEstimate + StepSize[Target-OldEstimate].</p>
+    <p>Exponential recency weight average,</p>
+    $$Q_{k+1}=(1-\alpha)^kQ_1 + \sum^k_{i=1}\alpha(1-\alpha)^{k-i}R_i$$
+    <p>The sample average method guarantees to converge for only one action, but not for all choices of the sequence \(\{\alpha_k(a)\}\). Another stochastic approximation theory gives the conditions requirement to assure convergence with probability 1:</p>
+    $$\sum^\infty_{k=1}\alpha_k(a) = \infty \quad\text{and}\quad \sum^\infty_{k=1}\alpha^2_k(a)\lt\infty$$
+    <p>Therefore, a constant step size never converges, as the second requirement does not meet.</p>
+    <h4>Optimistic Initial Values</h4>
+    <p>Bias exists if not all actions have been selected at least once. Initial action values can be used as a simple way of encouraging exploration.</p>
+    <h4>Upper-Confidence Bound Action Selection</h4>
+    <p></p>
+    <p>The greedy actions are those that look best at present. \(\epsilon\)-greedy forces the non-greedy action to be tried, but no preference for those that are uncertain.</p>
+    <p>It is better to select among the non-greedy actions according to their potential based on their variance or uncertainty. So the one without being explored should be selected.</p>
+    $$ A_t = \arg\max_a [ Q_t(a) + c\sqrt{\frac{\ln t}{N_t(a)}} ] $$
+    where \(c=2\) is the degree of exploration.
     <p></p>
     <h3>References</h3>
     <hr>
