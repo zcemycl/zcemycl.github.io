@@ -41,6 +41,23 @@
     $$G_t=R_{t+1}+R_{t+2}+\cdots+R_T$$
     $$G_t=R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+\cdots = \sum^\infty_{k=0}\gamma^k R_{t+k+1}$$
     $$G_t=\sum^{T-t-1}_{k=0}\gamma^k R_{t+k+1}$$
+    <h4>Markov Property</h4>
+    <p>The state is any information available to the agent. Main concern is not with designing the state signal, but with deciding with what action to take as a function of whatever state signal is available. A state signal that succeeds in retaining all relevant information is said to be Markov, or to have the Markov property. An independence of path property is defined as that all that matters is in the current state signal. </p>
+    <p>The probability of responses (the environment dynamics), </p>
+    $$Pr(R_{t+1}=r,S_{t+1}=s'|\{S_i\}_{i=0}^t,\{A_i\}_{i=0}^t,\{R\}_{i=1}^t)$$
+    <p>If the state signal has the Markov property, the environment's response at \(t+1\) depends only on the state and action representations at \(t\). The environment's dynamics becomes,</p>
+    $$p(s',r|s,a) = Pr(R_{t+1}=r,S_{t+1}=s'|S_t=s,A_t=a)$$
+    <p>This is named as one-step dynamics of the environment.</p>
+    <h4>Markov Decision Processes (MDP)</h4>
+    <p>The expected rewards for state-action pairs,</p>
+    $$r(s,a)=\mathbb{E}[R_{t+1}|S_t=s,A_t=a]=\sum_{r\in\mathfrak{R}}r\sum_{s'\in\mathfrak{S}}p(s',r|s,a)$$
+    <p>The state-transition probabilities,</p>
+    $$p(s'|s,a)=Pr(S_{t+1}=s'|S_t=s,A_t=a)=\sum_{r\in\mathfrak{R}}p(s',r|s,a)=\mathfrak{P}^a_{ss'}$$
+    <p>The expected rewards for state-action-next-state triples,</p>
+    $$r(s,a,s')=\mathbb{E}[R_{t+1}|S_t=s,A_t=a,S_{t+1}=s']=\frac{\sum_{r\in\mathfrak{R}}rp(s',r|s,a)}{p(s'|s,a)}=\mathfrak{R}^a_{ss'}$$
+    <p>A transition graph is a useful way to summarize the dynamics of a finite MDP, mainly the last two quantities, the state transition probabilities and rewards for triples. It has two features, state node for each possible state, and an action node for each state-action pair. (may relate to message-passing graphical model)</p>
+    <h4></h4>
+    <p></p>
     <h4></h4>
     <p></p>
     <h3>References</h3>
