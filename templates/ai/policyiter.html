@@ -52,8 +52,22 @@
     $$\sum_rp(r|s,a) = \sum_r\sum_{s'}p(s',r|s,a)$$
     <p>The expected return starting from s, taking the action a, and following policy \(\pi\).</p>
     $$q_\pi(s,a)=\mathbb{E}_\pi[G_t|S_t=s,A_t=a]=\mathbb{E}_\pi\big[\sum^\infty_{k=0}\gamma^kR_{t+k+1}|S_t=s,A_t=a\big]\\
-    =\sum_{s',r}p(s',r|s,a)(r+\gamma V_\pi(s'))
+    =\sum_{s',r}p(s',r|s,a)(r+\gamma q_\pi(s',a'))
     $$
+    <p>The backup diagram (existing in the book) shows the relationships that form the basis of the update, it transfer value information back to a state from its successor states.</p>
+    <h4>Optimal Value Functions</h4>
+    <p>A policy \(\pi\) is defined to be better than or equal to a policy \(\pi'\) for all states, i.e. \(\pi\geq\pi'\) if and only if \(v_\pi(s)\geq v_{\pi'}(s)\) for all \(s\in\mathfrak{S}\). This is an optimal policy. The optimal state-value function is defined as,</p>
+    $$v_*(s) = \max_\pi v_\pi(s)$$
+    <p>The optimal action-value function is defined as, </p>
+    $$q_*(s,a)=\max_\pi q_\pi(s,a)$$
+    <p>The Bellman optimality equation expresses the fact that the value of a state under an optimal policy must equal the expected return for the best action from that state,</p>
+    $$v_*(s)=\max_{a\in\mathfrak{A}(s)}q_{\pi*}(s,a)=\max_a\mathbb{E}_{\pi*}[G_t|S_t=s,A_t=a]\\
+    =\max_{a\in\mathfrak{A}(s)}\sum_{s',r}p(s',r|s,a)[r+\gamma v_*(s')]\\
+    q_*(s,a) = \sum_{s',r}p(s',r|s,a)[r+\gamma\max_{a'}q_*(s',a')]
+    $$
+    <p>This solution relies on at least 3 assumptions that are rarely true in practice. (1) we accurately know the dynamics of the environment. (2) we have enough computational resources to complete the computation of the solution. (3) the Markov property.</p>
+    <h4>Dynamic Programming</h4>
+    <p>Dynamic programming referes to a collection of algorithms that can be used to compute optimal policies given a perfect model of the environment as a MDP.</p>
     <hr>
     <h4></h4>
     <p></p>
