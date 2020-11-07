@@ -69,8 +69,6 @@
     <h4>Dynamic Programming</h4>
     <p>Dynamic programming referes to a collection of algorithms that can be used to compute optimal policies given a perfect model of the environment as a MDP.</p>
     <hr>
-    <h4></h4>
-    <p></p>
     <div style="text-align:center">
     <img src="https://raw.githubusercontent.com/zcemycl/Robotics/master/Reinforcemnet%20Learning/ValIter2.png" width="30%">
     <figcaption>Grid world</figcaption>
@@ -89,13 +87,23 @@
     $$
     $$\max_s|V_{k+1}(s)-V_k(s)|<\theta$$
     <li>Policy Improvement</li>
+    <p>The greedy policy takes the action that looks best in the short term -- after one step of lookahead -- according to \(v_\pi\).</p>
     $$
-    \begin{align*}
-    \pi'(s) &= \arg\max_a\sum_{s',r}p(s',r|s,a)(r+\gamma V_\pi(s'))\\
-    \end{align*}
+    v_{\pi'}(s) = \max_a\sum_{s',r}p(s',r|s,a)[r+\gamma v_{\pi'}(s')]\\
+    \pi'(s) = \arg\max_a q_\pi(s,a)=\arg\max_a\sum_{s',r}p(s',r|s,a)(r+\gamma V_\pi(s'))
     $$
+    <p>Let \(\pi\) and \(\pi'\) be any pair of deterministic policies such that, for all \(s\in\mathfrak{S}\),</p>
+    $$q_\pi(s,\pi'(s))\geq v_\pi(s)$$
+    <p>Strict inequality above holds for any state, the one below holds at least one state.</p>
     $$V_{\pi'}(s)\geq V_\pi(s)$$
+    <p>You can prove that \(q_\pi(s,\pi'(s))=v_{\pi'}(s)\).</p>
     </ul>
+    <p>For stochastic policy \(\pi=\pi(a|s)\),</p>
+    $$q_\pi(s,\pi'(s)) = \sum_a\pi'(a|s)q_\pi(s,a)$$
+    <h4>Policy Iteration</h4>
+    <p>A sequence of monotonically improving policies and value functions,</p>
+    $$\pi_0\xrightarrow{E}v_{\pi_0}\xrightarrow{I}\pi_1\xrightarrow{E}v_{\pi_1}\xrightarrow{I}\pi_2\xrightarrow{E}v_{\pi_2}\cdots v_*$$
+    where \(E\) is the policy evulation and \(I\) is the policy improvement.
     <h3>References</h3>
     <hr>
     </div>
