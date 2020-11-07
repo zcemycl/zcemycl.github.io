@@ -79,20 +79,22 @@
     <ul>
     <li>Initialize values and policies arbitrarily.</li>
     <li>Update values and policies iteratively,</li>
+
+    <ul>
+    <li>Policy Evaluation</li>
+    <p>Each iteration of iterative policy evaluation backs up the value of every state once to produce the new approximate function \(V_{k+1}\). It is a full backup since they are based on all possible next states rather than on a sample next state. If \(k\rightarrow\infty\), \(V_{k}\rightarrow V_\pi\).</p>
+    $$
+    V_\pi(s)=\sum_a\pi(a|s)\sum_{s',r}p(s',r|s,a)(r+\gamma V_\pi(s'))  \\
+    V_{k+1}(s)=\sum_a\pi(a|s)\sum_{s',r}p(s',r|s,a)(r+\gamma V_k(s')) 
+    $$
+    $$\max_s|V_{k+1}(s)-V_k(s)|<\theta$$
+    <li>Policy Improvement</li>
     $$
     \begin{align*}
-    V_{k+1}(s)&=\sum_a\pi(a|s)\sum_{s',r}p(s',r|s,a)(r+\gamma V_k(s')) \\
     \pi'(s) &= \arg\max_a\sum_{s',r}p(s',r|s,a)(r+\gamma V_\pi(s'))\\
     \end{align*}
     $$
-    <li>Criterions:
-        <ul>
-        <li>Policy Evaluation</li>
-        $$\max_s|V_{k+1}(s)-V_k(s)|<\theta$$
-        <li>Policy Improvement</li>
-        $$V_{\pi'}(s)\geq V_\pi(s)$$
-        </ul>
-    </li>
+    $$V_{\pi'}(s)\geq V_\pi(s)$$
     </ul>
     <h3>References</h3>
     <hr>
