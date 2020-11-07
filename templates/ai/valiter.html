@@ -31,6 +31,7 @@
 
     <h3>Value Iteration</h3>
     <hr>
+    <p>One drawback to policy iteration is that each of its iterations involves policy evaluation. Policy evaluation can be truncated by stopping after just one sweep (one backup of each state).</p>
     <div style="text-align:center">
     <img src="https://raw.githubusercontent.com/zcemycl/Robotics/master/Reinforcemnet%20Learning/ValIter1.png" width="30%">
     <figcaption>Small world</figcaption>
@@ -43,6 +44,9 @@
     <li>Stop when the value function stops changing / converged,</li>
     $$\max_s|V_{k+1}(s)-V_k(s)|<\theta$$
     </ul>
+    <h4>Asynchronous DP</h4>
+    <p>A major drawback to the DP methods is that they involve operations over the entire state set of the MDP, i.e. sweeps of the state set.</p>
+    <p>Asynchronous DP allows some states are backed up several times before the values of others are backed up once. But it still has to back up the values of all the states to converge.</p>
     <h3>References</h3>
     <hr>
     </div>
