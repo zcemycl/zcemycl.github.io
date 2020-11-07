@@ -33,6 +33,11 @@
     <hr>
     <h4>Value Functions</h4>
     <p>Value functions (of states/state-action pairs) are to estimate how good it is for the agent to be in a given state (/to perform a given action and state).</p>
+    <p>Consider \(p(r|s)\),</p>
+    $$p(r|s)=\sum_a\sum_{s'}p(r,a,s'|s)=\sum_a\sum_{s'}p(r,s'|a,s)p(a|s)=\sum_a\pi(a|s)\sum_{s'}p(s',r|s,a)$$
+    <p>Expected reward of a given state,</p>
+    $$\sum_r rp(r|s)=\sum_a\pi(a|s)\sum_{s'}\sum_r rp(s',r|s,a)$$
+    <p>Expected return when starting in s and following \(\pi\),</p>
     $$
     \begin{align*}
     v_\pi(s)&=\mathbb{E}_\pi[G_t|S_t=s]=\mathbb{E}_\pi\big[\sum^\infty_{k=0}\gamma^kR_{t+k+1}|S_t=s\big] \\
@@ -41,10 +46,15 @@
     &=\sum_a\pi(a|s)\sum_{s',r}p(s',r|s,a)[r+\gamma v_\pi(s')]
     \end{align*}
     $$
-    <p>Interestingly, you can see the value of a state given a policy is the estimate of the future state value. This represents the value of the current state is related to the future states, not the previous states. This is the Bellman equation for \(v_\pi\).</p>
+    <p>Interestingly, you can see the value of a state given a policy is the sum of the future state value. This represents the value of the current state is related to the future states, not the previous states. This is the Bellman equation for \(v_\pi\).</p>
+    <p>Similarly, </p>
+    $$p(r|s,a)=\sum_{s'}p(s',r|s,a)$$
+    $$\sum_rp(r|s,a) = \sum_r\sum_{s'}p(s',r|s,a)$$
     <p>The expected return starting from s, taking the action a, and following policy \(\pi\).</p>
     $$q_\pi(s,a)=\mathbb{E}_\pi[G_t|S_t=s,A_t=a]=\mathbb{E}_\pi\big[\sum^\infty_{k=0}\gamma^kR_{t+k+1}|S_t=s,A_t=a\big]\\
+    =\sum_{s',r}p(s',r|s,a)(r+\gamma V_\pi(s'))
     $$
+    <hr>
     <h4></h4>
     <p></p>
     <div style="text-align:center">
