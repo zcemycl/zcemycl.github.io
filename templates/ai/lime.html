@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Local Interpretable Model-agnostic Explanations</h3>
+    <hr>
+    <div style='text-align:center'>
+    <img src="https://raw.githubusercontent.com/zcemycl/ProbabilisticPerspectiveMachineLearning/master/LIME/result.png" width="50%">
+    </div>
+    <p>Given the original represntation of an instance being explained \(x\) (the image), we can generate a binary vector \(x'\) for its interpretable representation. In this case, \(x'\) is an one vector of the length of number of superpixels. A perturbed sample \(z'\) is a binary vector which is sampled from $x'$ randomly under the uniform distribution. Then a fake image \(z\) with less superpixels is generated.</p>
+    <p>To choose the best explanation, it must reduce the cost between the true model and approximate function, and the complexity penalty of approximate function.</p>
+    $$\xi(x) = \arg\min_{g\in G}\underbrace{\mathcal{L}(f,g,\pi_x)}_{\text{cost}}+\underbrace{\Omega(g)}_{\text{complexity}}$$
+    <p>where</p>
+    $$
+    \begin{align*}
+    \mathcal{L}(f,g,\pi_x) &= \sum_{z,z'\in\mathcal{Z}}\pi_x(z)(f(z)-g(z'))^2 \\
+    g(z') &= w_g\cdot z'\\
+    \Omega(g) &= \infty\mathcal{1}[\|w_g\|_0\gt K] \\
+    \pi_x(z)&= e^{-\frac{1}{\sigma^2}\|x-z\|^2_2}
+    \end{align*}
+    $$
+    <p>
+    where \(f(x)\) is the neural network model which predicts the probability of \(x\) belonging to a certain class, \(g\) an interpretable model, \(\pi_x(z)\) the proximity measure between an instance \(z\)(fake image) to \(x\)(real image), \(\mathcal{L}\) the fidelity function and \(\Omega\) the complexity measure (restricting the number of superpixels used to explain the label).
+    </p><p>
+    \(\mathcal{L}(f,g,\pi_x)\) measures how unfaithful \(g\) is approximating \(f\) in the locality defined by \(\pi_x\). If this term is small, it represents \(g\) faithfully approximates \(f\).
+    </p><p>
+    \(\Omega(g)\) is similar to a regularization term, it limits the complexity of the approximate model \(g\). If \(g\) is a random forest algorithm, it limits the depth by \(K\). If \(g\) is a linear model, it limits the number of features. Our aim is to approximate \(f(z)\) by \(g(z')\) as follows,
+    </p>
+    $$f(z)\approx g(z') = w_g\cdot z'$$
+    <p>Least absolute shrinkage and selection operator (lasso) is applied to compute the representation of \(w_g\). The lasso estimate (\(\hat{w}_g\)) is defined by,</p>
+    $$\hat{w}_g = \arg\min(f(z)-w_g\cdot z')^2\quad\text{subject to}\quad |w_g|\lt K \\ 
+    =\arg\min_{w_g}\sum_{z,z'\in\mathcal{Z}}(f(z)-w_g\cdot z')+\lambda\|w_g\|_1$$
+    <p>Compared with ridge regression which only shrinks coefficients, lasso can set some coefficients to 0, retain the relatively important varaible and give an easily interpretable model.</p>
+    <h3>References</h3>
+    <ol>
+    <li><a href="https://arxiv.org/abs/1602.04938">"Why Should I Trust You?": Explaining the Predictions of Any Classifier</a></li>
+    <li><a href="https://arxiv.org/abs/1810.02678">Local Interpretable Model-agnostic Explanations of Bayesian Predictive Models via Kullback-Leibler Projections</a></li>
+    <li><a href="https://arxiv.org/abs/2002.07434">A Modified Perturbed Sampling Method for Local Interpretable Model-agnostic Explanation</a></li>
+    </ol>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+
+    
+</body>
+</html>
