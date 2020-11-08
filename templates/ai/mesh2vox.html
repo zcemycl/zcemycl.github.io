@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Transforming Mesh to Voxel</h3>
+    <hr>
+    <p>Before testing the 3d reconstruction algorithm, like point cloud, I would like a well-designed scenario. So that, I don't have to extract feature descriptors, but only focus on the design 3d reconstruction algorithm itself.</p>
+    <p>There are 3 useful resources, ShapeNet, gazebo and Unity3D. These provide well-defined 3d models, so that each point on the model can be used for simulating 2d camera view, and reconstruction.</p>
+    <div style="text-align:center;">
+    <img src="../../resources/chairmesh.png" width="30%">
+    <img src="../../resources/chair.png" width="40%">
+    <figcaption>Left: Voxel of the chair. Right: 3d model of the chair.</figcaption>
+    </div>
+    <p>I rewrite the matlab script into python, to turn 3d model from .off file into the voxels form on the left.</p>
+    <h3>References</h3>
+    <ol>
+    <li><a href="https://uk.mathworks.com/matlabcentral/fileexchange/24086-polygon2voxel">MATLAB File Exchange Polygon2Voxel</a></li>
+    </ol>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+
+    
+</body>
+</html>
