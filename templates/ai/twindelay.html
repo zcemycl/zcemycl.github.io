@@ -29,10 +29,17 @@
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
 
-    <h3>Twin-Delayed DDPG</h3>
+    <h3>Twin-Delayed Deep Deterministic Policy Gradient (DDPG)</h3>
     <hr>
-    <h4>Actor Crtics</h4>
+    <p>Typical deep q-learning model is not enough for predicting continuous action space. Therefore, twin-delayed DDPG is introduced. </p>
+    <div style="background-color:white;text-align:center;">
+    <img src="https://jmichaux.github.io/assets/week4/dqn_ddpg_cropped.png" width="50%">
+    </div>
+    <h4>Actor Crtic</h4>
+    <p>Actor: \(\mathcal{S}\rightarrow\mathcal{A}\)</p>
+    <p>Critic: \(\mathcal{S},\mathcal{A}\rightarrow Q\)</p>
     <h4>Policy Gradient</h4>
+    <p>When one pair of actor critic is introduced, there is a problem of approximating Q-values. </p>
     <h4>DNN</h4>
     <div style="text-align:center">
     <video width="30%" controls autoplay loop>
@@ -46,6 +53,9 @@
     </video>
     </div>
     <h3>References</h3>
+    <ol>
+    <li><a href="https://jmichaux.github.io/week4b/">Jon Michaux Off-Policy Actor-Critic Algorithms</a></li>
+    </ol>
     <hr>
     </div>
     <script type="text/javascript" async
