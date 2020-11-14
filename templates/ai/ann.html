@@ -81,7 +81,7 @@
         <td>-F recipe.py</td>
       </tr>
     </table>
-    <p>The recipe name is defined in the python script by the decorator name <code>@prodigy.recipe("my-custom-recipe")</code>. The script should have the following basic format,</p>
+    <p>The recipe name is defined in the python script by the decorator name <code>@prodigy.recipe("my-custom-recipe")</code>. The command passes the dataset name to the input (dataset) of the function with decorator, same as the source to images_path, etc. If the function does not have the second argument, the argument of source in the command line can be reduced. The script should have the following basic format,</p>
     <pre><code>
 import prodigy
 from prodigy.components.loaders import Images
