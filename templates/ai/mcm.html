@@ -31,14 +31,28 @@
 
     <h3>Monte Carlo Methods</h3>
     <hr>
-    <div style="text-align:center;background-color:white;">
-    <img src="../../resources/ql21_1.png" width="30%">
-    <img src="../../resources/ql21_2.png" width="30%">
+    <p>Sometimes it is impossible to assume complete knowledge of the environment. Monte Carlo methods require only experience, including sample sequences of states, actions, and rewards from actual or simulated interaction with an environment.</p>
+    <p>A model is still required, but it only needs to generate sample transitions, not the complete probability distributions of all possible transitions that is required for DP. This means, mcm does not need transition probabilities, like \(p(s',r|s,a)\).</p>
+    <p>Monte Carlo Methods (MCM) sample and average returns for each state-action pair, like the bandit methods sample and average rewards for each action. The main difference is that now there are multiple states, each acting like a different bandit problem and that the different bandit problems are interrelated.</p>
+    <h4>Monte Carlo Prediction</h4>
+    <p>To learn the state-value function for a given policy, given that the value of a state is the expected return starting from that state, the average of returns should converge to the expected value when more returns are observed.</p>
+    <p>For instance, to estimate \(v_\pi(s)\). Each occurence of state \(s\) in an episode is called a visit, the first-visit MC method estimates the value ast the average of the returns following first visits to \(s\), the every-visit MC method averages the returns following all visits to \(s\). Both converge as the number of visits goes to infinity, but every-visit MC is less straightforward. </p>
+    <ul>
+    <li>First visit MC \(G\leftarrow \text{return following the 1st occurence of }s\)</li>
+    <li>Every visit MC</li>
+    </ul>
+    <h5>Blackjack experiment</h5>
+    <p>Assume that player hits (request one more card) whenever his sum is not 20 or 21. Ace can be counted as 1 or 11. In this case, the ace is suppressed to 1 if the sum is greater than 20 or 21. If the sum is 20 or 21, the player sticks (stop). This is the player policy. The dealer never hits, and only the first card is shown. </p>
+    <p>The rewards of 1,-1 and 0 are given for winning, losing, and drawing respectively. The game ends when the player stops hitting.</p>
+    <div style="text-align:center;">
+    <img style="background-color:white;" src="../../resources/ql21_1.png" width="30%">
+    <img style="background-color:white;"src="../../resources/ql21_2.png" width="30%">
     </div>
-    <div style="text-align:center;background-color:white;">
-    <img src="../../resources/ql21_3.png" width="30%">
-    <img src="../../resources/ql21_4.png" width="30%">
+    <div style="text-align:center;">
+    <img style="background-color:white;"src="../../resources/ql21_3.png" width="30%">
+    <img style="background-color:white;"src="../../resources/ql21_4.png" width="30%">
     </div>
+    <p>Although this game has complete knowledge of the environment, it would not be easy to apply DP methods, since they require the quantities \(p(s',r|s,a)\) and the expected rewards. An important fact about MC methods is that the estimates for each state are independent. The estimate for one state does not build upon the estimate of any other state, as in the ase in DP. </p>
 
     <div class="formula">
     $
