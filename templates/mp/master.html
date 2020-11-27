@@ -67,6 +67,15 @@ cn^d \frac{1-r^{N}}{1-r} \approx cn^d \bigg[\frac{a}{b^d}\bigg]^{\log_b n}\\
 & cn^d\sum^{\log_b n}_{j=0}\big[\frac{a}{b^d}\big]^j \approx \frac{cn^d}{1-r}\approx c'n^d \leq \mathcal{O}(n^d)
     \end{align*}
     </div>
+    <p>Examples</p>
+    <ol>
+    <li>Merge Sort, \(a=2, b=2 ,d=1\), \(T(n)\leq \mathcal{O}(n\log n)\)</li>
+    <li>Binary Search, \(a=1, b=2 ,d=0\), \(T(n)\leq \mathcal{O}(\log n)\)</li>
+    <li>Karatsuba without Gauss, \(a=4, b=2 ,d=1\), \(T(n)\leq \mathcal{O}(n^{\log_2 4}=n^2)\)</li>
+    <li>Karatsuba with Gauss, \(a=3, b=2 ,d=1\), \(T(n)\leq \mathcal{O}(n^{\log_2 3=1.59})\)</li>
+    <li>Strassen's Matrix Multiplication, \(a=7, b=2 ,d=2\), \(T(n)\leq \mathcal{O}(n^{2.81})\)</li>
+    <li>Fictitious recurrence, \(a=2, b=2 ,d=2\), \(T(n)\leq \mathcal{O}(n^2)\)</li>
+    </ol>
     <h3>References</h3>
     <hr>
     </div>
