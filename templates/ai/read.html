@@ -38,8 +38,8 @@
     $$A_t = \arg\max_aQ_t(a)$$
     <p>Alternative is to introduce \(\epsilon\) which is a small probability to select randomly from amongst all the actions with equal probability. This is called \(\epsilon-greedy\) method.</p>
     <h5>Experiment</h5>
-    <div style="text-align:center;background-color:white;">
-    <img src="../../resources/qlbasic.png" width="60%">
+    <div style="text-align:center;">
+    <img src="../../resources/qlbasic.png" style="background-color:white;" width="60%">
     </div>
     <p>Estimate the convergence by the settings, \(T=2000\), \(q(a)\sim\mathcal{N}(0,1)\), \(a^* = \arg\max_a q(a)\)(true action, true action value). In the real world, select greedy or not by \(\mathbb{U}(0,1)\),</p>
     $$R_t = q(A_t)+\mathcal{N}(0,1) \\
