@@ -103,6 +103,7 @@ def image_label(dataset,images_path):
 <code>blocks</code>. The labels are defined in <code>config</code>, and host ip address as well.</p>
 <p>To generate a transcript, run <code>prodigy db-out dataset > **.jsonl</code>.</p>
     <p>Drop the dataset, <code>prodigy drop dataset</code>.</p>
+    <p>List database. <code>prodigy stats -l </code>.</p>
     <p>The stream can just be a list of dictionaries from jsonl file, before passing the image path to get the image, the image must turn into uri, via fetch media.<code>stream = fetch_media(stream, ["image"], skip=True)</code></p>
     <h5>Key bindings</h5>
     <table>
