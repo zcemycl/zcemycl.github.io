@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%;table-layout:fixed;}
+      td,tr,th{border:1px solid white;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Data Structure</h3>
+    <hr>
+    <h4>Common Operations Running Time</h4>
+    <table>
+    <tr>
+        <th></th>
+        <th>Search</th>
+        <th>Select i-th statistic</th>
+        <th>min/max</th>
+        <th>rank</th>
+        <th>successor (next element)</th>
+        <th>output</th>
+        <th>insert</th>
+        <th>deletion</th>
+    </tr>
+    <tr>
+        <td>Sorted Array (static dataset)</td>
+        <td>\(\mathcal{\theta}(\log n)\)</td>
+        <td>\(\mathcal{O}(1)\)</td>
+        <td>\(\mathcal{O}(1)\)</td>
+        <td>\(\mathcal{O}(\log n)\)</td>
+        <td>\(\mathcal{O}(1)\)</td>
+        <td>\(\mathcal{O}(n)\)</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Binary Search Tree (dynamic dataset)</td>
+        <td>\(\mathcal{O}(\log n)\)</td>
+        <td>\(\mathcal{O}(\log n)\)</td>
+        <td>\(\mathcal{O}(\log n)\)</td>
+        <td>\(\mathcal{O}(\log n)\)</td>
+        <td>\(\mathcal{O}(\log n)\)</td>
+        <td>\(\mathcal{O}(n)\)</td>
+        <td>\(\mathcal{O}(\log n)\)</td>
+        <td>\(\mathcal{O}(\log n)\)</td>
+    </tr>
+    <tr>
+        <td>Heap</td>
+        <td></td>
+        <td></td>
+        <td>\(\mathcal{O}(1)\) either min or max</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>\(\mathcal{O}(\log n)\)</td>
+        <td>\(\mathcal{O}(\log n)\)</td>
+    </tr>
+    <tr>
+        <td>Hash Table</td>
+        <td>\(\mathcal{O}(1)\)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>\(\mathcal{O}(1)\)</td>
+        <td>\(\mathcal{O}(1)\)</td>
+    </tr>
+    </table>
+    <h4>Binary Search Tree</h4>
+    <div style="text-align:center;">
+    <img src="../../resources/bst.png">
+    </div>
+    <h5>Notes</h5>
+    <ul>
+    <li>A tree diagram where the left descendant is smaller than its parent, the right one is greater than its parent.</li>
+    <li>Search operation resembles the binary search in sorted array.</li>
+    <li>It can have bad time complexity if it is not balanced. The search can become linear time, not log time. Therefore, Red-Black Tree strategy can be considered.</li>
+    <li>Deletion of a node, use left descendant to replace the deleted node.</li>
+    </ul>
+    <h4>Min/Max Heap</h4>
+    <div style="text-align:center;">
+    <img src="../../resources/minheap.png">
+    </div>
+    <h5>Notes</h5>
+    <ul>
+    <li>Min Heap, is a tree which has the top node with smallest value, all the descendents are greater than the parents.</li>
+    <li>Tree is complete, from top to bottom, from left to right.</li>
+    <li>Only need an array, each element is representing one node, from top to bottom and from left to right. </li>
+    <li>Extract-Min is constant log time. Get-Min is constant time. Once the top node is deleted, the last element replaces it, and bubble-down to retain the order of heap.</li>
+    <li>Insertion to the last leaf, bubble up if necessary.</li>
+    </ul>
+    <h3>References</h3>
+    <hr>
+    </div>
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+
+    
+</body>
+</html>
