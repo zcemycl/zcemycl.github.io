@@ -29,8 +29,73 @@
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
 
-    <h3>Topic</h3>
+    <h3>SQL Syntax</h3>
     <hr>
+    <h4>Create Table</h4>
+    <div style="display:flex;">
+    <pre style="width:40vw;"><code>
+CREATE TABLE table1 (   
+    id INT PRIMARY KEY,
+    name VARCHAR(20),
+);
+    </code></pre>
+
+    <pre style="width:40vw;"><code>
+CREATE TABLE table1 (   
+    id INT,
+    name VARCHAR(20),
+    PRIMARY KEY(id),
+);
+    </code></pre>
+    </div>
+
+    <h4>Access column format</h4>
+    <pre><code>
+DESCRIBE table1;
+    </code></pre>
+
+    <h4>Delete table</h4>
+    <pre><code>
+DROP TABLE table1;
+    </code></pre>
+
+
+    <h4>Add column</h4>
+    <pre><code>
+ALTER TABLE table1 ADD discount DECIMAL(3,2);
+    </code></pre>
+    <p>3 digits, 2 decimal places.</p>
+
+    <h4>Drop column</h4>
+    <pre><code>
+ALTER TABLE table1 DROP COLUMN discount;
+    </code></pre>
+
+
+    <h4></h4>
+    <pre><code>
+
+    </code></pre>
+
+
+    <h4></h4>
+    <pre><code>
+
+    </code></pre>
+
+
+    <h4></h4>
+    <pre><code>
+
+    </code></pre>
+
+
+
+
+
+
+
+
     <h3>References</h3>
     <hr>
     </div>
