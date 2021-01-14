@@ -31,6 +31,41 @@
 
     <h3>Advanced SQL Syntax</h3>
     <hr>
+    <h4>Relational Database Creation</h4>
+    <p>First, create a table without foreign key. Then have another table with.</p>
+    <pre><code>
+CREATE TABLE member (
+emp_id INT PRIMARY KEY,
+name VARCHAR(25),
+family_id INT, 
+/*Family id -- a foreign key pointing to family table*/
+);
+
+CREATE TABLE family (
+family_id INT PRIMARY KEY,
+family_name VARCHAR(25),
+parent_id INT,
+FOREIGN KEY(parent_id) REFERENCES member(emp_id) ON DELETE SET NULL
+/*parent_id points back to member table*/
+);
+    </code></pre>
+    <p>Then alter the first table, to make foreign keys. Because another table is created to provide client.</p>
+    <pre><code>
+ALTER TABLE member
+ADD FOREIGN KEY(family_id)
+REFERENCES family(family_id)
+ON DELETE SET NULL;
+    </code></pre>
+    <p>For two primary keys as foreign keys, you need references as, <code>ON DELETE CASCADE</code></p>
+
+    <h4>Insert into RD</h4>
+
+    <pre><code>
+
+    </code></pre>
+
+
+
     <h3>References</h3>
     <hr>
     </div>
