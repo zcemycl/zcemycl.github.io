@@ -83,27 +83,55 @@ INSERT INTO table1(name) VALUES('Leo'); #AUTO_INCREMENT
     <p>Notes: Cannot insert duplicate values.</p>
 
 
-    <li></li>
+    <li>Update rows</li>
     <pre><code>
-
+UPDATE table1;
+SET name = 'Kim' # SET VAL1 = val1, VAL2 = val2, ...
+WHERE id = 2; # OR, AND 
     </code></pre>
 
+    <li>Delete rows</li>
+    <pre><code>
+DELETE FROM table1
+WHERE id=1 AND name='Leo';
+    </code></pre>
 
-    <li>Extract information</li>
+    <li>Queries
+    <ol type="a">
+    <li>Basic</li>
     <pre><code>
 SELECT * FROM table1;
+SELECT id,name FROM table1;
+SELECT table1.id,table1.name FROM table1;
+    </code></pre>
+    <li>ARRANGE IN ORDER</li>
+    <pre><code>
+ORDER BY name;
+ORDER BY id,name ASC; # order by id, then by name
+ORDER BY name DESC;
     </code></pre>
 
+
+    <li>Limit the number of rows</li>
+    <pre><code>
+LIMIT 10;
+    </code></pre>
+
+
+    <li>Select columns with specific values
+    <pre><code>
+WHERE id &gt 0  AND name = 'Jack';
+WHERE id &gt 0  AND name &lt&gt 'Jack';
+WHERE id &gt 0  AND name IN ('Jack','Leo');
+    </code></pre>
+    </li>
+    </li>
 
 
 
 
 
     </ol>
-
-
-
-
 
     <h3>References</h3>
     <hr>
