@@ -31,7 +31,8 @@
 
     <h3>SQL Syntax</h3>
     <hr>
-    <h4>Create Table</h4>
+    <ol>
+    <li>Create Table
     <div style="display:flex;">
     <pre style="width:40vw;"><code>
 CREATE TABLE table1 (   
@@ -48,49 +49,57 @@ CREATE TABLE table1 (
 );
     </code></pre>
     </div>
+    
+    <p>Other Constraints: <code>NOT NULL</code>,<code>UNIQUE</code>,<code>AUTO_INCREMENT</code>, <code>DEFAULT 'sth'</code>.</p>
+    </li>
 
-    <h4>Access column format</h4>
-    <pre><code>
-DESCRIBE table1;
-    </code></pre>
+    <li>Access column format</li>
+    <p><code>DESCRIBE table1;</code></p>
 
-    <h4>Delete table</h4>
-    <pre><code>
+    <li>Delete table</li>
+    <p><code>
 DROP TABLE table1;
-    </code></pre>
+    </code></p>
 
 
-    <h4>Add column</h4>
-    <pre><code>
+    <li>Add column</li>
+    <p><code>
 ALTER TABLE table1 ADD discount DECIMAL(3,2);
-    </code></pre>
+    </code></p>
     <p>3 digits, 2 decimal places.</p>
 
-    <h4>Drop column</h4>
-    <pre><code>
+    <li>Drop column</li>
+    <p><code>
 ALTER TABLE table1 DROP COLUMN discount;
+    </code></p>
+
+
+    <li>Insert data</li>
+    <pre><code>
+INSERT INTO table1 VALUES(1,'Jack');
+INSERT INTO table1(id) VALUES(2);
+INSERT INTO table1(name) VALUES('Leo'); #AUTO_INCREMENT
     </code></pre>
+    <p>Notes: Cannot insert duplicate values.</p>
 
 
-    <h4></h4>
+    <li></li>
     <pre><code>
 
     </code></pre>
 
 
-    <h4></h4>
+    <li>Extract information</li>
     <pre><code>
-
-    </code></pre>
-
-
-    <h4></h4>
-    <pre><code>
-
+SELECT * FROM table1;
     </code></pre>
 
 
 
+
+
+
+    </ol>
 
 
 
