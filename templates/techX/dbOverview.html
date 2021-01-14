@@ -33,17 +33,23 @@
     <hr>
     <h4>Terminology</h4>
     <div style="text-align:center;">
-    <div class="mermaid" style="background-color:white;max-height:50vh; max-width:80vw">
+    <div class="mermaid" style="background-color:white; max-width:80vw">
     graph LR
       A[Database] --> B[Relational];
       B --> I(Table with foreign ID);
       A --> C[Non-relational];
-      C --> J(JSON, Graph, Hash);
       B -->|Language| D(SQL Structured Query Language);
       B -->|Managed by| E(Relational Database Management Systems RDBMS);
       E --> F(mySQL,postgreSQL,mariaDB);
+      E --> Z(UI client);
+      Z --> Y(phpMyAdmin, pgAdmin, popSQL);
+      B --> X(Cloud service);
+      X --> W(AWS RDS);
+      C --> X;
+      X --> V(AWS S3);
       C -->|Managed by| G(Non-RDBMS);
       G --> H(mongoDB,dynamoDB);
+      C --> J(JSON, Graph, Hash);
     </div>
     </div>
 
