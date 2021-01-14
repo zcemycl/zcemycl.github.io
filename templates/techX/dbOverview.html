@@ -32,6 +32,30 @@
     <h3>Database Overview</h3>
     <hr>
     <h4>Terminology</h4>
+    <div style="text-align:center;">
+    <div class="mermaid" style="background-color:white;max-height:50vh; max-width:80vw">
+    graph LR
+      A[Database] --> B[Relational];
+      B --> I(Table with foreign ID);
+      A --> C[Non-relational];
+      C --> J(JSON, Graph, Hash);
+      B -->|Language| D(SQL Structured Query Language);
+      B -->|Managed by| E(Relational Database Management Systems RDBMS);
+      E --> F(mySQL,postgreSQL,mariaDB);
+      C -->|Managed by| G(Non-RDBMS);
+      G --> H(mongoDB,dynamoDB);
+    </div>
+    </div>
+
+    <ul>
+    <li>Database Management System (DBM) is a database program. It is a software system that uses a standard method of cataloging, retrieving, and running queries on data.</li>
+    <li>The PostgreSQL is a database engine implementing SQL standards. It usually listen as a server on a network tcp port to provide its abilities. The pgAdmin is a sort of client. You are able to manipulate schema and data on an instance or multiple instances of PostgreSQL engines. The MS Windows instalation package consists of both PostgreSQL server and PgAdmin client. So far right after the instalation you are able to manage your databases.</li>
+    <li>Queries are requests made to the database management system for specific information.</li>
+    <li>CRUD: Create, read, update and delete.</li>
+    <li>Foreign key is a field in the table that is primary key in another table.</li>
+    <li>Primary key uniquely identify a record in the table.</li>
+    <li></li>
+    </ul>
 
     <h3>References</h3>
     <hr>
@@ -45,7 +69,10 @@
       B-->D(fa:fa-spinner);
     </div>
     <li><a href="https://codepen.io/Ryuno-Ki/pen/LNxwgR">Mermaid Demo</a></li>
-    <li><a href=""></a></li>
+    <li><a href="https://techterms.com/definition/dbms">TechTerms: DBMS</a></li>
+    <li><a href="https://stackoverflow.com/questions/38703378/difference-between-pgadmin-and-postgresql/38703520">Difference between pgAdmin and PostgreSQL</a></li>
+    <li><a href="https://www.youtube.com/watch?v=HXV3zeQKqGY">YouTube: SQL Tutorial - Full Database Course for Beginners</a></li>
+    <li><a href="https://www.dotnettricks.com/learn/sqlserver/difference-between-primary-key-and-foreign-key">Difference between Primary Key and Foreign Key</a></li>
     <li><a href=""></a></li>
     </ol>
     </div>
