@@ -121,11 +121,19 @@ ON member.emp_id = family.parent_id;
     </code></pre>
 
     <h4>Nested Queries</h4>
-    <p></p>
     <pre><code>
-    
+SELECT employee.first_name, employee.last_name
+FROM employee
+WHERE employee.emp_id IN (
+    SELECT works_with.emp_id
+    FROM works_with
+    WHERE works_with.total_sales &gt 30000;
+);    
     </code></pre>
+    
+    <h4>Trigger (Follow-up)</h4>
 
+    <h4>Entity Relationship Diagram (ERD)</h4>
     <p></p>
     <pre><code>
     
@@ -134,6 +142,10 @@ ON member.emp_id = family.parent_id;
 
     <h3>References</h3>
     <hr>
+    <ol>
+    <li><a href="https://www.smartdraw.com/entity-relationship-diagram/">smartdraw -- Entity Relationship Diagram</a></li>
+    <li><a href=""></a></li>
+    </ol>
     </div>
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
