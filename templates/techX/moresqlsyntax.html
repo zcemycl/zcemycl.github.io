@@ -101,21 +101,35 @@ GROUP BY family_id;
 SELECT * FROM member
 WHERE name LIKE 'L%';
     </code></pre>
-
     
+    <p>Union like stacking up</p>
+    <pre><code>
+SELECT name AS stack_names
+FROM member
+UNION
+SELECT family_name 
+FROM family;
+/*2 columns from tables will stack up as one*/
+    </code></pre>
+
+    <p>Join (Left or Right as well)</p>
+    <pre><code>
+SELECT member.emp_id,member.name,family.family_name,family.parent_id
+FROM member
+JOIN family
+ON member.emp_id = family.parent_id;
+    </code></pre>
+
+    <h4>Nested Queries</h4>
     <p></p>
     <pre><code>
     
     </code></pre>
 
-
     <p></p>
     <pre><code>
     
     </code></pre>
-
-
-
 
 
     <h3>References</h3>
