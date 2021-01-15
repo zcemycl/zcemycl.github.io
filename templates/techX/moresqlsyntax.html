@@ -59,10 +59,24 @@ ON DELETE SET NULL;
     <p>For two primary keys as foreign keys, you need references as, <code>ON DELETE CASCADE</code></p>
 
     <h4>Insert into RD</h4>
+    <p>First, insert first table, with NULL foreign keys' values. For the second table, all values are provided.</p>
+    <pre><code>
+INSERT INTO member VALUES(1,'Leo',NULL)
+INSERT INTO family VALUES(1,'MICHAEL',1)
+    </code></pre>
+    <p>Update the first table by filling in the missing foreign key value.</p>
+    <pre><code>
+UPDATE member
+SET branch_id = 1
+WHERE emp_id = 1;
+    </code></pre>
+    <p>This is because the primary key in family is not created yet.</p>
 
+    <h4>Advanced queries</h4>
     <pre><code>
 
     </code></pre>
+
 
 
 
