@@ -73,9 +73,47 @@ WHERE emp_id = 1;
     <p>This is because the primary key in family is not created yet.</p>
 
     <h4>Advanced queries</h4>
+    <p>Display column name as another name.</p>
     <pre><code>
-
+SELECT name AS forename FROM member;
     </code></pre>
+
+    <p>Display distinct values of column</p>
+    <pre><code>
+SELECT DISTINCT family_id FROM member;
+    </code></pre>
+
+
+    <p>Use function to operate, like counting. Others like <code>AVG</code>, <code>SUM</code>.</p>
+    <pre><code>
+SELECT COUNT(emp_id) FROM member;
+    </code></pre>
+
+    <p>Group by a feature. The second attribute selected should be the group by attribute.</p>
+    <pre><code>
+SELECT COUNT(family_id),family_id 
+FROM member
+GROUP BY family_id;   
+    </code></pre>
+
+    <p>Similar to Regular Expression, % can represent any number of characters, _ is any one character.</p>
+    <pre><code>
+SELECT * FROM member
+WHERE name LIKE 'L%';
+    </code></pre>
+
+    
+    <p></p>
+    <pre><code>
+    
+    </code></pre>
+
+
+    <p></p>
+    <pre><code>
+    
+    </code></pre>
+
 
 
 
