@@ -52,9 +52,23 @@
 
     <hr>
     <h4>Balancing popularity with age</h4>
+    <h5>Basic</h5>
+    $$\frac{f(popularity)}{g(age)}$$
+    <p>Higher popularity leads to higher ranking, Older age lower ranking.</p>
+    <h5>Hacker News Formula</h5>
+    $$s = \frac{(u-d-1)^{0.8}}{(a+2)^g}p$$
+    <p>where s is score, g gravity = 1.8 greater than .8, this means age is more important to up down votes. u number of up votes, d no of down. p is the penalty (controversy, commercial, etc). Sublinear function is applied to popularity.</p>
+    <h5>Reddit Formula</h5>
+    $$s = \frac{u-d}{|u-d|}\log\big(\max(1,|u-d|)\big)+\frac{a}{45000}$$
+    <p>Sublinear log since first 100 votes are more important at the beginning. Scores increase over time.</p>
 
-
-
+    <hr>
+    <h4>Rating</h4>
+    <ul>
+    <li>Binary outcomes (-1/1) as classification</li>
+    <li>5 star ratings as regression</li>
+    </ul>
+    <h5>Confidence Intervals</h5>    
 
     <h3>References</h3>
     <hr>
