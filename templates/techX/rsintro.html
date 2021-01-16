@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Introduction to Recommendation System</h3>
+    <hr>
+    <h4>Naive Methods</h4>
+    <h5>Popularity</h5>
+    <p>Count of views/ visits to the website, music, movie, etc. Problem is that it is unfair to new product. </p>
+
+    <h5>Average Ratings</h5>
+    <p>Average of ratings given by the users. Problem: unable to calculate without buyers' reviews or ratings.</p>
+
+    <h5>A/B Testing</h5>
+    <p>A/B testing (also known as split testing or bucket testing) is a method of comparing two versions of a webpage or app against each other to determine which one performs better. AB testing is essentially an experiment where two or more variants of a page are shown to users at random, and statistical analysis is used to determine which variation performs better for a given conversion goal. </p>
+    <p>There are not much people willing to revisit the site, once the website is not appealing. You can potentially lose clients at the beginning.</p>
+
+    <h5>Product Associations</h5>
+    <p>Intuition: if someone loves buying art books, you should recommend more art books rather than bike.</p>
+    <p>It is written as the conditional probability, \(\frac{C(A,B)}{C(B)}=\frac{p(A,B)}{p(B)}=p(A|B)\)</p>
+    <p>Problem: over-associate two products</p>
+    <p>Lift is formulated as,</p>
+    $$Lift = \frac{p(A,B)}{p(A)p(B)} = \frac{p(A|B)}{p(A)} = \frac{p(B|A)}{p(B)}$$  
+    <p>If two variables are independent, \(p(A|B)=p(A)\), \(\frac{p(A|B)}{p(A)}=1\). Only if they are dependent, buying B increases the probability to buy A, then lift is greater than 1.</p>
+
+    <hr>
+    <h4>Balancing popularity with age</h4>
+
+
+
+
+    <h3>References</h3>
+    <hr>
+    <ol>
+    <li><a href="https://www.optimizely.com/uk/optimization-glossary/ab-testing/">A/B Testing by Optimizely</a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+    </ol>
+
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+
+    
+</body>
+</html>
