@@ -69,7 +69,17 @@
     <li>5 star ratings as regression</li>
     </ul>
     <h5>Confidence Intervals</h5>    
-
+    $$\bar{X}=\frac{1}{N}\sum^N_{i=1}X_i \sim \mathcal{N}(\mu,\frac{\sigma^2}{N})$$
+    $$X\sim\mathcal{N}(\mu,\sigma^2)$$
+    <p>Normal approximation</p>
+    $$CI_{95\%} = [\bar{X}+z_{left}\frac{s}{\sqrt{N}},\bar{X}+z_{right}\frac{s}{\sqrt{N}}]$$
+    <p>where s is the standard deviation, \(z_{left}=\Phi^{-1}(.025)\), \(z_{left}=\Phi^{-1}(.975)\), \(\Phi\) CDF.</p>
+    <p>Bernoulli CI Approximation</p>
+    $$\hat{p}=\frac{\#success}{N} \sim probability$$
+    $$CI_{95\%} = [\hat{p}-1.96\sqrt{\frac{\hat{p}(1-\hat{p})}{N}},\hat{p}+1.96\sqrt{\frac{\hat{p}(1-\hat{p})}{N}}]$$
+    <p>Wilson Interval</p>
+    $$\frac{\hat{p}+\frac{z^2}{2N}}{1+\frac{z^2}{N}}\pm \frac{z}{1+\frac{z^2}{N}}\sqrt{\frac{\hat{p}(1-\hat{p})}{N}+\frac{z^2}{4N^2}}$$
+    <p>Then sort by lower bound. This ensures same average ratings with little votes will have lower score than those with more votes, since the lower bound of confidence interval with high variance will have a much smaller lower bound than that with low variance (more samples). But it is a pessimistic approach.</p>
     <h3>References</h3>
     <hr>
     <ol>
