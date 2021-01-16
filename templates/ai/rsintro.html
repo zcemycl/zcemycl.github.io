@@ -80,6 +80,16 @@
     <p>Wilson Interval</p>
     $$\frac{\hat{p}+\frac{z^2}{2N}}{1+\frac{z^2}{N}}\pm \frac{z}{1+\frac{z^2}{N}}\sqrt{\frac{\hat{p}(1-\hat{p})}{N}+\frac{z^2}{4N^2}}$$
     <p>Then sort by lower bound. This ensures same average ratings with little votes will have lower score than those with more votes, since the lower bound of confidence interval with high variance will have a much smaller lower bound than that with low variance (more samples). But it is a pessimistic approach.</p>
+    <hr>
+    <h5>Smoothing (/Damping)</h5>
+    <p>To fix the zero division problem of the average rating, the rating can be rewritten as,</p>
+    $$r = \frac{1}{N+\lambda}(\sum^N_{i=1}X_i+\lambda\mu_0)$$
+    <p>where \(\mu_0\) is the global average.</p>
+    <h5>Explore-Exploit Dilemma</h5>
+    <p>To exploit, I need more confidence, so take more samples to explore. But exploring may cause loss, I need to exploit, exploitation can make me not to discover better strategy, so explore again.</p>
+
+
+
     <h3>References</h3>
     <hr>
     <ol>
