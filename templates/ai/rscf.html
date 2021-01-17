@@ -62,11 +62,17 @@
     <p>Either one can be used as weight calculation, they are very similar since pearson correlation is just a centered version of cosine similarity. Therefore,</p>
     $$w_{ii'}=\frac{\sum_{j\in\Psi_{ii'}}(r_{ij}-\bar{r}_i)(r_{i'j}-\bar{r}_{i'})}{\sqrt{\sum_{j\in\Psi_{ii'}}(r_{ij}-\bar{r}_i)^2}\sqrt{\sum_{j\in\Psi_{ii'}}(r_{i'j}-\bar{r}_{i'})^2}}$$
 
-    <p>where \(\Psi_i\) set of movies that user i has rated, \(\Psi_{ii'}\) set of movies both users have rated and \(\Psi_{ii'}=\Psi_i\cap\Psi_{i'}\).</p>
+    <p>where \(\Psi_i\) set of movies that user i has rated, \(\Psi_{ii'}\) set of movies both users have rated and \(\Psi_{ii'}=\Psi_i\cap\Psi_{i'}\). For some implementation considerations, if there are no common movies, those two users are not considered and counted into the weight. Also, can set a threshold to limit the number of neigborhoods for weighting since it can reduce the computing time. We can use KNN in this case. At the end, the personalized score is computed \(s_{ij}\).</p>
 
     <hr>
     <h4>Item-Item Collaborative Filtering</h4>
-
+    <p>The idea of this filtering is to harness the correlation between items, instead of users. Item Correlation is formulated by.</p>
+    $$w_{jj'}=\frac{\sum_{i\in\Omega_{jj'}}(r_{ij}-\bar{r}_j)(r_{ij'}-\bar{r}_{j'})}{\sqrt{\sum_{i\in\Omega_{hh'}}(r_{ij}-\bar{r}_j)^2}\sqrt{\sum_{i\in\Omega_{jj'}}(r_{ij'}-\bar{r}_{j'})^2}}$$
+    <p>where \(\Omega_j\) users who rated item j, \(\Omega_{jj'}\) users who rated item j and item j', and \(\bar{r}_j\) average rating for item j.</p>
+    <p>Item score is written as, </p>    
+    $$s_{ij} = \bar{r}_j+\frac{1}{\sum_{j'\in\Psi_i}|w_{jj'}|}\sum_{j'\in\Psi_i}w_{jj'}(r_{ij'}-\bar{r}_{j'})$$
+    <p>where \(\Psi_i\) items user i has rated.</p>
+    <p>UUCF: choose items for an user because those items have been liked by similar users. IICF: choose items because the user has liked similar items in the past.</p>
     <h3>References</h3>
     <hr>
     </div>
