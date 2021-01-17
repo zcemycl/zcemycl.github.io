@@ -33,6 +33,16 @@
     <hr>
     <p>We can further design a score for ranking personalized for each client.</p>
     <p>Originally, a score for each item j is defined as \(s_j\), where there are M items.</p>
+    $$s_j=\frac{1}{|\Omega_j|}\sum_{i\in\Omega_j}r_{ij}$$
+    <p>where \(\Omega_j\) set of all users who rated item j, and \(r_{ij}\) rating user i gave item j.</p>
+    <p>To personalize the score, it is rewritten as, no modification at the moment, just introduce one more index for s, </p>
+    $$s_{ij}=\frac{1}{|\Omega_j|}\sum_{i'\in\Omega_j}r_{i'j}=\hat{r}_{ij}$$
+    <p>where \(\hat{r}\) is the prediction, \(r\) is the target ground truth.</p>
+    <p>Now define \(R_{N\times M}\) is an user-item ratings matrix of size N\(\times\)M. It resembles the word-document matrix, thats why it is closely related to NLP. We hope to do matrix factorization, to separate this matrix into user matrix and item matrix. You have to also concern about sparsity of the matrix. </p>
+    <p>It is a regression problem, therefore, MSE loss is used.</p>
+    $$MSE = \frac{1}{\Omega}\sum_{i,j\in\Omega}(r_{ij}-\hat{r}_{ij})^2$$
+
+
     <h3>References</h3>
     <hr>
     </div>
