@@ -41,9 +41,30 @@
     <p>Now define \(R_{N\times M}\) is an user-item ratings matrix of size N\(\times\)M. It resembles the word-document matrix, thats why it is closely related to NLP. We hope to do matrix factorization, to separate this matrix into user matrix and item matrix. You have to also concern about sparsity of the matrix. </p>
     <p>It is a regression problem, therefore, MSE loss is used.</p>
     $$MSE = \frac{1}{\Omega}\sum_{i,j\in\Omega}(r_{ij}-\hat{r}_{ij})^2$$
-
+    <hr>
     <h4>User-User Collaborative Filtering</h4>
+    <p>The idea behind collaborative filtering is to discover the correlation between users' preferences. To harness the power of the correlated preferences, the algorithm is designed to weight the rating more if similar user has similar common preferences. </p>
+    $$s_{ij}=\frac{1}{\sum_{i'\in\Omega_j}w_{ii'}}\sum_{i'\in\Omega_j}w_{ii'}r_{i'j}$$
+    <p>where \(w_{ii'}\) the weight between user i and i' indicating the correlation. Another issue with average rating is that users can be biased, like some are more optimistic giving good movies 5 bad movies 3, but pessimistic good for bad 1.</p>
+    <p>This can be resolved by deviation, this can reduce the effect of bias,</p>
+    $$\delta_{ij}=r_{ij}-\bar{r}_i$$
+    <p>So that the second equation can be rewritten as, </p>
+    \begin{align*}
+    s_{ij}&=\frac{1}{|\Omega_j|}\sum_{i'\in\Omega_j}r_{i'j}=\bar{r}_i+\frac{1}{|\Omega_j|}\sum_{i'\in\Omega_j}(r_{i'j}-\bar{r}_{i'})=\bar{r}_i+\hat{\delta}_{ij}\\
+    \end{align*}
+    <p>Combine with the weight sum, </p>
+    $$s_{ij}=\bar{r}_i+\frac{1}{\sum_{i'\in\Omega_j}|w_{ii'}|}\sum_{i'\in\Omega_j}w_{ii'}(r_{i'j}-\bar{r}_{i'})$$
+    <h5>Weights</h5>
+    <p>Pearson correlation coefficient is given by,</p>
+    $$\varrho_{xy}=\frac{\sum^N_{i=1}(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum^N_{i=1}(x_i-\bar{x})^2\sum^N_{i=1}(y_i-\bar{y})^2}}$$
+    <p>Cosine similarity is given by,</p>
+    $$\cos\theta = \frac{x^\top y}{|x||y|} = \frac{\sum^N_{i=1}x_iy_i}{\sqrt{\sum^N_{i=1}x_i^2}\sqrt{\sum^N_{i=1}y_i^2}}$$
+    <p>Either one can be used as weight calculation, they are very similar since pearson correlation is just a centered version of cosine similarity. Therefore,</p>
+    $$w_{ii'}=\frac{\sum_{j\in\Psi_{ii'}}(r_{ij}-\bar{r}_i)(r_{i'j}-\bar{r}_{i'})}{\sqrt{\sum_{j\in\Psi_{ii'}}(r_{ij}-\bar{r}_i)^2}\sqrt{\sum_{j\in\Psi_{ii'}}(r_{i'j}-\bar{r}_{i'})^2}}$$
 
+    <p>where \(\Psi_i\) set of movies that user i has rated, \(\Psi_{ii'}\) set of movies both users have rated and \(\Psi_{ii'}=\Psi_i\cap\Psi_{i'}\).</p>
+
+    <hr>
     <h4>Item-Item Collaborative Filtering</h4>
 
     <h3>References</h3>
