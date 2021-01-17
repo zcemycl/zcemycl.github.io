@@ -32,6 +32,45 @@
     <h3>Page Rank</h3>
     <hr>
     <p>The PageRank of a page is the probability I would end up on that page if I surfed the Internet randomly for an infinite amount of time.</p>
+    <h4>Markov Models (Bi-grams,Tri-grams,etc.)</h4>
+    $$p(x_t|\{x_i\}_{i=1}^{t-1}) = p(x_t|x_{t-1})$$
+    <p>The transition probability matrix, </p>
+    $$A_{ij}=p(x_t=j|x_{t-1}=i)$$
+    <p>Stochastic / Markov matrix,</p>
+    $$\sum^M_{j=1}A_{ij}=\sum^M_{j=1}p(x_t=j|x_{t-1}=i)=1$$
+    <div style="display:inline;max-width:10%;text-align:center">
+    <div class="mermaid" style="background-color:white;width:20vw;text-align:center">
+    graph LR
+      C -->|A11| C;
+      B -->|A22| B;
+      C((1)) -->|A21| B((2));
+      B -->|A12| C;
+    </div>
+    </div>
+    <h5>Transition probability of the whole sequence</h5>
+    $$p(\{x_i\}_{i=1}^T)=p(x_1)\prod^T_{t=2}p(x_t|x_{t-1})$$    
+    <p>To calculate the transition probability, we use add-1 or epsilon smoothing, so that even if there are unknown transitions, there will be no zero division.</p>
+    $$p(x_t=j|x_{t-1}=i)=\frac{C(i\rightarrow j)+1}{C(i)+V}$$
+    $$p(x_t=j|x_{t-1}=i)=\frac{C(i\rightarrow j)+\epsilon}{C(i)+\epsilon V}$$
+    <p>where V is vocabulary size (number of unique words). The expression is closely related to beta posterior mean.</p>
+
+    <h5>State Distribution</h5>
+    <p>The state probability distribution at time \(t\), \(\pi_t=[\{p(x_t=i)\}_{i=1}^N]\).</p>
+    <h5>Future State Distribution</h5>
+    $$p(x_{t+1}=j)=\sum^M_{i=1}p(x_{t+1}=j,x_t=i)=\sum^M_{i=1}A_{ij}\pi_t(i)=\pi_{t+1}(j)$$
+    $$\begin{align*}
+    \Pi_{t+1} &= \Pi_tA \\
+    \Pi_{t+k} &= \Pi_tA^k \rightarrow \Pi_{\infty} = \Pi_{\infty}A \rightarrow Av=\lambda v
+    \end{align*}$$
+
+    <p>This gives us the model of pagerank. Each state is a page link, the transition is the link between two pages, the transition probability becomes,</p>
+    $$p(x_t=j|x_{t-1}=i)=\frac{1}{n(i)}$$
+    <p>only if i links to j, \(n(i)\)is number of links on page i. Otherwise, the probability will be 0. However, the zero probability will become dominant, since there are billion of pages on the internet having 0 transition probabilities, smoothing is required.</p>
+    <p>Assume A and U are valid Markov matrices, so as G, </p>
+    $$G = .85A+.15U \qquad U_{ij}=\frac{1}{M} \qquad \forall i,j=1\cdots M $$
+    $$\Pi_{\infty}=\Pi_{\infty}G$$
+    <p>The state probability is the ranking value of respective page. This addresses the problem of spamming and creating fake pages.</p>
+
     <h3>References</h3>
     <hr>
     </div>
