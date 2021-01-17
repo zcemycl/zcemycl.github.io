@@ -66,8 +66,39 @@
     <h4>Gaussian distribution</h4>    
     <p>The rating can be described as a Gaussian distribution, assume that the prior, likelihood and posterior are normal distributed, </p>
     <p>However, instead of using variance, it is more convenient to work with precision (inverse variance), </p>
-    <h4></h4>    
-    <h4></h4>    
+    $$p(x|\mu,\sigma^2)=\frac{1}{\sqrt{2\pi\sigma^2}}exp(-\frac{(x-\mu)^2}{2\sigma^2})=p(x|\mu,\tau)=\sqrt{\frac{\tau}{2\pi}}exp(-\frac{1}{2}\tau(x-\mu)^2)$$
+    
+    <h4>Model of prior</h4>    
+    <p>To model the hyperparameter distribution,</p>
+    <ol>
+    <li>Model \(p(\mu)\), \(\tau\) known, \(p(\mu)\sim\mathcal{N}\)</li>
+    <li>Model \(p(\tau)\), \(\mu\) known, \(p(\tau)\sim\Gamma\)</li>
+    <li>Model \(p(\mu,\tau)\), \(p(\mu)\sim\mathcal{N}\Gamma\)</li>
+    </ol>
+    <p>Assume that, the likelihood and prior are written as</p>
+    $$X\sim\mathcal{N}(\mu,\tau^{-1}) \quad \mu\sim\mathcal{N}(m,\lambda^{-1})$$
+
+    <h4>Online Learning </h4>    
+    <p>For only the first case,</p>
+    $$
+    \begin{align*}
+    p(\mu|X) &\propto p(X|\mu)p(\mu)\propto exp(-\frac{1}{2}\lambda(\mu-m)^2)\prod_i exp(-\frac{1}{2}\tau(x_i-\mu)^2)\\
+    &\propto exp(-\frac{1}{2}\lambda'(\mu-m')^2)
+    \end{align*}
+    $$
+    <p>Expand and Compare terms in the exponent,</p>
+    $$\begin{align*}
+    &\lambda(\mu-m)^2+\tau\sum_i(x_i-\mu)^2=\mu^2(\lambda+\tau\sum_i 1)-2\mu(\lambda m+\tau\sum_ix_i)+\cdots \\
+    &=\mu^2\lambda'-2\mu\lambda'm'+\cdots\\
+    \end{align*}$$
+
+    <p>Therefore, </p>
+    $$\lambda' = \lambda+N\tau$$
+    $$m'=\frac{\lambda m+\tau\sum_ix_i}{\lambda'}=\frac{\lambda m+\tau\sum_ix_i}{\lambda+N\tau}$$
+
+    <hr>
+    <h4>Explore and Exploit</h4>
+    <p>Instead of using lower bound of the distribution, here will use the sampling from the distribution to ensure both exploration and exploitation. If we only use the mean, may not have exploration. </p>
 
     <h3>References</h3>
     <hr>
