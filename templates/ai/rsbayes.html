@@ -33,8 +33,51 @@
     <hr>
     $$CTR = \frac{\# clicks}{\# impressions}$$
     <p>where clicks are the number of clicks, impressions are defined as the number of showing the page. This is like the probability of being clicked.</p>
+    <h4>Bernoulli Distribution</h4>    
+    <p>You can consider the CTR as the probability of being 1, </p>
+    $$p(x) = \pi^x(1-\pi)^{1-x}=p(x|\pi)$$
+    <p>where \(\pi\) is the probability of x=1, \(x\in [0,1]\).</p>
+
+    <h4>Beta distribution</h4>
+    <p>To use bayes rule, the prior of the probability is required. Read the link to understand why beta distribution can describe a probability of probability.</p>
+    $$p(\pi) = \frac{1}{B(\alpha,\beta)}\pi^{\alpha-1}(1-\pi)^{\beta-1}$$
+    $$B(\alpha,\beta)=\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)} = \frac{(\alpha-1)!(\beta-1)!}{(\alpha+\beta-1)!}$$
+
+
+    <h4>Online Learning </h4> 
+    <p>Using Bayes rule, the posterior \(p(\pi|x)\) can be obtained, it can become the new prior called conjugate prior. Intuitively, you have a prior assumption about the probability, as more events happen, your prior will get updated, this is the core idea of online learning.</p>
+    $$
+    \begin{align*}
+    p(\pi|X) &\propto p(X|\pi)p(\pi) = p(\pi)\prod_{i=1}\pi^{x_i}(1-\pi)^{1-x_i}    \\
+    &\propto \pi^{\alpha-1}(1-\pi)^{\beta-1}\pi^{\sum_ix_i}(1-\pi)^{N-\sum_ix_i}\\
+    &=\pi^{\alpha-\sum_ix_i-1}(1-\pi)^{\beta+N-\sum_ix_i-1}=\pi^{\alpha'-1}(1-\pi)^{\beta'-1}
+    \end{align*}
+    $$
+    <p>Therefore, the hyperparameters can be updated iteratively with more and more data,</p>
+    $$\alpha'=\alpha-\sum_ix_i$$   
+    $$\beta'=\beta+N-\sum_ix_i$$
+    <p>Consider the mean and variance,</p>
+    $$\mu = \frac{\alpha}{\alpha+\beta}$$
+    $$\sigma^2 = \frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}$$
+    <p>The variance will decrease with number of samples.</p>
+
+    <hr>
+    <p>Similarly,</p>
+    <h4>Gaussian distribution</h4>    
+    <p>The rating can be described as a Gaussian distribution, assume that the prior, likelihood and posterior are normal distributed, </p>
+    <p>However, instead of using variance, it is more convenient to work with precision (inverse variance), </p>
+    <h4></h4>    
+    <h4></h4>    
+
     <h3>References</h3>
     <hr>
+    <ol>
+    <li><a href="https://www2.stat.duke.edu/courses/Spring12/sta104.1/Lectures/Lec15.pdf">Order Statistics by Colin Rundel</a></li>
+    <li><a href="https://medium.com/datadriveninvestor/how-funk-singular-value-decomposition-algorithm-work-in-recommendation-engines-36f2fbf62cac">How Does the Funk SVD Algorithm work in Recommendation Engines</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Normal-gamma_distribution">Normal-gamma distribution</a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+    </ol>
     </div>
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
