@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Proof of Backpropagation</h3>
+    <hr>
+    <div class="mermaid" style="background-color:white;max-width:80vw;"> 
+    graph LR
+      A(($a^1$)) -->|$\theta^1$| B(($z^2$));
+      B -->|$g$| C(($a^2$));
+      C -->|$\theta^2$| D(($z^3$));
+      D -->|$g$| E(($a^3$))
+    </div>
+
+    <h4>Forward Pass</h4>
+    <p>Define $a_{0}$ as the bias, 
+the subscript ij represents the direction from output nodes i: $a^{(n)}_{i}$ to input nodes j: $z^{(n+1)}_{j}$, 
+the superscript represents the layer index</p>
+$$z^{(2)} = \theta^{(1)}a^{(1)} $$
+    <p>For example,</p>
+$$\left[ \begin{array}{}
+z^{(2)}_{1} \\
+z^{(2)}_{2} \\
+\end{array} \right]
+= 
+\left[ \begin{array}{}
+\theta^{(1)}_{01} & \theta^{(1)}_{11} & \theta^{(1)}_{21} \\
+\theta^{(1)}_{02} & \theta^{(1)}_{12} & \theta^{(1)}_{22} \\
+\end{array} \right]
+\space
+\left[ \begin{array}{}
+a^{(1)}_{0}\\
+a^{(1)}_{1}\\
+a^{(1)}_{2}\\
+\end{array} \right]
+$$
+    <p>Bias will be added back before next layer of matrix multiplication.</p>
+$$a^{(2)} = 
+\left[ \begin{array}{}
+a^{(2)}_{1}\\
+a^{(2)}_{2}\\
+\end{array} \right] \to 
+\left[ \begin{array}{}
+a^{(2)}_{0}\\
+a^{(2)}_{1}\\
+a^{(2)}_{2}\\
+\end{array} \right]$$
+    <p>Similarily for layer 3,</p>
+$$z^{(3)} = \theta^{(2)}a^{(2)} $$
+$$\left[ \begin{array}{}
+z^{(3)}_{1} \\
+z^{(3)}_{2} \\
+\end{array} \right]
+= 
+\left[ \begin{array}{}
+\theta^{(2)}_{01} & \theta^{(2)}_{11} & \theta^{(2)}_{21} \\
+\theta^{(2)}_{02} & \theta^{(2)}_{12} & \theta^{(2)}_{22} \\
+\end{array} \right]
+\space
+\left[ \begin{array}{}
+a^{(2)}_{0}\\
+a^{(2)}_{1}\\
+a^{(2)}_{2}\\
+\end{array} \right]
+$$
+$$a^{(3)} = g(z^{(3)}) = 
+\left[ \begin{array}{}
+\frac{1}{1+ e^{-z^{(3)}_{1}}}\\
+\frac{1}{1+ e^{-z^{(3)}_{2}}}\\
+\end{array} \right] = 
+\left[ \begin{array}{}
+a^{(3)}_{1}\\
+a^{(3)}_{2}\\
+\end{array} \right]$$
+    <p>But since layer 3 is the last layer, no bias will be added back.</p>
+    <hr>
+
+    <h4>Cost function</h4>
+    $$\begin{align*}
+    J(\theta) &= \Delta = \Delta_{1} + \Delta_{2}=\frac{1}{2}(\delta^{(3)}_{1})^{2}+\frac{1}{2}(\delta^{(3)}_{2})^{2}\\
+    &= \frac{1}{2}\big((a^{(3)}_{1} - y_{1})^2+(a^{(3)}_{2} - y_{2})^2\big)
+    \end{align*}$$
+    <h4>Gradient Descent for each weight</h4>
+ $$\theta^{(k)}_{ij} := \theta^{(k)}_{ij} - \alpha \frac{\partial J(\theta)}{\partial \theta^{(k)}_{ij}}$$
+
+    <hr>
+    <h4>Backward pass</h4>
+For $\theta^{(2)}$, $$\frac{\partial \Delta}{\partial \theta^{(2)}_{ij}} = 
+\frac{\mathrm d \Delta}{\mathrm d \Delta_{j}} \frac{\mathrm d \Delta_{j}}{\mathrm d \delta^{(3)}_{j}}
+\frac{\partial \delta^{(3)}_{j}}{\partial a^{(3)}_{j}} \frac{\mathrm d a^{(3)}_{j}}{\mathrm d z^{(3)}_{j}} \frac{\partial z^{(3)}_{j}}{\partial \theta^{(2)}_{ij}} = a^{(2)}_{i}g'(z^{(3)}_{j})\delta^{(3)}_{j}$$
+
+
+$$\frac{\partial \Delta}{\partial \theta^{(2)}_{11}} = 
+\frac{\mathrm d \Delta}{\mathrm d \Delta_{1}} \frac{\mathrm d \Delta_{1}}{\mathrm d \delta^{(3)}_{1}}
+\frac{\partial \delta^{(3)}_{1}}{\partial a^{(3)}_{1}} \frac{\mathrm d a^{(3)}_{1}}{\mathrm d z^{(3)}_{1}} \frac{\partial z^{(3)}_{1}}{\partial \theta^{(2)}_{11}} 
+= (1)(\delta^{(3)}_{1})(1)\bigg(\frac{ e^{-z^{(3)}_{1}}}{(1+ e^{-z^{(3)}_{1}})^{2}}\bigg)a^{(2)}_{1} 
+= (\delta^{(3)}_{1})\bigg(\frac{ e^{-z^{(3)}_{1}}}{(1+ e^{-z^{(3)}_{1}})^{2}}\bigg)a^{(2)}_{1}
+= a^{(2)}_{1}a^{(3)}_{1}(1-a^{(3)}_{1})\delta^{(3)}_{1} = a^{(2)}_{1}g'(z^{(3)}_{1})\delta^{(3)}_{1}$$
+
+$$, where \space \space g'(z^{(3)}_{1}) = a^{(3)}_{1}(1 - a^{(3)}_{1});$$
+
+$$\frac{\partial \Delta}{\partial \theta^{(2)}_{21}} = 
+\frac{\mathrm d \Delta}{\mathrm d \Delta_{1}} \frac{\mathrm d \Delta_{1}}{\mathrm d \delta^{(3)}_{1}}
+\frac{\partial \delta^{(3)}_{1}}{\partial a^{(3)}_{1}} \frac{\mathrm d a^{(3)}_{1}}{\mathrm d z^{(3)}_{1}} \frac{\partial z^{(3)}_{1}}{\partial \theta^{(2)}_{21}} = a^{(2)}_{2}g'(z^{(3)}_{1})\delta^{(3)}_{1}; 
+$$
+
+
+$$\frac{\partial \Delta}{\partial \theta^{(2)}_{12}} = 
+\frac{\mathrm d \Delta}{\mathrm d \Delta_{2}} \frac{\mathrm d \Delta_{2}}{\mathrm d \delta^{(3)}_{2}}
+\frac{\partial \delta^{(3)}_{2}}{\partial a^{(3)}_{2}} \frac{\mathrm d a^{(3)}_{2}}{\mathrm d z^{(3)}_{2}} \frac{\partial z^{(3)}_{2}}{\partial \theta^{(2)}_{12}} = a^{(2)}_{1}g'(z^{(3)}_{2})\delta^{(3)}_{2}; $$
+
+$$\frac{\partial \Delta}{\partial \theta^{(2)}_{22}} = 
+\frac{\mathrm d \Delta}{\mathrm d \Delta_{2}} \frac{\mathrm d \Delta_{2}}{\mathrm d \delta^{(3)}_{2}}
+\frac{\partial \delta^{(3)}_{2}}{\partial a^{(3)}_{2}} \frac{\mathrm d a^{(3)}_{2}}{\mathrm d z^{(3)}_{2}} \frac{\partial z^{(3)}_{2}}{\partial \theta^{(2)}_{22}} = a^{(2)}_{2}g'(z^{(3)}_{2})\delta^{(3)}_{2}$$
+
+    <p>Generally,</p>
+$$\frac{\partial J(\theta)}{\partial \theta^{(\ell)}_{ij}} = a^{(\ell)}_{i}g'(z^{\ell + 1}_{j})\delta^{\ell + 1}_{j} $$
+
+    <p>For $\theta^{(1)}$, </p>
+$$\frac{\partial \Delta}{\partial \theta^{(1)}_{ij}} = 
+\bigg(
+\frac{\mathrm d \Delta}{\mathrm d \Delta_1}\frac{\mathrm d \Delta_1}{\mathrm d \delta^{(3)}_{1}}\frac{\partial \delta^{(3)}_{1}}{\partial a^{(3)}_{1}}\frac{\mathrm d a^{(3)}_{1}}{\mathrm d z^{(3)}_{1}} \frac{\partial z^{(3)}_{1}}{\partial a^{(2)}_{j}} 
++ 
+\frac{\mathrm d \Delta}{\mathrm d \Delta_2}\frac{\mathrm d \Delta_2}{\mathrm d \delta^{(3)}_{2}}\frac{\partial \delta^{(3)}_{2}}{\partial a^{(3)}_{2}}\frac{\mathrm d a^{(3)}_{2}}{\mathrm d z^{(3)}_{2}} \frac{\partial z^{(3)}_{2}}{\partial a^{(2)}_{j}} 
+\bigg)
+\frac{\mathrm d a^{(2)}_{j}}{\mathrm d z^{(2)}_{j}}
+\frac{\partial z^{(2)}_{j}}{\partial \theta^{(1)}_{ij}}
+$$
+
+$$\frac{\partial \Delta}{\partial \theta^{(1)}_{11}} = 
+\bigg(
+\frac{\mathrm d \Delta}{\mathrm d \Delta_1}\frac{\mathrm d \Delta_1}{\mathrm d \delta^{(3)}_{1}}\frac{\partial \delta^{(3)}_{1}}{\partial a^{(3)}_{1}}\frac{\mathrm d a^{(3)}_{1}}{\mathrm d z^{(3)}_{1}} \frac{\partial z^{(3)}_{1}}{\partial a^{(2)}_{1}} 
++ 
+\frac{\mathrm d \Delta}{\mathrm d \Delta_2}\frac{\mathrm d \Delta_2}{\mathrm d \delta^{(3)}_{2}}\frac{\partial \delta^{(3)}_{2}}{\partial a^{(3)}_{2}}\frac{\mathrm d a^{(3)}_{2}}{\mathrm d z^{(3)}_{2}} \frac{\partial z^{(3)}_{2}}{\partial a^{(2)}_{1}} 
+\bigg)
+\frac{\mathrm d a^{(2)}_{1}}{\mathrm d z^{(2)}_{1}}
+\frac{\partial z^{(2)}_{1}}{\partial \theta^{(1)}_{11}}
+=
+\big(\delta^{(3)}_{1}g'(z^{(3)}_{1})\theta^{(2)}_{11} + \delta^{(3)}_{2}g'(z^{(3)}_{2})\theta^{(2)}_{12}\big)g'(z^{(2)}_{1})a^{(1)}_1
+= 
+a^{(1)}_{1}g'(z^{(2)}_{1})\delta^{(2)}_{1}$$
+
+$$\frac{\partial \Delta}{\partial \theta^{(1)}_{12}} = 
+\bigg(
+\frac{\mathrm d \Delta}{\mathrm d \Delta_1}\frac{\mathrm d \Delta_1}{\mathrm d \delta^{(3)}_{1}}\frac{\partial \delta^{(3)}_{1}}{\partial a^{(3)}_{1}}\frac{\mathrm d a^{(3)}_{1}}{\mathrm d z^{(3)}_{1}} \frac{\partial z^{(3)}_{1}}{\partial a^{(2)}_{2}} 
++ 
+\frac{\mathrm d \Delta}{\mathrm d \Delta_2}\frac{\mathrm d \Delta_2}{\mathrm d \delta^{(3)}_{2}}\frac{\partial \delta^{(3)}_{2}}{\partial a^{(3)}_{2}}\frac{\mathrm d a^{(3)}_{2}}{\mathrm d z^{(3)}_{2}} \frac{\partial z^{(3)}_{2}}{\partial a^{(2)}_{2}} 
+\bigg)
+\frac{\mathrm d a^{(2)}_{2}}{\mathrm d z^{(2)}_{2}}
+\frac{\partial z^{(2)}_{2}}{\partial \theta^{(1)}_{12}}
+= 
+\big(\delta^{(3)}_{1}g'(z^{(3)}_{1})\theta^{(2)}_{21} + \delta^{(3)}_{2}g'(z^{(3)}_{2})\theta^{(2)}_{22}\big)g'(z^{(2)}_{2})a^{(1)}_1
+=
+a^{(1)}_{1}g'(z^{(2)}_{2})\delta^{(2)}_{2}$$
+
+ $$\frac{\partial \Delta}{\partial \theta^{(1)}_{21}} = 
+\bigg(
+\frac{\mathrm d \Delta}{\mathrm d \Delta_1}\frac{\mathrm d \Delta_1}{\mathrm d \delta^{(3)}_{1}}\frac{\partial \delta^{(3)}_{1}}{\partial a^{(3)}_{1}}\frac{\mathrm d a^{(3)}_{1}}{\mathrm d z^{(3)}_{1}} \frac{\partial z^{(3)}_{1}}{\partial a^{(2)}_{1}} 
++ 
+\frac{\mathrm d \Delta}{\mathrm d \Delta_2}\frac{\mathrm d \Delta_2}{\mathrm d \delta^{(3)}_{2}}\frac{\partial \delta^{(3)}_{2}}{\partial a^{(3)}_{2}}\frac{\mathrm d a^{(3)}_{2}}{\mathrm d z^{(3)}_{2}} \frac{\partial z^{(3)}_{2}}{\partial a^{(2)}_{1}} 
+\bigg)
+\frac{\mathrm d a^{(2)}_{1}}{\mathrm d z^{(2)}_{1}}
+\frac{\partial z^{(2)}_{1}}{\partial \theta^{(1)}_{21}}
+=
+a^{(1)}_{2}g'(z^{(2)}_{1})\delta^{(2)}_{1}$$
+
+$$\frac{\partial \Delta}{\partial \theta^{(1)}_{22}} = 
+\bigg(
+\frac{\mathrm d \Delta}{\mathrm d \Delta_1}\frac{\mathrm d \Delta_1}{\mathrm d \delta^{(3)}_{1}}\frac{\partial \delta^{(3)}_{1}}{\partial a^{(3)}_{1}}\frac{\mathrm d a^{(3)}_{1}}{\mathrm d z^{(3)}_{1}} \frac{\partial z^{(3)}_{1}}{\partial a^{(2)}_{2}} 
++ 
+\frac{\mathrm d \Delta}{\mathrm d \Delta_2}\frac{\mathrm d \Delta_2}{\mathrm d \delta^{(3)}_{2}}\frac{\partial \delta^{(3)}_{2}}{\partial a^{(3)}_{2}}\frac{\mathrm d a^{(3)}_{2}}{\mathrm d z^{(3)}_{2}} \frac{\partial z^{(3)}_{2}}{\partial a^{(2)}_{2}} 
+\bigg)
+\frac{\mathrm d a^{(2)}_{2}}{\mathrm d z^{(2)}_{2}}
+\frac{\partial z^{(2)}_{2}}{\partial \theta^{(1)}_{22}}
+=
+a^{(1)}_{2}g'(z^{(2)}_{2})\delta^{(2)}_{2}$$
+
+ $$ \delta^{(2)} = 
+\left[ \begin{array}{}
+\delta^{(2)}_{1}\\
+\delta^{(2)}_{2}\\
+\end{array}\right]
+=
+\left[ \begin{array}{}
+\theta^{(2)}_{11}\delta^{(3)}_1g'(z^{(3)}_1) + \theta^{(2)}_{12}\delta^{(3)}_2g'(z^{(3)}_2) \\
+\theta^{(2)}_{21}\delta^{(3)}_1g'(z^{(3)}_1) + \theta^{(2)}_{22}\delta^{(3)}_2g'(z^{(3)}_2) \\
+\end{array}\right] 
+=
+\left[ \begin{array}{}
+\theta^{(2)}_{11} & \theta^{(2)}_{12} \\
+\theta^{(2)}_{21} & \theta^{(2)}_{22} \\
+\end{array}\right] \space 
+\left[ \begin{array}{}
+\delta^{(3)}_1g'(z^{(3)}_1) \\
+\delta^{(3)}_2g'(z^{(3)}_2) \\
+\end{array}\right] 
+= 
+(\theta^{(2)})^{T} \delta^{(3)}.*g'(z^{(3)})$$
+
+    <p>Generally,</p>
+$$\delta^{(\ell)}= 
+\begin{cases}
+a^{(\ell)} - y & \text{for} \space \ell = L\\
+(\theta^{(\ell)})^{T}\delta^{(\ell + 1)}.*g'(z^{(\ell + 1)}) & \text{for} \space 1<\ell \leq L-1 
+\end{cases}
+$$
+    <p>where L = last layer</p>
+
+    <hr>
+    <h4>Summary</h4>
+$$
+z^{(\ell + 1)} = \theta^{(\ell)} \space a^{(\ell)}$$
+$$
+\frac{\partial J(\theta)}{\partial \theta^{(\ell)}_{ij}} = a^{(\ell)}_{i}g'(z^{(\ell + 1)}_{j})\delta^{(\ell + 1)}_{j}
+$$
+$$
+\delta^{(\ell)}= 
+\begin{cases}
+a^{(\ell)} - y \\
+(\theta^{(\ell)})^{T}\delta^{(\ell + 1)}.*g'(z^{(\ell + 1)}) 
+\end{cases}
+$$
+$$
+g'(z^{(\ell)}) = a^{(\ell)}\big(1 - a^{(\ell)}\big)$$
+    <p>The form of weight matrix is given by,</p>
+$$\theta^{(\ell)}
+= 
+\left[ \begin{array}{}
+\theta^{(\ell)}_{11} & \theta^{(\ell)}_{21} & \cdots & \theta^{(\ell)}_{n1} \\
+\theta^{(\ell)}_{12} & \theta^{(\ell)}_{22} & ... & \theta^{(\ell)}_{n2} \\
+\vdots & \vdots & \ddots & \vdots \\
+\theta^{(\ell)}_{1n} & \cdots & \cdots & \theta^{(\ell)}_{nn}
+\end{array}\right] 
+$$
+
+
+
+
+
+
+
+
+
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+
+
+
+    
+</body>
+</html>
