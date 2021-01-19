@@ -43,6 +43,7 @@ git clone https://github.com/zcemycl/learnGit.git
     <li>Create a branch to solve the issue. Go to branch, and start editing.</li>
     <pre><code>
 git branch dev master
+git branch -a
 git checkout dev
     </code></pre>
 
@@ -53,11 +54,28 @@ git commit -m "some messages"
 git push origin dev
     </code></pre>
 
+    <li>Go back to github webpage again. View Pull requests tab. </li>
+    <li>Press Compare \& pull request button. This will create a new pull request. </li>
+    <li>Now assign Reviewers, Assignees, Labels, branch to merge / be merged. Press Create pull request.</li>
+    <li>At Pull requests tab, the reviewer can comment, check lines changed in Files changed, highlight the changed code to comment, etc. This is called code review process.</li>
+    <li>Once it is done, press Merge pull request. You can close it as well.</li>
+    <li>Get back to Issues, link the Issues to the respective Pull requests. You can as well delete branch.</li>
 
 
-    <li></li>
-    <li></li>
-    <li></li>
+
+    <li>Since the branch is closed online, you need to update your branches locally.</li>
+    <pre><code>
+git fetch
+git pull 
+    </pre></code>
+
+
+    <li>Delete your branch which is unnecessary anymore.</li>
+    <pre><code>
+git branch -D dev
+git remote prune origin
+    </pre></code>
+
     </ol>
 
 
