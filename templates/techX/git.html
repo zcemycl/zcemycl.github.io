@@ -55,9 +55,21 @@ git push origin dev
     </code></pre>
 
     <li>Go back to github webpage again. View Pull requests tab. </li>
-    <li>Press Compare \& pull request button. This will create a new pull request. </li>
+    <li>Press Compare & pull request button. This will create a new pull request. </li>
     <li>Now assign Reviewers, Assignees, Labels, branch to merge / be merged. Press Create pull request.</li>
     <li>At Pull requests tab, the reviewer can comment, check lines changed in Files changed, highlight the changed code to comment, etc. This is called code review process.</li>
+    <li>Sometimes, if you click pull requests, there are some conflicted files look as follows,</li>
+    <pre><code>
+&lt&lt&lt&lt&lt&lt&lt&lt&lt&lt&lt&lt branch1
+line 1 
+===================================
+line 1'
+&gt&gt&gt&gt&gt&gt&gt&gt&gt&gt&gt&gt master
+    </code></pre>
+    <li>Just delete online to the follow format to resolve conflicts,</li>
+    <pre><code>
+line 1 
+    </code></pre>
     <li>Once it is done, press Merge pull request. You can close it as well.</li>
     <li>Get back to Issues, link the Issues to the respective Pull requests. You can as well delete branch.</li>
 
