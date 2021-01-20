@@ -135,8 +135,14 @@ WHERE employee.emp_id IN (
 
     <h4>Entity Relationship Diagram (ERD)</h4>
     <p></p>
-    <pre><code>
     
+    <h4>Very Long Queries</h4>
+    <pre><code>
+select t1.AddressID,t1.FullAddress,t1.PricePaid,t2.AddressID,t2.FullAddress,t2.EPCType,t2.AddressID,t2.FloorArea from flat2db.landregistrypricepaid as t1
+inner join flat2db.epc as t2 on t1.AddressID = t2.AddressID 
+where t1.PostCode like 'NW2 %' and t2.PostCode like 'NW2 %' and t2.EPCType = 'DOMESTIC'
+limit 10;
+
     </code></pre>
 
 
