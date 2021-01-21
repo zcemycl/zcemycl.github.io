@@ -51,6 +51,23 @@
     <ol>
     <li>Run <code>SELECT * FROM namedb.item LIMIT 10;</code>.</li>
     </ol>
+
+    <h4>SQL Alchemy</h4>
+    <p>Install by </p>
+    <pre><code>
+pip3 install sqlalchemy
+    </code></pre>
+    <p>To connect your database server, </p>
+    <pre><code>
+import sqlalchemy as db
+import pandas as pd
+pd.set_option('display.max_columns', None)
+conn_str = f"mysql+pymysql://{Username}:{Password}@{ip_addres+port}/{Database_name}"
+with db.create_engine(conn_str).connect() as conn:
+    sql = """select * from table1 limit 10 offset 10;"""
+    df = pd.read_sql_query(sql,conn)
+    </code></pre>
+
     <h3>References</h3>
     <hr>
     <ol>
