@@ -142,7 +142,14 @@ select t1.AddressID,t1.FullAddress,t1.PricePaid,t2.AddressID,t2.FullAddress,t2.E
 inner join flat2db.epc as t2 on t1.AddressID = t2.AddressID 
 where t1.PostCode like 'NW2 %' and t2.PostCode like 'NW2 %' and t2.EPCType = 'DOMESTIC'
 limit 10;
-
+    
+    </code></pre>
+    <h4>Having multiple record</h4>
+    <pre><code>
+SELECT column_name
+  FROM table_name
+ GROUP BY column_name
+HAVING COUNT(column_name) = 1;
     </code></pre>
 
 
