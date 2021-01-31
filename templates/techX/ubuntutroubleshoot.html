@@ -39,19 +39,29 @@
         <li>Go to system settings, click + sign to add a new input source.</li>
         <li>Select the input you want, like Chinese (Cangjie).</li>
         <li>If the input does not exist, go to terminal and type <code>sudo apt-get update</code> and <code>sudo apt-get install ibus-cangjie</code>.</li>
-        <li>It should appear now.</li>
+        <li>It should appear now. Add it to your language input. Switch between inputs with Win + Space.</li>
         </ul>
       <li>No screen recorder.</li>
         <ul>
         <li>Before 18.04, screen recorder is not installed as default. </li>
         <li>Go to Ubuntu Software. install vokoscreenNG.</li>
+        <li>Otherwise, just press Shift+Ctrl+Alt+R, to start recording after version 18.04.</li>
+        </ul>
+
+      <li>Partition and Mount</li>
+        <ul>
+        <li>During dualboot, you might want to split partition. One way is to use GParted <code>sudo apt-get install gparted</code>.</li>
+        <li>You can start shrinking and splitting new partition, by <code>sudo gparted</code>. Once you get in, choose a big partition, and split it into smaller one. </li>
+        <li>Bear in mind that, windows cannot access to ext4 file system, but ubuntu can access both ext4 and ntfs. NTFS is usually used by windows, EXT4 for linux.</li>
+        <li>To make the partition readable from terminal file structure, you need to mount. If there is a missing Mount Point in GParted for a partition, go to terminal. <code>sudo mkdir /backup</code> and <code>sudo mount /dev/nvme0n1p8 /backup</code>.</li>
+        <li>Now if you check by <code>df -h</code>, Mount on column will show.</li>
+        <li>You can even mount windows ntfs for ubuntu to use. <code>sudo mkdir /windows</code>, <code>sudo mount /dev/nvme0n1p1 /windows</code>. Inside it, you can see files from windows. In <code>/windows</code>, I create <code>ubuntu/</code> folder which contains <code>docs/ data/ projects/ outputs/</code> folders just for isolation.</li>
         </ul>
 
       <li></li>
         <ul>
         <li></li>
         </ul>
-
     </ol>
     <h3>References</h3>
     <hr>
