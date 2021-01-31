@@ -34,7 +34,24 @@
       <li>Ubuntu cannot restart or shutdown properly.<ul>
         <li>In file <code>/etc/default/grub</code>, change line from <code>GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"</code> to <code>GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi=force"</code>.</li>
         <li>Then run <code>update-grub</code>.</li></ul></li>
+      <li>Install another language input.</li>
+        <ul>
+        <li>Go to system settings, click + sign to add a new input source.</li>
+        <li>Select the input you want, like Chinese (Cangjie).</li>
+        <li>If the input does not exist, go to terminal and type <code>sudo apt-get update</code> and <code>sudo apt-get install ibus-cangjie</code>.</li>
+        <li>It should appear now.</li>
+        </ul>
+      <li>No screen recorder.</li>
+        <ul>
+        <li>Before 18.04, screen recorder is not installed as default. </li>
+        <li>Go to Ubuntu Software. install vokoscreenNG.</li>
+        </ul>
+
       <li></li>
+        <ul>
+        <li></li>
+        </ul>
+
     </ol>
     <h3>References</h3>
     <hr>
