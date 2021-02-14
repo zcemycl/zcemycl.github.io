@@ -31,8 +31,82 @@
 
     <h3>Regular Expression</h3>
     <hr>
+    <h4>Catching Group</h4>
+    <pre><code>
+expr_1 = r'(\w+)(\W+)'
+line = 'abcabcdefabc*,.zyw'
+print(re.findall(expr_1,line))
+    </code></pre>
+
+    <pre><code>
+[('abcabcdefabc', '*,.')]
+    </code></pre>
+    <p>If <code>\W</code> not in bracket, the second result does not show.</p>
+    
+
+    <h4>Ignore uppercase and lowercase</h4>
+    <pre><code>
+expr_1 = r'(?i)leo leung'
+line = 'Leo Leung'
+print(re.findall(expr_1,line))
+print(re.findall(expr_1,'LEO LEUNG'))
+    </code></pre>
+
+    <pre><code>
+['Leo Leung']
+['LEO LEUNG']
+    </code></pre>
+
+
+    <h4>Lookahead assertion (Positive)<code>(?=x)</code> (Negative)<code>(?!x)</code></h4>
+    <pre><code>
+expr_1 = r'(?i).* (?=leung)'
+line = 'Leo Leung'
+print(re.findall(expr_1,line))
+print(re.findall(expr_1,'ok LEUNG'))
+    </code></pre>
+    <pre><code>
+['Leo ']
+['ok ']
+    </code></pre>
+
+    <h4>Lookbehind assertion</h4>
+    <pre><code>
+expr_1 = r'(?i)(?&lt=leo) .*'
+line = 'Leo Leung'
+print(re.findall(expr_1,line))
+print(re.findall(expr_1,'ok LEUNG'))
+    </code></pre>
+    <pre><code>
+[' Leung']
+[]
+    </code></pre>
+
+    <h4>A mix of operations</h4>
+    <p>The difference between <code>(?=x)</code> and <code>(?:x)</code> is that, the latter includes the display of x.</p>
+    <pre><code>
+expr_1 = r'(?i:leo) .* (?i:patrick) abc'
+line = 'I am Leo Leung Patrick abc, 12, Leo aaa patrick abc'
+print(re.findall(expr_1,line))
+print(re.findall(expr_1,'ok LEUNG'))
+    </code></pre>
+
+    <pre><code>
+['Leo Leung Patrick abc, 12, Leo aaa patrick abc']
+[]
+    </code></pre>
+
+
+
+
+
+
     <h3>References</h3>
     <hr>
+    <ol>
+    <li><a href="https://docs.python.org/3/library/re.html#module-re">Regular expression operations</a></li>
+    <li><a href="https://www.dataquest.io/blog/regex-cheatsheet/">Regex Cheat Sheet: A Quick Guide to Regular Expressions in Python</a></li>
+    </ol>
     </div>
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
