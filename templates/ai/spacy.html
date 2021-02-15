@@ -37,6 +37,75 @@
 pip install spacy
 python -m spacy download en_core_web_{sm,md,lg} # small, medium or large
     </code></pre>
+    <h4>Pipeline components</h4>
+    <div style="text-align:center">
+    <img src="https://user-images.githubusercontent.com/13643239/55229632-dbff9480-521d-11e9-8499-efb2a9c948db.png" width="60%">
+    </div>
+    <pre><code>
+import spacy
+nlp = spacy.load('en_core_web_sm')
+doc = nlp('Larry Page founded Google')    
+for token in doc:
+    print(token.text) # Larry\nPage\n...
+    </code></pre>
+    <p>Other attirbutes,</p>
+    <ol>
+    <li>Index: <code>token.i</code></li>
+    <li>Alphabet or not: <code>token.is_alpha</code></li>
+    <li>Punctuation or not: <code>token.is_punct</code></li>
+    <li>Number or not:<code>token.like_num</code></li>
+    <li>Part of Speech Tagging: <code>token.pos</code> (id) <code>token.pos_</code> (tag name)</li>
+    </ol>
+
+    <h4>Named Entity Recognition (NER)</h4>
+    <p><code>token.ent_type_</code></p>
+    <div style="text-align:center">
+    <img src="https://user-images.githubusercontent.com/13643239/52234151-443a9580-28c1-11e9-831a-9adee3ec87b1.png" width="50%">
+    </div>
+    <pre><code>
+from spacy import displacy
+displacy.render(doc, style="ent")
+    </code></pre>
+
+
+
+    <h4>Dependency Parsing</h4>
+    <p><code>token.dep_</code></p>
+    <div style="text-align:center">
+    <img src="https://user-images.githubusercontent.com/13643239/52234132-38e76a00-28c1-11e9-82e6-e5d6b4a7f339.png" width="50%">
+    </div>
+    <pre><code>
+doc = nlp("This is a sentence")
+displacy.render(doc, style="dep")
+    </code></pre>
+
+    <h4>Rule-based matching/ phrase matcher</h4>
+    <pre><code>
+from spacy.matcher import Matcher
+matcher = Matcher(nlp.vocab)
+pattern = [{"LOWER": "new"}, {"LOWER": "york"}]
+matcher.add('CITIES', None, pattern)
+matches = matcher(doc)
+for match_id, start, end in matches:
+     # Get the matched span by slicing the Doc
+     span = doc[start:end]
+     print(span.text)
+    </code></pre>
+
+    <h4>Word vectors and similarity</h4>
+    <p>Only available in medium or large models.
+<code>
+doc1.similarity(doc2)
+</code>
+    </p>
+
+    <h4>Help function</h4>
+    <p><code>spacy.explain('NNP')</code></p>
+
+
+
+
+
 
     <h3>References</h3>
     <hr>
