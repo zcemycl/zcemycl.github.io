@@ -79,7 +79,7 @@ doc = nlp("This is a sentence")
 displacy.render(doc, style="dep")
     </code></pre>
 
-    <h4>Rule-based matching/ phrase matcher</h4>
+    <h4>Rule-based matching</h4>
     <pre><code>
 from spacy.matcher import Matcher
 matcher = Matcher(nlp.vocab)
@@ -90,6 +90,50 @@ for match_id, start, end in matches:
      # Get the matched span by slicing the Doc
      span = doc[start:end]
      print(span.text)
+    </code></pre>
+
+
+    <h4>Phrase Matching</h4>
+    <pre><code>
+from spacy.matcher import PhraseMatcher
+nlp = spacy.load("en_core_web_sm")
+matcher = PhraseMatcher(nlp.vocab)
+terms = ["Barack Obama", "Angela Merkel", "Washington, D.C."]
+# Only run nlp.make_doc to speed things up
+patterns = [nlp.make_doc(text) for text in terms]
+matcher.add("TerminologyList", patterns)
+    </code></pre>
+
+    <h4>Dependency Matcher</h4>
+    <pre><code>
+from spacy.matcher import DependencyMatcher
+
+# "[subject] ... initially founded"
+pattern = [
+  # anchor token: founded
+  {
+    "RIGHT_ID": "founded",
+    "RIGHT_ATTRS": {"ORTH": "founded"}
+  },
+  # founded -&gt subject
+  {
+    "LEFT_ID": "founded",
+    "REL_OP": "&gt",
+    "RIGHT_ID": "subject",
+    "RIGHT_ATTRS": {"DEP": "nsubj"}
+  },
+  # "founded" follows "initially"
+  {
+    "LEFT_ID": "founded",
+    "REL_OP": ";",
+    "RIGHT_ID": "initially",
+    "RIGHT_ATTRS": {"ORTH": "initially"}
+  }
+]
+
+matcher = DependencyMatcher(nlp.vocab)
+matcher.add("FOUNDED", [pattern])
+matches = matcher(doc)
     </code></pre>
 
     <h4>Word vectors and similarity</h4>
