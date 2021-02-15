@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Finite State Machine</h3>
+    <hr>
+    <h4>Installation</h4>
+    <pre><code>
+pip install openfst-python
+    </code></pre>
+
+    <h4>Build Symbol Dictionary</h4>
+    <pre><code>
+import openfst_python as fst
+printable_ST = fst.SymbolTable()
+for c in ['<eps>'] + list(string.printable):
+    printable_ST.add_symbol(c)
+    </code></pre>
+
+    <h4>Finite State Acceptor (FSA)</h4>
+    <pre><code>
+compiler = fst.Compiler(isymbols=printable_ST, 
+                        osymbols=printable_ST, 
+                        keep_isymbols=True, 
+                        keep_osymbols=True)
+print('0 1 a a',file=compiler)
+print('1 2 b b',file=compiler)
+print('2 3 c c',file=compiler)
+print('3 4 a a 0.4',file=compiler)
+print('2 5 a a 0.2',file=compiler)
+print('5 6 a a',file=compiler)
+print('2 1.0',file=compiler)
+print('3',file=compiler)
+print('4',file=compiler)
+print('6 0.1',file=compiler)
+inputFst = compiler.compile();
+inputFst
+    </code></pre>
+    <div style="text-align:center">
+    <img src="../../resources/acc1.png" width="50%">
+    </div>
+
+
+
+
+    <h4>Finite State Transducer (FST)</h4>
+    <pre><code>
+compiler = fst.Compiler(isymbols=printable_ST, 
+                        osymbols=printable_ST, 
+                        keep_isymbols=True, 
+                        keep_osymbols=True)
+print('0 1 a x 0.2',file=compiler)
+print('0 1 b y 1.2',file=compiler)
+print('0 1 c z 3',file=compiler)
+print('1 2 b y 0.5',file=compiler)
+print('1 4 b z 0.1' ,file=compiler)
+print('2 3 c x',file=compiler)
+print('2 4 a <eps> 0.5' ,file=compiler)
+print('4 4 a x 0.1',file=compiler)
+print('3',file=compiler)
+print('4',file=compiler)
+modelFst = compiler.compile();
+modelFst
+    </code></pre>
+    <div style="text-align:center">
+    <img src="../../resources/trans2.png" width="50%">
+    </div>
+
+
+    <h4>Compose FSA with FST</h4>
+    <pre><code>
+fst.compose(inputFst.arcsort(), modelFst)
+    </code></pre>
+    <div style="text-align:center">
+    <img src="../../resources/compose.png" width="50%">
+    </div>
+
+
+    <h4>Shortest Path</h4>
+    <pre><code>
+modelFst1 = modelFst.copy().project()
+fst.shortestpath(modelFst1)
+    </code></pre>
+    <div style="text-align:center">
+    <img src="../../resources/shortestpath.png" width="30%">
+    </div>
+
+
+
+    <h4>N Best (Shortest) Paths</h4>
+    <pre><code>
+fst.shortestpath(modelFst1, nshortest=3, unique=3).rmepsilon()
+    </code></pre>
+    <div style="text-align:center">
+    <img src="../../resources/nshortest.png" width="50%">
+    </div>
+
+
+
+
+    <h4>Push Weights</h4>
+    <pre><code>
+nb = fst.push(fst.shortestpath(modelFst1,nshortest=3,unique=3).rmepsilon(),push_weights=True)
+nb
+    </code></pre>
+    <div style="text-align:center">
+    <img src="../../resources/push.png" width="50%">
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <h3>References</h3>
+    <hr>
+    <ol>
+    <li><a href="http://www.openfst.org/twiki/bin/view/FST/WebHome">OpenFst Library</a></li>
+    <li><a href="https://pypi.org/project/openfst-python/">openfst-python 1.7.3</a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+    </ol>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+
+    
+</body>
+</html>
