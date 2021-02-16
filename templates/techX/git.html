@@ -90,6 +90,24 @@ git remote prune origin
 
     </ol>
 
+    <h4>Git Ignore</h4>
+    <p>To ignore some files' changes, and to avoid uploading them. Create a filename called <code>.gitignore</code>, </p>
+    <pre><code>
+data/*
+.ipynb_checkpoints/*
+*.swp
+    </code></pre>
+
+
+    <h4>Git Attributes</h4>
+    <p>To control the display of languages in the repo, create a file named <code>.gitattributes</code>,</p>
+    <pre><code>
+* linguist-vendored
+*.html linguist-vendored=false
+*.js linguist-vendored=false
+*.css linguist-vendored=false
+    </code></pre>
+
 
 
     <h3>References</h3>
