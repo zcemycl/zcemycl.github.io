@@ -64,7 +64,14 @@
       <li>Initialize rosdep<pre><code>sudo rosdep init</code></pre>Then<pre><code>rosdep update</code></li>
       <li>Environment setup<pre><code>source /opt/ros/kinetic/setup.bash</code></pre>Then<pre><code>echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 source ~/.bashrc</code></li>
-      <li>Dependencies for building packages of python <pre><code>sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential</code></pre>Then reboot.</li>
+      <li>Dependencies for building packages of python <pre><code>sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+sudo apt-get install ros-kinetic-joy
+sudo apt-get install ros-kinetic-control-toolbox
+sudo apt-get install ros-kinetic-robot-controllers
+sudo apt-get install ros-kinetic-gazebo-ros
+sudo apt-get install ros-kinetic-gazebo-plugins 
+sudo apt-get install ros-kinetic-rgbd-launch
+</code></pre>Then reboot.</li>
     </ol>
     <h4>Test setup</h4>
     <ol> 
