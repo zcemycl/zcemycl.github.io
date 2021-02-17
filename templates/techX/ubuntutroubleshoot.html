@@ -58,10 +58,31 @@
         <li>You can even mount windows ntfs for ubuntu to use. <code>sudo mkdir /windows</code>, <code>sudo mount /dev/nvme0n1p1 /windows</code>. Inside it, you can see files from windows. In <code>/windows</code>, I create <code>ubuntu/</code> folder which contains <code>docs/ data/ projects/ outputs/</code> folders just for isolation.</li>
         </ul>
 
+      <li>Error when using <code>apt-get</code></li>
+        <ul>
+        <li>The error looks like this,</li>
+        <pre><code>
+E: Could not get lock /var/lib/dpkg/lock - open (11 Resource temporarily unavailable)
+E: Unable to lock the administration directory (/var/lib/dpkg/) is another process using it?  
+        </code></pre>
+        <li>Fix by,</li>
+        <pre><code>
+sudo rm /var/lib/apt/lists/lock
+sudo rm /var/cache/apt/archives/lock
+sudo rm /var/lib/dpkg/lock
+        </code></pre>
+        </ul>
+
+
+
+
       <li></li>
         <ul>
         <li></li>
         </ul>
+
+
+
     </ol>
     <h3>References</h3>
     <hr>
