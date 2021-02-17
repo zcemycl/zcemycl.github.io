@@ -31,9 +31,56 @@
 
     <h3>ROS Simulation Basic 1</h3>
     <hr>
+    <h4>System check</h4>
+    <pre><code>
+source ~/.bashrc # like sys append path
+export TURTLEBOT3_MODEL=burger
+cd ~/catkin_ws # the default workplace to store 
+catkin_make # make sure compile 100%
+    </code></pre>
+
+    <h4>Remote Control</h4>
+    <p><code>roslaunch &ltpackage_name&gt &ltlaunch_file&gt</code> is to launch a ROS program.</p>
+    <pre><code>
+roscore # connect client with server
+roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch # initialize the gazebo world
+roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
+    </code></pre>
+
+
+
+    <h4>Navigate to packages</h4>
+    <pre><code>
+roscd turtlebot3_teleop
+    </code></pre>
+    <p>Structures:</p>
+    <ul>
+    <li>launch folder containing .launch files</li>
+    <li>src folder containing .cpp .py files</li>
+    <li>CMakeLists.txt: List of cmake rules for compilation</li>
+    <li>package.xml: Package information and dependencies</li>
+    </ul>
+
+
+
     <h4></h4>
+    <p></p>
     <pre><code>
     </code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <h3>References</h3>
     <hr>
