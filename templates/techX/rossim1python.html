@@ -63,13 +63,21 @@ roscd turtlebot3_teleop
 
 
 
-    <h4></h4>
-    <p></p>
+    <h4>Command to Publish Topic</h4>
+    <p>Without writing a script to control, we can use a command prompt to directly control action.</p>
     <pre><code>
+roscore
+rosservice call /enable_motors true
+rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 0, y: 0.0, z: 1.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}' # publish topic
+#rosrun teleop_twist_keyboard teleop_twist_keyboard.py # alternative to remotely control
     </code></pre>
 
 
 
+    <h4></h4>
+    <p></p>
+    <pre><code>
+    </code></pre>
 
 
 
