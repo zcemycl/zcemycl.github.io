@@ -29,64 +29,37 @@
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
 
-    <h3>ROS Node</h3>
+    <h3>ROS CheatSheet</h3>
     <hr>
-
-    <h4></h4>
-    <p></p>
+    <h4>Catkin Commands</h4>
     <pre><code>
-cd ~/my_ws/src
-catkin_create_pkg my_package rospy
-cd my_package
-mkdir launch
-cd src
-vim simple.py
+catkin_make
+catkin_make --only-pkg-with-deps <package_name>
+catkin_create_pkg package dependencies
+
     </code></pre>
 
 
 
-    <h4></h4>
-    <p>In src folder, create the python script simple.py,</p>
+
+    <h4>ROS Commands</h4>
     <pre><code>
-#! /usr/bin/env python
-
-import rospy
-
-rospy.init_node('ObiWan')
-print("Help me Obi-Wan Kenobi, you're my only hope")
-
-'''loops
-rate = rospy.Rate(2)               # We create a Rate object of 2Hz
-while not rospy.is_shutdown():     # Endless loop until Ctrl + C
-   print("Help me Obi-Wan Kenobi, you're my only hope")
-   rate.sleep()                    # We sleep the needed time to maintain the Rate fixed above
-    
-'''
-
-    </code></pre>
-    <p>Allow execution permission, </p>
-    <pre><code>
-chmod +x simple.py
+roslaunch package x.launch
+rosrun package x.py
+roscd package
+rospack list # list package
+rospack profile # refrest package list
+rosnode list # running node
+rosnode info  /node # example, /ObiWan
+rosparam list
+rosparam get parameter_name 
+rosparam set parameter_name value
+rosparam get /camera/imager_rate
+rosparam set /camera/imager_rate 4.0
+rosparam get /camera/imager_rate
     </code></pre>
 
 
-
-    <p>In launch folder, create my_package_launch_file.launch,</p>
-    <pre><code>
-&ltlaunch&gt
-    &lt!-- My Package launch file --&gt
-    &ltnode pkg="my_package" type="simple.py" name="ObiWan"  output="screen"&gt
-    &lt/node&gt
-&lt/launch&gt
-    </code></pre>
-
-    <p>Then run by, </p>
-    <pre><code>
-roscore # T1
-roslaunch my_package my_package_launch_file.launch # T2
-# or 
-# rosrun my_package simple.py
-    </code></pre>
 
 
     <h3>References</h3>
