@@ -51,8 +51,51 @@ git clone https://github.com/osrf/gazebo_models
     </div>
 
 
+    <h4>Modify launch and world files</h4>
+    <ol>
+    <li>In worlds folder, have your world settings in <code>postbox.world</code>.</li>
+    <pre><code>
+&lt?xml version="1.0"&gt
+&ltsdf version="1.5"&gt
 
+  &ltworld name="default"&gt
+   
+    &ltinclude&gt
+      &lturi&gtmodel://sun&lt/uri&gt
+    &lt/include&gt
+    &ltinclude&gt
+      &lturi&gtmodel://ground_plane&lt/uri&gt
+    &lt/include&gt
+    &ltinclude&gt
+      &lturi&gtmodel://postbox&lt/uri&gt
+      &ltpose&gt1 0 0 0 0 0&lt/pose&gt
+    &lt/include&gt
 
+  &lt/world&gt
+&lt/sdf&gt
+    </code></pre>
+    <li>Can try running <code>gazebo postbox.world</code>.</li>
+    <li>In launch folder, <code>postbox_world.launch</code></li>
+    <pre><code>
+&lt?xml version="1.0" encoding="UTF-8"?&gt
+&ltlaunch&gt
+  &ltarg name="debug" default="false"/&gt
+  &ltarg name="gui" default="false"/&gt
+  &ltarg name="pause" default="true"/&gt
+  &ltarg name="world" default="$(find my_package)/worlds/postbox.world"/&gt
+
+  &ltinclude file="$(find gazebo_ros)/launch/empty_world.launch"&gt
+    &ltarg name="world_name" value="$(arg world)"/&gt
+    &ltarg name="debug" value="$(arg debug)"/&gt
+    &ltarg name="gui" value="$(arg gui)"/&gt
+    &ltarg name="paused" value="$(arg pause)"/&gt
+    &ltarg name="use_sim_time" value="true"/&gt
+  &lt/include&gt
+
+&lt/launch&gt
+    </code></pre>
+    <li>Test with <code>roslaunch my_package postbox_world.launch</code>.</li>
+    </ol>
 
 
 
