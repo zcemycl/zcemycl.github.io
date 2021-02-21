@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>ROS Simulation Camera</h3>
+    <hr>
+    <h5>Add this to the urdf</h5>
+    <pre><code>
+&ltlink name='cam_link'&gt
+  &ltpose frame=''&gt-0.118317 0.002195 0.004205 -0 -0 -3.12703&lt/pose&gt
+  &ltinertial&gt
+    &ltmass&gt0.1&lt/mass&gt
+    &ltinertia&gt
+      &ltixx&gt1&lt/ixx&gt
+      &ltixy&gt0&lt/ixy&gt
+      &ltixz&gt0&lt/ixz&gt
+      &ltiyy&gt1&lt/iyy&gt
+      &ltiyz&gt0&lt/iyz&gt
+      &ltizz&gt1&lt/izz&gt
+    &lt/inertia&gt
+    &ltpose frame=''&gt0 0 0 0 -0 0&lt/pose&gt
+  &lt/inertial&gt
+  &ltself_collide&gt0&lt/self_collide&gt
+  &ltkinematic&gt0&lt/kinematic&gt
+  &ltsensor name='camera1' type='camera'&gt
+    &ltcamera name="head"&gt
+      &lthorizontal_fov&gt1.3962634&lt/horizontal_fov&gt
+      &ltimage&gt
+        &ltwidth&gt800&lt/width&gt
+        &ltheight&gt800&lt/height&gt
+        &ltformat&gtR8G8B8&lt/format&gt
+      &lt/image&gt
+      &ltclip&gt
+        &ltnear&gt0.02&lt/near&gt
+        &ltfar&gt300&lt/far&gt
+      &lt/clip&gt
+    &lt/camera&gt
+    &ltalways_on&gt1&lt/always_on&gt
+    &ltupdate_rate&gt30&lt/update_rate&gt
+    &ltvisualize&gt1&lt/visualize&gt
+    &ltplugin name="camera_controller" filename="libgazebo_ros_camera.so"&gt
+    &ltalwaysOn&gttrue&lt/alwaysOn&gt
+    &ltupdateRate&gt0.0&lt/updateRate&gt
+    &ltcameraName&gtiris/camera&lt/cameraName&gt
+    &ltimageTopicName&gtimage_raw&lt/imageTopicName&gt
+    &ltcameraInfoTopicName&gtcamera_info&lt/cameraInfoTopicName&gt
+    &ltframeName&gtcamera_link&lt/frameName&gt
+    &lthackBaseline&gt0.07&lt/hackBaseline&gt
+    &ltdistortionK1&gt0.0&lt/distortionK1&gt
+    &ltdistortionK2&gt0.0&lt/distortionK2&gt
+    &ltdistortionK3&gt0.0&lt/distortionK3&gt
+    &ltdistortionT1&gt0.0&lt/distortionT1&gt
+    &ltdistortionT2&gt0.0&lt/distortionT2&gt
+  &lt/plugin&gt
+  &lt/sensor&gt
+&lt/link&gt
+    </code></pre>
+    
+
+    <h4>Steps</h4>
+    <ol>
+    <li></li>
+    <li></li>
+    </ol>
+
+
+
+    <h3>References</h3>
+    <hr>
+    <ol>
+    <li><a href="https://answers.ros.org/question/210695/adding-a-camera-to-a-model-in-gazebo-beginner/">ROS Answers -- Adding a camera to a model in Gazebo? (Beginner)</a></li>
+    <li><a href="http://gazebosim.org/tutorials?tut=ros_gzplugins#Camera">Gazebo plugins in ROS</a></li>
+    <li><a href="http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython">Converting between ROS images and OpenCV images (Python)</a></li>
+    <li><a href=""></a></li>
+    </ol>
+
+
+
+
+
+
+
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+
+    
+</body>
+</html>
