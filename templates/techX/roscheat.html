@@ -60,6 +60,8 @@ rosparam set /camera/imager_rate 4.0
 rosparam get /camera/imager_rate
 rosservice call /service_demo "{}"
 rosservice call /gazebo/reset_simulation "{}"
+rosservice call /gazebo/reset_world "{}"
+rosservice call /gazebo/delete_model "my_robot"
 rosrun rviz rviz
 rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 1.0, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}
 rostopic list
