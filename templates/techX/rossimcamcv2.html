@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Connect ROS Camera Simulation to Opencv</h3>
+    <hr>
+    <div style="text-align:center">
+    <img src="../../resources/cam_link_cv2.png" style="width:70%; max-height:50%">
+    </div>
+
+    <pre><code>
+#! /usr/bin/env python 
+import sys
+sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages')
+import cv2
+sys.path.append('/opt/ros/kinetic/lib/python2.7/dist-packages')
+from cv_bridge import CvBridge, CvBridgeError
+import roslib
+#roslib.load_manifest('camera_test')
+import rospy 
+from sensor_msgs.msg import Image,CompressedImage
+import numpy as np
+
+
+class image_converter:
+	def __init__(self):
+		self.bridge = CvBridge()
+		self.image_sub = rospy.Subscriber('/arm_sensor/camera/image_raw/compressed',CompressedImage,self.callback,queue_size=1)
+	def callback(self,data):
+		try:
+			np_arr = np.fromstring(data.data,np.uint8)
+			cv_image = cv2.imdecode(np_arr,cv2.IMREAD_COLOR)
+		except CvBridgeError as e:
+			print(e)
+		rows,cols,channels = cv_image.shape
+		cv2.imshow('Image window',cv_image)
+		cv2.waitKey(2)
+
+
+def main(args):
+	ic = image_converter()
+	rospy.init_node('image_converter',anonymous=True)
+	try:
+		rospy.spin()
+	except KeyboardInterrupt:
+		print('Shutting down')
+	cv2.destroyAllWindows()
+
+
+if __name__ == "__main__":
+	main(sys.argv)
+    </code></pre>
+
+
+    <pre><code>
+&ltlaunch&gt
+	&ltnode pkg="camera_test" type="connectcam.py" name="image_converter" output="screen"&gt
+	&lt/node&gt
+&lt/launch&gt
+    </code></pre>
+
+
+
+
+
+
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+
+    
+</body>
+</html>
