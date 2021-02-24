@@ -99,8 +99,18 @@ sudo apt-get install libopencv-dev
     </code></pre>
     <li></li>
     <pre><code>
-
+roscore
+roslaunch gazebo_ros empty_world.launch
+roslaunch camera_test spawn.launch
+roslaunch camera_test rviz.launch
     </code></pre>
+
+
+    <li>Inside gazebo window, insert any models.</li>
+
+    <li>Inside rviz window, add robotmodel and camera. Change Global Options Fixed Frame to camera_link, change Camera Image Topic to /arm_sensors/camera/image_raw</li>
+
+
     </ol>
 
     <div style="text-align:center">
