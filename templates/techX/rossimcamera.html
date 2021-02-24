@@ -31,73 +31,26 @@
 
     <h3>ROS Simulation Camera</h3>
     <hr>
-    <h5>Add this to the urdf</h5>
-    <pre><code>
-&ltlink name='cam_link'&gt
-  &ltpose frame=''&gt-0.118317 0.002195 0.004205 -0 -0 -3.12703&lt/pose&gt
-  &ltinertial&gt
-    &ltmass&gt0.1&lt/mass&gt
-    &ltinertia&gt
-      &ltixx&gt1&lt/ixx&gt
-      &ltixy&gt0&lt/ixy&gt
-      &ltixz&gt0&lt/ixz&gt
-      &ltiyy&gt1&lt/iyy&gt
-      &ltiyz&gt0&lt/iyz&gt
-      &ltizz&gt1&lt/izz&gt
-    &lt/inertia&gt
-    &ltpose frame=''&gt0 0 0 0 -0 0&lt/pose&gt
-  &lt/inertial&gt
-  &ltself_collide&gt0&lt/self_collide&gt
-  &ltkinematic&gt0&lt/kinematic&gt
-  &ltsensor name='camera1' type='camera'&gt
-    &ltcamera name="head"&gt
-      &lthorizontal_fov&gt1.3962634&lt/horizontal_fov&gt
-      &ltimage&gt
-        &ltwidth&gt800&lt/width&gt
-        &ltheight&gt800&lt/height&gt
-        &ltformat&gtR8G8B8&lt/format&gt
-      &lt/image&gt
-      &ltclip&gt
-        &ltnear&gt0.02&lt/near&gt
-        &ltfar&gt300&lt/far&gt
-      &lt/clip&gt
-    &lt/camera&gt
-    &ltalways_on&gt1&lt/always_on&gt
-    &ltupdate_rate&gt30&lt/update_rate&gt
-    &ltvisualize&gt1&lt/visualize&gt
-    &ltplugin name="camera_controller" filename="libgazebo_ros_camera.so"&gt
-    &ltalwaysOn&gttrue&lt/alwaysOn&gt
-    &ltupdateRate&gt0.0&lt/updateRate&gt
-    &ltcameraName&gtiris/camera&lt/cameraName&gt
-    &ltimageTopicName&gtimage_raw&lt/imageTopicName&gt
-    &ltcameraInfoTopicName&gtcamera_info&lt/cameraInfoTopicName&gt
-    &ltframeName&gtcamera_link&lt/frameName&gt
-    &lthackBaseline&gt0.07&lt/hackBaseline&gt
-    &ltdistortionK1&gt0.0&lt/distortionK1&gt
-    &ltdistortionK2&gt0.0&lt/distortionK2&gt
-    &ltdistortionK3&gt0.0&lt/distortionK3&gt
-    &ltdistortionT1&gt0.0&lt/distortionT1&gt
-    &ltdistortionT2&gt0.0&lt/distortionT2&gt
-  &lt/plugin&gt
-  &lt/sensor&gt
-&lt/link&gt
-    </code></pre>
-    
+
+
+    <div style="text-align:center">
+    <img src="../../resources/camera_link.png" style="width:80%; max-height:50%;">
+    </div>
+
 
     <h4>Steps</h4>
     <ol>
     <li>Create package dependent on urdf.</li>
     <pre><code>
+sudo apt-get install libopencv-dev
 cd ~/my_ws/src
 catkin_create_pkg camera_test urdf sensor_msgs cv_bridge rospy std_msgs
 cd ..
+mkdir launch urdf
     </code></pre>
-
-
-    <pre><code>
-sudo apt-get install libopencv-dev
-    </code></pre>
-    <li></li>
+    <li>Paste the files into their respective folders urdf and launch.</li>
+    
+    <li>Run the model in simulation by,</li>
     <pre><code>
 roscore
 roslaunch gazebo_ros empty_world.launch
@@ -113,9 +66,118 @@ roslaunch camera_test rviz.launch
 
     </ol>
 
-    <div style="text-align:center">
-    <img src="../../resources/camera_link.png" width="50%">
-    </div>
+
+
+
+    <h5>robot.urdf</h5>
+    <pre><code>
+&lt?xml version="1.0"?&gt
+&ltrobot name="my_robot" xmlns:xacro="http://ros.org/wiki/xacro"&gt
+
+  &ltxacro:property name="M_PI" value="3.1415926535897931" /&gt
+
+    &ltlink name="camera_link"&gt
+
+      &ltcollision&gt
+        &ltorigin xyz="0 0 0" rpy="0 0 0" /&gt
+        &ltgeometry&gt
+          &ltbox size="0.1 0.1 0.1"/&gt
+        &lt/geometry&gt
+      &lt/collision&gt
+
+      &ltvisual&gt
+        &ltorigin xyz="0 0 0" rpy="0 0 0" /&gt
+        &ltgeometry&gt
+          &ltbox size="0.1 0.1 0.1"/&gt
+        &lt/geometry&gt
+        &ltmaterial name="grey"&gt
+            &ltcolor rgba="0.2 0.2 0.2 1.0"/&gt
+        &lt/material&gt
+      &lt/visual&gt
+
+
+      &ltinertial&gt
+        &ltmass value="0.001" /&gt
+        &ltorigin xyz="0.1 0 0" rpy="0 0 0" /&gt
+        &ltinertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001" /&gt
+      &lt/inertial&gt
+
+    &lt/link&gt
+
+
+
+    &ltgazebo reference="camera_link"&gt
+      &ltsensor type="camera" name="camera_camera_sensor"&gt
+        &ltupdate_rate&gt30.0&lt/update_rate&gt
+        &ltcamera&gt
+          &ltpose&gt0.035 0 0.078 0 ${-M_PI/2} 0&lt/pose&gt
+          &lthorizontal_fov&gt${85 * M_PI/180.0}&lt/horizontal_fov&gt
+          &ltimage&gt
+            &ltformat&gtR8G8B8&lt/format&gt
+            &ltwidth&gt1020&lt/width&gt
+            &ltheight&gt1020&lt/height&gt
+          &lt/image&gt
+          &ltclip&gt
+            &ltnear&gt0.01&lt/near&gt
+            &ltfar&gt1000&lt/far&gt
+          &lt/clip&gt
+        &lt/camera&gt
+
+        &ltplugin name="camera_camera_controller" filename="libgazebo_ros_camera.so"&gt
+          &ltalwaysOn&gttrue&lt/alwaysOn&gt
+          &ltupdateRate&gt0.0&lt/updateRate&gt
+          &ltcameraName&gtarm_sensor/camera&lt/cameraName&gt
+          &ltimageTopicName&gtimage_raw&lt/imageTopicName&gt
+          &ltcameraInfoTopicName&gtcamera_info&lt/cameraInfoTopicName&gt
+          &ltframeName&gtcamera_link&lt/frameName&gt
+          &lthackBaseline&gt0.07&lt/hackBaseline&gt
+          &ltdistortionK1&gt0.0&lt/distortionK1&gt
+          &ltdistortionK2&gt0.0&lt/distortionK2&gt
+          &ltdistortionK3&gt0.0&lt/distortionK3&gt
+          &ltdistortionT1&gt0.0&lt/distortionT1&gt
+          &ltdistortionT2&gt0.0&lt/distortionT2&gt
+        &lt/plugin&gt
+      &lt/sensor&gt
+    &lt/gazebo&gt
+
+&lt/robot&gt
+    </code></pre>
+    
+
+    <h5>spawn.launch</h5>
+    <pre><code>
+&lt?xml version="1.0" encoding="UTF-8" ?&gt
+&ltlaunch&gt
+  &ltparam name="robot_description" command="$(find xacro)/xacro --inorder '$(find camera_test)/urdf/robot.urdf'"/&gt
+  
+  &ltarg name="x" default="0"/&gt
+  &ltarg name="y" default="0"/&gt
+  &ltarg name="z" default="1.5"/&gt
+
+  &ltnode name="my_robot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+        args="-urdf -param robot_description -model my_robot -x $(arg x) -y $(arg y) -z $(arg z)"/&gt
+
+&lt/launch&gt
+    </code></pre>
+
+
+    <h5>rviz.urdf</h5>
+    <pre><code>
+&lt?xml version="1.0" ?&gt
+&ltlaunch&gt
+
+  &ltparam name="robot_description" command="$(find xacro)/xacro --inorder '$(find camera_test)/urdf/robot.urdf'"/&gt
+
+  &ltnode name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"&gt
+    &ltparam name="use_gui" value="False"/&gt
+  &lt/node&gt
+
+  &ltnode name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/&gt
+
+  &ltnode name="rviz" pkg="rviz" type="rviz"/&gt
+
+&lt/launch&gt
+    </code></pre>
 
 
     <h3>References</h3>
