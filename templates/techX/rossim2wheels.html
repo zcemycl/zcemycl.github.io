@@ -29,54 +29,49 @@
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
 
-    <h3>ROS CheatSheet</h3>
+    <h3>ROS 2 Wheels Robot</h3>
     <hr>
-    <h4>Catkin Commands</h4>
-    <pre><code>
-catkin_make
-catkin_make --only-pkg-with-deps <package_name>
-catkin_create_pkg package dependencies
 
+    <ol>
+    <li>Create package. </li>
+    <pre><code>
+catkin_create_pkg robot2wheels urdf sensor_msgs cv_bridge rospy std_msgs
+cd robot2wheels 
+mkdir launch urdf
+    </code></pre>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    </ol>
+
+
+
+
+    <h5>robot.xacro</h5>
+    <pre><code>
+<?xml version="1.0"?>
+<robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+</robot>
+    </code></pre>
+
+
+    <h5></h5>
+    <pre><code>
+    </code></pre>
+
+
+    <h5></h5>
+    <pre><code>
     </code></pre>
 
 
 
 
-    <h4>ROS Commands</h4>
-    <pre><code>
-roscore
-roslaunch package x.launch
-rosrun package x.py
-roscd package
-rospack list # list package
-rospack profile # refrest package list
-rospack depends turtlebot3_description
-rosnode list # running node
-rosnode info  /node # example, /ObiWan
-rosparam list
-rosparam get parameter_name 
-rosparam set parameter_name value
-rosparam get /camera/imager_rate
-rosparam set /camera/imager_rate 4.0
-rosparam get /camera/imager_rate
-rosservice call /service_demo "{}"
-rosservice call /gazebo/reset_simulation "{}"
-rosservice call /gazebo/reset_world "{}"
-rosservice call /gazebo/delete_model "my_robot"
-rosrun rviz rviz
-rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 1.0, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}
-rostopic list
-rostopic info /cmd_vel
-rostopic echo /cmd_vel
-    </code></pre>
 
-    <h4>Directories</h4>
-    <pre><code>
-/opt/ros/kinetic/share
-~/.bashrc
-~/.gazebo/models
-~/.rviz
-    </code></pre>
+
+
 
 
     <h3>References</h3>
