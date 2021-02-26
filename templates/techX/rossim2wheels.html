@@ -44,7 +44,7 @@ mkdir launch urdf
 roscore
 roslaunch gazebo_ros empty_world.launch
     </code></pre>
-    <li>Tune the model by spawn and reset, calculate the inertia as well, (green:x, red: y, blue: z)</li>
+    <li>Tune the model by spawn and reset, calculate the inertia as well, (red:x, green: y, blue: z)</li>
     <pre><code>
 roslaunch robot2wheels spawn.launch
 rosservice call /gazebo/delete_model "my_robot"
