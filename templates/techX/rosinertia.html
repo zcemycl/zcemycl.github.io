@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>ROS Inertia Calculator</h3>
+    <hr>
+    <ol>
+    <li>Create package.</li>
+    <pre><code> 
+catkin_create_pkg my_mira_description rospy rviz controller_manager gazebo_ros joint_state_publisher robot_state_publisher
+cd my_mira_description
+mkdir scripts
+    </code></pre>
+    <li>Create your script inertia_calculator.py.</li>
+    <pre><code>
+#!/usr/bin/env python
+import math
+
+
+class InertialCalculator(object):
+
+    def __init__(self):
+        print "InertialCalculator Initialised..."
+
+    def start_ask_loop(self):
+
+        selection = "START"
+
+        while selection != "Q":
+            print "#############################"
+            print "Select Geometry to Calculate:"
+            print "[1]Box width(w)*depth(d)*height(h)"
+            print "[2]Sphere radius(r)"
+            print "[3]Cylinder radius(r)*height(h)"
+            print "[Q]END program"
+            selection = raw_input(">>")
+            self.select_action(selection)
+
+        print "InertialCaluclator Quit...Thank you"
+
+    def select_action(self, selection):
+        if selection == "1":
+            mass = float(raw_input("mass>>"))
+            width = float(raw_input("width>>"))
+            depth = float(raw_input("depth>>"))
+            height = float(raw_input("height>>"))
+            self.calculate_box_inertia(m=mass, w=width, d=depth, h=height)
+        elif selection == "2":
+            mass = float(raw_input("mass>>"))
+            radius = float(raw_input("radius>>"))
+            self.calculate_sphere_inertia(m=mass, r=radius)
+        elif selection == "3":
+            mass = float(raw_input("mass>>"))
+            radius = float(raw_input("radius>>"))
+            height = float(raw_input("height>>"))
+            self.calculate_cylinder_inertia(m=mass, r=radius, h=height)
+        elif selection == "Q":
+            print "Selected Quit"
+        else:
+            print "Usage: Select one of the give options"
+
+
+    def calculate_box_inertia(self, m, w, d, h):
+        Iw = (m/12.0)*(pow(d,2)+pow(h,2))
+        Id = (m / 12.0) * (pow(w, 2) + pow(h, 2))
+        Ih = (m / 12.0) * (pow(w, 2) + pow(d, 2))
+        print "BOX w*d*h, Iw = "+str(Iw)+",Id = "+str(Id)+",Ih = "+str(Ih)
+
+    def calculate_sphere_inertia(self, m, r):
+        I = (2*m*pow(r,2))/5.0
+        print "SPHERE Ix,y,z = "+str(I)
+
+    def calculate_cylinder_inertia(self, m, r, h):
+        Ix = (m/12.0)*(3*pow(r,2)+pow(h,2))
+        Iy = Ix
+        Iz = (m*pow(r,2))/2.0
+        print "Cylinder Ix,y = "+str(Ix)+",Iz = "+str(Iz)
+
+if __name__ == "__main__":
+    inertial_object = InertialCalculator()
+    inertial_object.start_ask_loop()
+    </code></pre>
+    <li>Make it executable. <code>chmod +x inertia_calculator.py</code></li>
+    </ol>
+
+
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+
+    
+</body>
+</html>
