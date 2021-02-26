@@ -35,12 +35,22 @@
     <ol>
     <li>Create package. </li>
     <pre><code>
-catkin_create_pkg robot2wheels urdf sensor_msgs cv_bridge rospy std_msgs
+catkin_create_pkg robot2wheels urdf sensor_msgs cv_bridge rospy std_msgs rviz controller_manager gazebo_ros joint_state_publisher robot_state_publisher
 cd robot2wheels 
 mkdir launch urdf
     </code></pre>
-    <li></li>
-    <li></li>
+    <li>Initialize the world.</li>
+    <pre><code>
+roscore
+roslaunch gazebo_ros empty_world.launch
+    </code></pre>
+    <li>Tune the model by spawn and reset, calculate the inertia as well, (green:x, red: y, blue: z)</li>
+    <pre><code>
+roslaunch robot2wheels spawn.launch
+rosservice call /gazebo/delete_model "my_robot"
+rosrun calculator inertia_calculator.py
+    </code></pre>
+
     <li></li>
     <li></li>
     </ol>
