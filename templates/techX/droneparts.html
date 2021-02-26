@@ -29,15 +29,33 @@
     <hr>
     <h4>Setup</h4>
     <ol>
-    <li>In Ubuntu 16.04, go to command line and type,</li>
+    <li>Install python package.</li>
     <pre><code>
-sudo apt install ros-kinetic-tello-driver
+pip2 install tellopy
+    </code></pre>
+    <li>Test the installation by, turning on the drone and connecting its wifi,</li>
+    <pre><code>
+python2 -m tellopy.examples.simple_takeoff
+    </code></pre>
+    <li>In Ubuntu 16.04, to control it by ROS,</li>
+    <pre><code>
+sudo apt install ros-kinetic-tello-driver ### Don't insall this way
+### Please install by source
+cd ~/catkin_ws/src
+git clone --recursive https://github.com/apple-17/tello_driver.git
+cd ..
+catkin_make
+source devel/setup.bash
     </code></pre>
     <li>Turn on Tello drone.</li>
     <li>Connect to Tello drone's wifi.</li>
     <li>Run rosnode,</li>
     <pre><code>
-roslaunch tello_driver tello_node.launch
+roslaunch tello_driver tello_node.launch # T1
+rostopic list # T2 show topic, it should have /tello/takeoff, /tello/land, /tello/image_raw/h264
+rostopic pub /tello/takeoff std_msgs/Empty "{}" # T2
+rostopic pub /tello/land std_msgs/Empty "{}" # T2
+rosrun rqt_image_view rqt_image_view /tello/image_raw/h264 # T2 to show stream video
     </code></pre>
     <li></li>
     <li></li>
@@ -52,6 +70,8 @@ roslaunch tello_driver tello_node.launch
     <ol>
     <li><a href="https://www.amebaiot.com/en/ameba-arduino-quadcopter/">Introduction to Ameba Quadcopter</a></li>
     <li><a href="http://wiki.ros.org/tello_driver">tello_driver</a></li>
+    <li><a href="https://pypi.org/project/tellopy/">tellopy 0.6.0 pip install tellopy</a></li>
+    <li><a href="https://alfredo-reyes-montero.gitbook.io/tello-dji/frameworks/ros">Tello Dji ROS -- ROS driver wrapper for DJI/Ryze Tello drone</a></li>
     <li><a href=""></a></li>
     </ol>
     </div>
