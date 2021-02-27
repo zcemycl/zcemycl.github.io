@@ -86,7 +86,8 @@ rospack list | grep my_package
     <p>Without writing a script to control, we can use a command prompt to directly control action.</p>
     <pre><code>
 roscore
-rosservice call /enable_motors true
+roslaunch hector_quadrotor_demo outdoor_flight_gazebo.launch
+rosservice call /enable_motors "enable: true"
 rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 0, y: 0.0, z: 1.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}' # publish topic
 #rosrun teleop_twist_keyboard teleop_twist_keyboard.py # alternative to remotely control
     </code></pre>
@@ -115,6 +116,11 @@ source devel/setup.bash
 
     <h3>References</h3>
     <hr>
+    <ol>
+    <li><a href="http://wiki.ros.org/hector_quadrotor/Tutorials/Quadrotor%20outdoor%20flight%20demo">Quadrotor outdoor flight demo</a></li>
+    <li><a href=""></a></li>
+    </ol>
+
     </div>
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
