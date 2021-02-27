@@ -31,6 +31,11 @@
 
     <h3>ROS 2 Wheels Robot</h3>
     <hr>
+    <div style="text-align:center;">
+      <video style="width:60vw"controls>
+          <source src="../../resources/movecam.mp4" type="video/mp4">
+      </video>
+    </div>
 
     <ol>
     <li>Create package. </li>
@@ -50,34 +55,308 @@ roslaunch robot2wheels spawn.launch
 rosservice call /gazebo/delete_model "my_robot"
 rosrun calculator inertia_calculator.py
     </code></pre>
+    <div style="text-align:center">
+    <img src="../../resources/axis.png" width="60%"/>
+    </div>
 
-    <li></li>
-    <li></li>
+    <li>The following is the final robot model, (however this is an unbalanced model, it cannot move smoothly)</li>
+    <div style="text-align:center">
+    <img src="../../resources/robot2wheels_fail.png" width="60%"/>
+    </div>
+    <li>Run simulation,</li>
+    
+    <pre><code>
+roslaunch robot2wheels spawn.launch
+roslaunch robot2wheels rviz.launch # please add robotmodel and camera
+rostopic pub /cmd_vel geometry_msgs/Twist "linear: x: -1.0 y: 0.0 z: 0.0 angular: x: -1.0 y: 0.0 z: 0.0"
+    </code></pre>
     </ol>
 
 
+    <div style="text-align:center">
+    <img src="" width="60%"/>
+    </div>
 
 
-    <h5>robot.xacro</h5>
+    <h5>robot.urdf</h5>
     <pre><code>
-<?xml version="1.0"?>
-<robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+&lt?xml version="1.0"?&gt
+&ltrobot name="my_robot" xmlns:xacro="http://ros.org/wiki/xacro"&gt
+  &ltxacro:property name="M_PI" value="3.1415926535897931" /&gt
+
+  &ltlink name="link_body"&gt
+    &ltpose&gt0 0 0.03 0 0 0&lt/pose&gt
+    &ltinertial&gt
+      &ltmass value="5"/&gt
+      &ltorigin xyz="0 0 0.03" rpy="0 0 0"/&gt
+      &ltinertia ixx="0.016833333333" ixy="0" ixz="0"
+ 	       iyy="0.004333333334" iyz="0" izz="0.020833333333"/&gt
+    &lt/inertial&gt
+
+    &ltcollision name="collision_body"&gt
+      &ltgeometry&gt
+	&ltbox size="0.10 0.20 0.02"/&gt
+      &lt/geometry&gt
+    &lt/collision&gt
+
+    &ltvisual&gt
+      &ltorigin xyz="0 0 0.03" rpy="0 0 0"/&gt
+      &ltgeometry&gt
+	&ltbox size="0.10 0.20 0.02"/&gt
+      &lt/geometry&gt
+    &lt/visual&gt
+
+    &ltcollision name="collision_caster"&gt
+      &ltorigin xyz="0.025 0 0" rpy="0 0 0"/&gt
+      &ltgeometry&gt
+	&ltsphere radius="0.01"/&gt
+      &lt/geometry&gt
+      &ltsurface&gt
+	&ltfriction&gt
+	  &ltode&gt
+	    &ltmu&gt0&lt/mu&gt
+	    &ltmu2&gt0&lt/mu2&gt
+	    &ltslip1&gt1.0&lt/slip1&gt
+	    &ltslip2&gt1.0&lt/slip2&gt
+	  &lt/ode&gt
+	&lt/friction&gt
+      &lt/surface&gt
+    &lt/collision&gt
+
+    &ltvisual name="visual_caster"&gt
+      &ltorigin xyz="0.025 0 0.008" rpy="0 0 0"/&gt
+      &ltgeometry&gt
+	&ltsphere radius="0.017"/&gt
+      &lt/geometry&gt
+    &lt/visual&gt
+
+
+  &lt/link&gt
+
+
+  &ltlink name="link_camera"&gt
     
-</robot>
+    &ltinertial&gt
+      &ltmass value="0.05"/&gt
+      &ltorigin xyz="0 0 0.05" rpy="0 0 0"/&gt
+      &ltinertia ixx="0.000003333333" ixy="0" ixz="0"
+ 	       iyy="0.0000033333333" iyz="0" izz="0.00000333333333"/&gt
+    &lt/inertial&gt
+
+    &ltcollision name="collision_camera"&gt
+      &ltgeometry&gt
+	&ltbox size="0.02 0.02 0.02"/&gt
+      &lt/geometry&gt
+    &lt/collision&gt
+
+    &ltvisual&gt
+      &ltorigin xyz="0 0 0.05" rpy="0 0 0"/&gt
+      &ltgeometry&gt
+	&ltbox size="0.02 0.02 0.02"/&gt
+      &lt/geometry&gt
+    &lt/visual&gt
+  &lt/link&gt
+
+
+  &ltlink name="link_laser"&gt
+    
+    &ltinertial&gt
+      &ltmass value="0.05"/&gt
+      &ltorigin xyz="0 0 0.07" rpy="0 0 0"/&gt
+      &ltinertia ixx="0.000002916666667" ixy="0" ixz="0"
+ 	       iyy="0.000002916666667" iyz="0" izz="0.0000025"/&gt
+    &lt/inertial&gt
+
+    &ltcollision name="collision_laser"&gt
+      &ltgeometry&gt
+	&ltcylinder length="0.02" radius="0.01"/&gt
+      &lt/geometry&gt
+    &lt/collision&gt
+
+    &ltvisual&gt
+      &ltorigin xyz="0 0 0.07" rpy="0 0 0"/&gt
+      &ltgeometry&gt
+	&ltcylinder length="0.02" radius="0.01"/&gt
+      &lt/geometry&gt
+    &lt/visual&gt
+  &lt/link&gt
+
+
+  &ltlink name="link_imu"&gt
+    
+    &ltinertial&gt
+      &ltmass value="0.05"/&gt
+      &ltorigin xyz="0 0 0.05" rpy="0 0 0"/&gt
+      &ltinertia ixx="0.000003333333" ixy="0" ixz="0"
+ 	       iyy="0.000003333333" iyz="0" izz="0.00000333333333"/&gt
+    &lt/inertial&gt
+
+    &ltcollision name="collision_imu"&gt
+      &ltgeometry&gt
+	&ltbox size="0.02 0.02 0.02"/&gt
+      &lt/geometry&gt
+    &lt/collision&gt
+
+    &ltvisual&gt
+      &ltorigin xyz="0 0 0.05" rpy="0 0 0"/&gt
+      &ltgeometry&gt
+	&ltbox size="0.02 0.02 0.02"/&gt
+      &lt/geometry&gt
+    &lt/visual&gt
+  &lt/link&gt
+
+
+  &ltlink name="link_left"&gt
+    
+    &ltinertial&gt
+      &ltmass value="1"/&gt
+      &ltorigin xyz="-0.02 0.1 0.02" rpy="0 1.5707 1.5707"/&gt
+      &ltinertia ixx="0.0002583333334" ixy="0" ixz="0"
+ 	       iyy="0.0002583333334" iyz="0" izz="0.00045"/&gt
+    &lt/inertial&gt
+
+    &ltcollision name="collision_left"&gt
+      &ltgeometry&gt
+	&ltcylinder length="0.02" radius="0.03"/&gt
+      &lt/geometry&gt
+    &lt/collision&gt
+
+    &ltvisual&gt
+      &ltorigin xyz="-0.02 0.1 0.02" rpy="0 1.5707 1.5707"/&gt
+      &ltgeometry&gt
+	&ltcylinder length="0.02" radius="0.03"/&gt
+      &lt/geometry&gt
+    &lt/visual&gt
+  &lt/link&gt
+
+
+
+  &ltlink name="link_right"&gt
+    
+    &ltinertial&gt
+      &ltmass value="1"/&gt
+      &ltorigin xyz="-0.02 -0.1 0.02" rpy="0 1.5707 1.5707"/&gt
+      &ltinertia ixx="0.0002583333334" ixy="0" ixz="0"
+ 	       iyy="0.0002583333334" iyz="0" izz="0.00045"/&gt
+    &lt/inertial&gt
+
+    &ltcollision name="collision_left"&gt
+      &ltgeometry&gt
+	&ltcylinder length="0.02" radius="0.03"/&gt
+      &lt/geometry&gt
+    &lt/collision&gt
+
+    &ltvisual&gt
+      &ltorigin xyz="-0.02 -0.1 0.02" rpy="0 1.5707 1.5707"/&gt
+      &ltgeometry&gt
+	&ltcylinder length="0.02" radius="0.03"/&gt
+      &lt/geometry&gt
+    &lt/visual&gt
+  &lt/link&gt
+
+
+
+
+
+
+
+  &ltjoint type="fixed" name="body_camera_joint"&gt
+    &ltorigin xyz="0.04 0 0.00" rpy="0 0 0"/&gt
+    &ltchild link="link_camera"/&gt
+    &ltparent link="link_body"/&gt
+    &ltaxis xyz="0 0 0"/&gt
+  &lt/joint&gt
+
+
+  &ltjoint type="fixed" name="camera_laser_joint"&gt
+    &ltorigin xyz="0.00 0 0.000" rpy="0 0 0"/&gt
+    &ltchild link="link_laser"/&gt
+    &ltparent link="link_camera"/&gt
+    &ltaxis xyz="0 0 0"/&gt
+  &lt/joint&gt
+
+  &ltjoint type="fixed" name="body_imu_joint"&gt
+    &ltorigin xyz="0 0 0.00" rpy="0 0 0"/&gt
+    &ltchild link="link_imu"/&gt
+    &ltparent link="link_body"/&gt
+    &ltaxis xyz="0 0 0"/&gt
+  &lt/joint&gt
+
+
+
+
+  &ltjoint type="continuous" name="body_left_joint"&gt
+    &ltorigin xyz="-0.02 0.01 0.00" rpy="0 0 0"/&gt
+    &ltchild link="link_left"/&gt
+    &ltparent link="link_body"/&gt
+    &ltaxis xyz="0 1 0" rpy="0 0 0"/&gt
+    &ltlimit effort="10000" velocity="1000"/&gt
+    &ltjoint_properties damping="1.0" friction="1.0"/&gt
+  &lt/joint&gt
+
+
+  &ltjoint type="continuous" name="body_right_joint"&gt
+    &ltorigin xyz="-0.02 -0.01 0.00" rpy="0 0 0"/&gt
+    &ltchild link="link_right"/&gt
+    &ltparent link="link_body"/&gt
+    &ltaxis xyz="0 1 0" rpy="0 0 0"/&gt
+    &ltlimit effort="10000" velocity="1000"/&gt
+    &ltjoint_properties damping="1.0" friction="1.0"/&gt
+  &lt/joint&gt
+
+  &ltgazebo&gt
+    &ltplugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller"&gt
+      &ltlegacyMode&gtfalse&lt/legacyMode&gt
+      &ltalwaysOn&gttrue&lt/alwaysOn&gt
+      &ltupdateRate&gt20&lt/updateRate&gt
+      &ltleftJoint&gtbody_left_joint&lt/leftJoint&gt
+      &ltrightJoint&gtbody_right_joint&lt/rightJoint&gt
+      &ltwheelSeparation&gt0.2&lt/wheelSeparation&gt
+      &ltwheelDiameter&gt0.3&lt/wheelDiameter&gt
+      &lttorque&gt0.1&lt/torque&gt
+      &ltcommandTopic&gtcmd_vel&lt/commandTopic&gt
+      &ltodometryTopic&gtodom&lt/odometryTopic&gt
+      &ltodometryFrame&gtodom&lt/odometryFrame&gt
+      &ltbodyBaseFrame&gtlink_body&lt/bodyBaseFrame&gt
+    &lt/plugin&gt
+  &lt/gazebo&gt
+
+
+  &ltgazebo reference="link_camera"&gt
+      &ltsensor type="camera" name="camera_camera_sensor"&gt
+        &ltupdate_rate&gt30.0&lt/update_rate&gt
+        &ltcamera&gt
+          &ltpose&gt0.035 0 0.078 0 0 0&lt/pose&gt
+          &lthorizontal_fov&gt${85 * M_PI/180.0}&lt/horizontal_fov&gt
+          &ltimage&gt
+            &ltformat&gtR8G8B8&lt/format&gt
+            &ltwidth&gt1020&lt/width&gt
+            &ltheight&gt1020&lt/height&gt
+          &lt/image&gt
+          &ltclip&gt
+            &ltnear&gt0.01&lt/near&gt
+            &ltfar&gt1000&lt/far&gt
+          &lt/clip&gt
+        &lt/camera&gt
+
+        &ltplugin name="camera_camera_controller" filename="libgazebo_ros_camera.so"&gt
+          &ltalwaysOn&gttrue&lt/alwaysOn&gt
+          &ltupdateRate&gt0.0&lt/updateRate&gt
+          &ltcameraName&gtarm_sensor/camera&lt/cameraName&gt
+          &ltimageTopicName&gtimage_raw&lt/imageTopicName&gt
+          &ltcameraInfoTopicName&gtcamera_info&lt/cameraInfoTopicName&gt
+          &ltframeName&gtlink_camera&lt/frameName&gt
+          &lthackBaseline&gt0.07&lt/hackBaseline&gt
+          &ltdistortionK1&gt0.0&lt/distortionK1&gt
+          &ltdistortionK2&gt0.0&lt/distortionK2&gt
+          &ltdistortionK3&gt0.0&lt/distortionK3&gt
+          &ltdistortionT1&gt0.0&lt/distortionT1&gt
+          &ltdistortionT2&gt0.0&lt/distortionT2&gt
+        &lt/plugin&gt
+      &lt/sensor&gt
+    &lt/gazebo&gt
+&lt/robot&gt
     </code></pre>
-
-
-    <h5></h5>
-    <pre><code>
-    </code></pre>
-
-
-    <h5></h5>
-    <pre><code>
-    </code></pre>
-
-
-
 
 
 
@@ -86,6 +365,15 @@ rosrun calculator inertia_calculator.py
 
     <h3>References</h3>
     <hr>
+    <ol>
+    <li><a href="http://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model">Adding Physical and Collision Properties to a URDF Model</a></li>
+    <li><a href="http://wiki.ros.org/urdf/XML/joint">urdf/XML/joint</a></li>
+    <li><a href="http://gazebosim.org/tutorials/?tut=build_robot">Make a Mobile Robot</a></li>
+    <li><a href="https://www.theconstructsim.com/exploring-ros-2-wheeled-robot-part-01/">Exploring ROS using a 2 Wheeled Robot #1: Basics of Robot Modeling using URDF
+</a></li>
+    <li><a href="http://gazebosim.org/tutorials/?tut=ros_urdf">Tutorial: Using a URDF in Gazebo</a></li>
+    </ol>
+
     </div>
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
