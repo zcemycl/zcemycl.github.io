@@ -49,19 +49,81 @@
     <p>When catkin_make turtlebot3_simulation, it always lead to many errors, such as</p>
     <ol>
     <li>ImportError: dynamic module does not define module export function (PyInit__tf2)</li>
-    <li>libapr-1.so.0 undefined reference uuid_generate@UUID_1.0</li>
+    <li>libapr-1.so.0: undefined reference to 'uuid_generate@UUID_1.0'</li>
+    <li>make problem: No rule to make target /usr/lib/x86_64-linux-gnu/libpcl_common.so</li>
     <li></li>
     </ol>
     <p>These are due to the conflicts between ros and anaconda, and uncomplete installation of kinetic ros and gazebo 9.</p>
 
 
-    <h4></h4>
+    <h4>Solutions</h4>
     <ol>
+    <li>Uninstall ros and its relevant packages.</li>
+    <pre><code>
+sudo apt-get remove ros*
+sudo apt list --installed | grep gazebo
+sudo apt-get remove gazebo*
+sudo apt-get remove ros-kinetic-gazebo*
+sudo apt autoremove
+    </code></pre>
+
+
+    <li>Uninstall acaconda3 on ubuntu. </li>
+    <pre><code>
+rm -rf ~/anaconda3
+# delete parts in .bashrc as well
+conda install anaconda-clean
+anaconda-clean
+anaconda-clean --yes
+    </code></pre>
+
+
+
+    <li>Use default pip and python.</li>
+    
+    <pre><code>
+sudo apt-get install virtualenv
+virtualenv -p /usr/bin/python3 testenv
+source ~/testenv/bin/activate
+pip install rospkg
+    </code></pre>
+
+
+
+    <li>Re-install kinetic ros and gazebo 9.</li>
+    <pre><code>
+sudo apt-get install ros-kinetic-ros-base # don't install desktop, it will lead to gazebo 7 again.
+sudo apt-get install ros-kinetic-gazebo9-ros-pkgs ros-kinetic-gazebo9-ros-control ros-kinetic-gazebo9*
+sudo apt-get install ros-kinetic-catkin
+sudo apt-get install rviz
+sudo apt-get install ros-kinetic-controller-manager ros-kinetic-joint-state-controller ros-kinetic-joint-trajectory-controller ros-kinetic-rqt ros-kinetic-rqt-controller-manager ros-kinetic-rqt-joint-trajectory-controller ros-kinetic-ros-control ros-kinetic-rqt-gui
+sudo apt-get install ros-kinetic-rqt-plot ros-kinetic-rqt-graph ros-kinetic-rqt-rviz ros-kinetic-rqt-tf-tree
+sudo apt-get install ros-kinetic-gazebo9-ros ros-kinetic-kdl-conversions ros-kinetic-kdl-parser ros-kinetic-forward-command-controller ros-kinetic-tf-conversions ros-kinetic-xacro ros-kinetic-joint-state-publisher ros-kinetic-robot-state-publisher
+sudo apt-get install ros-kinetic-ros-control ros-kinetic-ros-controllers
+    </code></pre>
+
+
+
+    <li>One more step to make sure kinetic ros and gazebo 9 are compatible. </li>
+    <pre><code>
+sudo apt-get install libeigen3-dev ros-kinetic-image-view ros-kinetic-parrot-arsdk libprotobuf-dev libprotoc-dev ros-kinetic-joy-teleop ros-kinetic-nav-msgs ros-kinetic-mav-msgs libyaml-cpp-dev ros-kinetic-nodelet ros-kinetic-mav-planning-msgs ros-kinetic-urdf ros-kinetic-image-transport ros-kinetic-roslint ros-kinetic-angles ros-kinetic-cv-bridge ros-kinetic-tf2-geometry-msgs ros-kinetic-xacro ffmpeg libavcodec-dev libavformat-dev libavutil-dev libswscale-dev ros-kinetic-camera-info-manager ros-kinetic-cmake-modules ros-kinetic-gazebo-msgs ros-kinetic-mavros-msgs ros-kinetic-control-toolbox ros-kinetic-mav-msgs ros-kinetic-libmavconn ros-kinetic-mavros ros-kinetic-octomap-msgs ros-kinetic-geographic-msgs ros-kinetic-mavlink ros-kinetic-mavros-extras ros-kinetic-mav-planning-msgs ros-kinetic-joy
+cd ~
+mkdir -p ros-kinetic-gazebo9-pkgs
+cd ros-kinetic-gazebo9-pkgs
+git clone -b feature/ros-kinetic-gazebo9-pkgs https://github.com/gsilano/BebopS.git
+cd BebopS
+chmod 777 gazebo9.sh
+./gazebo9.sh
+cd ~
+sudo rm -rf ros-kinetic-gazebo9-pkgs # delete the folder after the installation
+    </code></pre>
     <li></li>
     </ol>
 
 
 
+    <pre><code>
+    </code></pre>
 
 
 
@@ -72,6 +134,10 @@
     <li><a href="https://medium.com/@abhiksingla10/setting-up-ros-kinetic-and-gazebo-8-or-9-70f2231af21a">Setting up ROS Kinetic and Gazebo 8 or 9</a></li>
     <li><a href="https://answers.ros.org/question/326226/importerror-dynamic-module-does-not-define-module-export-function-pyinit__tf2/">ImportError: dynamic module does not define module export function (PyInit__tf2)</a></li>
     <li><a href="https://blog.csdn.net/qq_36013249/article/details/103311001#commentBox">解决libapr-1.so.0：对‘uuid_generate@UUID_1.0’未定义的引用</a></li>
+    <li><a href="https://answers.ros.org/question/57213/how-i-completely-remove-all-ros-from-my-system/">How I completely remove all ros from my system?</a></li>
+    <li><a href="https://thivaharan28.medium.com/installing-uninstalling-anaconda3-on-ubuntu-40e0ffe8b17d">Installing & Uninstalling Anaconda3 on Ubuntu</a></li>
+    <li><a href="https://github.com/ROBOTIS-GIT/turtlebot3/issues/347">catkin_make failed (turtlebot3, turtlebot3_msgs) </a></li>
+    <li><a href="https://github.com/gsilano/BebopS">Github -- gsilano/BebopS</a></li>
     <li><a href=""></a></li>
     </ol>
 
