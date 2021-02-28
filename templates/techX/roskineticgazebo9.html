@@ -40,9 +40,19 @@
     <img src="https://api.ignitionrobotics.org/1.0/images/citadel/tutorials/actors/actor_skin.gif" width="60%">
     </div>
 
-    <li></li>
+    <li>I want to directly reinstall via 'Setting up ROS Kinetic and Gazebo 8 or 9'.</li>
     </ol>
 
+
+
+    <h4>Troubleshooting problems</h4>
+    <p>When catkin_make turtlebot3_simulation, it always lead to many errors, such as</p>
+    <ol>
+    <li>ImportError: dynamic module does not define module export function (PyInit__tf2)</li>
+    <li>libapr-1.so.0 undefined reference uuid_generate@UUID_1.0</li>
+    <li></li>
+    </ol>
+    <p>These are due to the conflicts between ros and anaconda, and uncomplete installation of kinetic ros and gazebo 9.</p>
 
 
     <h4></h4>
@@ -51,10 +61,17 @@
     </ol>
 
 
+
+
+
+
     <h3>References</h3>
     <hr>
     <ol>
-    <li><a href=""></a></li>
+    <li><a href="https://ignitionrobotics.org/docs/citadel/actors">Gazebo Actors</a></li>
+    <li><a href="https://medium.com/@abhiksingla10/setting-up-ros-kinetic-and-gazebo-8-or-9-70f2231af21a">Setting up ROS Kinetic and Gazebo 8 or 9</a></li>
+    <li><a href="https://answers.ros.org/question/326226/importerror-dynamic-module-does-not-define-module-export-function-pyinit__tf2/">ImportError: dynamic module does not define module export function (PyInit__tf2)</a></li>
+    <li><a href="https://blog.csdn.net/qq_36013249/article/details/103311001#commentBox">解决libapr-1.so.0：对‘uuid_generate@UUID_1.0’未定义的引用</a></li>
     <li><a href=""></a></li>
     </ol>
 
