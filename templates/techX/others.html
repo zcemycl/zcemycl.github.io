@@ -45,6 +45,7 @@ ExecStart=/path/to/spark/sbin/start-all.sh
 [Install]
 WantedBy=multi-user.target
 ### Command
+sudo systemctl daemon-reload
 sudo systemctl start myfirst.service
 sudo systemctl enable myfirst.service # enable to run at boot
 sudo systemctl stop myfirst.service
