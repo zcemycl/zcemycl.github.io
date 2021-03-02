@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>MariaDB</h3>
+    <hr>
+    <p>MariaDB is an extended version of MySQL.</p>
+    
+    <h4>Installation</h4>
+    <p>Install MariaDB on Ubuntu 18.04</p>
+    <pre><code>
+sudo apt update
+sudo apt install mariadb-server
+sudo systemctl status mariadb
+mysql -V
+    </code></pre>
+
+
+    <p>Securing MariaDB</p>
+    <pre><code>
+sudo mysql_secure_installation
+# answer Y to all questions 
+mysql -u root -p [optional] # always start with this
+# then input password set up in mysql secure installation
+\h # help
+\q # quit
+    </code></pre>
+
+
+    <p>Install MariaDB in Python</p>
+    <pre><code>
+sudo apt install libmariadb3 libmariadb-dev # to avoid 'Please make sure, that MariaDB Connector/C is installed on your system.' warning
+pip install mariadb
+    </code></pre>
+
+
+    <p></p>
+    <pre><code>
+    </code></pre>
+
+
+
+    <h3>References</h3>
+    <hr>
+    <ol>
+    <li><a href="https://linuxize.com/post/how-to-install-mariadb-on-ubuntu-18-04/">How to Install MariaDB on Ubuntu 18.04</a></li>
+    <li><a href="https://mariadb.com/docs/clients/connector-c/#connc-install">MariaDB Connector/C</a></li>
+    <li><a href="https://mariadb.com/docs/clients/connector-python/#installing-from-pypi">MariaDB Connector/Python</a></li>
+    <li><a href="https://github.com/datacharmer/test_db">Github --  datacharmer / test_db </a></li>
+    <li><a href="https://www.mariadbtutorial.com/getting-started/connect-to-mariadb/">Connect to MariaDB</a></li>
+    <li><a href="https://mariadb.com/resources/blog/how-to-connect-python-programs-to-mariadb/">How to connect Python programs to MariaDB</a></li>
+    <li><a href=""></a></li>
+    </ol>
+
+
+
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+
+    
+</body>
+</html>
