@@ -73,6 +73,7 @@ try:
                                   host="127.0.0.1",
                                   port="5432",
                                   database="postgres")
+    # database name can be from 'SELECT current_database();'
 
     cursor = connection.cursor()
     print("PostgreSQL server information")
