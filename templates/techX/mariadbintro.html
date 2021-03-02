@@ -98,6 +98,45 @@ SELECT * FROM Book;
     <h4>Python Syntax</h4>
     <p></p>
     <pre><code>
+#### Setup
+import mariadb
+import sys
+try:
+    conn = mariadb.connect(
+        user="root",
+        password="pwd",
+        host="localhost",
+        port=3306,
+        database="demo"
+    )
+except mariadb.Error as e:
+    print(f"Error connecting to MariaDB Platform: {e}")
+    sys.exit(1)
+cur = conn.cursor()
+
+#### SELECT
+cur.execute(
+    "SELECT * FROM Book")
+for item in cur:
+    print(item)
+
+#### Show databases
+cur.execute("SHOW DATABASES")
+#print all databases
+for db in cur:
+    print(db)
+
+#### Create table
+cur.execute("CREATE TABLE student (id INT, name VARCHAR(255))")
+
+#### Insert
+sql = "INSERT INTO student(id,name) VALUES(01, 'John')"
+cur.execute(sql)
+conn.commit()
+print(cur.rowcount, "Record Inserted")
+
+#### Close connection
+conn.close()
     </code></pre>
 
 
@@ -117,7 +156,7 @@ SELECT * FROM Book;
     <li><a href="https://www.mariadbtutorial.com/getting-started/connect-to-mariadb/">Connect to MariaDB</a></li>
     <li><a href="https://mariadb.com/resources/blog/how-to-connect-python-programs-to-mariadb/">How to connect Python programs to MariaDB</a></li>
     <li><a href="https://www.guru99.com/mariadb-tutorial-install.html">MariaDB Tutorial for Beginners: Learn with EXAMPLES </a></li>
-    <li><a href=""></a></li>
+    <li><a href="https://www.guru99.com/python-mysql-example.html">Python with MySQL: Connect, Create Database, Table, Insert [Examples] </a></li>
     </ol>
 
 
