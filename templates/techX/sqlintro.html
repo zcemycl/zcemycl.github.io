@@ -56,16 +56,48 @@ INSERT INTO color (id, name) VALUES (1,'red');
 
 ### Select
 SELECT * FROM color;
-
-
-
     </code></pre>
 
 
 
-    <h4></h4>
+    <h4>Python Connection</h4>
     <pre><code> 
+pip install psycopg2
+### Script
+import psycopg2
+from psycopg2 import Error
 
+try:
+    connection = psycopg2.connect(user="postgres",
+                                  password="postgres",
+                                  host="127.0.0.1",
+                                  port="5432",
+                                  database="postgres")
+
+    cursor = connection.cursor()
+    print("PostgreSQL server information")
+    print(connection.get_dsn_parameters(), "\n")
+    cursor.execute("SELECT version();")
+    record = cursor.fetchone()
+    print("You are connected to - ", record, "\n")
+
+except (Exception, Error) as error:
+    print("Error while connecting to PostgreSQL", error)
+
+### Insert
+cursor.execute("INSERT INTO color (id, name) VALUES (2, 'blue')")
+connection.commit()
+
+### Select
+cursor.execute('SELECT * FROM color;')
+record = cursor.fetchall()
+print('Result ',record)
+
+### Close
+if (connection):
+    cursor.close()
+    connection.close()
+    print("PostgreSQL connection is closed")
     </code></pre>
 
 
@@ -78,7 +110,7 @@ SELECT * FROM color;
     <li><a href="https://thispointer.com/python-read-a-csv-file-line-by-line-with-or-without-header/">Python: Read a CSV file line by line with or without header</a></li>
     <li><a href="https://www.postgresqltutorial.com/import-csv-file-into-posgresql-table/">Import CSV File Into PostgreSQL Table</a></li>
     <li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04">How To Install and Use PostgreSQL on Ubuntu 18.04</a></li>
-    <li><a href=""></a></li>
+    <li><a href="https://pynative.com/python-postgresql-tutorial/">Python PostgreSQL Tutorial Using Psycopg2</a></li>
     <li><a href=""></a></li>
 
     </ol>
