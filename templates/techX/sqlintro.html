@@ -38,8 +38,26 @@ sudo apt install postgresql postgresql-contrib
     </code></pre>
 
 
-    <h4></h4>
+    <h4>Command Lines</h4>
     <pre><code> 
+sudo -u postgres psql # username and postgresql --&gt postgres=#
+\q # quit
+\dt # list table
+\d # list table and sequence
+
+### SQL Commands
+CREATE TABLE color (
+id INT,
+name VARCHAR(100) NOT NULL,
+PRIMARY KEY (id));
+
+### Insert
+INSERT INTO color (id, name) VALUES (1,'red');
+
+### Select
+SELECT * FROM color;
+
+
 
     </code></pre>
 
