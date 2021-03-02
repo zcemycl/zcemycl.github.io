@@ -37,6 +37,7 @@
     <p>Install MariaDB on Ubuntu 18.04</p>
     <pre><code>
 sudo apt update
+sudo apt install mysql-server # ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (111)
 sudo apt install mariadb-server
 sudo systemctl status mariadb
 mysql -V
@@ -64,6 +65,9 @@ pip install mariadb
     <h4>Terminal Commands</h4>
     <p></p>
     <pre><code>
+show databases; # list out databases
+use database_name; # switch database ## MariaDB [(none)] becomes [database_name]
+show tables; # 
     </code></pre>
 
 
