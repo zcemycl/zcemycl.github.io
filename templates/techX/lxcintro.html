@@ -44,6 +44,7 @@ sudo systemctl status lxd
     </code></pre>
 
     <h4>Initialization</h4>
+    <p>After <code>sudo lxd init</code>,</p>
     <pre><code>
 Would you like to use LXD clustering? (yes/no) [default=no]: 
 Do you want to configure a new storage pool? (yes/no) [default=yes]: 
@@ -56,6 +57,7 @@ What IPv6 address should be used? (CIDR subnet notation, “auto” or “none�
 Would you like LXD to be available over the network? (yes/no) [default=no]: 
 Would you like stale cached images to be updated automatically? (yes/no) [default=yes] 
     </code></pre>
+    <p>Clustering means multiple computer server. Local network bridge allows the containers to communicate with the original computer. All of them are default. Storage backend to dir. Stale cached images updated automatically ensure the remote repo updates your local images whenever there are changes.</p>
 
     <h4>Instructions</h4>
     <pre><code>
