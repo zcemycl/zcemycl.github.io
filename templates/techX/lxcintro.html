@@ -65,11 +65,13 @@ Would you like stale cached images to be updated automatically? (yes/no) [defaul
 sudo lxc help # find the command
 sudo lxc version # just print version == 3
 sudo lxc storage list # where to store lxc
+sudo lxc info a
 sudo lxc remote list # which repo to install lxc
+sudo lxc image list # what is downloaded
 sudo lxc image list images: # list all images that can be downloaded
 sudo lxc image list images:ubuntu
 sudo lxc image list # list all running containers
-uname -r # 5.4.0-66-generic
+uname -r # 5.4.0-66-generic host kernel
 lsb_release -dirc # show version
 free -m # show ram
 ip a s # show all connections like inet
@@ -94,6 +96,23 @@ lxc launch ubuntu:16.04
 lxc stop prepared-snipe # also have start option
 lxc delete prepared-snipe # --force without stopping
     </code></pre>
+    <li>Copy the instance.</li>
+    <pre><code>
+lxc copy a b
+lxc start b
+    </code></pre>
+    <li>Rename the instance.</li>
+    <pre><code>
+lxc stop a
+lxc move a c
+lxc start c
+    </code></pre>
+    <li>Log into the instance.</li>
+    <pre><code>
+lxc exec a bash # login as a root user
+    </code></pre>
+    <li>Use <code>exit</code> to get out.</li>
+    <li></li>
     <li></li>
     <li></li>
     </ol>
