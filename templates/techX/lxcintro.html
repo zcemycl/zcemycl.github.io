@@ -60,12 +60,16 @@ Would you like stale cached images to be updated automatically? (yes/no) [defaul
     <p>Clustering means multiple computer server. Local network bridge allows the containers to communicate with the original computer. All of them are default. Storage backend to dir. Stale cached images updated automatically ensure the remote repo updates your local images whenever there are changes.</p>
 
     <h4>Instructions</h4>
+    <p>The followings are for understanding your system,</p>
     <pre><code>
 sudo lxc help # find the command
-sudo lxc version # just print version
+sudo lxc version # just print version == 3
+sudo lxc storage list # where to store lxc
+sudo lxc remote list # which repo to install lxc
 sudo lxc image list images: # list all images that can be downloaded
 sudo lxc image list images:ubuntu
 sudo lxc image list # list all running containers
+uname -r # 5.4.0-66-generic
 lsb_release -dirc # show version
 free -m # show ram
 ip a s # show all connections like inet
@@ -73,6 +77,32 @@ nproc # number of processors
 hostname # yui@yui-Inspiron-7590 will show yui-Inspiron-7590
 ping lxname.lxd
     </code></pre>
+
+
+    <h5>Operations</h5>
+    
+    <ol>
+    <li>Launch an instance.</li>
+    <pre><code>
+lxc launch ubuntu:16.04
+    </code></pre>
+    <li>Sometimes it can cause an error, like LXD does not have a uid/gid allocation.</li>
+    <li>Add <code>root:100000:65536</code> to <code>/etc/subuid</code> and <code>/etc/subgid</code>, then reboot.</li>
+    <li><code>ip a s</code> or <code>ifconfig</code> can show the new network bridge.</li>
+    <li>Delete container by,</li>
+    <pre><code>
+lxc stop prepared-snipe # also have start option
+lxc delete prepared-snipe # --force without stopping
+    </code></pre>
+    <li></li>
+    <li></li>
+    </ol>
+
+
+    <h5></h5>
+    <pre><code>
+    </code></pre>
+
 
 
 
