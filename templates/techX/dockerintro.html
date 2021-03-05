@@ -33,8 +33,13 @@
     <hr>
     <h4>Installation</h4>
     <pre><code>
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get remove docker docker-engine docker.io containerd runc
+sudo apt-get update
+sudo apt-get install apt-transport-https ca-certificates curl gnupg
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+lsb_release -cs # bionic
+uname -m # x86_64 so use amd64
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 sudo apt-get update
 apt-cache policy docker-ce
 sudo apt-get install -y docker-ce
@@ -56,8 +61,8 @@ sudo systemctl status docker
     <hr>
     <ol>
     <li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04">How To Install and Use Docker on Ubuntu 16.04</a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
+    <li><a href="https://docs.docker.com/engine/install/ubuntu/">Install Docker Engine on Ubuntu</a></li>
+    <li><a href="https://towardsdatascience.com/how-to-properly-use-the-gpu-within-a-docker-container-4c699c78c6d1">How to Properly Use the GPU within a Docker Container</a></li>
     </ol>
     </div>
     <script type="text/javascript" async
