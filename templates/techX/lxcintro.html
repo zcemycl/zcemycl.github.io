@@ -66,6 +66,9 @@ sudo lxc help # find the command
 sudo lxc version # just print version == 3
 sudo lxc storage list # where to store lxc
 sudo lxc info a
+lxc config show a
+lxc profile list
+lxc profile show default
 sudo lxc remote list # which repo to install lxc
 sudo lxc image list # what is downloaded
 sudo lxc image list images: # list all images that can be downloaded
@@ -112,7 +115,14 @@ lxc start c
 lxc exec a bash # login as a root user
     </code></pre>
     <li>Use <code>exit</code> to get out.</li>
-    <li></li>
+    <li>Limit resources, options: memory, cpu</li>
+    <pre><code>
+lxc config set a limits.memory 512MB # or 1GB , check out by free -m 
+OR in profile
+lxc profile edit profilename # config: limits.memory: 512MB
+lxc launch ubuntu:16.04 env2 --profile profilename
+    </code></pre>
+
     <li></li>
     <li></li>
     </ol>
