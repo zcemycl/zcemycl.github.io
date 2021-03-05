@@ -123,6 +123,18 @@ lxc profile edit profilename # config: limits.memory: 512MB
 lxc launch ubuntu:16.04 env2 --profile profilename
     </code></pre>
 
+    <li>Send files,</li>
+    <pre><code>
+lxc file push filename containername/root/
+lxc file pull containername/root/filename .
+    </code></pre>
+
+    <li>Backup container</li>
+    <pre><code>
+lxc snapshot a backupname
+lxc restore a backupname
+    </code></pre>
+    <li></li>
     <li></li>
     <li></li>
     </ol>
