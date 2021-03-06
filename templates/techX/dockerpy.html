@@ -33,8 +33,49 @@
     <hr>
     <h4>Run a script</h4>
     <ol>
-    <li><code></code></li>
+    <li>Pull the image. <code></code></li>
     <pre><code>
+docker pull python:3.8.0-alpine3.10 
+# python:3.8-slim-buster
+# python:3.8
+docker image ls
+    </code></pre>
+    <li>Run image. <code></code></li>
+    <pre><code>
+docker container run --rm -it python:3.8.0-alpine3.10 
+# --rm remove after exit
+# -it enter after create
+docker container run --rm -it python:3.8.0-alpine3.10 python -V
+docker container run --rm -it python:3.8.0-alpine3.10 pip -V
+docker container run --rm -it python:3.8.0-alpine3.10 cat /etc/os-release
+# the ending is cmd in image
+    </code></pre>
+    <li>Create script. <code>main.py</code></li>
+    <pre><code>
+import os
+    </code></pre>
+    <li>Run script that has no dependency.<code></code></li>
+    <pre><code>
+docker container run --rm -it 
+    -v /path/to/folder:/workfolder:ro # read only
+    python:3.8.0-alpine3.10 
+    python /workfolder/main.py
+    </code></pre>
+    <li>Need Dockerfile for build.<code></code></li>
+    <pre><code>
+FROM python:3.8
+
+RUN pip3 install -r requirements.txt
+# RUN apt-get -y update (optional)
+RUN mkdir -p /workfolder
+COPY ./main.py /workfolder/
+CMD [ "python" , "/workfolder/main.py" ] # similar to subprocess
+    </code></pre>
+    <li>Run image build based on Dockerfile. <code></code></li>
+    <pre><code>
+docker image build -t goodpython:v01 .
+docker image ls
+docker container run --rm -it goodpython:v01 # repo:tag
     </code></pre>
     </ol>
 
@@ -42,6 +83,11 @@
 
     <h4>Run a flask project</h4>
     <ol>
+    <li>After image is created, view in <code>docker images</code></li>
+    <pre><code>
+docker run -d -p 5000:5000 myimage
+curl http://localhost:5000
+    </code></pre>
     <li><code></code></li>
     <pre><code>
     </code></pre>
