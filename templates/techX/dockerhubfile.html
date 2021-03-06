@@ -32,7 +32,21 @@
     <h3>DockerHub and Dockerfile</h3>
     <hr>
     <h4>Link DockerHub with local</h4>
-    
+    <ol>
+    <li>Sign up and in to Docker Hub.</li>
+    <li>Create a Repo on the Docker Hub.</li>
+    <li>Name it as zcemycl/ubuntu-nodejs, set to public. (free account)</li>
+    <li>Log in Dockerhub connection by, <code>docker login</code>, then type your username zcemycl and password.</li>
+    <li>Create a dockerfile named <code>Dockerfile</code>.</li>
+    <pre><code>
+FROM busybox
+CMD echo "Hello world! This is my first Docker image."
+    </code></pre>
+    <li>Build Docker Image. <code>docker build -t zcemycl/ubuntu-nodejs .</code></li>
+    <li>Test Docker Image. <code>docker run zcemycl/ubuntu-nodejs</code></li>
+    <li>Push Docker Image to Docker Hub. <code>docker push zcemycl/ubuntu-nodejs</code></li>
+    <li>You should now see the changes in dockerhub repo.</li>
+    </ol>
 
 
     <h4></h4>
