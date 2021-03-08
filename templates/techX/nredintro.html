@@ -31,7 +31,47 @@
 
     <h3>NodeRed Introduction</h3>
     <hr>
+    <h4>Installation</h4>
+    <ol>
+    <li>Update your system.<code></code></li>
+    <pre><code>
+sudo apt-get update
+sudo apt-get upgrade -y
+    </code></pre>
+    <li>Install Node.js and npm. <code></code></li>
+    <pre><code>
+sudo apt-get install nodejs
+sudo apt install npm
+    </code></pre>
 
+    <li>Install Node-RED.<code></code></li>
+    <pre><code>
+sudo npm install -g --unsafe-perm node-red node-red-admin
+    </code></pre>
+    <li>Test installation.<code></code></li>
+    <pre><code>
+sudo ufw allow 1880
+node-red
+# In browser 127.0.0.1:1880
+    </code></pre>
+    <li>Can install new nodes in folder <code>~/.node-red</code></li>
+    <pre><code>
+npm i node-red-node-email
+npm i node-red-dashboard
+    </code></pre>
+    </ol>
+
+
+    <h4>Basics</h4>
+    <ol>
+    <li><code></code></li>
+    <pre><code>
+    </code></pre>
+    <li><code></code></li>
+    <pre><code>
+    </code></pre>
+
+    </ol>
 
     <h3>References</h3>
     <ol>
