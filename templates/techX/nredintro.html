@@ -78,7 +78,12 @@ npm i node-red-dashboard
     <li>Click Deploy.<code></code></li>
     <li>At right hand panel, under info (ctrl+g i),  click Trigger action for timestamp.<code></code></li>
     <li>Under debug (ctrl+g d), you can see the message. </li>
-
+    <li>Can use function in between. </li>
+    <pre><code>
+var newString = msg.payload.replace("world", "From Node-Red");
+msg = {payload:newString};
+return msg;
+    </code></pre>
     </ol>
 
 
