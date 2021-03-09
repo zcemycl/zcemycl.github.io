@@ -33,20 +33,25 @@
     <hr>
     <p>Compared to Hypertext Transfer Protocol (HTTP), it focuses to transfer data.</p>
 
-    <h4></h4>
-    <ol>
-    <li><code></code></li>
+    <h4>Installation</h4>
     <pre><code>
-    </code></pre>
-    <li><code></code></li>
-    <pre><code>
+sudo apt-get install mosquitto
+sudo apt-get install mosquitto-clients
     </code></pre>
 
-    </ol>
+
+    <h4>Subscriber and Publisher</h4>
+    <pre><code>
+mosquitto_sub -t "test" # T1 to create a topic named test
+mosquitto_pub -m "message from mosquitto_pub client" -t "test" # T2
+    </code></pre>
 
 
-
-
+    <h4>NodeRed mqtt in node</h4>
+    <ul>
+    <li>Server: localhost:1883</li>
+    <li>Topic: test</li>
+    </ul>    
 
     <h3>References</h3>
     <hr>
