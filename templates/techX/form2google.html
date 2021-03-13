@@ -25,6 +25,8 @@ function SubForm (){
     <style>
       body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
       /*h3{color:#00ff2b}*/
+      /*body,h3,h4,h5,a,div{border:1px solid white;}*/
+
       a{color:#337AB7;font-weight:bold;text-decoration:none;}
       pre code {
         color:white;
@@ -47,26 +49,86 @@ function SubForm (){
 
     <h3>Send HTML Data to Google Sheet</h3>
     <hr>
-  <form id="myForm">
-    <label>Full Name</label>
-    <br/>
-    <input name="name" />
-    <br/>
-    <label>Age</label>
-    <br/>
-    <input type="radio" id="age" name="age" value="18-35" /> 18-35<br/>
-    <input type="radio" id="age" name="age" value="35+" /> 35+<br/>
-    <br/>
-    <br/>
-  </form>
-  <button onclick="SubForm()">Submit</button>
+    <h4>Demo</h4>
+    <p>This demo also works for static pages generated from Github Pages. Once you click submit, after approximately 5 seconds, the data will be shown in this link. <a href="https://api.apispreadsheets.com/data/9472/">https://api.apispreadsheets.com/data/9472/</a>. </p>
 
+    <div style="height:8vh; border:1px solid white;">
+      <form id="myForm">
+        <div style="width:40%; float:left;">
+          <label>Full Name</label>
+          <br/>
+          <input name="name" style="width:80%"/>
+          <br/>
+        </div>
+
+        <div style="width:30%; float:left; ">
+          <label>Age</label>
+          <br/>
+          <input type="radio" id="age" name="age" value="18-35" /> 18-35<br/>
+          <input type="radio" id="age" name="age" value="35+" /> 35+<br/>
+          <br/>
+        </div>
+      </form>
+      
+      <div style="width:30%; float:left; ">
+      <button style="width:100%;" onclick="SubForm()">Submit</button>
+      </div>
+    </div>
+
+    <br>
+    <div style="text-align:center;">
+    <img src="../../resources/form2google.png" style="width:40%;">
+    </div>
 
     <hr>
-
+    <h4>How to set up?</h4>
     <ol>
-    <li></li>
-    <li></li>
+    <li>Open up a blank Googlesheet. Name the first row as header. (View &#8594 Freeze &#8594 1 row)</li>
+    <li>Sign in API Spreadsheets account. <a href="https://www.apispreadsheets.com/">https://www.apispreadsheets.com/</a></li>
+    <li>Upload Google Sheets file by clicking the icon.</li>
+    <li>Copy the API URL for your file.</li>
+    <li>Edit your website html. Make sure to edit ajax url and headers (if private). Your form input names must match to your header in google sheets.</li>
+    <pre><code>
+&lt!DOCTYPE html&gt
+&lthtml&gt
+&lthead&gt
+&lttitle&gtSave Web Form Data to Spreadsheets - Contact Form&lt/title&gt
+&ltscript
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"&gt&lt/script&gt
+&ltscript&gt
+function SubForm (){
+    $.ajax({
+        url:'https://api.apispreadsheets.com/data/410/',
+        headers: {"accessKey": "YOUR_ACCESS_KEY", "secretKey": "YOUR_ACCESS_KEY"}
+        type:'post',
+        data:$("#myForm").serializeArray(),
+        success: function(){
+          alert("Form Data Submitted :)")
+        },
+        error: function(){
+          alert("There was an error :(")
+        }
+    });
+}
+&lt/script&gt
+&lt/head&gt
+&ltbody&gt
+  &ltform id="myForm"&gt
+    &ltlabel&gtFull Name&lt/label&gt
+    &ltbr/&gt
+    &ltinput name="name" /&gt
+    &ltbr/&gt
+    &ltlabel&gtAge&lt/label&gt
+    &ltbr/&gt
+    &ltinput type="radio" id="age" name="age" value="18-35" /&gt 18-35&ltbr/&gt
+    &ltinput type="radio" id="age" name="age" value="35+" /&gt 35+&ltbr/&gt
+  &lt/form&gt
+  &ltbutton onclick="SubForm()"&gtSubmit&lt/button&gt
+&lt/body&gt
+&lt/html&gt
+    </code></pre>
     <li></li>
     </ol>
 
@@ -76,6 +138,11 @@ function SubForm (){
 
     <h3>References</h3>
     <hr>
+    <ol>
+    <li><a href="https://lovespreadsheets.medium.com/save-web-html-form-data-to-google-sheets-47e48f7517e6">Save Web/HTML Form Data to Google Sheets</a></li>
+    <li><a href=""></a></li>
+    </ol>    
+
     </div>
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
