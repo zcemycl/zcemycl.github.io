@@ -6,7 +6,45 @@
     <link rel="stylesheet" href="static/behavior.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-        body{background-color:black;color:white}
+    body{background-color:black;color:white}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
     </style>
     <meta name="viewport" content="width=device-width; initial-scale=1.0">
 </head>
