@@ -60,8 +60,8 @@
         width:5px;
         background: #555;
     }
-
     </style>
+
 </head>
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
@@ -85,7 +85,7 @@
     <h4>Binder with nbinteract Setup</h4>
     <p>This solves the problem of that the binder cannot be embedded in iframe.</p>
     <div style="text-align:center; height:100%">
-    <iframe src="https://zcemycl.github.io/resources/demobinder.html" style="width:80%; height:60vh"></iframe>
+    <iframe id="contentDiv" src="https://zcemycl.github.io/resources/demobinder.html" style="width:80%; height:60vh"></iframe>
     </div>
     <ol>
     <li>In your target repo, install nbinteract creating <code>.nbinteract.json</code>, </li>
@@ -129,6 +129,9 @@ git push origin master
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>mermaid.initialize({startOnLoad:true});</script>
 
+    <script>
+    $('#contentDiv').load('https://zcemycl.github.io/resources/demobinder.html .output_area');
+    </script>
     
 </body>
 </html>
