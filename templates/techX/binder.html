@@ -104,8 +104,16 @@ git commit -m "Publish nb"
 git push origin master
     </code></pre>
     <li>The demo is published as this url. <a href="https://zcemycl.github.io/resources/demobinder.html">https://zcemycl.github.io/resources/demobinder.html</a></li>
-    <li></li>
+    <li>To only show the output (the interactive plot), we can edit the html file. <code>resources/demobinder.html</code></li>
+    <li>Insert the display none style into input div.</li>
+    <pre><code>
+&ltdiv class="input" style="display:none;"&gt
+&ltbutton class="js-nbinteract-widget" style="display:none;"&gt
+    </code></pre>
     </ol>
+    <div style="text-align:center; height:100%">
+    <iframe id="contentDiv" src="https://zcemycl.github.io/resources/demobinder_only_output.html" style="width:80%; height:60vh"></iframe>
+    </div>
 
 
 
