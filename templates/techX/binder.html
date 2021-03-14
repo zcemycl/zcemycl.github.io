@@ -69,7 +69,7 @@
     <h3>Binder</h3>
     <hr>
 
-    <h4>Setup</h4>
+    <h4>Binder with Jupyter Notebook Setup</h4>
     <div style="text-align:center">
     <img src="../../resources/demobinder1.png" style="width:50%;"> 
     </div>
@@ -79,6 +79,32 @@
     <li>Edit the fields and launch. </li>
     <li>You can now play around the jupyter notebook online with link, once it is launched. I cannot embed it in iframe.</li>
     <li>Try this link. <a href="https://mybinder.org/v2/gh/zcemycl/zcemycl.github.io/master?filepath=resources%2Fdemobinder.ipynb">https://mybinder.org/v2/gh/zcemycl/zcemycl.github.io/master?filepath=resources%2Fdemobinder.ipynb</a>.</li>
+    </ol>
+
+
+    <h4>Binder with nbinteract Setup</h4>
+    <p>This solves the problem of that the binder cannot be embedded in iframe.</p>
+    <div style="text-align:center; height:100%">
+    <iframe src="https://zcemycl.github.io/resources/demobinder.html" style="width:80%; height:60vh"></iframe>
+    </div>
+    <ol>
+    <li>In your target repo, install nbinteract creating <code>.nbinteract.json</code>, </li>
+    <pre><code>
+pip install nbinteract
+nbinteract init
+git add -A
+git commit -m "Setup nbinteract"
+git push origin master
+    </code></pre>
+    <li>Convert the notebook into an HTML file, run command, </li>
+    <pre><code>
+nbinteract resources/demobinder.ipynb
+git add -A
+git commit -m "Publish nb"
+git push origin master
+    </code></pre>
+    <li>The demo is published as this url. <a href="https://zcemycl.github.io/resources/demobinder.html">https://zcemycl.github.io/resources/demobinder.html</a></li>
+    <li></li>
     </ol>
 
 
