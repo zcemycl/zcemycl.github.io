@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Dynamic Host Configuration Protocol (DHCP)</h3>
+    <hr>
+    <p>Every computer on a network has to have an IP address, it needs to be assigned. It is a service that can run  on a server, like a Linux server, and a router.</p>
+
+    <div style="text-align:center">
+    <img src="../../resources/dhcp.png" style="width:40%">
+    </div>
+    <p>To find out your dhcp server, log in your router admin, by browsing 192.168.x.1 (find out via ifconfig). </p>
+
+    <h4>Internet Protocol (IP)</h4>
+    <p>Static IP address: Never change, is assigned by the user manually.</p>
+    <pre><code>
+IP address: 10.0.0.2
+Subnet mask: 255.255.255.0
+Default gateway: 10.0.0.1
+DNS Server: 10.0.0.9
+    </code></pre>
+    <p>Dynamic IP address: computer gets an IP address from a DHCP server. Check this in <code>/var/lib/dhcp/dhclient.leases</code></p>
+    <p>Scope is the range of ip address can be used. IP ranges from 10.0.0.1 to 10.0.0.100.</p>
+
+    <h4>Lease not Given</h4>
+    <p>The DHCP server assigns the IP address as a lease. A lease is the amount of time an IP address is assigned to a computer. It helps to make sure the server does not run out of IP addresses.</p>
+
+    <h4>Address Reservations</h4>
+    <p>A reservation ensures that a specific computer or device will always be given the same IP address. (not equivalent to a static IP.)</p>
+    
+
+
+
+
+
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+
+    
+</body>
+</html>
