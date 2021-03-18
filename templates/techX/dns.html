@@ -83,14 +83,17 @@
 
     <div class="mermaid" style="background-color:white; max-width:80vw">
     flowchart LR
-      A[Browser] --Domain Name--> B[ISP/Resolver Server];
-      A --cache--> A;
-      B --IP--> A;
-      B --find--> B;
-      B --find--> C[Root server];
-      B --find--> D[Top Level Domain TLD Server];
-      B --find--> E[Authorative Name Server];
+      A[Browser] --forward: Domain Name--> B[ISP/Resolver Server];
+      A --resolve: IP cache--> A;
+      B --resolve: IP--> A;
+      B --forward--> C[Root server];
+      C --resolve--> B;
+      B --forward--> D[Top Level Domain TLD Server];
+      D --resolve--> B;
+      B --forward--> E[Authoritative Name Server];
+      E --resolve--> B;
     </div>
+    <p>Priorities: Browser &#8594 ISP  &#8594 Root Server  &#8594 TLD Server  &#8594 Authoritative Server</p>
 
     <h4>Differences between DNS forwarder and resolver</h4>
     <p>The DNS forwarder(s) tell the DNS service where to send queries if it doesn't "know" the answer (e.g. it's not authoritative or in the cache).</p>
@@ -107,6 +110,7 @@
     <li><a href="https://www.noip.com/">No-IP: Free Dynamic DNS - Managed DNS</a></li>
     <li><a href="https://www.duckdns.org/">Duck DNS: free dynamic DNS hosted on AWS</a></li>
     <li><a href="http://www.dtdns.org/">www.dtdns.org - Free Dynamic DNS</a></li>
+    <li><a href="https://community.infoblox.com/t5/DNS-DHCP-IPAM/what-is-the-different-between-DNS-forwarder-and-DNS-Resolver/td-p/7393">what is the different between DNS forwarder and DNS Resolver ?</a></li>
     <li><a href=""></a></li>
     <li><a href=""></a></li>
     </ol>
