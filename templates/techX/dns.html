@@ -69,6 +69,32 @@
     <h3>Domain Name System (DNS) and Dynamic DNS</h3>
     <hr>
     <p>Human communicates with each other by mentioning names, but machine does that by ip address. In order to bridge human and machine communication, a domain name is needed since we are better at memorizing names than numbers.</p>
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    graph LR
+      A[192.168.1.1] --> B[192.168.1.2];
+      B --> A;
+      A --> C[192.168.1.3];
+      C --> A;
+      B--> C;
+      C-->B;
+    </div>
+
+    <h4>DNS simply resolves names to numbers, domain names to IP addresses. </h4>
+
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    flowchart LR
+      A[Browser] --Domain Name--> B[ISP/Resolver Server];
+      A --cache--> A;
+      B --IP--> A;
+      B --find--> B;
+      B --find--> C[Root server];
+      B --find--> D[Top Level Domain TLD Server];
+      B --find--> E[Authorative Name Server];
+    </div>
+
+    <h4>Differences between DNS forwarder and resolver</h4>
+    <p>The DNS forwarder(s) tell the DNS service where to send queries if it doesn't "know" the answer (e.g. it's not authoritative or in the cache).</p>
+    <p>The DNS resolver settngs tell the Infoblox appliance where to send queries if it needs to resolve a name or perform a reverse lookup.</p>
 
     <h4>Differences between DNS and DDNS</h4>
     <p>It is possible to bind domain name and dynamic public ip address, but since that ip is constantly changing, browsing that domain name can sometimes turn into bad gateway. You also need to buy a domain name.</p>
