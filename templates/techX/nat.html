@@ -68,6 +68,21 @@
 
     <h3>Network Address Translation</h3>
     <hr>
+    <p>It is used in routers to translate a set of IP addresses to another set of IP addresses. It helps to preserver the limited amount of IPv4 public IP addresses. </p>
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    graph LR
+      A[Public IP] --> B([NAT]);
+      B --> C[Private IP1];
+      B --> D[Private IP2];
+    </div>
+
+    <p>NAT assigns private ip addresses to each device under the same router. This private ip addresses are not directly accessible from the Internet.</p>
+    <p>However, in the future we do not need private IP addresses, since there are more number of IPv6 addresses. </p>
+
+    <div style="text-align:center">
+    <img src="../../resources/nat.png" style="width:50%;">
+    </div>
+
     <h3>References</h3>
     <hr>
     </div>
