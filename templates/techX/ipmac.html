@@ -68,6 +68,25 @@
 
     <h3>IP and Media Access Control Addresses</h3>
     <hr>
+    <div style="text-align:center;">
+    <img src="../../resources/ipmac.png" style="width:50%">
+    </div>
+    <p>Meanwhile, ip address is usually assigned from your router or internet service provider (ISP) to your device, such as 192.168.1.100 and 185.89.9.65, mac address is tied to a key connection device called network interface card (NIC).</p>
+    <p>Both of them are important for transfering data from your device to internet, public ip is used to transfer data from internet to your home, private ip and mac addresses are to transfer from home router to your device.</p>
+    <p>To find out your public ip address, simply find it in google search, what is my ip. </p>
+    <p>For private ip, </p>
+    <pre><code>
+ifconfig | grep inet # usually starts with 192.168.
+    </code></pre>
+    <p>For mac address, in your laptop, </p>
+    <pre><code>
+ip addr show
+# link/ether 38:00:25:f5:eb:a0 brd ff:ff:ff:ff:ff:ff
+    </code></pre>
+
+    <p>In your smartphone, go Settings &#8594 General &#8594 About phone &#8594 Network, you can see all the relevant addresses.</p>
+
+
     <h3>References</h3>
     <hr>
     </div>
