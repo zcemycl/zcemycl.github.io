@@ -69,7 +69,21 @@
 
     <h3>HTTP and SSL</h3>
     <hr>
-    
+    <p>Hypertext transfer Protocol HTTP is a protocol that is used for viewing webpages. In standard HTTP, all information is sent in clear text, and it is vulnerable and insecure. </p> 
+    <p>Personal sensitive data can be exposed to hackers. Thats why we need Secure HTTP. It encrypts the data that is being retrieved by HTTP.</p>
+   
+    <p>HTTPS uses a protocol that ensures security on the internet, it uses public key encryption to secure data, such as Secure Sockets Layer (SSL), Transport Layer Security (TLS) (latest industry standard, etc.)</p>
+
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    flowchart LR
+      A[Computer] --access--> B[Internet];
+      B --access--> C[Server];
+      C --SSLcertificate--> B;
+      B --SSLcertificate--> A;
+    </div>
+
+    <p>HTTPS is important since Google flags websites without SSL as not secure, and penalizes search ranking.</p>
+
     <h4>Guidelines</h4>
     <ol>
     <li>SSH into the server with nginx and hosting your website. </li>
