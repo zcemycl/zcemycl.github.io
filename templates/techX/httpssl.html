@@ -66,13 +66,39 @@
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
 
+
     <h3>HTTP and SSL</h3>
     <hr>
+    
+    <h4>Guidelines</h4>
+    <ol>
+    <li>SSH into the server with nginx and hosting your website. </li>
+    <li>Go to Cerbot, select the correct software and system. </li>
+    <li>Follow the instructions from Certbot, </li>
+    <pre><code>
+sudo apt install snapd
+sudo snap install core; sudo snap refresh core
+sudo apt-get remove certbot
+sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+sudo certbot --nginx
+sudo certbot renew --dry-run
+    </code></pre>
+
+
+    <li>Now the website is secured.</li>
+    </ol>
+
+
+
+
+
     <h3>References</h3>
     <hr>
     <ol>
     <li><a href="https://letsencrypt.org/">Let's Encrypt - Free SSL/TLS Certificates</a></li>
     <li><a href="https://certbot.eff.org/">Certbot</a></li>
+    <li><a href="https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx">certbot instructions: My HTTP website is running Nginx on Ubuntu 18.04 LTS (bionic)</a></li>
     <li><a href=""></a></li>
     </ol>
 
