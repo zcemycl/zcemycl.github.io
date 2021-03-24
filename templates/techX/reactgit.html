@@ -69,8 +69,98 @@
     <h3>React app deployment with Github</h3>
     <hr>
 
+    <h4>Installation and Version Update</h4>
+    <pre><code>
+## Update node
+curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+sudo apt-get install -y nodejs
+## Install npx
+npm i -g npx
+## Install yarn
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt update && sudo apt install yarn
+    </code></pre>
 
+    <h4>Create project locally</h4>
+    <ol>
+    <li>Create the project,</li>
+    <pre><code>
+npx create-react-app starter-project
+    </code></pre>
+    <li>Start localhost by, </li>
+    <pre><code>
+yarn start
+    </code></pre>
+    </ol>
 
+    <h4>Create repository</h4>
+    <ol>
+    <li>Create an empty repository, with name of <code>starter-project</code>.</li>
+    <li>In your folder <code>starter-project</code>, add remote and push,</li>
+    <pre><code>
+git remote add origin https://github.com/zcemycl/starter-project
+git push --set-upstream origin master
+    </code></pre>
+    <li>Install gh-pages package, this will create <code>node_modules</code> and <code>package.json</code>,</li>
+    <pre><code>
+yarn add gh-pages
+    </code></pre>
+    <li>Edit <code>package.json</code>,</li>
+    <pre><code>
+{
+  "homepage":"https://zcemycl.github.io/starter-project/", ####
+  "name": "starter-project",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "gh-pages": "^3.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "predeploy":"npm run build", ####
+    "deploy":"gh-pages -d build",####
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      "&gt0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
+    </code></pre>
+    <li>Deploy the application, </li>
+    <pre><code> 
+npm run deploy
+    </code></pre>
+    <li>I will add, commite and push again normally.</li>
+    </ol>
+
+    <h4></h4>
+    <pre><code>
+    </code></pre>
 
 
     <h3>References</h3>
