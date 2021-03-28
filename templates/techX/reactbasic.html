@@ -99,11 +99,59 @@
 
     <h4>Syntax</h4>
     <ol>
+    <li>index.js (Don't need to touch most of the time)</li>
+    <pre><code>
+import React from "react"
+import ReactDOM from "react-dom"
+import App from './components/App'
+
+const reactContentRoot = document.getElementById("root")
+
+ReactDOM.render(&ltApp/&gt, reactContentRoot)
+    </code></pre>
+
+    <li>App.js</li>
+    <pre><code>
+import React from "react"
+import customButton from "./customButton"
+
+const App = () =&gt {
+    return {
+        &ltp&gt I am Leo. &lt/&gt
+    }
+}
+export default App
+    </code></pre>
     <li>Functions</li>
+    <pre><code>
+const funcname = (arg1,arg2) =&gt {
+    return x
+}
+    </code></pre>
+    
+
+
+
     <li>Import</li>
+    
+    <pre><code>
+import x,{a,b} from y
+    </code></pre>
+
     <li>Export</li>
+    
+    <pre><code>
+export default jsscriptname
+    </code></pre>
     <li>Hooks</li>
-    <li></li>
+    <pre><code>
+var,setter = useState(initial_var)
+useEffect
+    </code></pre>
+    <li>.css, just normal css script</li>
+    <pre><code>
+import "./customButton.css" # in .js
+    </code></pre>
     </ol>
 
 
