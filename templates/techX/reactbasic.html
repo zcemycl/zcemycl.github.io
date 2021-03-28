@@ -71,6 +71,28 @@
     <h4>Set up</h4>
     <p>After running <code>create-react-app</code>,</p>
     <ol>
+    <li>All packages are listed in <code>package.json</code>.</li>
+    <li>Delete all src files except index.js. </li>
+    <li>Structure of the project,</li>
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    graph TD
+      Y[Project] --> Z[index.js];
+      Y --> A;
+      Y --> X[public];
+      X --> UU[index.html];
+      Y --> W[package.json];
+      A[src] --> B[components];
+      B --> C[App.js];
+      B --> D[CustomButton];
+      D --> E[CustomButton.css];
+      D --> F[CustomButton.js];
+      D ==> C;
+      C ==> Z;
+      Z ==> UU;
+    </div>
+
+
+
     <li></li>
     </ol>
 
