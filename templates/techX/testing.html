@@ -69,11 +69,67 @@
     <h3>Software Testings</h3>
     <hr>
     <h4>Types</h4>
+    <p>Consider the following graph, each node is a function, </p>
+    <div class="mermaid">
+    graph LR
+      A --> B;
+      B --> C;
+      C --> D;
+      A --> C;
+    </div>
     <ul>
     <li>Unit testing</li>
+    <p>It is used for testing independent components of your software, for example, writing a unittest for function A to check expected output. </p>
     <li>Mock testing</li>
+    <p>Mocking means creating a fake version of an external or internal service that can stand in for the real one, helping your tests run more quickly and more reliably. When your implementation interacts with an object’s properties, rather than its function or behavior, a mock can be used.</p>
+    <p>For example, function C is highly dependent on A and B, it is hard to test it independently, you might need to fake A and B to make C outputing expected results.</p>
     <li>System testing</li>
+    <p>It is used to test the whole program, ignoring individual components. You input expected arguments, and test the expected outputs.</p>
     </ul>
+
+    <h4>Example</h4>
+
+    <div class="mermaid">
+    graph LR
+      A[app] --> B[src];
+      B --> C[app.py];
+      A--> D[tests];
+      D --> E[test_app.py];
+    </div>
+    <pre><code>
+from flask_jsonpify import jsonpify
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return jsonpify({'output':'Hello World'})
+
+if __name__ == "__main__":
+    app.run()
+    </code></pre>
+
+    <code>export PYTHONPATH=src</code>
+    <pre><code>
+from app import *
+import unittest
+import json
+
+def test_home():
+    assert home.__name__=='home'
+
+class MyAppCase(unittest.TestCase):
+    def setUp(self):
+        app.config['TESTING'] = True
+        self.app = app.test_client()
+    def test_home(self):
+        resp = self.app.get('/')
+        data = json.loads(resp.get_data(as_text=True))
+        self.assertEqual(data['output'],'Hello World')
+    </code></pre>
+    <p>In your app folder, run <code>pytest</code>. </p>
+
     <h3>References</h3>
     <hr>
     <ol>
@@ -90,6 +146,8 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
     <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
 
     
 </body>
