@@ -115,6 +115,13 @@ python-3.7.6
     <a href="https://hidden-dusk-28735.herokuapp.com/">https://hidden-dusk-28735.herokuapp.com/</a>
     <p>Just want to make a fake api, just like <a href="https://fakestoreapi.com/docs">How to use fakestoreapi</a>, some data look like this link <a href="https://fakestoreapi.com/products?limit=5">https://fakestoreapi.com/products?limit=5</a>.</p>
 
+    <p>May encounter this bug: Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://hidden-dusk-28735.herokuapp.com/. (Reason: CORS header ‘Access-Control-Allow-Origin’ missing)</p>
+    <p>Solve by adding this to python</p>
+    <pre><code>
+from flask_cors import CORS
+app = Flask(__name__)
+CORS(app)
+    </code></pre>
 
     <h3>References</h3>
     <hr>
