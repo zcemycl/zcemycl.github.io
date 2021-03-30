@@ -94,13 +94,11 @@ heroku authorizations:create # this gives Client,ID,Description,Scope,Token
     <li>Add this to your workflow yml, </li>
     <pre><code> 
 - name: Deploy to Heroku
-  env: 
-    HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
-    HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-  if: github.ref == 'refs/heads/master' && job.status == 'success'
-  run: |
-    git remote add heroku https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git
-    git push heroku HEAD:master -f
+  uses: akhileshns/heroku-deploy@v3.12.12
+  with: 
+    heroku_api_key: ${{ secrets.HEROKU_API_TOKEN }}
+    heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+    heroku_email: ${{ secrets.HEROKU_EMAIL }}
     </code></pre>
     <li>Create a file named <code>Procfile</code> in your repo.</li>
     <pre><code>
@@ -110,6 +108,7 @@ web gunicorn --pythonpath src app:app
     <pre><code>
 python-3.7.6
     </code></pre>
+    <li>Go to your heroku app, Deploy tab &#8594 Github Deployment method &#8594 Connect to your github account and repo (App connected to GitHub) &#8594 Enable Automatic deploys</li>
     </ol>
 
 
