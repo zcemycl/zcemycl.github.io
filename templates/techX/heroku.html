@@ -76,10 +76,40 @@
     <pre><code>
 sudo snap install --classic heroku
 heroku login
+heroku create # in your app folder https://hidden-dusk-28735.herokuapp.com/
     </code></pre>
 
-    <li></li>
-    <li></li>
+    <li>Simplest method to directly update your website is via, </li>
+    <pre><code>
+git push heroku master
+    </code></pre>
+    <li>In order to trigger the update event in heroku when github has tested my new code, the following steps are needed, </li>
+    <li>Authentication is needed to make github and heroku knowing each other. Like, github needs to know your heroku account, heroku needs to know github account, </li>
+    <pre><code> 
+heroku authorizations:create # this gives Client,ID,Description,Scope,Token
+    </code></pre>
+    <li>Put your token in github repo, Settings tab &#8594 Secrets &#8594 New repository secret &#8594 Enter Name and Value (from heroku authorizations) &#8594 Add secret</li>
+
+    <li>Also create a secret in it, heroku app name 'hidden-dusk-28735' from url.</li>
+    <li>Add this to your workflow yml, </li>
+    <pre><code> 
+- name: Deploy to Heroku
+  env: 
+    HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
+    HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+  if: github.ref == 'refs/heads/master' && job.status == 'success'
+  run: |
+    git remote add heroku https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git
+    git push heroku HEAD:master -f
+    </code></pre>
+    <li>Create a file named <code>Procfile</code> in your repo.</li>
+    <pre><code>
+web gunicorn --pythonpath src app:app
+    </code></pre>
+    <li>Update requirements.txt with gunicorn, and edit a file named <code>runtime.txt</code></li>
+    <pre><code>
+python-3.7.6
+    </code></pre>
     </ol>
 
 
@@ -88,6 +118,11 @@ heroku login
 
     <h3>References</h3>
     <hr>
+    <ol>
+    <li><a href="https://devcenter.heroku.com/articles/platform-api-quickstart">Extending Heroku/Platform API/Getting Started with the Platform API</a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+    </ol>
     </div>
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
