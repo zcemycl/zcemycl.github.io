@@ -68,6 +68,82 @@
 
     <h3>SocketIO</h3>
     <hr>
+    <h4>Scripts</h4>    
+    <p><code>main.py</code></p>
+    <pre><code>
+from flask import Flask, render_template
+from flask_socketio import SocketIO
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
+socketio = SocketIO(app)
+
+@app.route('/')
+def sessions():
+    return render_template('session.html')
+
+def messageReceived(methods=['GET', 'POST']):
+    print('message was received!!!')
+
+@socketio.on('my event')
+def handle_my_custom_event(json, methods=['GET', 'POST']):
+    print('received my event: ' + str(json))
+    socketio.emit('my response', json, callback=messageReceived)
+
+if __name__ == '__main__':
+    socketio.run(app, host='192.168.1.100',port=5001,debug=True)
+    </code></pre>    
+
+    <p><code>templates/session.html</code></p>
+    <pre><code>
+&lt!DOCTYPE html&gt
+  &lthtml lang="en"&gt
+  &lthead&gt
+    &lttitle&gtFlask_Chat_App&lt/title&gt
+  &lt/head&gt
+  &ltbody&gt
+
+    &lth3 style='color: #ccc;font-size: 30px;'&gtNo message yet..&lt/h3&gt
+    &ltdiv class="message_holder"&gt&lt/div&gt
+
+    &ltform action="" method="POST"&gt
+      &ltinput type="text" class="username" placeholder="User Name"/&gt
+      &ltinput type="text" class="message" placeholder="Messages"/&gt
+      &ltinput type="submit"/&gt
+    &lt/form&gt
+
+    &lt!-- jQuery (necessary for Bootstrap's JavaScript plugins) --&gt
+    &ltscript src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"&gt&lt/script&gt
+    &ltscript src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"&gt&lt/script&gt
+    &ltscript type="text/javascript"&gt
+      var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+      socket.on( 'connect', function() {
+        socket.emit( 'my event', {
+          data: 'User Connected'
+        } )
+        var form = $( 'form' ).on( 'submit', function( e ) {
+          e.preventDefault()
+          let user_name = $( 'input.username' ).val()
+          let user_input = $( 'input.message' ).val()
+          socket.emit( 'my event', {
+            user_name : user_name,
+            message : user_input
+          } )
+          $( 'input.message' ).val( '' ).focus()
+        } )
+      } )
+      socket.on( 'my response', function( msg ) {
+        console.log( msg )
+        if( typeof msg.user_name !== 'undefined' ) {
+          $( 'h3' ).remove()
+          $( 'div.message_holder' ).append( '&ltdiv&gt&ltb style="color: #000"&gt'+msg.user_name+'&lt/b&gt '+msg.message+'&lt/div&gt' )
+        }
+      })
+    &lt/script&gt    
+    </code></pre>
+    <p>Then just run <code>python main.py</code>.</p>
+
     
     <h3>References</h3>
     <hr>
@@ -75,6 +151,8 @@
     <li><a href="https://www.shanelynn.ie/asynchronous-updates-to-a-webpage-with-flask-and-socket-io/">Asynchronous updates to a webpage with Flask and Socket.io</a></li>
     <li><a href="https://medium.com/dailyjs/combining-react-with-socket-io-for-real-time-goodness-d26168429a34">Combining React with Socket.io for real-time goodness</a></li>
     <li><a href="https://www.youtube.com/watch?v=MCYIQXeoU30">Real-time data update in chart.js using Socket.io | Angular Socket.io client</a></li>
+    <li><a href="https://codeburst.io/building-your-first-chat-application-using-flask-in-7-minutes-f98de4adfa5d">Building your first Chat Application using Flask in 7 minutes</a></li>
+    <li><a href=""></a></li>
     </ol>
 
 
