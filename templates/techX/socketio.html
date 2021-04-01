@@ -68,6 +68,20 @@
 
     <h3>SocketIO</h3>
     <hr>
+    <h4></h4>
+    <pre><code>
+pip install flask-socketio&lt5.0.0 gevent eventlet gevent-websocket greenlet
+npm i socket.io-client
+import flask_socketio
+import eventlet
+eventlet.monkey_patch()
+app = Flask(__name__)
+socketio = SocketIO(app)
+
+import openSocket from 'socket.io-client';
+    </code></pre>
+
+
     <h4>Scripts</h4>    
     <p><code>main.py</code></p>
     <pre><code>
