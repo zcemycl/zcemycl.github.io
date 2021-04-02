@@ -66,8 +66,34 @@
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
 
-    <h3>Topic</h3>
+    <h3>S3 with cloudfront service</h3>
     <hr>
+    <h4>Background</h4>
+    <p>To ensure smooth content/video streaming all over the world, we need to place a copy of the media across servers in the world. So US users do not need to download content in UK server, they can download it more quickly in US server. </p>
+
+    <h4>Steps</h4>
+    <ol>
+    <li>Create S3 Bucket with a specific bucket name. (default is ok)</li>
+    <li>Upload a video file.</li>
+    <li>Create Cloudfront distirbution under Networking & Content Delivery &#8594 Web,</li>
+    <pre><code>
+Origin Domain Name: {bucket-name}.s3.amazonaws.com
+Origin Path: 
+Enable Origin Shield: No
+Origin ID: S3-{bucket-name}
+Restrict Bucket Access: Yes
+Origin Access Identity: Create a New Identity
+Comment: access-identity-{bucket-name}.s3.amazonaws.com
+Grant Read Permissions on Bucket: Yes, Update Bucket Policy
+Viewer Protocol Policy: Redirect HTTP to HTTPS
+Cache and origin request settings: Use a cache policy and origin request policy
+SSL Certificate: Default CloudFront Certificate (*.cloudfront.net)
+    </code></pre>
+    <li>Once it is created, get in your cloudfront distribution &#8594 Invalidation &#8594 Create invalidation &#8594 Edit Object Paths: /</li>
+    <li>Now you will have an endpoint with a format https://{hash}.cloudfront.net/media .</li>
+    <li></li>
+    </ol>
+
     <h3>References</h3>
     <hr>
     </div>
