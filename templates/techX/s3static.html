@@ -68,11 +68,32 @@
 
     <h3>S3 hosting static website</h3>
     <hr>
-    <p>This method hosts the static website in a similar way that github pages do. </p>
+    <p>This method hosts the static website in a similar way that github pages do. It is quite similar to host a website with dynamic domain name, since they are all based on amazonaws.com root domain.</p>
     <h4>Steps</h4>
     <ol>
-    <li></li>
-    <li></li>
+    <li>Enter your s3 Service interface. (Services &#8594 Storage Category &#8594 S3)</li>
+    <li>Create bucket, name it like a website url. </li>
+    <li>Upload a index.html file. </li>
+    <li>Upload an error.html file so that if the browser enters a page that does not exist, this page will be shown. </li>
+    <li>Go into your website bucket &#8594 Adjust Settings &#8594 Static website hosting Enable &#8594 Specify index.html and error.html. </li>
+    <li>Go to Permissions &#8594 Edit Block Public Access &#8594 Unlock Block all Public Access.</li>
+    <li>Edit Bucket Policy,</li>
+    <pre><code>
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::{url}/*" ## please replace url with your website domain name
+        }
+    ]
+}
+    </code></pre>
+    <li>Objects Tab &#8594 Select all files &#8594 Actions &#8594 Make Public</li>
+    <li>Now you can see your page with accessible endpoint, in format http://{url}.s3-website.{region}.amazonaws.com .</li>
     <li></li>
     </ol>
 
