@@ -72,10 +72,26 @@
     <p>Normally, if your server is hosting a website, it comes without ssl cerficiate, you might need to do that by Certbot and LetsEncrypt. However, aws loves to rebrand stuff, so they introduce ACM which can help you to register a ssl certificate with their interface.</p>
 
     <h4>Steps</h4>
+    <p>Assume that you would like to disguise your hash endpoint website (cloudfront distribution) with your company domain, to add custom domain name to cloudfront distribution you need to,</p>
     <ol>
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>Cloudfront Distribution &#8594 General &#8594 Edit &#8594 Set your Alternate Domain Names (CNAMES Canonical names): {url}</li>
+    <li>Edit SSL Certificate to Custom SSL Certificate.</li>
+    <li>Click Request/Import Certificate with ACM.</li>
+    <li>Add Domain name {url}.</li>
+    <li>Select DNS validation as validation method. This leads you to DNS Server/Resolver. Skip Tags and Review. Confirm and Request.</li>
+    <li>Now copy the name and data of CNAME to your DNS Resolver, </li>
+    <pre><code>
+Name: _hash.{subdomain_of_url}
+Type: CNAME
+Data: _hash2.acm-validations.aws.
+    </code></pre>
+    <li>After 'Pending Validation' becomes 'Issued' in Cloudfront dashboard, add another subdomain in DNS Resolver,</li>
+    <pre><code>
+Name: {subdomain_of_url}
+Type: CNAME
+Data: hash.cloudfront.net.
+    </code></pre>
+    <li>Now you should be able to access your media via endpoint company domain.</li>
     </ol>
 
     <h3>References</h3>
