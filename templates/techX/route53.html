@@ -72,11 +72,21 @@
     <p>This acts like a DNS (Domain Name System) Resolver, to redirect your domain name to the relevant IP address, other free open source software can be used like PowerDNS. </p>
 
     <h4>Steps</h4>
+    <p>Assume that you have already got a domain under Route 53 &#8594 Sidebar Domains &#8594 Registered domains,</p>
     <ol>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>Back to Route 53 Dashboard &#8594 Hosted Zone &#8594 Click your domain name.</li>
+    <li>It should have two default records, one is Type NS (Namespace) and one is SOA (Start of Authority).</li>
+    <li>Now Create Record (to forward to S3 record) &#8594 Simple routing &#8594 Next &#8594 Define simple record,</li>
+    <pre><code>
+define subdomain: {???}.happy.com
+Record type: A
+Value/Route traffic to: Alias to S3 Website endpoint
+Region: {where your bucket}
+Bucket: {bucket name}
+Evaluate target health: No (if nothing behind the host)
+    </code></pre>
+    <li>Define simple record &#8594 Create records.</li>
+    <li>Go on ACM, it helps you to register SSL cerificate for your website.  (It will have a button for 'Create record in Route 53'.)</li>
     </ol>
 
 
