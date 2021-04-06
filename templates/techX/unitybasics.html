@@ -81,6 +81,7 @@
         F --> G(Scenes);
         F --> H(Prefabs);
         F --> I(Materials);
+        F --> J(Scripts);
         G --> B;
     </div>
 
@@ -100,8 +101,30 @@
     <li>Materials: store color material, Prefabs: store reusable objects which can be changed easily, Scenes: store all samplescenes, .</li>
     <li>Drag object from hierarchy to prefab to create a storage of reusable objects.</li>
     <li>Create empty object, it acts like an empty folder to store all objects.</li>
+    <li>Edit &#8594 Preferences &#8594 External Tools #&8594 External Script Editor: vscode.</li>
     <li>Add Component: can add behavior scripts and physics to the object.</li>
-    <li></li>
+    <li>Rigid body component: can apply force like gravity.</li>
+    <li>Script component: make sure your script class name is matching your object name.</li>
+    <pre><code>
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
+    </code></pre>
     <li></li>
     <li></li>
     <li></li>
