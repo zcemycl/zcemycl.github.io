@@ -72,8 +72,17 @@
     <h4>One piece of Mesh</h4>
     <p>Weight distribution: red(more) to blue (less)</p>
     <div style="text-align:center">
-    <img src="../../resources/weightpaint.png" style="width:55%">
+    <img src="../../resources/weightpaint.png" style="width:30%">
+    <img src="../../resources/meshv2.png" style="width:30%">
     </div>    
+    <ol>
+    <li>Object Mode &#8594 Select body then bone &#8594 Ctrl+P &#8594 Automatic Weights</li>
+    <li>Select bone &#8594 Alt+P &#8594 Disconnect Bone (can remain parent) / Clear Parent</li>
+    <li>Need poles for leg and hip joint, and leg and foot joint. Remember to uncheck deform.</li>
+    <li>leg needs Under Pose Mode, add Inverse Kinematics &#8594 Target and Pole Target are Amature, Bone 1 is foot pole and Bone 2 leg pole. Pole Angle needs adjustment if any distortion, chain length = 2.</li>
+    <li>foot needs add Copy Rotation, Invert Y and Z, uncheck Inherit Rotation. Target: Armature, and Bone footpole, Target and Owner are Local Space.</li>
+    <li></li>
+    </ol>
 
 
 
