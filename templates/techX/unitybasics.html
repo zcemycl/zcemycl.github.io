@@ -82,6 +82,7 @@
         F --> H(Prefabs);
         F --> I(Materials);
         F --> J(Scripts);
+        F --> P(PhysMaterials);
         G --> B;
     </div>
 
@@ -126,6 +127,23 @@ public class Player : MonoBehaviour
 }
     </code></pre>
     <li>Edit &#8594 Project settings &#8594 Input Manager: It shows the inputs can be used by player. </li>
+    <li>Useful built-in methods in C# script,</li>
+    <pre><code>
+void Start()
+void Update()
+void FixedUpdate()
+void OnCollisionEnter(Collision collision)
+void OnCollisionExit(Collision collision)
+void OnTriggerEnter(Collision other)
+    </code></pre>
+    <li>public (/SerializeField private) variable (/field) in the script will export to Unity. Can drag an empty object to connect with it.</li>
+    
+    <pre><code>
+public datatype dataname;
+[SerializeField] private datatype dataname;
+    </code></pre>
+    <li>Layer Filtering: Click object &#8594 Add Layer named Player &#8594 Change  Layer to Player &#8594 Edit &#8594 Project settings &#8594 Physics uncheck Player layer</li>
+    <li></li>
     <li></li>
     <li></li>
     </ol>
