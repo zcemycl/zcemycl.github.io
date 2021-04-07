@@ -92,6 +92,22 @@
       </video>
     </div>
 
+    <h4>Compatibility with vscode</h4>
+    <ol>
+    <li>
+    <p>[VS Code] Error: The reference assemblies for framework ".NETFramework,Version=v4.7.1" were not found.</p>
+    <pre><code>
+sudo apt install gnupg ca-certificates
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+sudo apt update
+    </code></pre>
+    <p>Then go to your vscode, File &#8594 Preferences &#8594 Settings &#8594 Use Search bar: "Omnisharp: Use Global Mono" &#8594 Change to always.</p>
+    </li>
+    <li></li>
+    </ol>
+
+
     <h3>References</h3>
     <hr>
     <ol>
