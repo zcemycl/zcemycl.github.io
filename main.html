@@ -10,7 +10,8 @@
     ::-webkit-scrollbar {
         width: 5px;
     }
-
+    /* img{width:150px; height:150px; object-fit:cover;background-color:white;} */
+    /* video{width:150px; height:150px; object-fit:contain;background-color:white;} */
     /* Track */
     ::-webkit-scrollbar-track {
         width:5px;
@@ -43,6 +44,41 @@
     ::-webkit-scrollbar-track:active {
         width:5px;
         background: #555;
+    }
+    .row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+    }
+
+    /* Create four equal columns that sits next to each other */
+    .column {
+    flex: 25%;
+    max-width: 23%;
+    padding: 0 1%;
+    }
+
+    .column img {
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%;
+    background-color:white;
+    }
+
+    .column video {
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%;
+    background-color:white;
+    }
+
+    /* Responsive layout - makes a two column-layout instead of four columns */
+    @media screen and (max-width: 800px) {
+    .column {
+        flex: 50%;
+        max-width: 46%;
+        padding: 0 2%;
+    }
     }
 
     </style>
@@ -193,39 +229,49 @@
 
     <div id="Highlights" class="tabcontent">
       <div style="text-align:center;">
-      <img src="https://zcemycl.github.io/resources/top.jpg" style="height:20vh;max-width:80vw">
-      <img src="https://zcemycl.github.io/resources/example_bb.png" style="height:20vh;max-width:80vw">
-      <img src="https://emanual.robotis.com/assets/images/platform/turtlebot3/simulation/turtlebot3_empty_world.png" style="height:20vh;max-width:80vw">
-      <img src="https://zcemycl.github.io/resources/escbldc1.png" style="height:20vh;max-width:80vw">
-      <img src="https://raw.githubusercontent.com/zcemycl/ProbabilisticPerspectiveMachineLearning/master/LIME/result.png" style="height:20vh;max-width:80vw">
-      <img src="https://raw.githubusercontent.com/zcemycl/TF2DeepFloorplan/main/resources/dfpmodel.png" style="height:20vh;max-width:80vw">
-      <img src="https://raw.githubusercontent.com/zcemycl/Robotics/master/Reinforcemnet%20Learning/ValIter1.png" style="height:20vh;max-width:80vw">
-      <img src="https://zcemycl.github.io/resources/eediagram.png" style="height:20vh;background-color:white;max-width:80vw">
-      <img src="https://zcemycl.github.io/resources/ql21_2.png" style="height:20vh;background-color:white;max-width:80vw">
-      <video style="height:20vh;max-width:80vw">
-        <source src="https://zcemycl.github.io/resources/Ant.mp4" type="video/mp4" />
-      </video>
-      <img src="https://zcemycl.github.io/resources/MoneyWheel.gif" style="height:20vh;max-width:80vw">
-      <img src="https://raw.githubusercontent.com/zcemycl/Matlab-GAN/master/CycleGAN/CycleGAN.gif" style="height:20vh;max-width:80vw">
-      <img src="https://raw.githubusercontent.com/zcemycl/Robotics/master/Perception/Logo%20Projection/result.png" style="height:20vh;background-color:white;max-width:80vw">
-      <img src="https://raw.githubusercontent.com/zcemycl/Robotics/master/Perception/3D%20object%20projection/ar_result.png" style="height:20vh;max-width:80vw">
-      <img src="https://zcemycl.github.io/resources/master.png" style="height:20vh;max-width:80vw">
-      <img src="https://zcemycl.github.io/resources/compose.png" style="height:20vh;max-width:80vw">
-      <video style="height:20vh; max-width:80vw">
-        <source src="https://zcemycl.github.io/resources/Calibration.webm" type="video/mp4" />
-      </video>
-      <img src="https://raw.githubusercontent.com/zcemycl/Pytorch_Outpainting_SRN/main/outputs/current.png" style="height:20vh;max-width:80vw">
-      <img src="https://raw.githubusercontent.com/zcemycl/Robotics/master/Estimation%20and%20Learning/Particle%20Localization/particleLocalization.png" style="height:20vh;max-width:80vw">
-      <img src="https://raw.githubusercontent.com/zcemycl/Robotics/master/SIR.gif" style="height:20vh;max-width:80vw">
-      <img src="https://raw.githubusercontent.com/zcemycl/Robotics/master/Aerial%20Robotics/quadcopter2D.gif" style="height:20vh;max-width:80vw">
-      <img src="https://raw.githubusercontent.com/zcemycl/TF2DeepFloorplan/main/resources/epoch60.png" style="height:20vh;max-width:80vw">
-      <img src="https://raw.githubusercontent.com/zcemycl/TF2DeepFloorplan/main/resources/LossR.png" style="height:20vh;max-width:80vw">
-      <img src="https://raw.githubusercontent.com/zcemycl/zcemycl.github.io/master/resources/minSpanTree.png" style="height:20vh;max-width:80vw">
-      <img src="https://raw.githubusercontent.com/zcemycl/zcemycl.github.io/master/resources/SCCs.png" style="height:20vh;max-width:80vw">
+      <div class="row">
 
-      <video style="height:20vh;max-width:80vw">
-        <source src="https://zcemycl.github.io/resources/mlagent.mp4" type="video/mp4" />
-      </video>
+        <div class="column">
+          <img src="https://zcemycl.github.io/resources/top.jpg">
+          <img src="https://zcemycl.github.io/resources/example_bb.png">
+          <img src="https://emanual.robotis.com/assets/images/platform/turtlebot3/simulation/turtlebot3_empty_world.png">
+          <img src="https://zcemycl.github.io/resources/escbldc1.png">
+          <img src="https://raw.githubusercontent.com/zcemycl/ProbabilisticPerspectiveMachineLearning/master/LIME/result.png">
+        </div>
+        <div class="column">
+          <img src="https://zcemycl.github.io/resources/eediagram.png">
+          <img src="https://zcemycl.github.io/resources/ql21_2.png">
+          <video>
+            <source src="https://zcemycl.github.io/resources/Ant.mp4" type="video/mp4" />
+          </video>
+          <img src="https://zcemycl.github.io/resources/MoneyWheel.gif">
+          <img src="https://raw.githubusercontent.com/zcemycl/Matlab-GAN/master/CycleGAN/CycleGAN.gif">
+          <img src="https://raw.githubusercontent.com/zcemycl/Robotics/master/Perception/Logo%20Projection/result.png">
+        </div>
+        <div class="column">
+          <img src="https://raw.githubusercontent.com/zcemycl/Robotics/master/Perception/3D%20object%20projection/ar_result.png">
+          <img src="https://zcemycl.github.io/resources/master.png">
+          <img src="https://zcemycl.github.io/resources/compose.png">
+          <video>
+            <source src="https://zcemycl.github.io/resources/Calibration.webm" type="video/mp4" />
+          </video>
+          <img src="https://raw.githubusercontent.com/zcemycl/Pytorch_Outpainting_SRN/main/outputs/current.png">
+          <img src="https://raw.githubusercontent.com/zcemycl/Robotics/master/Estimation%20and%20Learning/Particle%20Localization/particleLocalization.png">
+          <img src="https://raw.githubusercontent.com/zcemycl/Robotics/master/Reinforcemnet%20Learning/ValIter1.png">
+        </div>
+        <div class="column">
+          <img src="https://raw.githubusercontent.com/zcemycl/Robotics/master/SIR.gif">
+          <img src="https://raw.githubusercontent.com/zcemycl/Robotics/master/Aerial%20Robotics/quadcopter2D.gif">
+          <img src="https://raw.githubusercontent.com/zcemycl/TF2DeepFloorplan/main/resources/dfpmodel.png">
+          <img src="https://raw.githubusercontent.com/zcemycl/TF2DeepFloorplan/main/resources/epoch60.png">
+          <img src="https://raw.githubusercontent.com/zcemycl/TF2DeepFloorplan/main/resources/LossR.png">
+          <img src="https://raw.githubusercontent.com/zcemycl/zcemycl.github.io/master/resources/minSpanTree.png">
+          <img src="https://raw.githubusercontent.com/zcemycl/zcemycl.github.io/master/resources/SCCs.png">
+          <video>
+            <source src="https://zcemycl.github.io/resources/mlagent.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
       </div>
     </div>
 
