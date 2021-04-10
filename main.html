@@ -81,6 +81,34 @@
     }
     }
 
+    .card {
+    border-color:white;
+    border-width: 1px;
+    border-radius: 5px; /* 5px rounded corners */
+    }
+
+    .card div.container{     
+        -webkit-transition: max-height 1s; 
+        -moz-transition: max-height 1s; 
+        -ms-transition: max-height 1s; 
+        -o-transition: max-height 1s; 
+        transition: max-height 1s ease-out, opacity 1s ease-out;
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+    }
+
+    .card:hover div.container{
+        /* display: initial; */
+        max-height: 200px;
+        opacity: 1;
+    }
+
+    /* Add rounded corners to the top left and the top right corner of the image */
+    img {
+    border-radius: 5px 5px 0 0;
+    }
+
     </style>
     <meta name="viewport" content="width=device-width; initial-scale=1.0">
 </head>
@@ -212,6 +240,7 @@
 
     <div id="Updates" class="tabcontent">
         [: //2021 UK]   <br>
+        [18:08 10/04/2021 UK] Adjust Highlights style.  <br>
         [18:39 13/03/2021 UK] 130 Post Tabs !!!  <br>
         [18:34 01/01/2021 UK] Add a new highlight section.  <br>
         [00:36 06/11/2020 UK] Update the first round of mathematical proofs and AI relevant topics.<br>
@@ -232,7 +261,14 @@
       <div class="row">
 
         <div class="column">
-          <img src="https://zcemycl.github.io/resources/top.jpg">
+          <div class="card">
+            <img src="https://zcemycl.github.io/resources/top.jpg">
+            <div class="container">
+              <h4><b>Drone Construction</b></h4>
+              <p>Building drone from scratch, and installing firmware.</p>
+            </div>
+          </div>
+          
           <img src="https://zcemycl.github.io/resources/example_bb.png">
           <img src="https://emanual.robotis.com/assets/images/platform/turtlebot3/simulation/turtlebot3_empty_world.png">
           <img src="https://zcemycl.github.io/resources/escbldc1.png">
@@ -241,7 +277,7 @@
         <div class="column">
           <img src="https://zcemycl.github.io/resources/eediagram.png">
           <img src="https://zcemycl.github.io/resources/ql21_2.png">
-          <video>
+          <video controls>
             <source src="https://zcemycl.github.io/resources/Ant.mp4" type="video/mp4" />
           </video>
           <img src="https://zcemycl.github.io/resources/MoneyWheel.gif">
@@ -252,7 +288,7 @@
           <img src="https://raw.githubusercontent.com/zcemycl/Robotics/master/Perception/3D%20object%20projection/ar_result.png">
           <img src="https://zcemycl.github.io/resources/master.png">
           <img src="https://zcemycl.github.io/resources/compose.png">
-          <video>
+          <video controls>
             <source src="https://zcemycl.github.io/resources/Calibration.webm" type="video/mp4" />
           </video>
           <img src="https://raw.githubusercontent.com/zcemycl/Pytorch_Outpainting_SRN/main/outputs/current.png">
@@ -267,7 +303,7 @@
           <img src="https://raw.githubusercontent.com/zcemycl/TF2DeepFloorplan/main/resources/LossR.png">
           <img src="https://raw.githubusercontent.com/zcemycl/zcemycl.github.io/master/resources/minSpanTree.png">
           <img src="https://raw.githubusercontent.com/zcemycl/zcemycl.github.io/master/resources/SCCs.png">
-          <video>
+          <video controls>
             <source src="https://zcemycl.github.io/resources/mlagent.mp4" type="video/mp4" />
           </video>
         </div>
