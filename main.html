@@ -93,14 +93,21 @@
         -ms-transition: max-height 1s; 
         -o-transition: max-height 1s; 
         transition: max-height 1s ease-out, opacity 1s ease-out;
+        /* -webkit-transition: height 1s; 
+        -moz-transition: height 1s; 
+        -ms-transition: height 1s; 
+        -o-transition: height 1s; 
+        transition: height 1s ease-out, opacity 1s ease-out; */
         overflow: hidden;
         max-height: 0;
+        /* height: 0; */
         opacity: 0;
     }
 
     .card:hover div.container{
         /* display: initial; */
         max-height: 200px;
+        /* height: 100px; */
         opacity: 1;
     }
 
