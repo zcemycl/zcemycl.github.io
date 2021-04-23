@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Elastic Block Store (EBS)</h3>
+    <hr>
+    <p>It acts like your backup hard drive, to store copies of your files. It can be easily plugged in and off to build extra memory space for your system.</p>
+
+    <h4>Backup your EC2 Instance</h4>
+    <ol>
+    <li>EC2 instance &#8594 Select instance.</li>
+    <li>Click Storage Tab at the bottom bar &#8594 Click on volume to backup <code>/dev/sda1</code>.</li>
+    <li>Create Snapshot &#8594 Write some description &#8594 Encrytion (optional) &#8594 Click Create Snapshot button to confirm.</li>
+    <li>Under EBS &#8594 Click Snapshots &#8594 View your snapshots created here.</li>
+    <li>Under EBS, select Snapshot &#8594 Actions &#8594 Create Volume &#8594 Choose the correct availability zone because ec2 instance can only attach volume at the same zone &#8594 Check Encryption then default Master Key &#8594 Create Volume to confirm.</li>
+    <li>Under EBS, Volume &#8594 New Volume will be created in previous step &#8594 Select Volume &#8594 Actions: Attach Volume &#8594 Choose ec2 instance to attach &#8594 Device auto/manual name &#8594 Attach.</li>
+    <li>Login the ec2 instance via SSH. Check attached volumes it should appear without mountpoint.</li>
+    <pre><code>
+lsblk
+    </code></pre>
+    <li>Check file system type. Filesystem data should mount to Boot sector. </li>
+    <pre><code>
+sudo file -s /dev/xvdf1 # filesystem data, this is the target
+sudo file -s /dev/xvdf # not this
+    </code></pre>
+    <li>Mount the new attached volume to data folder.</li>
+    <pre><code>
+sudo mkdir /data
+sudo mount /dev/xvdf1 /data
+    </code></pre>
+    <li>Edit settings in <code>/etc/fstab</code> to make sure the volume always be mounted after reboot.</li>
+    <pre><code>
+LABEL=cloudimg-rootfs / ext4 defaults,discard 0 0
+/dev/xvdf1 /data ext4 defaults,nofail 0 2
+    </code></pre>
+    <li>Unmount, Mount again and Reboot.</li>
+    <pre><code>
+sudo umount /data
+sudo mount -a
+sudo reboot
+    </code></pre>
+    </ol>
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+
+    
+</body>
+</html>
