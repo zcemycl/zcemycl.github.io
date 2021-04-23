@@ -68,13 +68,65 @@
 
     <h3>Apache2</h3>
     <hr>
+    <h4>Installation</h4>
+    <pre><code>
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install apache2
+sudo systemctl start apache2
+sudo systemctl enable apache2
+sudo systemctl status apache2 # should be active
+sudo ufw allow in "Apache Full"
+    </code></pre>
 
 
+    <h4>Testing to host</h4>
+    <ol>
+    <li>Make directory.</li>
+    <pre><code>
+mkdir /var/www/html/random.com
+    </code></pre>
+    <li>Create <code>index.html</code> in <code>/var/www/html/random.com</code>.</li>
+    <pre><code>
+&lthtml&gt
+&lttitle&gtsite1.example.com&lt/title&gt
+&lth1&gtWelcome to site1.example.com Website&lt/h1&gt
+&ltp&gtThis is my first website hosted with name-based virtual hosting&lt/p&gt
+&lt/html&gt
+    </code></pre>
+    <li>Change ownership of directory to www-data.</li>
+    <pre><code>
+sudo chown -R www-data:www-data /var/www/html/random.com
+    </code></pre>
+    <li>Create an Apache virtual host config file <code>/etc/apache2/sites-available/random.com</code>. </li>
+    <pre><code>
+&ltVirtualHost *:80&gt
+ServerAdmin admin@dev.rcg.re5q.ai
+ServerName dev.rcg.re5q.ai
+DocumentRoot /var/www/html/dev.rcg.re5q.ai
 
+DirectoryIndex index.html
+ErrorLog ${APACHE_LOG_DIR}/dev.rcg.re5q.ai_error.log
+CustomLog ${APACHE_LOG_DIR}/dev.rcg.re5q.ai_access.log combined
+&lt/VirtualHost&gt
+    </code></pre>
+    <li>Enable and restart apache2.</li>
+    <pre><code>
+a2ensite random.com
+sudo systemctl restart apache2
+    </code></pre>
+    <li>Add your DNS record to DNS resolver, like Route 53, by mapping Domain name to Public IPv4 address.</li>
+    </ol>
 
 
     <h3>References</h3>
     <hr>
+    <ol>
+    <li><a href="https://www.atlantic.net/vps-hosting/host-multiple-websites-on-a-single-server-with-apache-on-ubuntu-18-04/">Host Multiple Websites on a Single Server with Apache on Ubuntu 18.04</a></li>
+    </ol>
+
+
+
     </div>
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
