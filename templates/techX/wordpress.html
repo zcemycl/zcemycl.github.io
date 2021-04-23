@@ -68,6 +68,71 @@
 
     <h3>EC2 Wordpress</h3>
     <hr>
+    <h4></h4>
+    <ol>
+    <li>Update your ubuntu system 20.04.</li>
+    <li>Install apache2.</li>
+    <li>Install mysql database server.</li>
+    <pre><code>
+sudo apt-get install mysql-server
+sudo systemctl status mysql # active
+sudo -s # be root user root@...
+mysql_secure_installation # pwd: YNNNN
+sudo systemctl start mysql
+sudo systemctl enable mysql
+sudo mysql -u root -p
+CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+CREATE USER wordpress IDENTIFIED WITH mysql_native_password BY 'abcdf';
+GRANT ALL ON wordpress.* TO 'wordpress'@'%';
+    </code></pre>
+    <li>Install PHP.</li>
+    <pre><code>
+sudo apt install php libapache2-mod-php php-mysql
+sudo apt install php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip
+    </code></pre>
+    <li>Download and install wordpress.</li>
+    <pre><code>
+curl -O https://wordpress.org/latest.tar.gz
+tar -xzvf latest.tar.gz
+sudo cp -R wordpress/* /var/www/html/random.com
+sudo chown -R www-data:www-data /var/www/html/random.com
+sudo chmod -R 775 /var/www/html/random.com
+cd /var/www/html/random.com
+sudo mv wp-config-sample.php wp-config.php
+    </code></pre>
+    <li>Edit <code>wp-config.php</code> file.</li>
+    <pre><code>
+DB_NAME = wordpress
+DB_USER = wordpress
+DB_PASSWORD = abcdf
+    </code></pre>
+    <li>Create VirtualHost for wordpress site <code>/etc/apache2/sites-available/random.com.conf</code>. </li>
+    <pre><code>
+&ltVirtualHost *:80&gt
+ServerAdmin admin@random.com
+ServerName random.com
+DocumentRoot /var/www/html/random.com
+ErrorLog ${APACHE_LOG_DIR}/random.com_error.log
+CustomLog ${APACHE_LOG_DIR}/random.com_access.log combined
+&lt/VirtualHost&gt
+    </code></pre>
+    <li>Enable, activate and restart new config with apache2.</li>
+    <pre><code>
+sudo a2ensite dev.rcg.re5q.ai.conf
+sudo systemctl restart apache2
+sudo systemctl enable apache2
+sudo systemctl start mysql
+sudo systemctl enable mysql
+    </code></pre>
+    <li>Add DNS record to resolver. You should be able to browse it after 10 mins? http://random.com/wp-admin</li>
+    <pre><code>
+random.com -&gt public_ip
+    </code></pre>
+    </ol>
+
+
+
+
     <h3>References</h3>
     <hr>
     </div>

@@ -98,16 +98,16 @@ mkdir /var/www/html/random.com
     <pre><code>
 sudo chown -R www-data:www-data /var/www/html/random.com
     </code></pre>
-    <li>Create an Apache virtual host config file <code>/etc/apache2/sites-available/random.com</code>. </li>
+    <li>Create an Apache virtual host config file <code>/etc/apache2/sites-available/random.com.conf</code>. </li>
     <pre><code>
 &ltVirtualHost *:80&gt
-ServerAdmin admin@dev.rcg.re5q.ai
-ServerName dev.rcg.re5q.ai
-DocumentRoot /var/www/html/dev.rcg.re5q.ai
+ServerAdmin admin@random.com
+ServerName random.com
+DocumentRoot /var/www/html/random.com
 
 DirectoryIndex index.html
-ErrorLog ${APACHE_LOG_DIR}/dev.rcg.re5q.ai_error.log
-CustomLog ${APACHE_LOG_DIR}/dev.rcg.re5q.ai_access.log combined
+ErrorLog ${APACHE_LOG_DIR}/random.com_error.log
+CustomLog ${APACHE_LOG_DIR}/random.com_access.log combined
 &lt/VirtualHost&gt
     </code></pre>
     <li>Enable and restart apache2.</li>
