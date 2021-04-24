@@ -85,9 +85,17 @@ Host random_name_for_aws
 
     <h4>How to view virtualhost in ec2 instance?</h4>
     <ol>
-    <li></li>
-    <li></li>
+    <li>Once vscode has connected to ec2 instance, start your php server. </li>
     <pre><code>
+cd root
+php -S localhost:7000 index.php
+nmap -p- localhost # view 7000 is opened
+    </code></pre>
+    <li>You can use terminal and Ctrl+Click localhost:7000. You should be able to view it in browser. </li>
+    <li>To kill the process, find pid and use kill command.</li>
+    <pre><code>
+ps aux | grep php # e.g. 31599
+kill -9 31599
     </code></pre>
     </ol>
 
