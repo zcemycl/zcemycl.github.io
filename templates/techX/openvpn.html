@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>OpenVPN</h3>
+    <hr>
+    <h4>Client</h4>
+    <h5>Windows</h5>
+    <ol>
+    <li>Download the installer via this website https://openvpn.net/community-downloads/. In my case, I downloaded Windows 64-bit MSI Installer.</li>
+    <li>Download your .ovpn file. In your PC, create folder C:\Program Files\OpenVPN\config. Place your file in it.</li>
+    <li>Click the installer and start installing. It should detect your config file.</li>
+    <li>Once everything is done, back to your Desktop. You should see OpenVPN GUI. Or at right bottom corner, show hidden Icons and there should be an icon like a screen with a lock. Right click and connect.</li>
+
+    </ol>
+
+    <h5>Ubuntu</h5>
+    <ol>
+    <li>Install Openvpn. <code>sudo apt-get install openvpn</code></li>
+    <li>Configure. <code>sudo openvpn --config config.ovpn</code></li>
+    <li>If the following errors occur, can do, 
+    <ol>
+    <li>openvpn unrecognized option or missing parameter : PARAM. Delete those tags within the .ovpn file.</li>
+    <li>Cipher Alogrithm 'AES-256-GCM' Not Found (OpenVPN Error). </li>
+    <pre><code>
+sudo curl -s https://swupdate.openvpn.net/repos/repo-public.gpg | apt-key add -
+sudo touch /etc/apt/sources.list.d/openvpn-aptrepo.list
+echo "deb http://build.openvpn.net/debian/openvpn/stable xenial main" &gt /etc/apt/sources.list.d/openvpn-aptrepo.list
+sudo apt update
+sudo apt install openvpn --upgrade
+    </code></pre>
+    <li>Getting “Cannot ioctl TUNSETIFF tun: Operation not permitted” when trying to connect to OpenVPN. Just use root sudo. </li>
+    </ol>
+    </li>
+    <li>Now run <code>sudo openvpn --config config.ovpn</code>. Keep it running as background, and ssh in another command window. This is how ubuntu 16.04 should be done.</li>
+    <li>In Ubuntu 18.04, you can press the connection icon on top right corner and turn on the vpn. </li>
+    </ol>
+
+
+    <h4></h4>
+
+
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+
+    
+</body>
+</html>
