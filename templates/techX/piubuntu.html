@@ -68,16 +68,37 @@
 
     <h3>Pi Setup by Ubuntu</h3>
     <hr>
+    <h4>Flash Pi by Ubuntu</h4>
     <ol>
     <li>Install Raspberry Pi Imager. </li>
     <pre><code>
-    sudo snap install rpi-imager
+sudo snap install rpi-imager
     </code></pre>
     <li>Insert your sd card in card reader.</li>
     <li>Open Raspberry Pi Imager. Select Raspberry Pi OS Full as OS. Select Generic-SD_MMD_MS_PRO as Storage. Press Write.</li>
     <li></li>
     </ol>
 
+    <h4>Remote Desktop Protocol</h4>
+    <ol>
+    <li>Install xrdp in Raspberry Pi.</li>
+    <pre><code>
+sudo apt-get install xrdp
+sudo service xrdp start (stop|restart|status)
+    </code></pre>
+    <li>In Ubuntu, install remmina</li>
+    <pre><code>
+sudo apt install remmina
+    </code></pre>
+    <li>Settings in Remmina</li>
+    <pre><code>
+Server: 192.168.1.xxx
+User name: pi
+User password: raspberry (default)
+Resolution: Use client resolution
+Color depth: GFX RFX (32 bpp)
+    </code></pre>
+    </ol>
 
 
     <h3>References</h3>
@@ -85,7 +106,7 @@
     <li><a href="https://ubuntu.com/tutorials/how-to-sdcard-ubuntu-server-raspberry-pi#2-prepare-the-sd-card">How to create an Ubuntu Server SDcard for Raspberry Pi</a></li>
     <li><a href="https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit">Operating system images</a></li>
     <li><a href="https://labists.com/pages/pi-case">LABISTS Raspberry Pi 4 Kit Quick Starter Guide</a></li>
-    <li><a href=""></a></li>
+    <li><a href="https://raspberrytips.com/remote-desktop-raspberry-pi/">5 ways to remote desktop on Raspberry Pi (Windows/Linux/Mac)</a></li>
     <li><a href=""></a></li>
     </ol>
 
