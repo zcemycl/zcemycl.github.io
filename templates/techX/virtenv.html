@@ -75,10 +75,25 @@
 ipython kernel install --user --name=envname
 jupyter notebook
     </code></pre>
+
+    <h4>Anaconda</h4>
+    <pre><code>
+conda create -n my_env
+conda activate my_env
+conda env update -n my_env --file config.yaml
+python -m ipykernel install --user --name=my_env
+jupyter notebook
+    </code></pre>
+
     <h3>References</h3>
     <hr>
     <ol>
     <li><a href="https://medium.com/@eleroy/jupyter-notebook-in-a-virtual-environment-virtualenv-8f3c3448247">Jupyter notebook in a virtual environment (virtualenv)</a></li>
+    <li><a href="https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#activating-an-environment">conda Managing environments</a></li>
+    <li><a href="https://medium.com/@nrk25693/how-to-add-your-conda-environment-to-your-jupyter-notebook-in-just-4-steps-abeab8b8d084">How to add your Conda environment to your jupyter notebook in just 4 steps</a></li>
+    <li><a href="https://stackoverflow.com/questions/58272405/how-to-install-packages-from-yaml-file-in-conda">How to install packages from yaml file in Conda</a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
     </ol>
     </div>
     <script type="text/javascript" async
