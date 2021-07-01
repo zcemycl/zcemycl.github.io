@@ -75,7 +75,7 @@ import requests
 content = requests.get(urlpage)
     </code></pre>
     <p>It gives the whole html of the static page content.</p>
-    <li>Beautiful Soup</li>
+    <li>Beautiful Soup -- for static page</li>
     <pre><code>
 import requests
 from bs4 import BeautifulSoup
@@ -84,7 +84,7 @@ soup = BeautifulSoup(content.content,'html.parser')
 table = soup.find('table',{'class':'wikitable sortable'})
     </code></pre>
     <p>It is used to scrape static pages.</p>
-    <li>Selenium</li>
+    <li>Selenium -- for dynamic page</li>
     <p>It can be used to automate web browser interaction with Python. Need to install the browser and its driver. </p>
     <pre><code>
 sudo apt-get install firefox
