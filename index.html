@@ -367,35 +367,36 @@
  
   <script>
   const main = async () => {
-        const url = "https://sheet.best/api/sheets/82c23d79-9535-4ef8-9970-f59acfed6f0a"
-        let currentTimestamp = Date.now()
-        let date = new Intl.DateTimeFormat('en-US',
-            {year:'numeric',month:'2-digit',day:'2-digit',
-            hour:'2-digit',minute:'2-digit',second:'2-digit'})
-            .format(currentTimestamp)
-        const respip = await axios.get('https://api.ipify.org/', { crossdomain: true })
-        const ip = respip?.data
-        console.log(ip,date)
-        fetch("https://ipapi.co/"+ip+"/json/")
-            .then((resp)=>resp.json())
-            .then((data)=>{ 
-            console.log(data);
-            const {ip,country_name,latitude,longitude} = data;
-            const ignoreIP = process.env.REACT_APP_IGNORE_IP.split(",")
-            if (selected!=="" && ip && ignoreIP.indexOf(ip)<0 ){
-                const objt = {IP:ip,Topic:selected,
-                    Timestamp:date,Country:country_name,
-                    Lat:latitude,Lng:longitude};
-                axios.post(url,objt)
-                    .then((response) => {
-                        console.log(response);
-                    });
-            }   
-        })
-        .catch(e=>{})
-    };
+      const url = "https://sheet.best/api/sheets/82c23d79-9535-4ef8-9970-f59acfed6f0a"
+      let currentTimestamp = Date.now()
+      let date = new Intl.DateTimeFormat('en-US',
+          {year:'numeric',month:'2-digit',day:'2-digit',
+          hour:'2-digit',minute:'2-digit',second:'2-digit'})
+          .format(currentTimestamp)
+      const respip = await axios.get('https://api.ipify.org/', { crossdomain: true })
+      const ip = respip?.data
+      console.log(ip,date)
+      fetch("https://ipapi.co/"+ip+"/json/")
+          .then((resp)=>resp.json())
+          .then((data)=>{ 
+          console.log(data);
+          const selected = "zcemycl.github.io"
+          const {ip,country_name,latitude,longitude} = data;
+          const ignoreIP = process.env.REACT_APP_IGNORE_IP.split(",")
+          if (selected!=="" && ip && ignoreIP.indexOf(ip)<0 ){
+              const objt = {IP:ip,Topic:selected,
+                  Timestamp:date,Country:country_name,
+                  Lat:latitude,Lng:longitude};
+              axios.post(url,objt)
+                  .then((response) => {
+                      console.log(response);
+                  });
+          }   
+      })
+      .catch(e=>{})
+  };
 
-    main();
+  main();
 
   </script>
 
