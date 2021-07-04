@@ -4,3 +4,4 @@ resources/.ipynb_checkpoints/*
 templates/techX/*.swp
 templates/mp/*.swp
 templates/ai/*.swp
+.env
