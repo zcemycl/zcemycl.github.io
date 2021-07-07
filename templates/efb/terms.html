@@ -74,8 +74,8 @@
     <div class="mermaid" style="background-color:white; max-width:80vw">
     graph LR
         A[Asset 資產] --> B["Equities (stocks)股票"];
-        B --> C["Fixed Income (bonds)"];      
-        B --> D[Alternatives];
+        A --> C["Fixed Income (bonds)"];      
+        A --> D[Alternatives];
         D --> E[Venture Capital風險投資];
         D --> F[Hedge Funds對沖基金];
         D --> G[Private Equity];
@@ -91,7 +91,7 @@
     <h4>Debt</h4>
     <div style="text-align:center;">
     <div class="mermaid" style="background-color:white; max-width:80vw">
-    graph LR
+    graph TD
         A[Debt] --> B[Secured];
         A --> C[Unsecured];
         A --> D[Revolving];
@@ -99,6 +99,47 @@
         A --> F[Corporate];
     </div>
     </div>
+
+    <h4>Fund</h4>
+    <div style="text-align:center;">
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    graph LR;
+        A[Fund] --> B[Emergency];
+        A --> C[College];
+        A --> D[Trust];
+        A --> E[Retirement];
+        A --> F[Mutual];
+        A --> G[Money-market];
+        A --> H[Exchange-traded];
+        A --> I[Hedge];
+        A --> J[Government bond];
+        A --> K[Debt-service];
+        A --> L[Capital projects];
+        A --> M[Permanent];
+    </div>
+    </div>
+
+    <h4>Bond</h4>
+    <div style="text-align:center;">
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    graph LR;
+        A[Bond] --> B[Corporate];
+        A --> C[Municipal];
+        A --> D[Government];
+        A --> E[Agency];
+        A --> F(Zero-Coupon);
+        A --> G(Convertible);
+        A --> H(Callable);
+        A --> I(Puttable);
+    </div>
+    </div>
+
+
+    <!--<h4></h4>
+    <div style="text-align:center;">
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    </div>
+    </div>--!>
 
 
     <h3>References</h3>
