@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Notes 1</h3>
+    <hr>
+    <h4>How Federal Funds Rate works</h4>
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    sequenceDiagram
+        participant FOMC;
+        participant commercial bank;
+        participant market;
+        FOMC->>commercial bank: increase Federal Funds Rate;
+        commercial bank->>market: more cash flow;
+        loop 
+            market->>market: boost activities
+        end
+        Note right of market: ideally
+    </div>
+
+    <h4>Bank reserves 銀行儲備</h4>
+    <ul>
+    <li>Minimum amounts of cash that banks are required to keep on hand regulated by Central bank in case of unexpected demand. Reverse rate (reverse vs deposit) has been set at 0 to 10%.</li>
+    <li>Central can use reverse levels as a weapon in monetary policy. Lower requirement to facilitate economic activity. Or demand to increase to slow down growth by fund rate. </li>
+    <li>Federal Reserve 聯邦儲備 and central banks can also use quantitative easing in order to control the reserve.</li>
+    <li></li>
+    </ul>
+
+    <h4>Government Bond</h4>
+    <ul>
+    <li>Treasury bills (T-bills) less than 1 yr.</li>
+    <li>Treasury notes (T-notes) 1-10 yrs.</li>
+    <li>Treasury bonds (T-bonds) more than 10 yrs.</li>
+    <li>These fixed income securities help government to get funds from consumers and investors. It is based on full faith and credit of the government. Investors can expect a high degree of safety and a steady but unspectacular profit from this. Upon maturity, these will return their face value.</li>
+    </ul>
+
+    <h4>Security</h4>
+
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    graph LR;
+        A[equity = stock 股票] --> B[security 証券];
+        C[bond 債券] --> D[debt];
+        D --> B;
+        C --> E[government];
+        C --> F[corporate];
+        D --> G[hybrid];
+        A --> G;
+        G --> B;
+        G --> H[equity warrants];
+        H --> I[like startups];
+        G --> J[convertible bonds];
+    </div>
+    <ul>
+    <li>An initial public offering (IPO) represents a company's first major sale of equity securities to the public. This is one of the methods in primary market, full of venture capitalists / angel investors.</li>
+    <li>Secondary market: aftermarket, securities are simply transferred as assets from one investor to another.</li>
+    <li>Public offer and sale of securities are regulated by US Securities and Exchange Commission (SEC) 証券交易委員會.</li>
+    <li>Self Regulatory Organizations (SROs)自我監管協會 within brokerage industry often take on regulatory positions as well. </li>
+    <li></li>
+    </ul>
+
+    <p>Definition of a security offering</p>
+    <ul> 
+    <li>Existence of an investment contract</li>   
+    <li>Formation of a common enterprise</li>   
+    <li>A promise of profits by the issuer</li>   
+    <li>Use of a 3rd party to promote the offering</li>   
+    </ul>
+
+
+
+
+
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
