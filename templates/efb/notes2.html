@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Notes 2</h3>
+    <hr>
+
+    <h4>Stock Symbol (Ticker)</h4>
+    <ul>
+    <li>Stock symbol is an arrangement of characters, around 4-5 characters, representing pubicly-traded securities on an exchange. It can denote additional characteristics like share class or trading restrictions.</li>
+    <li>Different types of stock symbols, include preferred stock (PR) like CTC.PR.A, voting rights GOOG (Class C shares) and GOOGL (Class A shares), BRK.A (greater voting rights) and BRK.B, etc.</li>
+
+<li>    A: Class A shares, e.g BRK.A</li>
+<li>    B: Class B shares, e.g. BRK.B</li>
+<li>    C: Issuer Qualification Exception—the company does not meet all the exchange’s listing requirements but can remain listed on the exchange for a short time period.</li>
+<li>    D: New issue of existing stock</li>
+<li>    E: Delinquent or missed one or more SEC required filings (may also be denoted by .LF)</li>
+<li>    F: Foreign issue</li>
+<li>    G: First convertible bond</li>
+<li>    H: Second convertible bond</li>
+<li>    I: Third convertible bond</li>
+<li>    J: Voting share</li>
+<li>    K: Non-voting share</li>
+<li>    L: Miscellaneous (e.g., foreign preferred, third-class of warrants, preferred when-issued, fifth class preferred shares, etc.)</li>
+<li>    M: Fourth-class preferred shares</li>
+<li>    N: Third-class preferred shares</li>
+<li>    O: Second-class preferred shares</li>
+<li>    P: First-class preferred shares</li>
+<li>    Q: In bankruptcy proceedings</li>
+<li>    R: Rights</li>
+<li>    S: Shares of beneficial interest</li>
+<li>    T: With warrants or with rights</li>
+<li>    U: Units</li>
+<li>    V: When-issued and when-distributed. These shares are about to go through a corporate action plan that has already been announced, such as a stock split.</li>
+<li>    W: Warrants</li>
+<li>    X: Mutual Funds</li>
+<li>    Y: American Depository Receipt (ADR)</li>
+<li>    Z: Miscellaneous situations (same as the letter L)</li>
+<li>    OB: Over-the-counter bulletin board</li>
+<li>    PK: Pink sheets stock</li>
+<li>    SC: Nasdaq Small-cap</li>
+<li>    NM: Nasdaq National Market</li>
+
+    </ul>
+
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
