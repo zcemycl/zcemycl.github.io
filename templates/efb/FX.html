@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Forex (Foreign Exchange FX) market</h3>
+    <hr>
+    <ul>
+    <li>Global marketplace for exchanging national currencies.</li>
+    <li>Largest and most liquid asset markets.</li>
+    <li>Currencies trade against each other as exchange rate pairs, like EUR/USD.</li>
+    <li>Spot (Cash) markets as well as derivatives markets offering forwards, futures, options, and currency swaps.</li>
+    <li>Sometimes hedge against international currency and interest rate risk, to speculate on geopolitical events, and to diversify portfolios, among several other reasons.</li>
+    <li>Trade is conducted over-the-counter.</li>
+    <li>Trader can earn the interest rate differential, and profit from changes in exchange rate.</li>
+    <li><b>Spot Market</b> is where currencies are bought and sold based on their trading price. </li>
+    <li><b>Forward contract</b> is a private agreement between two parties to buy a currency at a future date and at a pre-determined price in OTC.</li>
+    <li><b>Future contract</b> is a standardized agreement between two parties to take delivery of a currency at a future date and at a pre-determined price.</li>
+    <li>Forward and Future Contracts do not trade actual currencies. INSTEAD they deal in contracts that represent claims to a certain currency type, a specific price per unit and a future date for settlement.</li>
+    <li></li>
+    </ul>
+
+    <h4>What Factors affect Foreign Exchange Rates</h4>
+    <h5><b>Inflation</b></h5> 
+    <p>It is the decline of purchasing power of a given currency over time.</p>
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    sequenceDiagram
+        participant Market;
+        participant Trader;
+        participant FX;
+        Market->>Trader: Inflation causes difficulties to purchase products.;
+        Trader->>FX: Less exchange of that currency.;
+        loop
+            FX->>FX: Less demand of that currency.;
+        end
+    </div>
+    <p>Consumer Price Index (CPI), basket of goods, Producer Price Index (PPI), </p>
+
+
+    <h5><b>Interest Rate</b></h5> 
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    sequenceDiagram
+        participant Market;
+        loop
+            Market->>Market: More economic activities need more cash flow;
+        end
+        participant Bank;
+        Market->>Bank: Lender can gain more money by increaing interest rate;
+        participant Trader;
+        participant FX;
+        Bank-->>Trader: ;
+        Trader->>FX: Wants to deposit in bank to get more interest;
+    </div>
+
+
+    <h5><b>Government Debt</b></h5> 
+
+    <h5><b>Terms of Trade</b></h5> 
+    <p>The terms of trade is the ratio of export prices to import prices. Exports prices rise at a greater rate than its imports prices, resulting in higher demand for the country's currency and its value. </p>    
+
+    <h5><b>Political Stability & Performance</b></h5> 
+    <p>The currency can become unreliable and have less purchasing power. Trader would not like to keep that currency, demand goes down, and the exchange rate is lowered.</p>
+
+
+    <h5><b>Recession</b></h5> 
+    <p>A period of temporary economic decline during which trade and industrial activity are reduced, generally identified by a fall in GDP in two successive quarters.</p>
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
