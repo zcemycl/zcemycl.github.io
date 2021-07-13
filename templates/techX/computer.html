@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Computer Parts</h3>
+    <hr>
+
+    <div style="text-align:center;">
+    <img src="../../resources/b450-a-pro-hero.png" style="width:30%"/>
+    </div>
+
+    <p>Here will discuss different computer parts, and how peripherals are connected. I will use Ryzen B450 Pro motherboard as an example.</p>
+
+    <p>One of the most difficult tasks for setting a PC is to connect all connectors.</p>
+    <ol>
+    <li>Power Supply of Motherboard: ATX 24-Pin 12 V PSU Connector. (ATX: Advanced Technology Extended, PSU: Power Supply Unit).</li>
+    <div style="text-align:center;"> 
+    <img src="../../resources/24pins.webp" style="width:30%"/>
+    </div>   
+    <li>Power Supply of CPU: it is a 8 pins cable extended from Corsair RM750 Fan.</li>
+    <div style="text-align:center;"> 
+    <img src="../../resources/8pins.png" style="width:30%"/>
+    <img src="../../resources/8pinouts.jpg" style="width:30%"/>
+    </div>   
+    <li>A1425L 12S-2 Chassis (case) fan: CHA_FAN can use 3 pins cable.</li>
+    <div style="text-align:center;"> 
+    <img src="../../resources/3pins.jpg" style="width:30%"/>
+    <img src="../../resources/s-l225.jpg" style="width:30%"/>
+    </div>   
+    <li>AMD Wraith Cooler Fan: CPU_FAN. It has 4 pins with a plate between pin 2 to 4. </li>
+    <div style="text-align:center;"> 
+    <img src="../../resources/615uW1DbLVL._AC_SL1500_.jpg" style="width:30%"/>
+    <img src="../../resources/d4799735-331510.png" style="width:30%"/>
+    </div>   
+    <li>There are other fan marks, like SYS_FAN (system fan), etc.</li>
+    <li>USB 9 pin connector</li>
+    <div style="text-align:center;"> 
+    <img src="../../resources/9pins.jpg" style="width:30%"/>
+    <img src="../../resources/9pinouts.jpg" style="width:30%"/>
+    </div>   
+    <li>USB 19 pin connector</li>
+    <div style="text-align:center;"> 
+    <img src="../../resources/19pins.jpeg" style="width:30%"/>
+    <img src="../../resources/19pinouts.jpg" style="width:30%"/>
+    </div>   
+    <li>HD Audio</li>
+    <div style="text-align:center;"> 
+    <img src="../../resources/hdaudioheader.jpg" style="width:30%"/>
+    </div>   
+    <li>SPK/PLED: Speaker/Power LED, 4 pin connector.</li>
+    <li>PWRBTN: Power Button, 2 pin.</li>
+    <li>RESET, 2 pin.</li>
+    <li>HDDLED: HDD LED Indicator to show hard disk drive and SSD activity, 2 pin.</li>
+    <li>Triangle sign: positive. Left: +, Right: -.</li>
+    <li>CORSAIR RM 750</li>
+    <div style="text-align:center;"> 
+    <img src="../../resources/-CP-9020055-UK-Gallery-RM750-01.webp" style="width:30%"/>
+    </div>   
+    <li>V-NAND SSD 970 EVO</li>
+    <div style="text-align:center;"> 
+    <img src="../../resources/970evo.jpg" style="width:30%"/>
+    </div>   
+    <li>Graphic card</li>
+    <li></li>
+    <li></li>
+    </ol>
+
+
+
+    <div style="text-align:center;"> 
+    <img src="" style="width:30%"/>
+    </div>   
+
+
+
+    <h3>References</h3>
+    <hr>
+    <ol>
+    <li><a href="https://www.lifewire.com/atx-24-pin-12v-power-supply-pinout-2624578">ATX 24-pin 12V Power Supply Pinout</a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+    </ol>
+
+
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
