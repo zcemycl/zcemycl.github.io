@@ -69,6 +69,19 @@
 
     <h3>Exec Node</h3>
     <hr>
+    <div style="text-align:center">
+    <img src="../../resources/exec.png" style="width:50%"/>
+    </div>
+    <p>Execute code in local terminal.</p>
+    <div style="text-align:center;">
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    graph LR;
+        A[inject] -->|"msg.payload [str] = ls"| B[exec];
+        B -->|_msgid,payload,rc| C[debug:stdout];
+        B -->|_msgid,payload,rc| D[debug:stderr];
+        B -->|_msgid,payload| E[debug:code];
+    </div>
+    </div>
 
 
 
