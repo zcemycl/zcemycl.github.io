@@ -113,16 +113,41 @@ sudo rm /var/lib/dpkg/lock
 
 
 
+      <li>Keyboard and Mouse not working at login screen</li>
+        <ul>
+        <li>Install <code>xserver-xorg-input</code>.</li>
+        <pre><code>
+sudo apt-get install xserver-xorg-input-all
+        </code></pre>
+        </ul>
+
+      <li>Send messages between Ubuntu PCs</li>
+        <ul>
+        <li>Can use ssh and libnotify-bin</li>
+        <pre><code>
+sudo apt-get install ssh libnotify-bin
+ssh username@ip
+export DISPLAY=:0
+notify-send "Title of message" "message text"
+        </code></pre>
+        </ul>
+
       <li></li>
         <ul>
         <li></li>
         </ul>
 
-
-
     </ol>
     <h3>References</h3>
     <hr>
+    <ol>
+    <li><a href="https://askubuntu.com/questions/1135717/ubuntu-18-04-keyboard-and-mouse-not-working-at-login-screen">Ubuntu 18.04 keyboard and mouse not working at login screen</a></li>
+    <li><a href="https://zoomadmin.com/HowToInstall/UbuntuPackage/xserver-xorg-input-all">How To Install "xserver-xorg-input-all" Package on Ubuntu</a></li>
+    <li><a href="https://askubuntu.com/questions/1033767/keyboard-not-working-after-update-to-18-04">Keyboard not working after update to 18.04</a></li>
+    <li><a href=""></a></li>
+    </ol>
+
+
     </div>
 
     
