@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Ubuntu 18.04 Virtual Network Computing</h3>
+    <hr>
+    <p>To remote control another machine Ubuntu 18.04 in LAN from Windows 10, you can use Remote Desktop Connection.  </p>
+
+    <h4>Ubuntu 18.04 VNC server</h4>
+    <ol>
+    <li>In Ubuntu 18.04, search <code>Desktop Sharing</code>.</li>
+    <li>Click <code>Screen Sharing</code>.</li>
+    <li>Tick <code>Allow connections to control the screen</code>.</li>
+    <li>Tick <code>Require a password</code>.</li>
+    <li>Enter a password.</li>
+    <li>Turn on Networks Wifi (LAN).</li>
+    <li>Close.</li>
+    <li>Disable Encryption.</li>
+    <pre><code>
+sudo apt install dconf-editor
+dconf-editor # launch it
+    </code></pre>
+    <li>Navigate to org &#8594 gnome &#8594 desktop &#8594 remote-access. Uncheck <code>require-encryption</code>.</li>
+    </ol>
+
+    <h4>Windows 10 Remote Desktop Connection</h4>
+    <ol>
+    <li>Enter these in General, then click <code>Connect</code>,</li>
+    <pre><code>
+Computer: 192.168.1.100
+Username: yui
+    </code></pre>
+    <li>In the blue screen with a small window at the middle, </li>
+    <pre><code>
+Session: vnc-any
+ip: 192.168.1.100
+port: 5900
+password: [you set before]
+    </code></pre>
+    <li>Click <code>OK</code>.</li>
+    </ol>
+
+
+
+
+    <h3>References</h3>
+    <hr>
+
+    <ol>
+    <li><a href="https://askubuntu.com/questions/155477/how-do-i-remotely-control-another-ubuntu-desktop-from-ubuntu">StackExchange -- How do I remotely control another Ubuntu desktop from Ubuntu?</a></li>
+    <li><a href=""></a></li>
+    </ol>
+
+
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
