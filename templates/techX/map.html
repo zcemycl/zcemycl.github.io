@@ -68,6 +68,30 @@
 
     <h3>Map Visualization</h3>
     <hr>
+    <h4>Installation</h4>
+    <pre><code>
+pip install geopandas
+sudo apt-get install libproj-dev proj-data proj-bin  
+sudo apt-get install libgeos-dev
+pip install cython cartopy
+pip install Cartopy Cython
+pip install geoplot
+    </code></pre>
+
+    <h4>Basic Code</h4>
+    <pre><code>
+import geopandas as gpd
+import geoplot as gpt
+
+ePATH = './Electoral_Divisions_-_OSi_National_Statutory_Boundaries.geojson'
+df_places = gpd.read_file(ePATH)
+df_places.plot() # plot the whole map defined by geojson
+df_places['geometry'][0] # only plot one polygon
+df_places['Count_Placeholder'] = np.random.randint(10,size=df_places.shape[0])
+
+gpt.choropleth(df_places,hue=df_places['Count_Placeholder'],cmap='Greens') # plot each polygon with a color under colormap
+    </code></pre>
+    
 
     <h3>References</h3>
     <hr>
@@ -80,6 +104,7 @@
     <li><a href="https://leafletjs.com/">Leaflet an open-source Javascript library for mobile-friendly interactive maps</a></li>
     <li><a href="https://deparkes.co.uk/2016/06/24/folium-marker-clusters/">Folium Marker Clusters</a></li>
     <li><a href="https://leafletjs.com/plugins.html">Leaflet Plugins</a></li>
+    <li><a href="https://geopandas.org/gallery/plotting_with_geoplot.html">Plotting with Geoplot and GeoPandas</a></li>
     </ol>
 
     </div>
