@@ -397,7 +397,7 @@
           .format(currentTimestamp)
       const respip = await axios.get('https://api.ipify.org/', { crossdomain: true })
       const ip = respip?.data
-      var ignoreIP = '188.214.14.65,82.132.230.178,213.86.131.10,82.163.221.82'
+      var ignoreIP = '188.214.14.65,82.132.230.178,213.86.131.10,82.163.221.82,35.177.125.81'
       fetch("https://ipapi.co/"+ip+"/json/")
           .then((resp)=>resp.json())
           .then((data)=>{ 
