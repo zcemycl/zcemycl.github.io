@@ -132,7 +132,7 @@ notify-send "Title of message" "message text"
         </code></pre>
         </ul>
 
-      <li>Cannot find Network Manager</li>
+      <li>Debian -- Cannot find Network Manager</li>
         <ul>
         <li>Start the network manager service by,</li>
         <pre><code>
@@ -140,10 +140,38 @@ sudo /etc/init.d/network-manager start
         </code></pre>
         </ul>
 
+      <li>Ubuntu -- No wired connection - Wired unmanaged</li>
+        <ul>
+        <li>Edit network manager configuration.</li>
+        <pre><code>
+sudo vim /etc/NetworkManager/NetworkManager.conf
+##
+managed=false -&#8594 true
+##
+sudo service network-manager restart
+        </code></pre>
+        <li>Ubuntu desktop installed shows wired unmanaged (more for vm)</li>
+        <pre><code>
+cd /etc/netplan
+sudo cp 50-cloud-init.yaml 50-cloud-init_copy.yaml
+sudo vim 50-cloud-init.yaml
+##
+network:
+    renderer: NetworkManager ### add this
+...
+##
+sudo netplan apply
+        </code></pre>
+        </ul>
+
+
       <li></li>
         <ul>
         <li></li>
         </ul>
+
+
+
     </ol>
     <h3>References</h3>
     <hr>
@@ -151,6 +179,7 @@ sudo /etc/init.d/network-manager start
     <li><a href="https://askubuntu.com/questions/1135717/ubuntu-18-04-keyboard-and-mouse-not-working-at-login-screen">Ubuntu 18.04 keyboard and mouse not working at login screen</a></li>
     <li><a href="https://zoomadmin.com/HowToInstall/UbuntuPackage/xserver-xorg-input-all">How To Install "xserver-xorg-input-all" Package on Ubuntu</a></li>
     <li><a href="https://askubuntu.com/questions/1033767/keyboard-not-working-after-update-to-18-04">Keyboard not working after update to 18.04</a></li>
+    <li><a href="https://askubuntu.com/questions/1039233/no-wired-connection-wired-unmanaged-ubuntu-18-04">No wired connection - Wired unmanaged ubuntu 18.04</a></li>
     <li><a href=""></a></li>
     </ol>
 

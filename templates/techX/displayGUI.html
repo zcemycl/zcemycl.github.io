@@ -67,57 +67,40 @@
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
 
-    <h3>Ubuntu 18.04 Virtual Network Computing</h3>
+    <h3>Display GUI</h3>
     <hr>
-    <p>To remote control another machine Ubuntu 18.04 in LAN from Windows 10, you can use Remote Desktop Connection.  </p>
-
-    <h4>Ubuntu 18.04 VNC server</h4>
-    <ol>
-    <li>In Ubuntu 18.04, search <code>Desktop Sharing</code>.</li>
-    <li>Click <code>Screen Sharing</code>.</li>
-    <li>Tick <code>Allow connections to control the screen</code>.</li>
-    <li>Tick <code>Require a password</code>.</li>
-    <li>Enter a password.</li>
-    <li>Turn on Networks Wifi (LAN).</li>
-    <li>Close.</li>
-    <li>Disable Encryption.</li>
+    <p>Whenever an ubuntu VM or an ubuntu server are set up, it is quite rare to get the GUI as default. But if you want to VNC or RDP, you might need one. </p>
+    <h4>Installation</h4>
     <pre><code>
-sudo apt install dconf-editor
-dconf-editor # launch it
+sudo apt-get install tasksel # tasksel manager to install GUIs
+sudo apt-get install slim
+sudo apt-get install lightdm
+sudo tasksel # UpDown to navigate, Space to select, Tab to OK, Enter.
+sudo service slim start # start display manager -- slim
+sudo systemctl set-default graphical
+sudo systemctl start gdm3
+sudo reboot
     </code></pre>
-    <li>Navigate to org &#8594 gnome &#8594 desktop &#8594 remote-access. Uncheck <code>require-encryption</code>.</li>
-    </ol>
 
 
+    <p>This should allow you to login the computer with GUIs.</p>
 
-    <h4>Windows 10 Remote Desktop Connection</h4>
-    <ol>
-    <li>Enter these in General, then click <code>Connect</code>,</li>
+
     <pre><code>
-Computer: 192.168.1.100
-Username: yui
     </code></pre>
-    <li>In the blue screen with a small window at the middle, </li>
-    <pre><code>
-Session: vnc-any
-ip: 192.168.1.100
-port: 5900
-password: [you set before]
-    </code></pre>
-    <li>Click <code>OK</code>.</li>
-    </ol>
 
-    <p>Sometimes, RDP Client in Windows does not work that well with vnc. You can install tinyVNC viewer installed in Windows, or Remmina default in Ubuntu.</p>
+
+
 
 
     <h3>References</h3>
     <hr>
-
     <ol>
-    <li><a href="https://askubuntu.com/questions/155477/how-do-i-remotely-control-another-ubuntu-desktop-from-ubuntu">StackExchange -- How do I remotely control another Ubuntu desktop from Ubuntu?</a></li>
-    <li><a href="https://ubuntuhandbook.org/index.php/2016/07/remote-access-ubuntu-16-04/">How to Remote Access to Ubuntu 16.04 from Windows</a></li>
+    <li><a href="https://phoenixnap.com/kb/how-to-install-a-gui-on-ubuntu">How to Install a Desktop (GUI) on an Ubuntu Server</a></li>
+    <li><a href="https://linuxconfig.org/how-to-disable-enable-gui-on-boot-in-ubuntu-20-04-focal-fossa-linux-desktop">How to disable/enable GUI on boot in Ubuntu 20.04 Focal Fossa Linux Desktop </a></li>
     <li><a href=""></a></li>
     </ol>
+
 
 
     </div>
