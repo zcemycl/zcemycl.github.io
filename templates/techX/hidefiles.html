@@ -88,9 +88,11 @@ attrib +h b.txt # hide it from dir
 
 
     <h4>Linux</h4>
-    <p>Turn a file into an image, using Steganography <code>steghide</code>.</p>
+    <p>Hide a file into an image, using Steganography <code>steghide</code>.</p>
     <pre><code>
 sudo apt install steghide
+steghide embed -cf wheretohide.jpg -ef hidethis.txt # 
+steghide extract -sf wheretohide.jpg
     </code></pre>
 
     <h3>References</h3>
