@@ -118,10 +118,13 @@ sudo cat /etc/shadow | grep username # it should be shown in between 1st : and 2
     </code></pre>
     <li>Create password list file and hash file, then run hashcat, </li>
     <pre><code>
-sudo hashcat -a 0 -m 1800 -o output.txt hashes.txt passwords.txt 
+sudo hashcat -a 0 -m 1800 -o cc.txt hh2.txt pp2.txt --potfile-path ./pot.pot 
 # a: attack mode , m: hash type, o: output
+sudo cat cc.txt # only sudo vim sudo cat can show
     </code></pre>
+    <p>If it has matches, it outputs cc.txt file. You need to reset the matches by deleting pot file. </p>
     </ol>
+    
 
     <h3>References</h3>
     <hr>
@@ -129,6 +132,8 @@ sudo hashcat -a 0 -m 1800 -o output.txt hashes.txt passwords.txt
     <li><a href="https://github.com/danielmiessler/SecLists/blob/master/Passwords/Leaked-Databases/rockyou-20.txt">rockyou password list</a></li>
     <li><a href="https://security.stackexchange.com/questions/134679/how-does-an-attacker-get-access-to-hashed-passwords">How does an attacker get access to hashed passwords?</a></li>
     <li><a href="https://owasp.org/www-project-top-ten/">Top 10 Web Application Security Risks</a></li>
+    <li><a href="https://askubuntu.com/questions/796770/how-to-install-libopencl-so-on-ubuntu">How to install libOpenCL.so on ubuntu</a></li>
+    <li><a href="https://hashcat.net/wiki/doku.php?id=timeout_patch">Driver Timeout Patch</a></li>
     <li><a href=""></a></li>
     </ol>
 
