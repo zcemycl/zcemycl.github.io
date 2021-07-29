@@ -69,8 +69,51 @@
 
     <h3>Password Cracking</h3>
     <hr>
+    <p>Every method is a brute-force attack, but passwords can be tried in different smart ways, here we can use <code>hydra</code> and <code>hashcat</code>.</p>
+
+    <h4>Installations</h4>
+    <pre><code>
+sudo apt install hydra
+sudo apt install hashcat
+    </code></pre>
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+
+    flowchart TD
+        A[online] --- B[offline];
+        subgraph "Method 1";
+        A --> C(hydra);
+        end;
+        subgraph "Method 2";
+        B --> D(hashcat)
+        end;
+    </div>
+
+    <h4>Online method</h4>
+    <p>Online method is a way to hack the password by trial and error with their login page. This is easily blocked by firewall with too many unsuccessful attempts. </p>
+    <h4>Offline method</h4>
+    <p>Offline requires the hacker to find the password hash beforehand. And crack the password by knowing which hash table it is (whether it is from windows 10, unix, shasum, md5, etc.).</p>
+
+    <h4>Terminologies</h4>
+    <ul>
+    <li>Dictionary Attack, like using the list of rockyou password.</li>
+    <li>Online Attack</li>
+    <li>Offline Attack</li>
+    <li></li>
+    <li></li>
+    </ul>
+
+
+
+
     <h3>References</h3>
     <hr>
+    <ol>
+    <li><a href="https://github.com/danielmiessler/SecLists/blob/master/Passwords/Leaked-Databases/rockyou-20.txt">rockyou password list</a></li>
+    <li><a href=""></a></li>
+    </ol>
+
+
+
     </div>
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
