@@ -109,8 +109,19 @@ sudo hydra -L usernames.txt -P pwds.txt ip ssh # L for list of users, P for list
 sudo hydar -l "username"  -p "pwd" ip ssh # l for one user, p for one password
     </code></pre>
 
-    
-
+    <h4>How to use hashcat?</h4>
+    <ol>
+    <li>Find the hash from,</li>
+    <pre><code>
+sudo cat /etc/shadow | grep username # it should be shown in between 1st : and 2nd :
+ 
+    </code></pre>
+    <li>Create password list file and hash file, then run hashcat, </li>
+    <pre><code>
+sudo hashcat -a 0 -m 1800 -o output.txt hashes.txt passwords.txt 
+# a: attack mode , m: hash type, o: output
+    </code></pre>
+    </ol>
 
     <h3>References</h3>
     <hr>
