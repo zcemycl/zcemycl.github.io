@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Setting up Website with DDNS</h3>
+    <hr>
+    <p>Here we will use a Sky router for port forwarding and ddns service.</p>
+   
+    <h4>Noip for DDNS setup</h4>
+    <ol>
+    <li>Register an account in <a href="https://www.noip.com">https://www.noip.com</a>, confirm and log in the account.</li>
+    <li>Dynamic DNS &#8594 No-IP Hostnames &#8594 Create Hostname &#8594 Create Hostname with following settings,</li>
+    <pre><code>
+Hostname: random
+Domain: ddns.net
+Record Type: DNS Host (A)
+IPv4: auto
+    </code></pre>
+    <li>Install the Linux Dynamic Update Client on Ubuntu. Follow the instructions, all for default. </li>
+    <li></li>
+    </ol>
+
+    <h4>Router Settings</h4>
+    <ol>
+    <li>Login 192.168.0.1. </li>
+    <li>[DDNS] Advanced tab &#8594 Dynamic DNS &#8594 Settings &#8594 Apply, </li>
+    <pre><code>
+Tick Use a Dynamic DNS Service
+Service Provider: www.noip.com
+Host Name: random.ddns.net
+User Name: email
+Password: no ip password
+    </code></pre>
+    <li>[DHCP] Advanced tab &#8594 LAN IP Setup &#8594 Address Reservation &#8594 Add &#8594 Settings &#8594 Reboot</li>
+    <pre><code>
+Reserve An IP Address
+IP Address: check by ifconfig
+MAC Address: auto
+Device: auto
+    </code></pre>
+    <li>[Port Forwarding] Security tab &#8594 Services &#8594 Add Service &#8594Apply </li>
+    <pre><code>
+Edit Custom Service - Port Forwarding
+Name: website
+Type: TCP
+Start Port: 80
+Finish Port: 80
+    </code></pre>
+    <li>[Firewall] Security tab &#8594 Firewall Rules &#8594 Inbound services &#8594 Add &#8594 Apply.</li>
+    <pre><code>
+IPv4 Settings
+Service: HTTP(TCP:80)
+Action: ALLOW always
+Destination IPv4 LAN address: server ip
+Access from: Any
+Source Ipv4 start finish address: 0.0.0.0
+Log: Always
+    </code></pre>
+    </ol>
+
+    <h4>Laptop Firewall</h4>
+    <ol>
+    <li>Enable HTTP.</li>
+    <pre><code>
+sudo ufw app list
+sudo ufw allow 80
+sudo ufw show added
+sudo ufw enable
+    </code></pre>
+    </ol>
+
+    <h4>Laptop Apache2 page</h4>
+    <ol>
+    <li>Start apache2.</li>
+    <pre><code>
+sudo systemctl stop nginx
+sudo systemctl start apache2
+    </code></pre>
+    <li>Can edit the file <code>/var/www/html/index.html</code>.</li>
+    <li></li>
+    </ol>
+
+
+    <h3>References</h3>
+    <hr>
+    <ol>
+    <li><a href="https://www.noip.com/support/knowledgebase/configure-ip-hostname/">How to Configure Your No-IP Hostname [my.noip.com] </a></li>
+    <li><a href="https://www.noip.com/support/knowledgebase/installing-the-linux-dynamic-update-client-on-ubuntu/">How to Install the Linux Dynamic Update Client on Ubuntu </a></li>
+    <li><a href="https://www.noip.com/support/knowledgebase/getting-started-with-no-ip-com/">Free Dynamic DNS : Getting Started Guide </a></li>
+    <li><a href="https://helpforum.sky.com/t5/Broadband-Talk/How-to-set-up-port-forwarding/ba-p/2662260">How to set up port forwarding</a></li>
+    <li><a href="https://www.noip.com/support/knowledgebase/how-to-configure-ddns-in-router/">How to Configure DDNS (Dynamic DNS) in a Router </a></li>
+    <li><a href="https://setuprouter.com/router/sky/sr101/dynamic-dns-52735-large.htm">Sky SR101 DynamicDNS</a></li>
+    <li><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04">How To Set Up a Firewall with UFW on Ubuntu 18.04</a></li>
+    <li><a href="https://phoenixnap.com/kb/ubuntu-start-stop-restart-apache">How to Start, Stop, or Restart Apache Server on Ubuntu</a></li>
+    <li><a href=""></a></li>
+    </ol>
+
+
+
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
