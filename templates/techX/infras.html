@@ -138,6 +138,39 @@ flowchart TD
     f3 --> f42[Raspi];
     g3 --> g4[Laptop]
     </div>
+    <p>Cisco Two-Tier Network Design Model</p>
+
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+flowchart TD
+    subgraph B1["Tier 2: Collapsed Core Layer"]
+        direction LR
+        i1[Switch] 
+        f1[Switch]
+    end
+    subgraph B4["Tier 1: Access Layer"]
+        direction LR
+        i3[Switch]
+        f3[Switch]
+        g3[Switch]
+    end
+    i1 --- f1
+    i1 --- i3
+    i1 --- f3
+    i1 --- g3
+    f1 --- i3
+    f1 --- f3
+    f1 --- g3
+    </div>
+
+
+    <p>User of Campus Core Layer to Reducee Network Scaling Complexity</p>
+    <ul>
+    <li>Topology without Core: Connecting Tier 2 together</li>
+    <li>Simplified Topology with Core: Connecting Tier 2 with Tier 3 Center</li>
+    </ul>
+
+
+
 
     <h3>References</h3>
     <hr>
