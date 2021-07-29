@@ -91,7 +91,7 @@ sudo apt install hashcat
     <h4>Online method</h4>
     <p>Online method is a way to hack the password by trial and error with their login page. This is easily blocked by firewall with too many unsuccessful attempts. </p>
     <h4>Offline method</h4>
-    <p>Offline requires the hacker to find the password hash beforehand. And crack the password by knowing which hash table it is (whether it is from windows 10, unix, shasum, md5, etc.).</p>
+    <p>Offline requires the hacker to find the password hash beforehand. And crack the password by knowing which hash table it is (whether it is from windows 10, unix, shasum, md5, etc.). Methods to get hash are quite illegal suggested in the <a href="https://security.stackexchange.com/questions/134679/how-does-an-attacker-get-access-to-hashed-passwords">link</a>.</p>
 
     <h4>Terminologies</h4>
     <ul>
@@ -103,12 +103,21 @@ sudo apt install hashcat
     </ul>
 
 
+    <h4>How to use hydra?</h4>
+    <pre><code>
+sudo hydra -L usernames.txt -P pwds.txt ip ssh # L for list of users, P for list of passwords
+sudo hydar -l "username"  -p "pwd" ip ssh # l for one user, p for one password
+    </code></pre>
+
+    
 
 
     <h3>References</h3>
     <hr>
     <ol>
     <li><a href="https://github.com/danielmiessler/SecLists/blob/master/Passwords/Leaked-Databases/rockyou-20.txt">rockyou password list</a></li>
+    <li><a href="https://security.stackexchange.com/questions/134679/how-does-an-attacker-get-access-to-hashed-passwords">How does an attacker get access to hashed passwords?</a></li>
+    <li><a href="https://owasp.org/www-project-top-ten/">Top 10 Web Application Security Risks</a></li>
     <li><a href=""></a></li>
     </ol>
 
