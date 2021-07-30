@@ -102,6 +102,54 @@ nmap -sT -p port public_ip
     <li></li>
     </ul>
 
+    <h4>Server update</h4>
+    <pre><code>
+sudo apt update # manual
+sudo apt dist-upgrade # manual
+sudo apt install unattended-upgrades # auto
+sudo dpkg-reconfigure --priority=low unattended-upgrades
+    </code></pre>
+
+
+    <h4>Create user in sudo group</h4>
+    <pre><code>
+sudo adduser username # then password, edit profile question
+sudo usermod -aG sudo username
+    </code></pre>
+
+    <h4>Public and Private Key to replace password</h4>
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    graph LR
+        A[Private Key] --> B[Public Key];
+        subgraph "Laptop";
+        A
+        end; 
+        subgraph "Server";
+        B
+        end;
+    </div>
+
+    <ol>
+    <li>In Linux server, create a folder to store public key, </li>
+    <pre><code>
+mkdir ~/.ssh && chmod 700 ~/.ssh
+    </code></pre>
+    <li>In client, create a key pair (public and private). </li>
+    <pre><code>
+ssh-keygen -b 4096 # store in default, id_rsa can be overwritten. Avoid overwriting, can skip passphrase
+# private: id_rsa, public: id_rsa.pub
+    </code></pre>
+    <li>Copy the public key to the server side.</li>
+    <pre><code>
+# Windows 
+scp $env:USERPROFILE/.ssh/id_rsa.pub username@ip
+# Linux
+scp ~/.ssh/id_rsa.pub username@ip
+ssh-copy-id username@ip
+    </code></pre>
+    </ol>
+
+ 
     <h3>References</h3>
     <hr>
     </div>
