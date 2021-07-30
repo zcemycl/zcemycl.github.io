@@ -149,6 +149,42 @@ ssh-copy-id username@ip
     </code></pre>
     </ol>
 
+    <h4>Change ssh server settings</h4>
+    <pre><code>
+Port xxxx # not 22 
+AddressFamily inet # just for ipv4
+PermitRootLogin no
+PasswordAuthentication no
+    </code></pre>
+    <p>Then restart by <code>sudo systemctl restart sshd</code>.</p>
+    <p>Next time, ssh with <code>ssh username@ip -p port</code>.</p>
+
+    <h4>Server firewall settings</h4>
+    <ol>
+    <li>Check the ports.</li>
+    <pre><code>
+sudo ss -tupln
+    </code></pre>
+    <li>Get uncomplicated firewall (ufw) working. </li>
+    <pre><code>
+sudo ufw status
+sudo ufw allow port # for example, 80/tcp
+sudo ufw enable # y
+    </code></pre>
+    <li>Edit firewall rules in <code>/etc/ufw/before.rules</code>.</li>
+    <pre><code>
+# Add this line to 
+...
+# ok icmp codes for INPUT
+-A ufw-before-input -p icmp --icmp-type echo-request -j DROP
+...
+    </code></pre>
+    <p>This avoids pinging me. <code>sudo ufw reload && sudo reboot</code></p>
+    </ol>
+
+
+
+
  
     <h3>References</h3>
     <hr>
