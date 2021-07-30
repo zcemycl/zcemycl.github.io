@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Protecting your SOHO network</h3>
+    <hr>
+
+    <h4>Check Network Vulnerability with OpenVAS</h4>
+    <ol>
+    <li>Check your public ip address, via searching "what is my ip" in Google.</li>
+    <li>Go to <a href="https://pentest-tools.com/network-vulnerability-scanning/network-security-scanner-online-openvas">https://pentest-tools.com/network-vulnerability-scanning/network-security-scanner-online-openvas</a>, and enter your ip. </li>
+    <li>If there are no opened ports, it should be fine.</li>
+    </ol>
+
+    <h4>Scan by nmap</h4>
+    <pre><code>
+nmap -sT public_ip # T: TCP scan gives you a list of opened ports
+nmap --script vuln public_ip # gives you a list of vulnerability
+nmap -sT -p port public_ip
+    </code></pre>    
+
+    <h4>Wifi Router settings</h4>
+    <ul>
+    <li>Turn on Firewall. (Ciso ASA 5506)</li>
+    <li>Stop unwanted ports for port forwarding.</li>
+    <li>Turn off Remote Management.</li>
+    <li>Change username and password.</li>
+    <li>Update and Upgrade Firmware.</li>
+    <li>Security uses the latest version like WPA2.</li>
+    <li>Network Name avoids using the machine name.</li>
+    <li>Guest uses their own network.</li>
+    <li>Disable pings from WAN.</li>
+    <li>Need specific separate network (DD-WRT, Cisco,Ubiquiti Unifi) for iot device.</li>
+    <li>Use a VPN for Remote Access, enabling secure tunneling to your home or office.</li>
+    <li>Site-to-site.</li>
+    <li></li>
+    <li></li>
+    </ul>
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
