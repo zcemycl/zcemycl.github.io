@@ -71,7 +71,7 @@
     <hr>
     <p>It is one of the social engineering attacks to gain access to the victim personal or business account. Social engineering is the term used for a broad range of malicious activities accomplished through human interactions. It uses psychological manipulation to trick users into making security mistakes or giving away sensitive information.</p>
 
-    <h4>Steps</h4>
+    <h4>Set up fake website</h4>
     <ol>
     <li>Clone a github repository named blackeye.</li>
     <pre><code>
@@ -88,18 +88,19 @@ cp ngrok blackeye
     <li>Go to blackeye folder, and run it, </li>
     <pre><code>
 cd blackeye
-sudo ./blackeye # option: 9 for linkedin
+sudo ./blackeye # option: 6 for google, 9 for linkedin
     </code></pre>
     <li>See the running status in <code>http://127.0.0.1:4040/status</code>. Send the url to the victim. </li>
 
-    <li></li>
-    <pre><code>
-    </code></pre>
-
-
-
-
     </ol>
+
+    <h4>Phishing emails, Smishing text or Vishing phone call</h4>
+    <ul>
+    <li>Spear-phishing: only target one</li>
+    <li>Whaling: only target very important person</li>
+    </ul>
+    <p>Here we can use social engineer toolkit (default in Kali Linux). </p>
+
 
 
     <h3>References</h3>
@@ -107,6 +108,7 @@ sudo ./blackeye # option: 9 for linkedin
     <ol>
     <li><a href="https://www.imperva.com/learn/application-security/social-engineering-attack/">What is social engineering</a></li>
     <li><a href="https://github.com/An0nUD4Y/blackeye">Github Repository: blackeye</a></li>
+    <li><a href="https://github.com/trustedsec/social-engineer-toolkit/">Github repository -- Social Engineer Toolkit</a></li>
     <li><a href=""></a></li>
     </ol>
 
