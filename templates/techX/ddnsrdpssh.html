@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>DDNS for RDP and SSH</h3>
+    <hr>
+    <p>Here the setup is similar to DDNS with Website.</p>
+
+    <h4>Router Settings</h4>
+    <ol>
+    <li>Login 192.168.0.1.</li>
+    <li>[DDNS] Advanced tab &#8594 DDNS &#8594 Settings &#8594 Apply,</li>
+    <pre><code>
+Enable DDNS
+Service Provider: www.noip.com
+Host Name: random.ddns.net
+User Name: email
+Password: noip pwd    
+    </code></pre>
+    <li>[DHCP] Advanced tab &#8594 LAN IP Setup &#8594 Address Reservation for raspberry pi &#8594 Add &#8594 Settings &#8594 Reboot,</li>
+    <pre><code>
+Reserve an IP
+IP Address: 192.168.0.x
+MAC Address: [ip addr show | grep link/ether]
+Device: auto
+    </code></pre>
+    <li>[Port Forwarding] Security tab &#8594 Services &#8594 Add Service &#8594 Apply</li>
+    <pre><code>
+Name: remoteSSH / remoteRDP
+Type: TCP/UDP
+Start Port: 22/3389
+Finish Port: 22/3389 # target ports in pi
+    </code></pre>
+    <li>[Firewall] Security tab &#8594 Firewall Rules &#8594 Inbound Services &#8594 Add &#8594 Apply,</li>
+    <pre><code>
+Service: SSH(22)/RDP(3389)
+Action: ALLOW Always
+Destination IPv4 LAN address: pi ip
+Access from: Any
+Source IPv4 start finish address: 0.0.0.0
+Log: Always
+    </code></pre>
+    </ol>
+
+
+    <h4>Pi Settings</h4>
+    <ol>
+    <li>Enable SSH and RDP firewall</li>
+    <pre><code>
+sudo ufw allow 22
+sudo ufw allow 3389
+sudo ufw enable
+    </code></pre>
+    <li>Enable SSH and RDP.</li>
+    </ol>
+
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
