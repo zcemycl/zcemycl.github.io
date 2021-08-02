@@ -89,6 +89,89 @@ Reboot now? Yes
     </code></pre>
 
 
+    <h4>User Configuration</h4>
+    <pre><code>
+pivpn add
+###
+Enter a Name for the Client: Name
+How many days should the certificate last? 1080
+Password and Reconfirm: ....
+### /home/pi/ovpns
+    </code></pre>
+    
+    <h4>Noip installation</h4>
+    <pre><code>
+cd /usr/local/src/
+wget http://www.noip.com/client/linux/noip-duc-linux.tar.gz
+tar xf noip-duc-linux.tar.gz
+cd noip-2.1.9-1/
+sudo make install
+###
+- etho0
+- email: noip email
+- password: noip pwd
+- update interval: 60 (mins)
+- run sth at successful update: n
+    </code></pre>
+
+    <h4>Run noip and enable</h4>
+    <pre><code>
+ps ax | grep noip2 # noip2 not running
+sudo noip2 # running but not enable
+sudo vim /etc/systemd/system/noip2.service # edit systemd file
+###
+[Unit]
+Description=No-ip.com dynamic IP address updater
+After=network.target
+After=syslog.target
+
+[Install]
+WantedBy=multi-user.target
+Alias=noip.service
+
+[Service]
+ExecStart=/usr/local/bin/noip2
+Restart=always
+Type=forking
+###
+sudo systemctl enable noip2
+sudo systemctl start noip2
+sudo ufw allow 1194
+# Then port forwarding and firewall 1194 on router
+sudo reboot
+    </code></pre>
+
+    <h4>Install PiHole</h4>
+    <pre><code>
+curl -sSL https://install.pi-hole.net | bash
+Choose an Interface: eth0
+Select Upstream DNS Provider: OpenDNS
+Suggested list: StevenBlack yes
+Select Protocols: IPv4 IPv6 OK
+Do you want to use your current network settings as a static ip address? Yes
+Do you wish to install the web admin interface? On
+lighttpd? On
+log queries? On
+Select a privacy mode of FTL. : 0 Show Everything
+    </code></pre>
+
+    <h4>Other configurations</h4>
+    <pre><code>
+sudo vim /etc/openvpn/server.conf
+###
+delete all push "dhcp-options"
+add 'push "dhcp-option DNS 10.8.0.1"'
+    </code></pre>
+
+    <pre><code>
+sudo vim /etc/pihole/setupVars.conf
+Add "PIHOLE_INTERFACE=tun0" below the eth0 line
+    </code></pre>
+
+    <pre><code>
+sudo vim /etc/dnsmasq.d/02-ovpn.conf
+add "interface=tun0"
+    </code></pre>
 
 
     <h3>References</h3>
