@@ -181,6 +181,31 @@ npm install --save package --legacy-peer-deps # if cannot resolve dep
     <li>@react-three/drei</li>
     <li>ammojs cannonjs ammo-physics</li>
     <li>leaflet react-leaflet react-leaflet-geosearch</li>
+    <pre><code>
+## from package.json
+ "browserslist": {
+   "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+},
+## to 
+"browserslist": [
+   ">0.2%",
+  "not dead",
+  "not op_mini all"
+],
+##
+sudo rm -r node_modules/.cache
+sudo npm install
+sudo yarn start
+    </code></pre>
     <li>react-dat-gui</li>
     <li></li>
     </ol>
@@ -209,6 +234,7 @@ rafce # generates a basic react template script
     <li><a href="https://codesandbox.io/s/r3f-particles-i-q4d2v?from-embed=&file=/src/index.js">r3f particles</a></li>
     <li><a href="https://codesandbox.io/search?query=react-graph-vis&page=1&configure%5BhitsPerPage%5D=12">codesandbox -- react-graph-vis</a></li>
     <li><a href="https://visjs.github.io/vis-network/examples/">visjs vis-network</a></li>
+    <li><a href="https://stackoverflow.com/questions/67552020/how-to-fix-error-failed-to-compile-node-modules-react-leaflet-core-esm-pat">How to fix error “Failed to compile : ./node_modules/@react-leaflet/core/esm/path.js 10:41 Module parse failed: Unexpected token (10:41)”</a></li>
     <li><a href=""></a></li>
     </ol>
     </div>
