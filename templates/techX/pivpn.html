@@ -137,7 +137,7 @@ Type=forking
 sudo systemctl enable noip2
 sudo systemctl start noip2
 sudo ufw allow 1194
-# Then port forwarding and firewall 1194 on router
+# Then port forwarding and firewall 1194 on router #############
 sudo reboot
     </code></pre>
 
@@ -178,6 +178,16 @@ add "interface=tun0"
     <pre><code>
 sudo nmcli connection import type openvpn file Leo.ovpn 
     </code></pre>
+
+
+    <h4>Windows 10 Client</h4>
+    <ol>
+    <li>Download OpenVPN Client GUI.</li>
+    <li>Import .ovpn file.</li>
+    <li>Turn on ovpn.</li>
+    <li><code>ssh pi@192.168.0.x</code></li>
+    <li>RDP --  server: 192.168.0.x, leave empty username. Then use xorg to get in.</li>
+    </ol>
 
     <h3>References</h3>
     <hr>
