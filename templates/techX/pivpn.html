@@ -175,9 +175,13 @@ add "interface=tun0"
 
 
     <h4>Ubuntu Client</h4>
+    <ol>
+    <li>cannot import saved openVPN configuration file. Then you need</li>
     <pre><code>
 sudo nmcli connection import type openvpn file Leo.ovpn 
     </code></pre>
+    <li>cannot toggle to ON, click configure &#8594 Identity tab &#8594 Type in User key password &#8594 Store the password for all users &#8594 click Advanced &#8594 User custom gateway port 1194 &#8594 OK Apply</li>
+    </ol>
 
 
     <h4>Windows 10 Client</h4>
@@ -191,6 +195,12 @@ sudo nmcli connection import type openvpn file Leo.ovpn
 
     <h3>References</h3>
     <hr>
+    <ol>
+    <li><a href="https://www.youtube.com/watch?v=O560roc5Ia8&t=1s">PiVPN PiHole NOIP DDNS Installation Raspberry Pi</a></li>
+    <li><a href=""></a></li>
+    </ol>
+
+
     </div>
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
