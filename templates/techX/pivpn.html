@@ -69,6 +69,38 @@
 
     <h3>PiVPN</h3>
     <hr>
+    <h4>Background</h4>
+    <h5>Traditional method to connect LAN</h5>
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    flowchart TD;
+    A[Laptop WAN] -->|"ddns+ports(80,443,22,3389)"| B(Router);
+    B -->|port forwarding 22,3389| C[Laptop LAN];
+    B -->|port forwarding| D[Phone LAN];
+    B -->|port forwarding 80,443| E[Pi LAN];
+    subgraph "DHCP"
+        B;C;D;E;
+    end
+    </div>
+
+
+
+
+    <h5>VPN method to connect LAN</h5>
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    flowchart TD;
+    subgraph "VPN"
+    A[Laptop WAN] -->|"ddns+ports(1194)"| B(Router);
+    subgraph "DHCP"
+    B -->|port forwarding 1194| C[VPN Server LAN];
+    end
+    end
+    C -->|LAN Access| D[Laptop LAN];
+    C -->|LAN Access| E[Phone LAN];
+    C -->|LAN Access| F[Pi LAN]
+    </div>
+
+
+
     <h4>Installations</h4>
     <pre><code>
 curl -L https://install.pivpn.io | bash
@@ -189,8 +221,8 @@ sudo nmcli connection import type openvpn file Leo.ovpn
     <li>Download OpenVPN Client GUI.</li>
     <li>Import .ovpn file.</li>
     <li>Turn on ovpn.</li>
-    <li><code>ssh pi@192.168.0.x</code></li>
-    <li>RDP --  server: 192.168.0.x, leave empty username. Then use xorg to get in.</li>
+    <li>SSH server: <code>ssh pi@192.168.0.x</code></li>
+    <li>RDP server: 192.168.0.x, leave empty username. Then use xorg to get in.</li>
     </ol>
 
     <h3>References</h3>
