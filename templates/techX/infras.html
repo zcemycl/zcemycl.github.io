@@ -73,21 +73,27 @@
     <h4>Server Side</h4>
     <div class="mermaid" style="background-color:white; max-width:80vw">
     graph TD
-      A[Wall:Network Jack] -->|Ethernet LAN Cable| B[Firewall];
+      A[Network Jack] -->|Ethernet LAN Cable| B[Firewall];
       B -->|Ethernet Cable| C[Ethernet Switch];
-      F[Wall: Socket] --> G[Power Extension Lead];
+      F[Socket] --> G[Power Extension Lead];
       G -->|Power Cable IEC320C13 female to BS1363 male| B;
       C -->|Ethernet Cable| D[Server 1];
       C -->|Ethernet Cable| E[Server 2];
       G -->|Power Cable| D;
       G -->|Power Cable| E;
+      subgraph "Wall"
+        A;F;
+      end
+      subgraph "Endpoint"
+        D;E;
+      end
     </div>
 
     <h4>Desktop Side</h4>
     <div class="mermaid" style="background-color:white; max-width:80vw">
     graph TD
-      A[Wall:Network Jack] -->|Ethernet LAN Cable| B[Desktop];
-      C[Wall:Socket] --> D[Power Extension Lead];
+      A[Network Jack] -->|Ethernet LAN Cable| B[Desktop];
+      C[Socket] --> D[Power Extension Lead];
       D -->|Power Cable| B;
       D -->|Power Cable| E[Monitor 1];
       D -->|Power Cable| F[Monitor 2];
@@ -95,6 +101,12 @@
       F -->|VGA Cable| B;
       B --> G[Keyboard];
       B --> H[Mouse];
+      subgraph "Wall"
+        A;C;
+      end
+      subgraph "PC setup"
+        E;F;B;G;H
+      end
     </div>
 
     <ul>
