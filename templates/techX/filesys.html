@@ -96,30 +96,30 @@
     <h4>Filesystem Hierarchy Standard (FHS)</h4>
     <ol>
     <li>Linux cares capitalization in file or folder name unlike windows.</li>
-    <li>bin : binaries for programs and applications, such as ls, cat, bash, etc. (single user mode only, not multi-users) </li>
-    <li>sbin: system binaries that a system admin would use, not for normal user. (single user mode only)</li>
+    <li><code>bin</code> : binaries for programs and applications, such as <code>ls</code>, <code>cat</code>, <code>bash</code>, etc. (single user mode only, not multi-users) </li>
+    <li><code>sbin</code>: system binaries that a system admin would use, not for normal user. (single user mode only)</li>
     <li>Single user mode is a special mode that boots you in as a root user to allow you to do system repairs updates, etc. Networking is disable because of security issues. When you install a program in Linux, it is not placed in bin or sbin.</li>
-    <li>boot: anything to boot the os. Don't touch it.</li>
-    <li>cdrom: an old mounting point for your cdrom.</li>
-    <li>dev: device, like your hardwares, nvme disk /dev/nvme* , hardware disk /dev/sda*, nvidia gpu /dev/nvidia* , etc. Also, webcam and keyboard. Don't touch this driver folder.</li>
-    <li>etc: edit to configure, et cetera (the rest), this stores all system-wide configuration files, such as, network, apt, ssh, apache2, nginx, etc. This is for system wide applications. </li>
-    <li>home: folder to store all users desktops.</li>
-    <li>lib, lib32, lib64: libraries. Applications can use to perform various functions, they are required by binaries in bin and sbin.</li>
-    <li>media, mnt: mount. These are for other mounted drives, like floppy disk, usb stick, external hard drive, network drive, or a second hard drive. It is like D:/ and E:/ and so on. </li>
-    <li>opt: optional folder for manually installed software. I put opencv here.Can install software created yourself.</li>
-    <li>proc: pseudo files that contain information about system processes and resources, for example, every process will have a directory here.</li>
+    <li><code>boot</code>: anything to boot the os. Don't touch it.</li>
+    <li><code>cdrom</code>: an old mounting point for your cdrom.</li>
+    <li><code>dev</code>: device, like your hardwares, nvme disk <code>/dev/nvme*</code> , hardware disk <code>/dev/sda*</code>, nvidia gpu <code>/dev/nvidia*</code> , etc. Also, webcam and keyboard. Don't touch this driver folder.</li>
+    <li><code>etc</code>: edit to configure, et cetera (the rest), this stores all system-wide configuration files, such as, network, <code>apt</code>, <code>ssh</code>, apache2, <code>nginx</code>, etc. This is for system wide applications. </li>
+    <li><code>home</code>: folder to store all users desktops.</li>
+    <li><code>lib, lib32, lib64</code>: libraries. Applications can use to perform various functions, they are required by binaries in <code>bin</code> and <code>sbin</code>.</li>
+    <li><code>media, mnt</code>: mount. These are for other mounted drives, like floppy disk, usb stick, external hard drive, network drive, or a second hard drive. It is like D:/ and E:/ and so on. </li>
+    <li><code>opt</code>: optional folder for manually installed software. I put opencv here.Can install software created yourself.</li>
+    <li><code>proc</code>: pseudo files that contain information about system processes and resources, for example, every process will have a directory here.</li>
     <pre><code>
 cat /proc/cpuinfo
 cat /proc/uptime
     </code></pre>
-    <li>root: root users home folder.</li>
-    <li>run: new folder, it is a tempfs file system. It runs in RAM, everything is gone when system is rebooted or shutdown. It is used to store info started early in boot procedure to store runtime info that they use to function. </li>
-    <li>snap: to store snap packages. </li>
-    <li>srv: service directory where service data is stored. If a server like web server or ftp server is running, you would store files that will be accessed by external users here for better security reason.  </li>
-    <li>sys: system folder. It is a way to interact with the kernel.</li>
-    <li>tmp: temporary directory where files are temporarily stored by applications. Should be empty after reboot.</li>
-    <li>usr: user application space. Applications are installed by the user, they are considered non-essential for basic system operation. Most programs installed from source code will end up in the local folders of usr. Larger programs are in share.</li>
-    <li>var: variable directory. It contains files and directories that are expected to grow in size, like some of the log files. </li>
+    <li><code>root</code>: root users home folder.</li>
+    <li><code>run</code>: new folder, it is a tempfs file system. It runs in RAM, everything is gone when system is rebooted or shutdown. It is used to store info started early in boot procedure to store runtime info that they use to function. </li>
+    <li><code>snap</code>: to store snap packages. </li>
+    <li><code>srv</code>: service directory where service data is stored. If a server like web server or ftp server is running, you would store files that will be accessed by external users here for better security reason.  </li>
+    <li><code>sys</code>: system folder. It is a way to interact with the kernel.</li>
+    <li><code>tmp</code>: temporary directory where files are temporarily stored by applications. Should be empty after reboot.</li>
+    <li><code>usr</code>: user application space. Applications are installed by the user, they are considered non-essential for basic system operation. Most programs installed from source code will end up in the local folders of usr. Larger programs are in share.</li>
+    <li><code>var</code>: variable directory. It contains files and directories that are expected to grow in size, like some of the log files. </li>
     <li>Hide files are in . format.</li>
     <li></li>
     </ol>
