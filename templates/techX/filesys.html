@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Linux Root File Structure</h3>
+    <hr>
+
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    flowchart LR
+        subgraph "Windows History"
+            A((boot)) --> B["DOS (Disk operating system)"]
+            B --> C[Windows];
+            C --> D{{"C:\WINDOWS"}};
+            A --> E[Windows];
+            subgraph "Now"
+                E --> F{{"C:\Program Files"}};
+            end
+        end
+        subgraph "Linux History"
+            G[BSD] --> H[Unix];
+            H --> I[Mac OS];
+            H --> J[Linux];
+            J --> K[Ubuntu];
+            J --> Q[Debian];
+            J --> Z[Raspi]
+        end
+    </div>
+
+
+
+    <h4>Filesystem Hierarchy Standard (FHS)</h4>
+    <ol>
+    <li>Linux cares capitalization in file or folder name unlike windows.</li>
+    <li>bin : binaries for programs and applications, such as ls, cat, bash, etc. (single user mode only, not multi-users) </li>
+    <li>sbin: system binaries that a system admin would use, not for normal user. (single user mode only)</li>
+    <li>Single user mode is a special mode that boots you in as a root user to allow you to do system repairs updates, etc. Networking is disable because of security issues. When you install a program in Linux, it is not placed in bin or sbin.</li>
+    <li>boot: anything to boot the os. Don't touch it.</li>
+    <li>cdrom: an old mounting point for your cdrom.</li>
+    <li>dev: device, like your hardwares, nvme disk /dev/nvme* , hardware disk /dev/sda*, nvidia gpu /dev/nvidia* , etc. Also, webcam and keyboard. Don't touch this driver folder.</li>
+    <li>etc: edit to configure, et cetera (the rest), this stores all system-wide configuration files, such as, network, apt, ssh, apache2, nginx, etc. This is for system wide applications. </li>
+    <li>home: folder to store all users desktops.</li>
+    <li>lib, lib32, lib64: libraries. Applications can use to perform various functions, they are required by binaries in bin and sbin.</li>
+    <li>media, mnt: mount. These are for other mounted drives, like floppy disk, usb stick, external hard drive, network drive, or a second hard drive. It is like D:/ and E:/ and so on. </li>
+    <li>opt: optional folder for manually installed software. I put opencv here.Can install software created yourself.</li>
+    <li>proc: pseudo files that contain information about system processes and resources, for example, every process will have a directory here.</li>
+    <pre><code>
+cat /proc/cpuinfo
+cat /proc/uptime
+    </code></pre>
+    <li>root: root users home folder.</li>
+    <li>run: new folder, it is a tempfs file system. It runs in RAM, everything is gone when system is rebooted or shutdown. It is used to store info started early in boot procedure to store runtime info that they use to function. </li>
+    <li>snap: to store snap packages. </li>
+    <li>srv: service directory where service data is stored. If a server like web server or ftp server is running, you would store files that will be accessed by external users here for better security reason.  </li>
+    <li>sys: system folder. It is a way to interact with the kernel.</li>
+    <li>tmp: temporary directory where files are temporarily stored by applications. Should be empty after reboot.</li>
+    <li>usr: user application space. Applications are installed by the user, they are considered non-essential for basic system operation. Most programs installed from source code will end up in the local folders of usr. Larger programs are in share.</li>
+    <li>var: variable directory. It contains files and directories that are expected to grow in size, like some of the log files. </li>
+    <li>Hide files are in . format.</li>
+    <li></li>
+    </ol>
+
+
+
+
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
