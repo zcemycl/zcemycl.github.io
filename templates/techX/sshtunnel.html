@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>SSH Tunneling</h3>
+    <hr>
+    <h4>Backgrounds</h4>
+    <p>Now as you have set up vpn, you still cannot access to all servers at home via normal ssh or normal rdp or normal vnc.</p>
+    <p>You need to connect to the vpn server first, then access other servers at home.</p>
+
+    <h4>Remmina</h4>
+    <ol>
+    <li>Turn on your VPN.</li>
+    <li>Create a new session, VNC protocol. Set up Basic settings normally.</li>
+    <li>At SSH Tunnel tab, enable SSH Tunnel &#8594 Custom: ip:port &#8594 Authentication type: Password &#8594 Username and Password. Now you can connect. </li>
+    </ol>
+
+    <h4>Terminal</h4>
+    <pre><code>
+ssh -J username1@ip1 username2@ip2
+# enter first user password then second
+    </code></pre>
+
+    <h4>Android to VNC with SSH Tunnel: bVNC Free</h4>
+    <ol>
+    <li>Turn on VPN.</li>
+    <li>Connection Type: Secure VNC over SSH</li>
+    <li>SSH Tunnel Settings</li>
+    <pre><code>
+ip port(default:22)
+username # later it will ask your password
+    </code></pre>
+    <li>VNC Connection Settings</li>
+    <pre><code>
+ip port(default:5900)
+username
+password #keep yes
+    </code></pre>
+    </ol>
+
+
+    <h4>Android to SSH with base SSH: JuiceSSH</h4>
+    <ol>
+    <li>Turn on VPN.</li>
+    <li>Basic settings</li>
+    <pre><code>
+Type: SSH
+Address: ip
+Identity: username + password
+    </code></pre>
+    <li>Advanced settings</li>
+    <pre><code>
+Port: 22
+Connect via: base ip
+    </code></pre>
+    </ol>
+
+
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
