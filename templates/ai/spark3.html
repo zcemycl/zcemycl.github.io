@@ -71,9 +71,44 @@
     <hr>
 
     <h4>Java Installation</h4>
-    <h4>Hadoop Installation</h4>
-    <h4>Spark Installation</h4>
+    <pre><code>
+clustercmd 'sudo apt install -y default-jre > /dev/null 2>&1'
+clustercmd java -version
+clustercmd 'sudo apt install -y default-jdk > /dev/null 2>&1'
+clustercmd df -h
+clustercmd 'sudo apt install -y scala > /dev/null 2>&1'
+clustercmd scala -version
+echo 'export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")' >> ~/.bashrc
+    </code></pre>
 
+    <h4>Hadoop Installation</h4>
+    <p>Download the correct tar file, by clicking Announcement under Release notes &#8594 Download tar.gz (not src!!)</p>
+    <pre><code>
+scp hadoop-3.3.1.tar.gz pi41:
+sudo tar -xvf hadoop-3.3.1.tar.gz -C /opt/
+sudo mkdir hadoop
+sudo mv hadoop-3.3.1/* hadoop
+sudo rm -r hadoop-3.3.1
+sudo chown pi:pi -R /opt/hadoop
+echo 'export HADOOP_HOME=/opt/hadoop' >> ~/.bashrc
+echo 'export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin' >> ~/.bashrc
+# edit /opt/hadoop/etc/hadoop/hadoop-env.sh to add this line
+export JAVA_HOME=$(readlink –f /usr/bin/java | sed "s:bin/java::") 
+echo 'export JAVA_HOME=$(readlink –f /usr/bin/java | sed "s:bin/java::")' >> /opt/hadoop/etc/hadoop/hadoop-env.sh
+
+source ~/.bashrc
+    </code></pre>
+    <p>Test with,</p>
+    <pre><code>
+cd && hadoop version | grep Hadoop
+    </code></pre>
+
+
+    <h4>Spark Installation</h4>
+    <p>Download the correct tar file under Download Apache Spark &#8594 Step 3.</p>
+    <pre><code>
+scp spark-3.1.2-bin-hadoop3.2.tgz pi41:
+    </code></pre>
 
     <h3>References</h3>
     <hr>
