@@ -67,103 +67,60 @@
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
 
-    <h3>Spark with Pi Cluster 1</h3>
+    <h3>Spark with Pi Cluster 2</h3>
     <hr>
-    <h4>Infrastructure</h4>
-    <div class="mermaid" style="background-color:white; max-width:80vw">
-    flowchart TD;
-        A[Router] -->|Ethernet| B[Switch];
-        subgraph s1[Cluster];
-        direction LR;
-        C[(Pi 1)] <-..-> D[(Pi 2)];
-        D <-..-> E[(Pi 3)];
-        C <-..-> E;
-        end;
-        B -->|Ethernet| s1;
-        A -..->|Wifi| F[Laptop]
-        F <-..-> s1;
-    </div>
-
-    <h4>Configure SSH for intercommunications</h4>
+    <h4>Background</h4>
+    <p>We might need some commands which can be run together across all servers in the cluster.</p>
+    <h4>Command sending to the cluster</h4>
     <ol>
-      <li>Change hostname for each pi, 
-        <ol>
-          <li>For each pi, do the same in <code>/etc/hosts</code>, comment out <code>127.0.1.1 raspberrypi</code> and add lines at the end, </li>
+      <li>List other pis other than itself.
           <pre><code>
-#127.0.1.1 raspberrypi
-192.168.0.14 pi41
-192.168.0.15 pi42
-192.168.0.16 pi43
+function otherpis {
+    grep "pi" /etc/hosts | awk '{print $2}' | grep -v $(hostname)
+}
           </code></pre>
-          <li>For each pi, change the hostname as pi4x in <code>/etc/hostname</code>, replace x with another number, like pi41 pi42 pi43,</li>
-          <pre><code>
-pi4x
-          </code></pre>
-          <li>Reboot each machine now. </li>
-          <li>Test: <code>ssh pi@pi4x</code>.</li>
-        </ol>
       </li>
-      <li>Simplify ssh command via ssh alias,
-        <ol>
-          <li>In my laptop, edit <code>~/.ssh/config</code>, copy to all pis as well,</li>
+      <li>General cluster cmd for any purpose
           <pre><code>
-Host pi41
-    User pi
-    Hostname 192.168.0.14   
-
-Host pi42
-    User pi
-    Hostname 192.168.0.15
-
-Host pi43
-    User pi
-    Hostname 192.168.0.16
+clustercmd() {
+    for pi in $(otherpis)
+    do
+        echo "ssh $pi $@"
+        ssh $pi "$@"
+    done
+    echo "$@"
+    eval $@
+}
           </code></pre>
-          <li>Test: <code>ssh pi4x</code></li>
-        </ol>
+          <ol>
+          <li>For examples,</li>
+          <pre><code>
+clustercmd date
+clustercmd 'sudo apt install htpdate -y > /dev/null 2>&1'
+clustercmd sudo htpdate -a -l time.nist.gov
+          </code></pre>
+          </ol>
       </li>
-      <li>Allow public/private key pairs for ssh among pis and laptop, 
-        <ol>
-          <li>In each pi server, generate a public/private key pairs, </li>
+      <li>Commands for shutdown or reboot together,
           <pre><code>
-ssh-keygen -t ed25519
-# all default is fine
+function clusterreboot {
+    clustercmd sudo shutdown -r now
+}
+function clustershutdown {
+    clustercmd sudo shutdown now
+}
           </code></pre>
-          <li>Copy public key from client to the target server means that you can ssh into the target without any password anymore.</li>
-          <pre><code>
-# all server (14)
-cat .ssh/id_ed25519.pub &gt&gt .ssh/authorized_keys
-# all clients (15,16)
-cat ~/.ssh/id_ed25519.pub | ssh pi@192.168.0.14 'cat &gt&gt .ssh/authorized_keys'
-OR
-ssh-copy-id -i pi@pi41
-ssh-copy-id -i pi@pi42
-ssh-copy-id -i pi@pi43
-          </code></pre>
-
-          <li>Copy this <code>authorized_keys</code> to every server,</li>
-          <pre><code>
-scp ~/.ssh/authorized_keys pi@pi4x:~/.ssh
-          </code></pre>
-          <li>Test: <code>ssh pi41</code>, it should not require any password anymore.</li>
-        </ol>
       </li>
-      <li>Make command shorter,
-        <ol>
-          <li>Add extra lines in <code>~/.bashrc</code>,</li>
+      <li>Command for copy file to another servers in cluster.
           <pre><code>
-alias p1="ssh pi41"
-alias p2="ssh pi42"
-alias p3="ssh pi43"
+clusterscp() {
+    for pi in $(otherpis); do
+        cat $1 | ssh $pi "sudo tee $1" > /dev/null 2>&1
+    done
+}
           </code></pre>
-          <li>Run the bash file. <code>source ~/.bashrc</code></li>
-          <li>Test: <code>p1</code> should have the same effect as <code>ssh pi41</code>.</li>
-        </ol>
       </li>
     </ol>
-
-
-
     <h3>References</h3>
     <hr>
     </div>
