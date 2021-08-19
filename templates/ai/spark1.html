@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Spark with Pi Cluster 1</h3>
+    <hr>
+    <h4>Infrastructure</h4>
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    flowchart TD;
+        A[Router] -->|Ethernet| B[Switch];
+        subgraph s1[Cluster];
+        direction LR;
+        C[(Pi 1)] <-..-> D[(Pi 2)];
+        D <-..-> E[(Pi 3)];
+        C <-..-> E;
+        end;
+        B -->|Ethernet| s1;
+        A -..->|Wifi| F[Laptop]
+        F <-..-> s1;
+    </div>
+
+    <h4>Configure SSH for intercommunications</h4>
+    <ol>
+      <li>Change hostname for each pi, 
+        <ol>
+          <li>For each pi, do the same in <code>/etc/hosts</code>, comment out <code>127.0.1.1 raspberrypi</code> and add lines at the end, </li>
+          <pre><code>
+#127.0.1.1 raspberrypi
+192.168.0.14 pi41
+192.168.0.15 pi42
+192.168.0.16 pi43
+          </code></pre>
+          <li>For each pi, change the hostname as pi4x in <code>/etc/hostname</code>, replace x with another number, like pi41 pi42 pi43,</li>
+          <pre><code>
+pi4x
+          </code></pre>
+          <li>Reboot each machine now. </li>
+          <li>Test: <code>ssh pi@pi4x</code>.</li>
+        </ol>
+      </li>
+      <li>Simplify ssh command via ssh alias,
+        <ol>
+          <li>In my laptop, edit <code>~/.ssh/config</code>, copy to all pis as well,</li>
+          <pre><code>
+Host pi41
+    User pi
+    Hostname 192.168.0.14   
+
+Host pi42
+    User pi
+    Hostname 192.168.0.15
+
+Host pi43
+    User pi
+    Hostname 192.168.0.16
+          </code></pre>
+          <li>Test: <code>ssh pi4x</code></li>
+        </ol>
+      </li>
+      <li>Allow public/private key pairs for ssh among pis and laptop, 
+        <ol>
+          <li></li>
+          <li></li>
+        </ol>
+      </li>
+      <li>
+        <ol>
+          <li></li>
+          <li></li>
+        </ol>
+      </li>
+    </ol>
+
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
