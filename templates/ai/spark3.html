@@ -202,13 +202,14 @@ hadoop fs -ls /
 #### Continue to test ####
 hadoop fs -put $SPARK_HOME/README.md / 
 spark-shell # start spark host
-scala&gt val textFile = sc.textFile("hdfs://pi1:9000/README.md")
+scala&gt val textFile = sc.textFile("hdfs://pi41:9000/README.md")
 ...
 
 scala&gt textFile.first()
 res0: String = # Apache Spark 
     </code></pre>
 
+    <p>In your browser, type in <code>http://{pi41_ip}:4040</code>, you should see the spark console as follows,</p>
     <div style="text-align:center">
       <img src="../../resources/spark.png" style="width:50%">
       <figcaption>You can see the textfile command is listed as completed jobs.</figcaption>
@@ -217,7 +218,34 @@ res0: String = # Apache Spark
 
     <h4>Troubleshootings</h4>
     <ol>
-      <li></li>
+      <li>Hide <code>execstack</code> Warning, i.e. <code>You have loaded library... which might have disabled stack guard.</code></li>
+      <pre><code>
+# edit /opt/hadoop/etc/hadoop/hadoop-env.sh
+export HADOOP_OPTS="-XX:-PrintWarnings –Djava.net.preferIPv4Stack=true"
+      </code></pre>
+      <li>Hide <code>NativeCodeLoader</code> Warning, i.e. <code>Unable to load [the] native-hadoop library for your platform</code>, </li>
+      <pre><code>
+echo 'export HADOOP_HOME_WARN_SUPPRESS=1' >> ~/.bashrc
+echo 'export HADOOP_ROOT_LOGGER="WARN,DRFA"' >> ~/.bashrc
+source ~/.bashrc
+      </code></pre>
+      <li>Restart properly, </li>
+      <pre><code>
+# Method 1 reboot, then run start-xxx.sh commands
+# Method 2 
+stop-all.sh && start-dfs.sh && start-yarn.sh
+      </code></pre>
+      <li>Missing datanode by <code>jps</code> and eroor <code>Hadoop java io IOException File could only be replicated to 0 nodes instead of minReplication 1 </code> when running <code>hadoop fs -put $SPARK_HOME/README.md /</code>, caused by accidentally command <code>hdfs namenode -format -force</code> again,</li>
+      <pre><code>
+sudo rm -r /opt/hadoop_tmp
+sudo mkdir -p /opt/hadoop_tmp/hdfs/datanode
+sudo mkdir -p /opt/hadoop_tmp/hdfs/namenode
+sudo chown pi:pi -R /opt/hadoop_tmp
+# Now rerun everything again,
+hdfs namenode -format -force
+start-dfs.sh
+start-yarn.sh # show work
+      </code></pre>
       <li></li>
     </ol>
 
