@@ -71,6 +71,7 @@
     <hr>
 
     <h4>Java Installation</h4>
+    <p>This can be done for all nodes.</p>
     <pre><code>
 clustercmd 'sudo apt install -y default-jre > /dev/null 2>&1'
 clustercmd java -version
@@ -81,6 +82,7 @@ clustercmd scala -version
 echo 'export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")' >> ~/.bashrc
     </code></pre>
 
+    <p>The following sections are only applied to first Node (master node/ name node). Other datanodes can be done in later article.</p>
     <h4>Hadoop Installation</h4>
     <p>Download the correct tar file, by clicking Announcement under Release notes &#8594 Download tar.gz (not src!!)</p>
     <pre><code>
@@ -108,7 +110,117 @@ cd && hadoop version | grep Hadoop
     <p>Download the correct tar file under Download Apache Spark &#8594 Step 3.</p>
     <pre><code>
 scp spark-3.1.2-bin-hadoop3.2.tgz pi41:
+sudo tar -xvf spark-3.1.2-bin-hadoop3.2.tgz -C /opt/
+cd /opt && sudo mkdir spark
+sudo mv spark-3.1.2-bin-hadoop3.2/* spark
+sudo rm -r spark-3.1.2-bin-hadoop3.2
+sudo chown pi:pi -R /opt/spark
+echo 'export SPARK_HOME=/opt/spark' >> ~/.bashrc
+echo 'export PATH=$PATH:$SPARK_HOME/bin' >> ~/.bashrc
+source ~/.bashrc
     </code></pre>
+    <p>Test with,</p>
+    <pre><code>
+spark-shell --version
+    </code></pre>
+
+
+    <h4>Configure HDFS</h4>
+    <p>Please configure these in Pi1 as master node, all files are within <code>/opt/hadoop/etc/hadoop</code>, </p>
+    <h5><b>core-site.xml</b></h5>
+    <pre><code>
+&ltconfiguration&gt
+  &ltproperty&gt
+    &ltname&gtfs.defaultFS&lt/name&gt
+    &ltvalue&gthdfs://pi41:9000&lt/value&gt
+  &lt/property&gt
+&lt/configuration&gt
+    </code></pre>
+
+
+    <h5><b>hdfs-site.xml</b></h5>
+    <pre><code>
+&ltconfiguration&gt
+  &ltproperty&gt
+    &ltname&gtdfs.datanode.data.dir&lt/name&gt
+    &ltvalue&gtfile:///opt/hadoop_tmp/hdfs/datanode&lt/value&gt
+  &lt/property&gt
+  &ltproperty&gt
+    &ltname&gtdfs.namenode.name.dir&lt/name&gt
+    &ltvalue&gtfile:///opt/hadoop_tmp/hdfs/namenode&lt/value&gt
+  &lt/property&gt
+  &ltproperty&gt
+    &ltname&gtdfs.replication&lt/name&gt
+    &ltvalue&gt1&lt/value&gt
+  &lt/property&gt
+&lt/configuration&gt
+    </code></pre>
+    <p>Run the following commands to refer the change,</p>
+    <pre><code>
+sudo mkdir -p /opt/hadoop_tmp/hdfs/datanode
+sudo mkdir -p /opt/hadoop_tmp/hdfs/namenode
+sudo chown pi:pi -R /opt/hadoop_tmp
+    </code></pre>
+
+
+    <h5><b>mapred-site.xml</b></h5>
+    <pre><code>
+&ltconfiguration&gt
+  &ltproperty&gt
+    &ltname&gtmapreduce.framework.name&lt/name&gt
+    &ltvalue&gtyarn&lt/value&gt
+  &lt/property&gt
+&lt/configuration&gt
+    </code></pre>
+
+    <h5><b>yarn-site.xml</b></h5>
+    <pre><code>
+&ltconfiguration&gt
+  &ltproperty&gt
+    &ltname&gtyarn.nodemanager.aux-services&lt/name&gt
+    &ltvalue&gtmapreduce_shuffle&lt/value&gt
+  &lt/property&gt
+  &ltproperty&gt
+    &ltname&gtyarn.nodemanager.auxservices.mapreduce.shuffle.class&lt/name&gt  
+    &ltvalue&gtorg.apache.hadoop.mapred.ShuffleHandler&lt/value&gt
+  &lt/property&gt
+&lt/configuration&gt
+    </code></pre>
+
+    <p>Test with,</p>
+    <pre><code>
+hdfs namenode -format -force # only do this at the first time, otherwise it will cause data lost in hdfs, to fix it see Troubleshooting section.
+start-dfs.sh
+start-yarn.sh 
+jps # must show NameNode, DataNode, NodeManager, ResourceManager, SecondaryNameNode, Jps. Otherwise, see Troubleshooting section.
+    </code></pre>
+
+    <p>Basic commands to control file system (fs), they look like extra layer to do linux bash,</p>
+    <pre><code>
+hadoop fs -mkdir /tmp
+hadoop fs -ls /
+#### Continue to test ####
+hadoop fs -put $SPARK_HOME/README.md / 
+spark-shell # start spark host
+scala&gt val textFile = sc.textFile("hdfs://pi1:9000/README.md")
+...
+
+scala&gt textFile.first()
+res0: String = # Apache Spark 
+    </code></pre>
+
+    <div style="text-align:center">
+      <img src="../../resources/spark.png" style="width:50%">
+      <figcaption>You can see the textfile command is listed as completed jobs.</figcaption>
+    </div>
+    
+
+    <h4>Troubleshootings</h4>
+    <ol>
+      <li></li>
+      <li></li>
+    </ol>
+
 
     <h3>References</h3>
     <hr>
