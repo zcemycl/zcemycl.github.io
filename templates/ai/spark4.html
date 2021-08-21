@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Spark with Pi Cluster 4</h3>
+    <hr>
+    <p>Now the cluster setup should begin. Previous chapter only prepares you to have a single-node cluster and that single node acts as both a master and a worker node. To set up the worker nodes, the following steps are required, </p>
+
+    <h4>Installation of Hadoop in every pi</h4>
+    <pre><code>
+clustercmd sudo mkdir -p /opt/hadoop_tmp/hdfs
+clustercmd sudo chown pi:pi -R /opt/hadoop_tmp
+clustercmd sudo mkdir -p /opt/hadoop
+clustercmd sudo chown pi:pi -R /opt/hadoop
+for pi in $(otherpis); do rsync –avxP $HADOOP_HOME $pi:/opt; done
+    </code></pre>
+    <p>In <code>~/.bashrc</code> file, add these lines </p>
+    <pre><code>
+export JAVA_HOME=$(readlink –f /usr/bin/java | sed "s:bin/java::")
+export HADOOP_HOME=/opt/hadoop
+export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+export SPARK_HOME=/opt/spark
+export PATH=$PATH:$SPARK_HOME/bin
+export HADOOP_HOME_WARN_SUPPRESS=1
+export HADOOP_ROOT_LOGGER="WARN,DRFA"
+    </code></pre>
+
+    <p>before,</p>
+    <pre><code>
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+    </code></pre>
+
+    <p>Test with,</p>
+    <pre><code>
+clustercmd hadoop version | grep Hadoop
+# if command not found, please follow the instruction above strictly so that export command is run when ssh is not interactive, or,
+clustercmd /opt/hadoop/bin/hadoop version | grep Hadoop
+clustercmd sudo -E env "PATH=$PATH" hadoop version | grep Hadoop
+clustercmd 'export PATH=$PATH:/opt/hadoop/bin && hadoop version | grep Hadoop'
+    </code></pre>
+
+    <h4>Installation of Spark in every pi</h4>
+    <pre><code>
+clustercmd sudo mkdir -p /opt/spark
+clustercmd sudo chown pi:pi -R /opt/spark
+for pi in $(otherpis); do rsync –avxP $SPARK_HOME $pi:/opt; done
+    </code></pre>
+
+    <h4></h4>
+    <pre><code>
+    </code></pre>
+
+
+    <h4></h4>
+    <pre><code>
+    </code></pre>
+
+
+
+
+
+
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
