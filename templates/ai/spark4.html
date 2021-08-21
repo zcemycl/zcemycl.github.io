@@ -71,7 +71,7 @@
     <hr>
     <p>Now the cluster setup should begin. Previous chapter only prepares you to have a single-node cluster and that single node acts as both a master and a worker node. To set up the worker nodes, the following steps are required, </p>
 
-    <h4>Installation of Hadoop in every pi</h4>
+    <h3>Installation of Hadoop in every pi</h3>
     <pre><code>
 clustercmd sudo mkdir -p /opt/hadoop_tmp/hdfs
 clustercmd sudo chown pi:pi -R /opt/hadoop_tmp
@@ -108,22 +108,167 @@ clustercmd sudo -E env "PATH=$PATH" hadoop version | grep Hadoop
 clustercmd 'export PATH=$PATH:/opt/hadoop/bin && hadoop version | grep Hadoop'
     </code></pre>
 
-    <h4>Installation of Spark in every pi</h4>
+    <h3>Installation of Spark in every pi</h3>
     <pre><code>
 clustercmd sudo mkdir -p /opt/spark
 clustercmd sudo chown pi:pi -R /opt/spark
 for pi in $(otherpis); do rsync –avxP $SPARK_HOME $pi:/opt; done
     </code></pre>
 
-    <h4></h4>
+    <h3>Configuring Hadoop on the Cluster</h3>
+    <p>Make these changes in the folder <code>/opt/hadoop/etc/hadoop</code> of all servers, including master node and workers node.</p>
+    <h5><b>core-site.xml</b></h5>
     <pre><code>
+&ltconfiguration&gt
+  &ltproperty&gt
+    &ltname&gtfs.default.name&lt/name&gt
+    &ltvalue&gthdfs://pi41:9000&lt/value&gt
+  &lt/property&gt
+&lt/configuration&gt
     </code></pre>
 
 
-    <h4></h4>
+    <h5><b>hdfs-site.xml</b></h5>
+    <p>Replication is set to 2 because I want the file is copied to 2 datanodes.</p>
     <pre><code>
+&ltconfiguration&gt
+  &ltproperty&gt
+    &ltname&gtdfs.datanode.data.dir&lt/name&gt
+    &ltvalue&gt/opt/hadoop_tmp/hdfs/datanode&lt/value&gt
+  &lt/property&gt
+  &ltproperty&gt
+    &ltname&gtdfs.namenode.name.dir&lt/name&gt
+    &ltvalue&gt/opt/hadoop_tmp/hdfs/namenode&lt/value&gt
+  &lt/property&gt
+  &ltproperty&gt
+    &ltname&gtdfs.replication&lt/name&gt
+    &ltvalue&gt2&lt/value&gt
+  &lt/property&gt
+&lt/configuration&gt
     </code></pre>
 
+
+    <h5><b>mapred-site.xml</b></h5>
+    <pre><code>
+&ltconfiguration&gt
+  &ltproperty&gt
+    &ltname&gtmapreduce.framework.name&lt/name&gt
+    &ltvalue&gtyarn&lt/value&gt
+  &lt/property&gt
+  &ltproperty&gt
+    &ltname&gtyarn.app.mapreduce.am.resource.mb&lt/name&gt
+    &ltvalue&gt256&lt/value&gt
+  &lt/property&gt
+  &ltproperty&gt
+    &ltname&gtmapreduce.map.memory.mb&lt/name&gt
+    &ltvalue&gt128&lt/value&gt
+  &lt/property&gt
+  &ltproperty&gt
+    &ltname&gtmapreduce.reduce.memory.mb&lt/name&gt
+    &ltvalue&gt128&lt/value&gt
+  &lt/property&gt
+&lt/configuration&gt
+    </code></pre>
+
+
+    <h5><b>yarn-site.xml</b></h5>
+    <pre><code>
+&ltconfiguration&gt
+  &ltproperty&gt
+    &ltname&gtyarn.acl.enable&lt/name&gt
+    &ltvalue&gt0&lt/value&gt
+  &lt/property&gt
+  &ltproperty&gt
+    &ltname&gtyarn.resourcemanager.hostname&lt/name&gt
+    &ltvalue&gtpi1&lt/value&gt
+  &lt/property&gt
+  &ltproperty&gt
+    &ltname&gtyarn.nodemanager.aux-services&lt/name&gt
+    &ltvalue&gtmapreduce_shuffle&lt/value&gt
+  &lt/property&gt
+  &ltproperty&gt
+    &ltname&gtyarn.nodemanager.auxservices.mapreduce.shuffle.class&lt/name&gt  
+    &ltvalue&gtorg.apache.hadoop.mapred.ShuffleHandler&lt/value&gt
+  &lt/property&gt
+  &ltproperty&gt
+    &ltname&gtyarn.nodemanager.resource.memory-mb&lt/name&gt
+    &ltvalue&gt900&lt/value&gt
+  &lt/property&gt
+  &ltproperty&gt
+    &ltname&gtyarn.scheduler.maximum-allocation-mb&lt/name&gt
+    &ltvalue&gt900&lt/value&gt
+  &lt/property&gt
+  &ltproperty&gt
+    &ltname&gtyarn.scheduler.minimum-allocation-mb&lt/name&gt
+    &ltvalue&gt64&lt/value&gt
+  &lt/property&gt
+  &ltproperty&gt
+    &ltname&gtyarn.nodemanager.vmem-check-enabled&lt/name&gt
+    &ltvalue&gtfalse&lt/value&gt
+  &lt/property&gt
+&lt/configuration&gt
+    </code></pre>
+
+    <h5><b>master</b></h5>
+    <pre><code>
+pi41
+    </code></pre>
+
+
+    <h5><b>workers</b></h5>
+    <pre><code>
+pi42
+pi43
+    </code></pre>
+
+    <p>Then, clear all the tmp files in datanode and namenode, and start the hdfs again,</p>
+    <pre><code>
+clustercmd rm -rf /opt/hadoop_tmp/hdfs/datanode/*
+clustercmd rm -rf /opt/hadoop_tmp/hdfs/namenode/*
+hdfs namenode -format -force # only in pi41
+start-dfs.sh && start-yarn.sh
+    </code></pre>
+
+    <p>Test the configuration with, open <code>http://{pi41_ip_address}:9870</code> in browser, </p>
+    <div style="text-align:center;">
+      <img src="../../resources/datanode.png" style="width:30%">
+      <img src="../../resources/browse.png" style="width:30%">
+      <figcaption>Left: Two nodes should be shown. Right: A file is shown if you use put. </figcaption>
+    </div>
+    <pre><code>
+jps # In pi41, should not have datanode. In pi42 and pi43 should have datanode.
+hadoop fs -put $SPARK_HOME/README.md / # this should be put into datanode 1 and 2 (pi42 and pi43).
+ls /opt/hadoop_tmp/hdfs/datanode # In pi41, should be empty. In pi42 and pi43, should have a folder named current.
+    </code></pre>
+
+
+
+
+    <h3>Configuring Spark on the Cluster</h3>
+    <pre><code>
+# Add these to ~/.bashrc
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export LD_LIBRARY_PATH=$HADOOP_HOME/lib/native:$LD_LIBRARY_PATH
+# Edit spark-defaults.conf
+cd $SPARK_HOME/conf
+sudo mv spark-defaults.conf.template spark-defaults.conf
+# Add these to spark-defaults.conf
+spark.master            yarn
+spark.driver.memory     465m
+spark.yarn.am.memory    356m
+spark.executor.memory   465m
+spark.executor.cores    2
+# Start dfs
+stop-dfs.sh && stop-yarn.sh
+start-dfs.sh && start-yarn.sh
+    </code></pre>
+
+    <p>Test with,<p>
+    <pre><code>
+spark-submit --deploy-mode client --class org.apache.spark.examples.SparkPi $SPARK_HOME/examples/jars/spark-examples_2.12-3.1.2.jar 7 
+# 2 datanodes: took 35.576593 s , Pi is roughly 3.140290200414572
+# 1 datanode : 
+    </code></pre>
 
 
 
