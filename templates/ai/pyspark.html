@@ -82,14 +82,17 @@ pyspark
 
     <h5><b>Without import pyspark,</b></h5>
     <pre><code>
-import random                                                                          
-import time                                                                                             
-NUM_SAMPLES = 100000000                                                                                                                                                                                 
-def inside(p):                                                                                               x, y = random.random(), random.random()              
-    return x*x + y*y &lt 1                                                                
-t1 = time.time()                                                                                         count = sc.parallelize(range(0, NUM_SAMPLES)).filter(inside).count()                                   
-print("Time Taken: {}s".format(time.time()-t1))                                                          
-pi = 4 * count / NUM_SAMPLES                                                                             print('Pi is roughly', pi)    
+import random
+import time  
+NUM_SAMPLES = 100000000
+def inside(p):
+    x, y = random.random(), random.random()
+    return x*x + y*y &lt 1
+t1 = time.time()                                                               
+count = sc.parallelize(range(0, NUM_SAMPLES)).filter(inside).count()
+print("Time Taken: {}s".format(time.time()-t1))
+pi = 4 * count / NUM_SAMPLES                                                   
+print('Pi is roughly', pi)
     </code></pre>
     <p>Then run,</p>
     <pre><code>
