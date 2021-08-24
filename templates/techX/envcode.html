@@ -121,6 +121,36 @@ bash ~/Downloads/Anacondaxxxxxx.sh
     <p>Some common packages are,</p>
     <code>numpy pandas opencv-python nltk Flask virtualenv tensorflow torch torchvision </code>
     <p>Please be cautious about tensorflow and pytorch gpu installation. It requires very specific version of cuda and gpu driver,etc. </p>
+
+    <h4>Matlab</h4>
+    <ol>
+    <li>Download the installer zip folder, and unzip it in an empty folder. </li>
+    <pre><code>
+mkdir matlab
+unzip matlab_R2021a_glnxa64.zip -d matlab
+cd matlab
+    </code></pre>
+    <li>Run the installer,</li>
+    <pre><code>
+sudo ./install
+    </code></pre>
+    <li>Install matlab-support package, </li>
+    <pre><code>
+mkdir -p MATLAB/R2021a # inside matlab folder
+sudo apt-get install matlab-support # YES - Rename GCC
+    </code></pre>
+    <li>Allow permission,</li>
+    <pre><code>
+sudo chown meme -R ~/.matlab # sudo chown username -R ~/.matlab
+    </code></pre>
+    <li>Then you can start the matlab by,</li>
+    <pre><code>
+matlab
+    </code></pre>
+    </ol>
+
+
+
     <h3>References</h3>
     <hr>
     <ol>
