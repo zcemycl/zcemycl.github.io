@@ -81,6 +81,14 @@ Confirm Password: pwd
 OK &#8594 Apply &#8594 OK
     </code></pre>
     <li>If you use a VNC client like Remmina showing that "Cannot Currently Show the Desktop", please follow the following instruction, <a href="https://www.tomshardware.com/uk/how-to/fix-cannot-currently-show-desktop-error-raspberry-pi">How to Fix Raspberry Pi's 'Cannot Currently Show the Desktop' Error</a>. I fix it by adjusting resolution and then rebooting.</li>
+    <li>Download packages.</li>
+    <pre><code>
+sudo apt-get update -y && sudo apt-get upgrade
+sudo apt-get install wiringpi
+gpio -v
+gpio readall
+git clone --depth 1 https://github.com/freenove/Freenove_RFID_Starter_Kit_for_Raspberry_Pi
+    </code></pre>
     <li></li>
     </ol>
 
