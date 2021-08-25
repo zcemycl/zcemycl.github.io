@@ -86,7 +86,10 @@ OK &#8594 Apply &#8594 OK
 sudo apt-get update -y && sudo apt-get upgrade
 sudo apt-get install wiringpi
 gpio -v
-gpio readall
+gpio readall # sometimes it may not show ### Oops - unable to determine board type... model: 17
+cd /tmp
+wget https://project-downloads.drogon.net/wiringpi-latest.deb
+sudo dpkg -i wiringpi-latest.deb
 git clone --depth 1 https://github.com/freenove/Freenove_RFID_Starter_Kit_for_Raspberry_Pi
     </code></pre>
     <li></li>
@@ -98,6 +101,8 @@ git clone --depth 1 https://github.com/freenove/Freenove_RFID_Starter_Kit_for_Ra
     <hr>
     <ol>
     <li><a href="https://www.tomshardware.com/uk/how-to/fix-cannot-currently-show-desktop-error-raspberry-pi">How to Fix Raspberry Pi's 'Cannot Currently Show the Desktop' Error</a></li>
+    <li><a href="https://raspberrypi.stackexchange.com/questions/102421/is-the-gpio-readall-command-compatible-with-rpi-4">Is the gpio readall command compatible with RPi 4?</a></li>
+    <li><a href=""></a></li>
     <li><a href=""></a></li>
     </ol>
     </div>
