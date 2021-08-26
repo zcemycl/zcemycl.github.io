@@ -110,7 +110,41 @@ python-3.7.6
     </code></pre>
     <li>Go to your heroku app, Deploy tab &#8594 Github Deployment method &#8594 Connect to your github account and repo (App connected to GitHub) &#8594 Enable Automatic deploys</li>
     </ol>
-    
+ 
+    <h4>Structure</h4>
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    flowchart LR
+        A[app.py] -->|render_template| B[index.html];
+        subgraph b[templates];
+            B
+        end;
+    </div>
+    <p>Basics of app.py</p>
+    <pre><code>
+# For GET method
+@app.route("/",methods=['GET'])
+## GET with args
+a = requests.args.get('a',None)
+## To test GET
+r = requests.get('http://ip:port/',params={'a':a})
+dct = json.loads(response.content.decode('utf-8'))
+
+# For POST method
+@app.route("/",methods=['POST'])
+## POST with args
+a = requests.values.get('a',None)
+## To test POST
+r = requests.post('http://ip:port/',params={'a':a}) # for simple datatype
+r = requests.post('http://ip:port/',json={'a':list}) # for image list
+dct = json.loads(response.content.decode('utf-8'))
+
+# return 
+## template
+render_template('xx.html',**kwargs)
+## json
+jsonpify({'output':output,'data':data})
+    </code></pre>
+
     <h4>Demo site</h4>
     <a href="https://hidden-dusk-28735.herokuapp.com/">https://hidden-dusk-28735.herokuapp.com/</a>
     <p>Just want to make a fake api, just like <a href="https://fakestoreapi.com/docs">How to use fakestoreapi</a>, some data look like this link <a href="https://fakestoreapi.com/products?limit=5">https://fakestoreapi.com/products?limit=5</a>.</p>
