@@ -71,13 +71,17 @@
 
     <div class="mermaid" style="background-color:white; max-width:80vw">
     flowchart TD
-      A[Javascript] ----> B(Packages);
-      B ----> C[D3.js];
-      B ----> D[jQuery];
-      B ----> E[React];
-      A ----> F(Frameworks);
-      F --> G[Angular];
-      F --> H[Node.js];
+      A[Javascript] ----> C[D3.js];
+      A ----> D[jQuery];
+      A ----> E[React];
+      subgraph Packages;
+      C;D;E;
+      end;
+      A --> G[Angular];
+      A --> H[Node.js];
+      subgraph Frameworks;
+      G;H;
+      end;
     </div>
 
     <h4>Install Node.js</h4>

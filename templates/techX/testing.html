@@ -90,11 +90,15 @@
     <h4>Example</h4>
 
     <div class="mermaid">
-    graph LR
-      A[app] --> B[src];
-      B --> C[app.py];
-      A--> D[tests];
-      D --> E[test_app.py];
+    flowchart LR
+      A[app] --> C[app.py];
+      subgraph src;
+      C;
+      end;
+      A--> E[test_app.py];
+      subgraph tests;
+      E;
+      end;
     </div>
     <pre><code>
 from flask_jsonpify import jsonpify
