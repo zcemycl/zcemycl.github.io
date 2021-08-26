@@ -69,25 +69,61 @@
     <h3>Database Overview</h3>
     <hr>
     <h4>Terminology</h4>
-    <div style="text-align:center;">
+
     <div class="mermaid" style="background-color:white; max-width:80vw">
-    graph LR
-      A[Database] --> B[Relational];
-      B --> I(Table with foreign ID);
-      A --> C[Non-relational];
-      B -->|Language| D(SQL Structured Query Language);
-      B -->|Managed by| E(Relational Database Management Systems RDBMS);
-      E --> F(mySQL,postgreSQL,mariaDB);
-      E --> Z(UI client);
-      Z --> Y(phpMyAdmin, pgAdmin, popSQL);
-      B --> X(Cloud service);
-      X --> W(AWS RDS);
-      C --> X;
-      X --> V(AWS S3);
-      C -->|Managed by| G(Non-RDBMS);
-      G --> H(mongoDB,dynamoDB);
-      C --> J(JSON, Graph, Hash);
-    </div>
+    flowchart TB
+        subgraph a[Relational: Table with Foreign ID]
+            direction LR
+            subgraph a1[Language]
+                direction TB
+                A11[Structured Query Language SQL]
+            end
+            subgraph a2["Relational Database Management System (RDBMS)"]
+                direction TB
+                A21[phpMyAdmin] --> A22[mySQL];
+                A21 --> A23[mariaDB];
+                A23 -->|fork| A22;
+                A24[pgAdmin] --> A25[postgreSQL];
+                subgraph a21[Database Engine]
+                    direction LR
+                    A22;A23;A25
+                end
+                subgraph a22[UI Client]
+                    direction LR
+                    A21;A24;A26[dBeaver]
+                end
+                A26 -->|any| a21;
+
+            end
+        end
+        subgraph b[Non-relational: JSON,Graph,Hash]
+            direction TB
+            subgraph b1[Non-RDBMS]
+                direction LR
+                subgraph b11[Engine]
+                direction LR
+                B11[mongoDB];
+                B12[noSQL];
+                end
+            end
+        end
+        subgraph c[Cloud service: AWS]
+            direction TB
+            subgraph c1[Relational]
+                direction LR
+                C1["Relational Database Service (RDS)"]
+            end
+            subgraph c2[Non-relational]
+                direction LR
+                C2[S3]
+                C21[mongoDB];
+                C22[dynamoDB];
+            end
+        end
+        A[Database] --> a;
+        A --> b;
+        a --> c1;
+        b --> c2;
     </div>
 
     <ul>
