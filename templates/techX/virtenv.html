@@ -85,6 +85,26 @@ python -m ipykernel install --user --name=my_env
 jupyter notebook
     </code></pre>
 
+    <h4>Troubleshootings</h4>
+    <ol>
+      <li>RuntimeError: failed to query /usr/bin/python3.6 with code 1 err. This occurs in Ubuntu 20.04.</li>
+      <pre><code>
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt-get install python3.6
+apt-get update
+apt-get install python3-virtualenv
+virtualenv -p /usr/bin/python3.6 venv 
+      </code></pre>
+      <li>ModuleNotFoundError: No module named 'virtualenv.seed.embed.via_app_data' when using virtualenv.</li>
+      <pre><code>
+python3 -m venv my_env
+      </code></pre>
+      <li></li>
+      <li></li>
+    </ol>
+
+
     <h3>References</h3>
     <hr>
     <ol>
@@ -92,7 +112,8 @@ jupyter notebook
     <li><a href="https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#activating-an-environment">conda Managing environments</a></li>
     <li><a href="https://medium.com/@nrk25693/how-to-add-your-conda-environment-to-your-jupyter-notebook-in-just-4-steps-abeab8b8d084">How to add your Conda environment to your jupyter notebook in just 4 steps</a></li>
     <li><a href="https://stackoverflow.com/questions/58272405/how-to-install-packages-from-yaml-file-in-conda">How to install packages from yaml file in Conda</a></li>
-    <li><a href=""></a></li>
+    <li><a href="https://itectec.com/ubuntu/ubuntu-problem-with-creating-python-3-6-virtual-environment-on-ubuntu-20-04/">Ubuntu – Problem with creating Python 3.6 virtual environment on Ubuntu 20.04</a></li>
+    <li><a href="https://stackoverflow.com/questions/63491221/modulenotfounderror-no-module-named-virtualenv-seed-embed-via-app-data-when-i">ModuleNotFoundError: No module named 'virtualenv.seed.embed.via_app_data' when I created new env by virtualenv</a></li>
     <li><a href=""></a></li>
     </ol>
     </div>
