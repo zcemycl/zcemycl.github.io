@@ -74,24 +74,38 @@
     <li>All packages are listed in <code>package.json</code>.</li>
     <li>Delete all src files except index.js. </li>
     <li>Structure of the project,</li>
+
+
     <div class="mermaid" style="background-color:white; max-width:80vw">
-    graph TD
-      Y[Project] --> Z[index.js];
-      Y --> A;
-      Y --> X[public];
-      X --> UU[index.html];
-      Y --> W[package.json];
-      A[src] --> B[components];
-      B --> C[App.js];
-      B --> D[CustomButton];
-      D --> E[CustomButton.css];
-      D --> F[CustomButton.js];
-      D ==> C;
-      C ==> Z;
-      Z ==> UU;
+    flowchart TB
+    subgraph a[Project]
+        direction TB
+        subgraph b[src]
+            direction LR
+            A[App.js] --> B[index.js]
+            subgraph b1[components]
+                direction TB
+                subgraph b11[CustomButton]
+                    direction LR
+                    B11[styles.js] --> B12[CustomButton.jsx]
+                end
+                subgraph b12[Graph]
+                    direction LR
+                    B13[styles.js] --> B14[Graph.jsx]
+                end
+                b11 --> B1[index.js]
+                b12 --> B1
+            end
+            b1 --> A
+        end
+        subgraph c[public]
+            direction LR
+            C[index.html];
+        end
+        B --> C;
+        D[package.json]
+    end;
     </div>
-
-
 
     <li></li>
     </ol>
