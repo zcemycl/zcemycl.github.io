@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Flask API Docker</h3>
+    <hr>
+
+
+    <h4>app.py</h4>
+    <pre><code>
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+@app.route("/",methods=['GET','POST'])
+def home():
+    return jsonify({"payload":"Hello world, I am Leo."})
+
+if __name__ == "__main__":
+    app.run(debug=True,host='0.0.0.0',port=1111) # must be 0000
+    </code></pre>
+
+    <h4>requirements.txt</h4>
+    <pre><code>
+Flask==1.1.2
+Flask-Bcrypt==0.7.1
+Flask-Classful==0.14.2
+Flask-Cors==3.0.10
+Flask-Ext==0.1
+Flask-Jsonpify==1.5.0
+Flask-Login==0.5.0
+Flask-Markdown==0.3
+Flask-MySQL==1.5.1
+Flask-SocketIO==4.3.1
+Flask-SQLAlchemy==2.4.3
+Flask-WTF==0.14.3
+    </code></pre>
+
+    <h4>Dockerfile</h4>
+    <pre><code>
+FROM python:3.8
+
+COPY requirements.txt ./requirements.txt
+COPY app.py ./app.py
+
+RUN pip install -r requirements.txt
+
+CMD ["python","./app.py"]
+    </code></pre>
+
+
+    <h4>Commands</h4>
+    <ol>
+    <li>Start container,</li>
+    <pre><code>
+docker build -t app_docker -f Dockerfile .
+docker run -d -p 2222:1111 app_docker # out:in
+    </code></pre>
+    <li>Stop and remove containers and images, </li>
+    <pre><code>
+# list image
+docker image list
+# list container
+docker ps -a
+# stop and remove
+docker stop `docker ps -a | grep app_docker | awk '{print $NF}'`
+docker rm `docker ps -a | grep app_docker | awk '{print $NF}'`
+## or
+docker rm --force `docker ps -a | grep app_docker | awk '{print $NF}'`
+# remove image
+docker image rm app_docker
+    </code></pre>
+    <li></li>
+    </ol>
+
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
