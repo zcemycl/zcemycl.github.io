@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Installations of Cuda Tensorflow and PyTorch with GPU</h3>
+    <hr>
+    <h4>Cuda</h4>
+    <p>Assume that the driver is installed,</p>
+    <pre><code>
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID) # 18.04
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+sudo apt-get install -y nvidia-container-toolkit
+sudo systemctl restart docker
+docker pull nvidia/cuda # this will give error
+docker pull nvidia/cuda:11.4.1-devel-ubuntu18.04 # this should be
+# testing
+docker run --gpus all nvidia/cuda:11.4.1-devel-ubuntu18.04 nvidia-smi
+    </code></pre>
+
+    <h4>Tensorflow 2</h4>
+    <pre><code>
+docker pull tensorflow/tensorflow:latest-gpu-py3
+docker pull tensorflow/tensorflow:latest-gpu-py3-jupyter
+# testing
+docker run --gpus all -it --rm tensorflow/tensorflow:latest-gpu-py3    python -c "import tensorflow as tf; print(tf.version); print(tf.test.is_gpu_available()); print(tf.test.is_built_with_cuda())" # should return True
+    </code></pre>
+
+
+    <h4>PyTorch</h4>
+    <pre><code>
+docker pull nvcr.io/nvidia/pytorch:18.04-py3
+docker run --gpus all -it --rm nvcr.io/nvidia/pytorch:18.04-py3 python -c "import torch; print(torch.cuda.is_available())"
+    </code></pre>
+
+    <h3>References</h3>
+    <hr>
+    <ol>
+    <li><a href="https://hub.docker.com/r/nvidia/cuda">docker -- nvidia/cuda</a></li>
+    <li><a href="https://unix.stackexchange.com/questions/136407/is-my-linux-arm-32-or-64-bit">is my linux ARM 32 or 64 bit?</a></li>
+    <li><a href="https://www.celantur.com/blog/run-cuda-in-docker-on-linux/">How to get your CUDA application running in a Docker container</a></li>
+    <li><a href="https://www.datamachinist.com/deep-learning/install-tensorflow-2-0-using-docker-with-gpu-support-on-ubuntu-18-04/">Part 5 – Install TensorFlow 2.0 with GPU support on Ubuntu 18.04 using Docker</a></li>
+    <li><a href="https://lambdalabs.com/blog/nvidia-ngc-tutorial-run-pytorch-docker-container-using-nvidia-container-toolkit-on-ubuntu/">NVIDIA NGC Tutorial: Run a PyTorch Docker Container using nvidia-container-toolkit on Ubuntu</a></li>
+    <li><a href=""></a></li>
+    </ol>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
