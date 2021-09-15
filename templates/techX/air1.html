@@ -67,9 +67,73 @@
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
 
-    <h3>Air Cooling PC -- Part 1</h3>
+    <h3>Air Cooling PC</h3>
     <hr>
 
+    <div class="mermaid" style="background-color:white; width:80vw; height:auto;">
+    flowchart TB
+      subgraph ab[Tower 900]
+      subgraph a[ASUS Pro WS X570-Ace Motherboard]
+        direction LR
+        subgraph a1[components]
+          direction LR
+          a11[AMD Ryzen 7 5800x]
+          a12[AMD Wraith Prism Cooler]
+          a13[Samsung 970 EVO 1TB PCIe NVMe M2 SSD]
+          a14[Corsair Vengeance rgb pro 16gb]
+          a12 -->|cover| a11
+          a15[RTX 2080 Ti]
+        end
+        subgraph a2[connectors]
+          direction LR
+          a21[AMD AM4 CPU Socket]
+          a22[4-pin CPU Fan]
+          a31[4-pin CHA_FAN]
+          a23[24-pin Motherboard Power]
+          a24[8-pin CPU Power]
+          a25[M2 Socket]
+          a26[DDR DIMM slot]
+          a27[SATA 6Gb/s Connector]
+          a28[PCI Express 4]
+          a29[USB 2]
+          a30[USB 3]
+        end
+        a11 --> a21;
+        a12 --> a22;
+        a13 --> a25;
+        a14 --> a26;
+        a15 --> a28;
+        a12 --> a29;
+      end
+      subgraph d[components]
+        d1[Chassis Fan 1]
+        d2[Chassis Fan 2]
+        d3[Others]
+      end
+      d1 --> a31;
+      d2 --> a31;
+      d3 --> a30;
+      d -->|reset, hdd audio, pled, speaker, power switch| a2;
+      subgraph b[RM 850 Power Supply]
+      end
+      a23 -->|24PIN ATX| b;
+      a24 -->|6+2 PCIe & 4+4 CPU| b;
+      a15 -->|6+2 PCIe & 4+4 CPU| b;
+      subgraph c[2 Tb HDD]
+      end
+      a27 --> c;
+      c -->|PERIPHERAL & SATA| b;
+      subgraph e[Corsiar Air Cooling Kit]
+        direction LR
+        e1[RGB Fan] -->|Mount| e2[Radiator];
+        e3[ICUE Commander Pro] -->|Fan Wire| e1;
+        e4[RGB Hub] -->|Rgb Wire| e1;
+        e3 -->|LED| e4;
+      end
+      e3 --> a29;
+      e3 -->|PERIPHERAL & SATA| b;
+      end
+    </div>
 
 
 
