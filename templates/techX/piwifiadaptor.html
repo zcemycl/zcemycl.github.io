@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Pi Wifi Adaptor</h3>
+    <hr>
+
+    <div class="mermaid" style="background-color:white; width:80vw">
+    flowchart LR
+      A[Phone] -.->|Hotspot| B[Pi]; 
+      B -->|Ethernet| C[PC without Wifi Adaptor];
+    </div>
+
+    <h4>Background</h4>
+    <p>I built a PC which has no Wifi Support but Ethernet support. However, sometimes some area has no fibre broadband, ethernet is still slow. So you may prefer 4G.</p>
+
+    <h4>Steps</h4>
+    <h5>Installation</h5>
+    <pre><code>
+sudo apt-get install dnsmasq
+    </code></pre>
+
+    <h5>Configure dnsmasq</h5>
+    <pre><code>
+sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
+sudo vim /etc/dnsmasq.conf.wlan2pceth
+### New
+interface=eth0
+dhcp-range=192.168.4.20,192.168.4.100,255.255.255.0,24h
+###
+sudo cp /etc/dnsmasq.conf.wlan2pceth /etc/dnsmasq.conf
+    </code></pre>
+
+    <h5>Configure dhcpcd</h5>
+    <pre><code>
+sudo cp /etc/dhcpcd.conf /etc/dhcpcd.conf.orig
+sudo cp /etc/dhcpcd.conf /etc/dhcpcd.conf.wlan2pceth
+sudo vim /etc/dhcpcd.conf.wlan2pceth
+### Add
+interface eth0
+static ip_address=192.168.4.1/24
+###
+sudo cp /etc/dhcpcd.conf.wlan2pceth /etc/dhcpcd.conf
+    </code></pre>
+
+    <h5>Configure sysctl</h5>
+    <pre><code>
+sudo cp /etc/sysctl.conf /etc/sysctl.conf.orig
+sudo cp /etc/sysctl.conf /etc/sysctl.conf.wlan2pceth
+sudo vim /etc/sysctl.conf.wlan2pceth
+### Uncomment
+net.ipv4.ip_forward=1
+###
+sudo cp /etc/sysctl.conf.wlan2pceth /etc/sysctl.conf
+    </code></pre>
+
+    <h5>Configure rc.local</h5>
+    <pre><code>
+sudo cp /etc/rc.local /etc/rc.local.orig
+sudo cp /etc/rc.local /etc/rc.local.wlan2pceth
+sudo vim /etc/rc.local.wlan2pceth
+### Add before "exit 0"
+sudo iptables -t nat -A  POSTROUTING -o wlan0 -j MASQUERADE
+###
+sudo cp /etc/rc.local.wlan2pceth /etc/rc.local
+    </code></pre>
+
+    <p>Then just reboot. </p>
+
+
+
+    <h3>References</h3>
+    <hr>
+    <ol>
+      <li><a href="https://www.raspberrypi.org/forums/viewtopic.php?t=203087">Raspberry Pi 3 As WiFi Adapter?</a></li>
+      <li><a href="https://network-data-cabling.co.uk/blog/what-is-wireless-bridge/">What Is a Wireless Bridge and Why Do You Need One?</a></li>
+      <li><a href="https://lazyadmin.nl/home-network/dhcp-lease-time/">DHCP Lease Time – What is it and How does it work?</a></li>
+      <li><a href="https://github.com/SurferTim/documentation/blob/6bc583965254fa292a470990c40b145f553f6b34/configuration/wireless/access-point.md#internet-sharing">Setting up a Raspberry Pi as an access point in a standalone network</a></li>
+      <li><a href=""></a></li>
+    </ol>
+
+
+
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
