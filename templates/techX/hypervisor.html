@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Hypervisor and Container</h3>
+    <hr>
+    <div class="mermaid" style="background-color:white; width:80vw;">
+      flowchart TB;
+        subgraph c[Container]
+          direction BT;
+          c1[Hardware]-->c5[Host OS];
+          c5 --> c2[Container Manager];
+        end
+        subgraph b[Type 2 Hypervisor]
+          direction BT;
+          b1[Hardware]-->b5[Host OS];
+          b5 --> b2[Hypervisor];
+          subgraph b3[Guest OS]
+            direction LR
+            b31( );b32( );
+          end
+          b2 --> b31;
+          b2 --> b32;
+        end
+        subgraph a[Type 1 Hypervisor]
+          direction BT;
+          a1[Hardware]-->a2[Hypervisor];
+          subgraph a34[Guest OS]
+            a341( );a342( );
+          end
+          a2 --> a341;
+          a2 --> a342;
+        end
+
+    </div>
+
+    <h4>Notes</h4>
+    <ol>
+      <li>Virt-Manager with QEMU and KVM is a faster and more professional option for Type 2 Hypervisor. It also has a command line method to manage any vms.</li>
+      <pre><code>
+sudo apt-get install qemu-kvm virt-manager virtinst bridge-utils cpu-checker libvirt-daemon
+sudo systemctl status libvirtd
+kvm-ok
+      </code></pre>
+      <li>Always install windows image without network, so you can skip some parts.</li>
+      <li>Reduce the UI latency in virt-manager, I had done the following changes,</li>
+      <pre><code>
+1. Make default storage in a SSD/NVME not HDD
+virsh pool-list
+virsh pool-destroy default
+virsh pool-undefine default
+sudo mkdir /media/yui/Disk/virtman
+virsh pool-define-as --name default --type dir --target /media/yui/Disk/virtman
+virsh pool-autostart default
+virsh pool-start default
+##########################
+2. Assign more RAM, CPU and Space
+##########################
+3. Customize configuration before install, then 
+Video QXL -> Model:Virtio -> tick 3D acceleration
+##########################
+4. Customize Edit:Preferences
+New VM 
+Graphics type: Spice
+Add Spice USB Redirection: Yes
+Storage format: Raw (not QCOW2)
+CPU default: Copy host CPU definition
+      </code></pre>
+      <li></li>
+      <pre><code>
+      </code></pre>
+    </ol>
+
+
+
+    <h3>References</h3>
+    <hr>
+    <ol>
+      <li><a href="https://www.vmware.com/topics/glossary/content/hypervisor">What is a Hypervisor? | VMware Glossary</a></li>
+      <li><a href="https://medium.com/teamresellerclub/type-1-and-type-2-hypervisors-what-makes-them-different-6a1755d6ae2c">Type 1 and Type 2 Hypervisors: What Makes Them Different</a></li>
+      <li><a href="https://blog.risingstack.com/operating-system-containers-vs-application-containers/">Operating System Containers vs. Application Containers</a></li>
+      <li><a href="https://www.electronicdesign.com/technologies/dev-tools/article/21801722/whats-the-difference-between-containers-and-virtual-machines">What’s the Difference Between Containers and Virtual Machines? </a></li>
+      <li><a href="https://mathiashueber.com/windows-virtual-machine-gpu-passthrough-ubuntu/">Beginner friendly guide to GPU passthrough on Ubuntu 18.04</a></li>
+      <li><a href="https://mathiashueber.com/pci-passthrough-ubuntu-2004-virtual-machine/">Virtual gaming machine with PCI passthrough on Ubuntu 20.04</a></li>
+      <li><a href="https://www.techpowerup.com/vgabios/">Video BIOS Collection</a></li>
+      <li><a href="https://www.youtube.com/watch?v=eTX10QlFJ6c">Single GPU Passthrough in Ubuntu AMD CPU/GPU</a></li>
+      <li><a href="https://serverfault.com/questions/840519/how-to-change-the-default-storage-pool-from-libvirt">How to change the default Storage Pool from libvirt?</a></li>
+      <li><a href=""></a></li>
+      <li><a href=""></a></li>
+    </ol>
+
+
+
+
+
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
