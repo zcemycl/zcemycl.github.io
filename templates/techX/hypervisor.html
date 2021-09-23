@@ -146,6 +146,14 @@ vim basic.sh
 sudo ./make.sh --add
 ### Then go to Add hardware &#8594 Storage &#8594 add macOS.qcow2
       </code></pre>
+      <li>Allow update without license.</li>
+      <pre><code>
+# add line to /etc/apt/sources.list
+deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription
+# add line to /etc/apt/sources.list.d/pve-enterprise.list
+deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription
+#### debian 10 buster to 11 bullseye
+      </code></pre>
       <li></li>
       <pre><code>
       </code></pre>
@@ -153,7 +161,6 @@ sudo ./make.sh --add
 
     <h4>GPU Passthrough vs vGPU</h4>
     
-
 
 
 
