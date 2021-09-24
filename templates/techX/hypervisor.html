@@ -160,7 +160,18 @@ deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription
     </ol>
 
     <h4>GPU Passthrough vs vGPU</h4>
-    
+    <ol>
+      <li>Edit xml file, <code>virsh edit vm3</code></li>
+      <pre><code>
+
+      </code></pre>
+      <li>Remove hardwares, like IDE CDROM, Tablet, Display Spice, Sound ich6, Channel spice, Video Virtio. Chipset must be Q35 and Firmware is UEFI. Add all PCIe devices related to Nvidia (RTX has 4, GTX has 2). </li>
+      <pre><code>
+      </code></pre>
+      <li>Make Libvirt Hooks</li>
+      <pre><code>
+      </code></pre>
+    </ol>
 
 
 
