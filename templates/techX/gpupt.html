@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>GPU Passthrough</h3>
+    <hr>
+
+    <h4>Single</h4>
+    <ol>
+      <li>Edit <code>/etc/default/grub</code>, and update, </li>
+      <pre><code>
+####
+GRUB_CMDLINE_LINUX_DEFAULT="amd_iommu=on iommu=pt iommu=1 rd.driver.pre=vfio-pci quiet splash"
+####
+update-grub
+reboot
+cat /proc/cmdline # check if working
+      </code></pre>
+      <li>Find PCI Bus address for GPU and sound, for RTX there will be 4, GTX will be 2, </li>
+      <pre><code>
+lspci -nnk | grep -i NVIDIA
+## 09:00:0 --> 10de:1b81, 09:00.1 --> 10de:10f0, GTX 1070
+      </code></pre>
+      <li>Edit <code>/etc/libvirt/libvirtd.conf</code>,</li>
+      <pre><code>
+####
+unix_sock_group = "libvirt"
+unix_sock_rw_perms = "0770"
+log_filters="1:qemu"
+log_outputs="1:file:/var/log/libvirt/libvirtd.log"
+####
+systemctl restart libvirt
+systemctl restart libvirtd
+sudo usermod -a -G libvirt $(whoami)
+sudo systemctl start libvirtd
+sudo systemctl enable libvirtd
+sudo reboot
+      </code></pre>
+      <li>Configure <code>/etc/libvirt/qemu.conf</code>,</li>
+      <pre><code>
+####
+user = "yui"
+group = "yui"
+####
+systemctl restart libvirtd
+sudo usermod -a -G kvm "yui"
+sudo usermod -a -G libvirt "yui"
+sudo reboot
+      </code></pre>
+      <li>Create VM in QEMU/KVM Virt Manager.</li>
+      <pre><code>
+V Customize configuration before install
+Chipset Q35
+Firmware UEFI x86_64:/usr/share/OVMF/OVMF_CODE.fd
+# Begin installation
+# Turn off, then delete
+SATA CDROM, Tablet, Display Spice, SOund ich9, Video QXL, Channel spice
+# Add hardware
+PCI Host Devices for GPU, 4 for RTX, 2 for GTX
+      </code></pre>
+      <li>Create Libvirt Hook.</li>
+      <pre><code>
+mkdir /etc/libvirt/hooks
+touch /etc/libvirt/hooks/qemu
+chmod +x /etc/libvirt/hooks/qemu
+####
+#!/bin/bash
+
+GUEST_NAME="$1"
+HOOK_NAME="$2"
+STATE_NAME="$3"
+MISC="${@:4}"
+
+BASEDIR="$(dirname $0)"
+
+HOOKPATH="$BASEDIR/qemu.d/$GUEST_NAME/$HOOK_NAME/$STATE_NAME"
+set -e # If a script exits with an error, we should as well.
+
+if [ -f "$HOOKPATH" ]; then
+eval \""$HOOKPATH"\" "$@"
+elif [ -d "$HOOKPATH" ]; then
+while read file; do
+  eval \""$file"\" "$@"
+done &lt&lt&lt "$(find -L "$HOOKPATH" -maxdepth 1 -type f -executable -print;)"
+fi
+####
+      </code></pre>
+      <li>Create Start Script,</li>
+      <pre><code>
+mkdir -p /etc/libvirt/hooks/qemu.d/win10/prepare/begin
+touch /etc/libvirt/hooks/qemu.d/win10/prepare/begin/start.sh
+chmod +x /etc/libvirt/hooks/qemu.d/win10/prepare/begin/start.sh
+####
+#!/bin/bash
+set -x
+
+# Stop display manager
+sudo systemctl stop display-manager
+# rc-service xdm stop
+
+# Unbind EFI Framebuffer
+echo efi-framebuffer.0 > /sys/bus/platform/drivers/efi-framebuffer/unbind
+
+# Unload NVIDIA kernel modules
+modprobe -r nvidia_drm nvidia_modeset nvidia_uvm nvidia drm_kms_helper drm i2c_nvidia_gpu
+
+# Unload AMD kernel module
+# modprobe -r amdgpu
+
+# Detach GPU devices from host
+# Use your GPU and HDMI Audio PCI host device
+virsh nodedev-detach pci_0000_09_00_0
+virsh nodedev-detach pci_0000_09_00_1
+virsh nodedev-detach pci_0000_09_00_2
+virsh nodedev-detach pci_0000_09_00_3
+
+# Load vfio module
+modprobe vfio
+modprobe vfio-pci
+modprobe vfio_iommu_type1
+####
+      </code></pre>
+      <li>Create Stop Script,</li>
+      <pre><code>
+mkdir -p /etc/libvirt/hooks/qemu.d/win10/release/end
+touch /etc/libvirt/hooks/qemu.d/win10/release/end/stop.sh
+chmod +x /etc/libvirt/hooks/qemu.d/win10/release/end/stop.sh
+####
+#!/bin/bash
+set -x
+
+# Unload vfio module
+modprobe -r vfio_pci
+modprobe -r vfio_iommu_type1
+modprobe -r vfio
+
+# Attach GPU devices to host
+# Use your GPU and HDMI Audio PCI host device
+virsh nodedev-reattach pci_0000_09_00_0
+virsh nodedev-reattach pci_0000_09_00_1
+virsh nodedev-reattach pci_0000_09_00_2
+virsh nodedev-reattach pci_0000_09_00_3
+
+# Rebind framebuffer to host
+echo "efi-framebuffer.0" > /sys/bus/platform/drivers/efi-framebuffer/bind
+
+# Load NVIDIA kernel modules
+modprobe nvidia_drm
+modprobe nvidia_modeset
+modprobe nvidia_uvm
+modprobe nvidia
+modprobe drm_kms_helper
+modprobe i2c_nvidia_gpu
+modprobe drm
+
+# Load AMD kernel module
+# modprobe amdgpu
+
+# Restart Display Manager
+sudo systemctl start display-manager
+# rc-service xdm start
+####
+      </code></pre>
+      <li>Download VGA Bios for the Graphic Card used to passthrough, check more info from NVIDIA X Server Settings, like VBIOS Version
+        <ul>
+          <li><a href="https://www.techpowerup.com/vgabios/">Video BIOS Collection</a></li>
+          <li><a href="https://www.techpowerup.com/vgabios/187006/palit-gtx1070-8192-161021-1">Palit GTX 1070 8 GB BIOS (Jetstream)</a></li>
+          <li><a href="https://www.techpowerup.com/vgabios/212615/msi-rtx2080ti-11264-181019-1">MSI RTX 2080 Ti 11 GB BIOS (Ventus)</a></li>
+        </ul>
+      </li>
+      <pre><code>
+sudo mv ~/Downloads/xxx.rom /usr/share/vgabios/
+sudo chmod -R 775 xxx.rom
+sudo chown root:root xxx.rom
+      </code></pre>
+      <li></li>
+      <pre><code>
+      </code></pre>
+      <li></li>
+      <pre><code>
+      </code></pre>
+    </ol>
+
+
+
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
