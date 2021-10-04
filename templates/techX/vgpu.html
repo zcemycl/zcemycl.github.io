@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>VGPU</h3>
+    <hr>
+
+    <ol>
+      <li>Flash the drive with DD mode for Proxmox Installation. Hostname should be host1.eliminatrix.com.</li>
+      <li>Enable apt package manager.</li>
+      <pre><code>
+vim /etc/apt/sources.list
+# Add this line
+deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription # proxmox 7 is using bullseye, proxmox 6 is buster
+####
+vim /etc/apt/sources.list.d/pve-enterprise.list
+# Comment all lines
+####
+apt update & apt upgrade -y
+      </code></pre>
+      <li>Install dependecies, </li>
+      <pre><code>
+apt install -y git build-essential pve-headers dkms jq unzip python3 python3-pip vim
+pip3 install frida
+      </code></pre>
+      <li>Git clone vgpu_unlock.</li>
+      <pre><code>
+git clone https://github.com/DualCoder/vgpu_unlock
+chmod -R +x vgpu_unlock
+      </code></pre>
+      <li>Edit grub file,</li>
+      <pre><code>
+vim /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT="quiet amd_iommu=on iommu=pt"
+update-grub
+      </code></pre>
+      <li>Load VFIO modules at boot,</li>
+      <pre><code>
+vim /etc/modules
+vfio
+vfio_iommu_type1
+vfio_pci
+vfio_virqfd
+      </code></pre>
+      <li>Update modprobe.d file.</li>
+      <pre><code>
+echo "options vfio_iommu_type1 allow_unsafe_interrupts=1" > /etc/modprobe.d/iommu_unsafe_interrupts.conf
+echo "options kvm ignore_msrs=1" > /etc/modprobe.d/kvm.conf
+echo "blacklist nouveau" >> /etc/modprobe.d/blacklist.conf
+update-initramfs -u
+reboot
+dmesg | grep -e DMAR -e IOMMU
+      </code></pre>
+      <li>Register for Nvidia vGPU free trial driver, and download the zip file, </li>
+      <pre><code>
+unzip NVIDIA-GRID-Linux-KVM-460.32.04-460.32.03-461.09.zip
+scp NVIDIA-Linux-x86_64-460.32.04-vgpu-kvm.run root@192.168.1.101:
+chmod +x NVIDIA-Linux-x86_64-460.32.04-vgpu-kvm.run
+      </code></pre>
+      <li>Apply changes to nvidia installer since kernel 5.11 does not accept kernel installation straightaway, then start installation,</li>
+      <pre><code>
+./NVIDIA-Linux-x86_64-460.32.04-vgpu-kvm.run -x
+wget https://raw.githubusercontent.com/rupansh/vgpu_unlock_5.12/master/twelve.patch
+wget https://raw.githubusercontent.com/wvthoog/nvidia_vgpu_proxmox_7/main/nv-caps.patch
+wget https://raw.githubusercontent.com/wvthoog/nvidia_vgpu_proxmox_7/main/nv-frontend.patch
+wget https://raw.githubusercontent.com/wvthoog/nvidia_vgpu_proxmox_7/main/nvidia-vgpu-vfio.patch
+
+cd NVIDIA-Linux-x86_64-460.32.04-vgpu-kvm
+
+patch -p0 &lt ../twelve.patch
+patch -p0 &lt ../nv-caps.patch
+patch -p0 &lt ../nv-frontend.patch
+patch -p0 &lt ../nvidia-vgpu-vfio.patch
+
+chmod +x nvidia-installer
+./nvidia-installer --dkms
+      </code></pre>
+      <li>Edit the Nvidia vGPU system services files,</li>
+      <pre><code>
+# 1.
+vim /lib/systemd/system/nvidia-vgpud.service
+ExecStart=/root/vgpu_unlock/vgpu_unlock /usr/bin/nvidia-vgpud
+# 2.
+vim /lib/systemd/system/nvidia-vgpu-mgr.service
+ExecStart=/root/vgpu_unlock/vgpu_unlock /usr/bin/nvidia-vgpu-mgr
+# 3.
+systemctl daemon-reload
+# 4.
+vim  /usr/src/nvidia-460.32.04/nvidia/os-interface.c
+#include "/root/vgpu_unlock/vgpu_unlock_hooks.c" // behind #include "nv-time.h"
+# 5.
+vim /usr/src/nvidia-460.32.04/nvidia/nvidia.Kbuild
+ldflags-y += -T /root/vgpu_unlock/kern.ld # at the end
+# 6. 
+ldflags-y += -T /root/vgpu_unlock/kern.ld
+dkms install -m nvidia -v 460.32.04
+reboot
+dmesg|grep -i vgpu # should show 'vGPU unlock patch applied.'
+nvidia-smi # should show
+apt install mdevctl
+mdevctl types # should show different profiles
+      </code></pre>
+      <li>Create vgpu profiles, </li>
+      <pre><code>
+touch startup.sh
+chmod +x startup.sh
+vim startup.sh
+####
+mdevctl start -u 0b5fd3fb-2389-4a22-ba70-52969a26b9d5 -p 0000:09:00.0 -t nvidia-48
+mdevctl start -u 924cfc77-4803-4118-a5f4-bd8de589ddf6 -p 0000:09:00.0 -t nvidia-48
+
+mdevctl define -a -u 0b5fd3fb-2389-4a22-ba70-52969a26b9d5
+mdevctl define -a -u 924cfc77-4803-4118-a5f4-bd8de589ddf6
+####
+./startup.sh
+mdevctl list
+      </code></pre>
+      <li>Create new VM with UEFI and Q35, can use multiple snapshot for testing, </li>
+      <pre><code>
+vim /etc/pve/qemu-server/100.conf
+### Add this to the beginning
+args: -device 'vfio-pci,sysfsdev=/sys/bus/mdev/devices/0b5fd3fb-2389-4a22-ba70-52969a26b9d5' -uuid 00000000-0000-0000-0000-000000000100
+###
+# Also set up sshd and rdp server.
+      </code></pre>
+      <li>Install NVIDIA driver from the same zip file, </li>
+      <pre><code>
+scp 462.96_grid_win10_server2016_server2019_64bit_international.exe root@192.168.1.101:
+      </code></pre>
+      <li>After reboot, the proxmox client will show black screen, you can use remmina or rdp client to log in. Then install Parsec.app and <a href="https://vb-audio.com/Cable/">VB-AUDIO Cable</a>.</li>
+      <pre><code>
+      </code></pre>
+    </ol>
+
+
+
+    <h3>References</h3>
+    <hr>
+
+    <ol>
+      <li><a href="https://www.nvidia.com/en-us/data-center/resources/vgpu-evaluation/">vGPU Software Free 90Days Trial | NVIDIA</a></li>
+      <li><a href=""></a></li>
+    </ol>
+
+
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
