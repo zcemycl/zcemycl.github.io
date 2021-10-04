@@ -237,19 +237,106 @@ sudo systemctl start display-manager
 sudo mv ~/Downloads/xxx.rom /usr/share/vgabios/
 sudo chmod -R 775 xxx.rom
 sudo chown root:root xxx.rom
+# For Pascal GPU, like 10xx series, one extra step is needed to convert rom,
+git clone https://github.com/Matoking/NVIDIA-vBIOS-VFIO-Patcher.git
+python nvidia_vbios_vfio_patcher.py -i xxx.rom -o yyy.rom
       </code></pre>
-      <li></li>
+      <li>Edit virsh file for the specific vm,</li>
       <pre><code>
+virsh edit win10
+####
+# 1. Edit tag
+## Before
+&ltdomain&gt>
+## After 
+&ltdomain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'&gt
+####
+# 2. Add mouse and keyboard as devices
+## ls /dev/input/by-id to get event-mouse/kbd
+...
+  &ltqemu:commandline&gt
+    &ltqemu:arg value='-object'/&gt
+    &ltqemu:arg value='input-linux,id=mouse1,evdev=/dev/input/by-id/usb-1bcf_USB_Optical_Mouse-event-mouse'/&gt
+    &ltqemu:arg value='-object'/&gt
+    &ltqemu:arg value='input-linux,id=kbd1,evdev=/dev/input/by-id/usb-Usb_KeyBoard_Usb_KeyBoard-event-kbd,grab_all=on,repeat=on'/&gt
+  &lt/qemu:commandline&gt
+&lt/domain&gt
+####
+# 3. Change devices input to virtio
+...
+&ltdevices&gt
+  ...
+  &ltinput type='mouse' bus='virtio'/&gt
+  &ltinput type='keyboard' bus='virtio'/&gt
+  ...
+&lt/devices&gt
+...
+####
+4. Video card driver virtualization detection
+...
+&ltfeatures&gt
+  ...
+  &lthyperv&gt
+    ...
+    &ltvendor_id state='on' value='whatever'/&gt
+    ...
+  &lt/hyperv&gt
+  &ltkvm&gt
+    &lthidden state='on'/&gt
+  &lt/kvm&gt
+  ...
+&lt/features&gt
+####
+5. vBIOs Patching
+...
+&lthostdev mode='subsystem' type='pci' managed='yes'&gt
+  &ltsource&gt
+    ...
+  &lt/source&gt
+  &ltrom file='/usr/share/vgabios/output.rom'/&gt
+  ...
+&lt/hostdev&gt
+...
+####
+...
       </code></pre>
-      <li></li>
+      <li>Edit qemu configuration file, </li>
       <pre><code>
+...
+cgroup_device_acl = [
+    "/dev/input/by-id/KEYBOARD_NAME",
+    "/dev/input/by-id/MOUSE_NAME",
+    "/dev/null", "/dev/full", "/dev/zero",
+    "/dev/random", "/dev/urandom",
+    "/dev/ptmx", "/dev/kvm", "/dev/kqemu",
+    "/dev/rtc","/dev/hpet", "/dev/sev"
+]
+...
       </code></pre>
+    </ol>
+
+
+    <h4>Change GPU</h4>
+    <ol>
+      <li>Download rom file and change rom path. (patch rom file if Pascal)</li>
+      <li>Add and remove necessary pcie hardware. </li>
+      <li>Login VM, should show now, then install nvidia driver for the changed GPU.</li>
+      <li></li>
     </ol>
 
 
 
     <h3>References</h3>
     <hr>
+
+    <ol>
+      <li><a href="https://github.com/QaidVoid/Complete-Single-GPU-Passthrough">Github --  QaidVoid/Complete-Single-GPU-Passthrough</a></li>
+      <li><a href="https://gitlab.com/Karuri/vfio">Gitlab -- vfio-single-gpu-passthrough</a></li>
+      <li><a href="https://github.com/Matoking/NVIDIA-vBIOS-VFIO-Patcher">Github -- Matoking/NVIDIA-vBIOS-VFIO-Patcher </a></li>
+      <li><a href="https://www.youtube.com/watch?v=eTX10QlFJ6c">Youtube -- Single GPU Passthrough in Ubuntu AMD CPU/GPU</a></li>
+    </ol>
+
+
     </div>
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
