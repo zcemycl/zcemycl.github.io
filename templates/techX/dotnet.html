@@ -67,6 +67,21 @@
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
 
     <h3>.NET framework</h3>
+    <h4>Installation</h4>
+    <pre><code>
+wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+sudo apt-get update; \
+  sudo apt-get install -y apt-transport-https && \
+  sudo apt-get update && \
+  sudo apt-get install -y dotnet-sdk-5.0
+sudo apt-get update; \
+  sudo apt-get install -y apt-transport-https && \
+  sudo apt-get update && \
+  sudo apt-get install -y aspnetcore-runtime-5.0
+    </code></pre>
+    <h4>How to run?</h4>
     <hr>
     <p>Very short and simple introduction of .NET framework to create stand-alone app, for multiple platforms like Linux and Windows. </p>
     <ol>
@@ -78,22 +93,33 @@
     <li>Run the app, the executable should be <code>./bin/Debug/net5.0/app1</code>.</li>
     <pre><code>
 #1
-mkdir app1
-cd app1
+mkdir app
+cd app
 #2
 dotnet new console
 #3
 vim Program.cs
 #4
+dotnet build --runtime win10-x64
+dotnet build -r linux-x64
+dotnet build
+dotnet run -r win10-x64
+dotnet run -r linux-x64
 dotnet run
 #5
- &ltPropertyGroup&gt
-    &ltRuntimeIdentifiers&gtwin10-x64;linux-x64&lt/RuntimeIdentifiers&gt
- &lt/PropertyGroup&gt
-dotnet publish -r win10-x64
-dotnet publish -r linux-x64
+&ltProject Sdk="Microsoft.NET.Sdk"&gt
+  &ltPropertyGroup&gt
+    &ltOutputType&gtExe&lt/OutputType&gt
+    &ltTargetFramework&gtnet5.0&lt/TargetFramework&gt
+  &lt/PropertyGroup&gt
+&lt/Project&gt
+dotnet publish -f net5.0 -r win10-x64 --self-contained false
+dotnet publish -f net5.0 -r linux-x64
+dotnet publish
 #6 
-./bin/Debug/net5.0/app1
+.\bin\Debug\net5.0\win10-x64\app.exe
+./bin/Debug/net5.0/linux-x64/app
+./bin/Debug/net5.0/publish/app
     </code></pre>
     </ol>
     <h3>References</h3>

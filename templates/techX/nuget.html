@@ -68,6 +68,39 @@
 
     <h3>Nuget</h3>
     <hr>
+    <div style="text-align:center">
+      <img src="../../resources/nuget.png" style="width:40%"/>
+    </div>
+    <h4>Installation</h4>
+    <pre><code>
+sudo apt install nuget
+## vscode
+Ctrl+Shift+X &#8594 NuGet Package Manager GUI
+    </code></pre>
+
+    <h4>How to use?</h4>
+    <ul>
+      <li>Ctrl+P &#8594 &gt Nuget Package Manager GUI</li>
+      <li></li>
+    </ul>
+
+    <h4>TroubleShootings</h4>
+    <ul>
+      <li>error NU1100: Unable to resolve 'Microsoft.NETCore.App.Runtime.win-x64' for 'net5.0', 'Microsoft.WindowsDesktop.App.Runtime.win-x64' for 'net5.0', 'Microsoft.AspNetCore.App.Runtime.win-x64' for 'net5.0'.
+        <ul>
+          <li>Solution 1: this might be due to bad gitlab package connection, reset the nuget package can help. 
+            <pre><code>
+cd ~/.nuget
+rm -r NuGet/
+sudo reboot
+            </code></pre>
+          </li>
+        </ul>
+      </li>
+      <li></li>
+      <li></li>
+    </ul>
+
     <h3>References</h3>
     <hr>
     <ol>
