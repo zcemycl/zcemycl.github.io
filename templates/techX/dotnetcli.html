@@ -69,13 +69,35 @@
 
     <h3>.NET Command Lines</h3>
     <hr>
-
+    <ul>
+      <li>Create a folder. <code>mkdir net5-quickstart</code></li>
+      <li>Create solution file. <code>dotnet new sln -n QuickStart</code></li>
+      <li>Create project by template. <code>dotnet new webapi -n QuickStart</code></li>
+      <li>Add project to solution. <code>dotnet sln QuickStart.sln add ./QuickStart/QuickStart.csproj</code></li>
+      <li>Create test project, and add it to solution.<code></code></li>
+      <pre><code>
+dotnet new xunit -n QuickStart.Tests
+dotnet sln QuickStart.sln add ./QuickStart.Tests/QuickStart.Tests.csproj
+      </code></pre>
+      <li>Add a reference of main project to test project. <code>dotnet add ./QuickStart.Tests/QuickStart.Tests.csproj reference ./QuickStart/QuickStart/csproj</code></li>
+      <li>CICD<code></code></li>
+      <pre><code>
+dotnet build
+dotnet test
+dotnet run 
+dotnet run -p ./QuickStart/QuickStart.csproj
+dotnet publish
+      </code></pre>
+      <li><code></code></li>
+      <li><code></code></li>
+    </ul>
 
 
     <h3>References</h3>
     <hr>
     <ol>
       <li><a href="https://medium.com/imaginelearning/asp-net-core-3-1-microservice-quick-start-c0c2f4d6c7fa">ASP.NET Core 3.1 Web API Quick Start</a></li>
+      <li><a href="https://www.c-sharpcorner.com/article/running-a-visual-studio-2019-solution-in-visual-studio-code/">Running A Visual Studio 2019 Solution In Visual Studio Code</a></li>
       <li><a href=""></a></li>
     </ol>
 
