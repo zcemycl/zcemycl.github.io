@@ -122,6 +122,36 @@ Connect via: base ip
 
 
 
+    <h4>Notes</h4>
+    <div class="mermaid" style="background-color:white; max-width:80vw">
+    flowchart LR;
+    z[Wifi Router 192.168.1.1];
+    subgraph a[Laptop 192.168.1.112]
+      a1[port 6666]
+    end
+    subgraph b[Pi 192.168.1.111]
+      b1[port 5901]
+      b2[dns 192.168.4.1]
+    end
+    z-->a;
+    z-->b;
+    subgraph c[PC 192.168.4.73]
+      c1[port 5900]
+    end
+    a1 -->|ssh| b1;
+    b2 -->|provide internet| c;
+    b1 -->|ssh| c1;
+    </div>
+    <pre><code>
+# In Pi,
+ssh -L 5901:localhost:5900 user1@192.168.4.73
+# In Laptop
+ssh -L 6666:localhost:5901 pi@192.168.1.111
+# Try VNC Viewer localhost:6666
+    </code></pre>
+
+
+
     <h3>References</h3>
     <hr>
     </div>
