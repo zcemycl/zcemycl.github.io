@@ -182,11 +182,20 @@ sudo kill processid
 sudo kill -9 `sudo lsof -t -i:port`
         </code></pre>    
 
+      <li>The following signatures couldn't be verified.</li>
+        <ul>
+        <li>Occur when sudo apt update.</li>
+	<li>It shows <code>W: GPG error: http://repo.{}... The following signature: NO_PUBKEY {key}</code>.</li>
+	<li>To fix it, </li>
+	<pre><code>
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys {key}
+	</code></pre>
+        </ul>
+
       <li></li>
         <ul>
         <li></li>
         </ul>
-
 
     </ol>
     <h3>References</h3>
@@ -198,6 +207,7 @@ sudo kill -9 `sudo lsof -t -i:port`
     <li><a href="https://askubuntu.com/questions/1039233/no-wired-connection-wired-unmanaged-ubuntu-18-04">No wired connection - Wired unmanaged ubuntu 18.04</a></li>
     <li><a href="https://stackoverflow.com/questions/28972503/linux-usermod-user-is-currently-used-by-process/47198383">Linux usermod user is currently used by process</a></li>
     <li><a href="https://askubuntu.com/questions/410244/is-there-a-command-to-list-all-users-also-to-add-delete-modify-users-in-the">Is there a command to list all users? Also to add, delete, modify users, in the terminal?</a></li>
+    <li><a href="https://itsfoss.com/solve-gpg-error-signatures-verified-ubuntu/">How to Fix “The following signatures couldn’t be verified” Error in Ubuntu Linux</a></li>
     <li><a href=""></a></li>
     </ol>
 
