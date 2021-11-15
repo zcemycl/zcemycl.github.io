@@ -158,10 +158,25 @@ npm run deploy
     <li>I will add, commite and push again normally.</li>
     </ol>
 
+    <h4>Troubleshootings</h4>
+    <ul>
+      <li>When running <code>sudo npm run deploy</code>, this error occurs, <code>EACCES: permission denied, mkdir '/media/yui/Disk/project/ui/practice-app/node_modules/.cache/terser-webpack-plugin'</code>, solve by,</li>
+      <pre><code>
+sudo npx browserslist@latest --update-db
+sudo npm install -g --unsafe-perm=true --allow-root
+sudo chmod -R 777 node_modules/.cache/
+      </code></pre>
+      <li></li>
+      <pre><code>
+      </code></pre>
+    </ul>
+
+
+
     <h4></h4>
+
     <pre><code>
     </code></pre>
-
 
     <h3>References</h3>
     <hr>
