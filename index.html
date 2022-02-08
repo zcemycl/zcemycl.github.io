@@ -457,17 +457,20 @@
           const selected = "zcemycl.github.io"
           const {ip,country_name,latitude,longitude} = data;
           if (selected!=="" && ip && ignoreIP.indexOf(ip)<0  ){
-              const objt = {IP:ip,Topic:selected,
-                  Timestamp:date,Country:country_name,
-                  Lat:latitude,Lng:longitude};
-              console.log(objt)
-              axios.post(url,objt)
-                  .then((response) => {
+              if (location.hostname !== "localhost" && location.hostname !== "127.0.0.1"){
+                  const objt = {IP:ip,Topic:selected,
+                    Timestamp:date,Country:country_name,
+                    Lat:latitude,Lng:longitude};
+                  console.log(objt)
+                  axios.post(url,objt)
+                    .then((response) => {
                       console.log(response);
-                  });
+                    });
+              }
           }   
       })
       .catch(e=>{})
+      .finally(e=>{})
   };
 
   main();
