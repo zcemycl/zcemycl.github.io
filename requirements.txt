@@ -3,6 +3,6 @@
 # ipywidgets==7.5.1
 matplotlib==2.2.3
 nbinteract==0.2.6
-numpy==1.18.5
+# numpy==1.18.5
 numpydoc==0.9.1
 scipy==1.4.1
