@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>AWS EC2 Instance with Security Group using Terraform</h3>
+    <hr>
+    <ol>
+        <li>Create tf script. </li>
+        <div class="mermaid">
+            flowchart TD;
+                A[ssh-key]-->|login|B[EC2];
+                C[Security Group]-->|attach|B;
+        </div>
+        <pre><code>
+provider "aws" {
+    region = "${var.AWS_REGION}"
+}
+resource "aws_key_pair" "example_key" {
+    key_name = "mykey"
+    public_key = "${file("${var.PATH_TO_PUBLIC_KEY}")}"
+}
+
+resource "aws_instance" "example" {
+    ami = "${lookup(var.AMIS,var.AWS_REGION)}"
+    instance_type = "t2.micro"
+    security_groups = [aws_security_group.example_sg.name]
+    key_name = "${aws_key_pair.example_key.key_name}"
+    provisioner "file" {
+        source  = "script.sh"
+        destination = "/tmp/script.sh"
+    }
+    provisioner "remote-exec"{
+        inline = [
+            "chmod +x /tmp/script.sh",
+            "sudo /tmp/script.sh"
+        ]
+    }
+    connection {
+        host = self.public_ip
+        user = "${var.INSTANCE_USERNAME}"
+        private_key = "${file("${var.PATH_TO_PRIVATE_KEY}")}"
+    }
+    provisioner "local-exec"{
+        command = "echo ${aws_instance.example.public_ip} >> public_ips.txt"
+    }
+    tags = {
+        Name = "ec2 example terraform instance"
+    }
+}
+
+resource "aws_security_group" "example_sg" {
+    name = "security group for example ec2"
+    ingress {
+        description = "HTTPS"
+        from_port = 443
+        to_port = 443
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+        ipv6_cidr_blocks = ["::/0"]
+    }
+    ingress {
+        description = "HTTP"
+        from_port = 80
+        to_port = 80
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+        ipv6_cidr_blocks = ["::/0"]
+    }
+    ingress {
+        description = "SSH"
+        from_port = 22
+        to_port = 22
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+        ipv6_cidr_blocks = ["::/0"]
+    }
+
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+        ipv6_cidr_blocks = ["::/0"]
+    }
+
+    tags = {
+        Name = "sg"
+    }
+}
+
+output "ip" {
+    value = "${aws_instance.example.public_ip}"
+}
+        </code></pre>
+        <li>Generate ssh key. <code>ssh-keygen mykey</code></li>
+        <li>Terraform apply.</li>
+        <li>ssh -i mykey ubuntu@ip</li>
+    </ol>
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+    </script>
+    
+</body>
+</html>
