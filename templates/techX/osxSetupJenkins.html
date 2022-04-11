@@ -77,6 +77,28 @@
         <li>Install every suggested plugins and register account.</li>
         <li></li>
     </ol>
+
+    <h4>Roles of Jenkins</h4>
+    <div style="background-color: white;">
+    <div class="mermaid">
+        sequenceDiagram
+            participant Developers
+            loop Dev
+                Developers->>Developers: write code
+            end
+            participant Github
+            Developers->>Github: commit code;
+            participant Jenkins
+            Github->>Jenkins: trigger/build;
+            loop Check
+                Jenkins->>Jenkins: build/test; 
+            end
+            Jenkins->>Github: publish result (success or not);
+            participant Servers
+            Jenkins->>Servers: deploy changes (success);
+
+    </div>
+    </div>
     <h3>References</h3>
     <ol>
         <li><a href="https://www.jenkins.io/download/lts/macos/">macOS Installers for Jenkins LTS 
@@ -84,6 +106,9 @@
             Homebrew Installer </a></li>
         <li><a href="https://www.youtube.com/watch?v=gIGs3eeTSo0">How to Install Jenkins in MacOS</a></li>
         <li><a href="https://www.jenkins.io/doc/book/pipeline/">Jenkins Pipeline</a></li>
+        <li><a href="https://about.gitlab.com/handbook/customer-success/demo-systems/tutorials/integrations/create-jenkins-pipeline/">Create a Jenkins Pipeline</a></li>
+        <li><a href="https://www.youtube.com/watch?v=nCKxl7Q_20I">Complete Jenkins Tutorial | Learn Jenkins From Scratch In 3 Hours | LambdaTest</a></li>
+        <li><a href=""></a></li>
     </ol>
     <hr>
     </div>
