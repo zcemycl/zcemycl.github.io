@@ -67,55 +67,50 @@
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
 
-    <h3>API GateWay and Lambda</h3>
+    <h3>OSX setup Jenkins</h3>
     <hr>
-    <div class="mermaid">
-        flowchart LR;
-            subgraph protected
-                A[API GateWay]-->B[Lambda]
-            end
-            C[API Key]-->protected
-    </div>
-
+    <h4>Steps</h4>
     <ol>
-        <li>Create Lambda. Test by, </li>
-        <pre><code>
-## event.json
-{
-    "queryStringParameters": {
-      "transactionId": "value1",
-      "type": "value2",
-      "amount": "value3"
-    }
-  }  
-##
-aws-vault exec leo.leung -- aws lambda invoke --region=eu-west-2 --function-name=func2 response.json --payload file://event.json   
-## it should respond with response.json
-{"statusCode": 200, 
-    "headers": {"Content-Type": "application/json"}, 
-    "body": "{\"transactionId\": 
-        \"value1\", \"type\": \"value2\", 
-        \"amount\": \"value3\", 
-        \"message\": \"Hello from Lambda land\"}"}% 
-##
-        </code></pre>
-        <li>Create API Gateway.</li>
-        <li>Configure Gateway, like add resource, add method, deploy.</li>
-        <li>Test by Postman, or browser. <code>https://xxxxxx.execute-api.eu-west-2.amazonaws.com/v1/predict?transactionId=1234&type=buy&amount=300</code></li>
-        <li>Configure Gateway, method execution &#8594 api key required &#8594 api keys &#8594 Usage Plans.</li>
-        <li>Test by Postman by including header x-api-key.</li>
+        <li>Install Jenkins via homebrew. <code>brew install jenkins-lts</code></li>
+        <li>Start Jenkins. <code>brew services start jenkins-lts</code></li>
+        <li>Go to <code>localhost:8080</code></li>
+        <li>Install every suggested plugins and register account.</li>
         <li></li>
     </ol>
 
-    
+    <h4>Roles of Jenkins</h4>
+    <div style="background-color: white;">
+    <div class="mermaid">
+        sequenceDiagram
+            participant Developers
+            loop Dev
+                Developers->>Developers: write code
+            end
+            participant Github
+            Developers->>Github: commit code;
+            participant Jenkins
+            Github->>Jenkins: trigger/build;
+            loop Check
+                Jenkins->>Jenkins: build/test; 
+            end
+            Jenkins->>Github: publish result (success or not);
+            participant Servers
+            Jenkins->>Servers: deploy changes (success);
+
+    </div>
+    </div>
     <h3>References</h3>
-    <hr>
     <ol>
-        <li><a href="https://www.youtube.com/watch?v=V-ac_ZvdAW4">API Authentication via API Keys | AWS API Gateway</a></li>
-        <li><a href="https://www.youtube.com/watch?v=uFsaiEhr1zs">AWS API Gateway to Lambda Tutorial in Python | Build a REST API</a></li>
-        <li><a href="https://bobbyhadz.com/blog/aws-cli-invoke-lambda-functions">Invoke Lambda Functions with AWS CLI - Complete Guide</a></li>
+        <li><a href="https://www.jenkins.io/download/lts/macos/">macOS Installers for Jenkins LTS 
+            Tweet
+            Homebrew Installer </a></li>
+        <li><a href="https://www.youtube.com/watch?v=gIGs3eeTSo0">How to Install Jenkins in MacOS</a></li>
+        <li><a href="https://www.jenkins.io/doc/book/pipeline/">Jenkins Pipeline</a></li>
+        <li><a href="https://about.gitlab.com/handbook/customer-success/demo-systems/tutorials/integrations/create-jenkins-pipeline/">Create a Jenkins Pipeline</a></li>
+        <li><a href="https://www.youtube.com/watch?v=nCKxl7Q_20I">Complete Jenkins Tutorial | Learn Jenkins From Scratch In 3 Hours | LambdaTest</a></li>
         <li><a href=""></a></li>
     </ol>
+    <hr>
     </div>
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">

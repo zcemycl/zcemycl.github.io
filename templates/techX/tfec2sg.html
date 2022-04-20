@@ -67,55 +67,102 @@
 <body class="content wrapper">
     <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
 
-    <h3>API GateWay and Lambda</h3>
+    <h3>AWS EC2 Instance with Security Group using Terraform</h3>
     <hr>
-    <div class="mermaid">
-        flowchart LR;
-            subgraph protected
-                A[API GateWay]-->B[Lambda]
-            end
-            C[API Key]-->protected
-    </div>
-
     <ol>
-        <li>Create Lambda. Test by, </li>
+        <li>Create tf script. </li>
+        <div class="mermaid">
+            flowchart TD;
+                A[ssh-key]-->|login|B[EC2];
+                C[Security Group]-->|attach|B;
+        </div>
         <pre><code>
-## event.json
-{
-    "queryStringParameters": {
-      "transactionId": "value1",
-      "type": "value2",
-      "amount": "value3"
-    }
-  }  
-##
-aws-vault exec leo.leung -- aws lambda invoke --region=eu-west-2 --function-name=func2 response.json --payload file://event.json   
-## it should respond with response.json
-{"statusCode": 200, 
-    "headers": {"Content-Type": "application/json"}, 
-    "body": "{\"transactionId\": 
-        \"value1\", \"type\": \"value2\", 
-        \"amount\": \"value3\", 
-        \"message\": \"Hello from Lambda land\"}"}% 
-##
-        </code></pre>
-        <li>Create API Gateway.</li>
-        <li>Configure Gateway, like add resource, add method, deploy.</li>
-        <li>Test by Postman, or browser. <code>https://xxxxxx.execute-api.eu-west-2.amazonaws.com/v1/predict?transactionId=1234&type=buy&amount=300</code></li>
-        <li>Configure Gateway, method execution &#8594 api key required &#8594 api keys &#8594 Usage Plans.</li>
-        <li>Test by Postman by including header x-api-key.</li>
-        <li></li>
-    </ol>
+provider "aws" {
+    region = "${var.AWS_REGION}"
+}
+resource "aws_key_pair" "example_key" {
+    key_name = "mykey"
+    public_key = "${file("${var.PATH_TO_PUBLIC_KEY}")}"
+}
 
-    
+resource "aws_instance" "example" {
+    ami = "${lookup(var.AMIS,var.AWS_REGION)}"
+    instance_type = "t2.micro"
+    security_groups = [aws_security_group.example_sg.name]
+    key_name = "${aws_key_pair.example_key.key_name}"
+    provisioner "file" {
+        source  = "script.sh"
+        destination = "/tmp/script.sh"
+    }
+    provisioner "remote-exec"{
+        inline = [
+            "chmod +x /tmp/script.sh",
+            "sudo /tmp/script.sh"
+        ]
+    }
+    connection {
+        host = self.public_ip
+        user = "${var.INSTANCE_USERNAME}"
+        private_key = "${file("${var.PATH_TO_PRIVATE_KEY}")}"
+    }
+    provisioner "local-exec"{
+        command = "echo ${aws_instance.example.public_ip} >> public_ips.txt"
+    }
+    tags = {
+        Name = "ec2 example terraform instance"
+    }
+}
+
+resource "aws_security_group" "example_sg" {
+    name = "security group for example ec2"
+    ingress {
+        description = "HTTPS"
+        from_port = 443
+        to_port = 443
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+        ipv6_cidr_blocks = ["::/0"]
+    }
+    ingress {
+        description = "HTTP"
+        from_port = 80
+        to_port = 80
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+        ipv6_cidr_blocks = ["::/0"]
+    }
+    ingress {
+        description = "SSH"
+        from_port = 22
+        to_port = 22
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+        ipv6_cidr_blocks = ["::/0"]
+    }
+
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+        ipv6_cidr_blocks = ["::/0"]
+    }
+
+    tags = {
+        Name = "sg"
+    }
+}
+
+output "ip" {
+    value = "${aws_instance.example.public_ip}"
+}
+        </code></pre>
+        <li>Generate ssh key. <code>ssh-keygen mykey</code></li>
+        <li>Terraform apply.</li>
+        <li>ssh -i mykey ubuntu@ip</li>
+    </ol>
     <h3>References</h3>
     <hr>
-    <ol>
-        <li><a href="https://www.youtube.com/watch?v=V-ac_ZvdAW4">API Authentication via API Keys | AWS API Gateway</a></li>
-        <li><a href="https://www.youtube.com/watch?v=uFsaiEhr1zs">AWS API Gateway to Lambda Tutorial in Python | Build a REST API</a></li>
-        <li><a href="https://bobbyhadz.com/blog/aws-cli-invoke-lambda-functions">Invoke Lambda Functions with AWS CLI - Complete Guide</a></li>
-        <li><a href=""></a></li>
-    </ol>
     </div>
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
