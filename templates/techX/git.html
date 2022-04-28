@@ -125,6 +125,17 @@ git branch -D dev
 git remote prune origin
     </pre></code>
 
+    <li>To cache your username and token, you can use, </li>
+    <pre><code>
+git config --global credential.helper manager-core
+    </code></pre>
+    <li>Use ssh key to control repo,</li>
+    <pre><code>
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+# copy ssh public key to github: Icon &#8594 Settings &#8594 SSH and GPG Keys &#8594 New SSH Key
+git clone ssh_path
+ssh -T git@github.com
+    </code></pre>
     <li></li>
     <pre><code>
     </code></pre>
@@ -198,6 +209,8 @@ git reset --soft HEAD~1
     <li><a href="https://www.freecodecamp.org/news/how-open-source-licenses-work-and-how-to-add-them-to-your-projects-34310c3cf94/">How open source licenses work and how to add them to your projects</a></li>
     <li><a href="https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba">Markdown License badges</a></li>
     <li><a href="https://devconnected.com/how-to-undo-last-git-commit/">How To Undo Last Git Commit</a></li>
+    <li><a href="https://stackoverflow.com/questions/46645843/where-to-store-my-git-personal-access-token">Where to store my Git personal access token?</a></li>
+    <li><a href="https://gist.github.com/xirixiz/b6b0c6f4917ce17a90e00f9b60566278">SSH keypair setup for GitHub (or GitHub/GitLab/BitBucket, etc, etc)</a></li>
     <li><a href=""></a></li>
     </ol>
     </div>
