@@ -79,6 +79,12 @@
     <div><h4>Troubleshootings</h4></div>
     <ol>
         <li>Make sure Tools Settings are correct</li>
+        <li>`import serial` Not found. </li>
+        <pre><code>
+sudo apt install python-serial
+pip install serial
+pip install esptool
+        </code></pre>
         <li>If you cannot upload, try to press reset button on the arduino mega and behind the esp32 and release them</li>
         <li>When the serial monitor is opened, you can only see the previous sketch printing instead of the currently uploaded one, try to press reset button on the arduino mega and behind the esp32 and release them. Don't forget to disconnect GND and GPIO0 pins of ESP32, and GND and RESET pins of mega before that. </li>
         <li>If you see Camera init failed, try not inserting the camera module into ESP32 deeply.</li>
