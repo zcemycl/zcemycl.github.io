@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <style>
+      body{background-color:black;color:white;height:100%;font-family:Arial,Helvetica,sans-serif;}
+      /*h3{color:#00ff2b}*/
+      a{color:#337AB7;font-weight:bold;text-decoration:none;}
+      pre code {
+        color:white;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        white-space:pre-wrap;
+        word-wrap:break-word;
+
+      }
+      table{width:100%}
+      td,tr,th{border:1px solid white;}
+      td,th{width:25%;}
+      div.formula{overflow-x:scroll;border:1px solid white;}
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        width:5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        width:5px;
+        border-radius: 10px;
+        background: #555;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:hover {
+        width:5px;
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        width:5px;
+        background: orange;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-track:active {
+        width:5px;
+        background: #555;
+    }
+
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="content wrapper">
+    <div style="background-color:black; color:white; padding:0 2% 0 2%; height: 100%; flex:1;overflow: auto;">
+
+    <h3>Integral of Gaussian Distribution</h3>
+    <hr>
+    <h4>Normalisation</h4>
+    Prove that, 
+    $\int^\infty_{-\infty}e^{-\alpha x^2}dx = \sqrt{\frac{\pi}{\alpha }}$
+    <div class="formula">
+        \begin{align*}
+        &\int^\infty_{-\infty}e^{-\alpha x^2}dx\int^\infty_{-\infty}e^{-\alpha y^2}dy =
+        \int^\infty_{-\infty}\int^\infty_{-\infty}e^{-\alpha(x^2+y^2)}dxdy = \int^{2\pi}_0d\theta\int^\infty_0re^{-\alpha r^2}dr \\
+        &= 2\pi\int^\infty_0\frac{-1}{2\alpha }e^{-\alpha r^2}d(-\alpha r^2)=\frac{-\pi}{\alpha }\int^\infty_0 d(e^{-\alpha r^2}) = \frac{-\pi}{\alpha }[e^{-\alpha r^2}]^\infty_0=\frac{\pi}{\alpha }\\
+        &\text{Therefore, } \bigg[\int^\infty_{-\infty}e^{-\alpha x^2}dx\bigg]^2=\frac{\pi}{\alpha } \Rightarrow \int^\infty_{-\infty}e^{-\alpha x^2}dx = \sqrt{\frac{\pi}{\alpha }}
+        \end{align*}
+    </div>
+    <hr>
+    Gaussian Distribution is given by ,
+    <div class="formula">
+        $$\mathcal{N}(x;\mu,\sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2 }}e^{-\frac{(x-\mu)^2 }{2\sigma^2 }}$$
+    </div>
+    <h4>Sum to 1</h4>
+    Prove that,$\int^\infty_{-\infty}\mathcal{N}(x;\mu,\sigma^2)dx = 1$
+    <div class="formula">
+        \begin{align*}
+        \frac{1}{\sqrt{2\pi\sigma^2} }
+        \end{align*}
+    </div>
+    <h3>References</h3>
+    <hr>
+    </div>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/javascript" src="https://zcemycl.github.io/static/eqresp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script type="text/javascript">
+        window.scrollTo(0, document.body.scrollHeight);
+    </script>
+    
+</body>
+</html>
