@@ -69,6 +69,23 @@
 
     <h3>Set up Development Environment for Windows</h3>
     <hr>
+    <h4>Vscode</h4>
+    <ol>
+        <li><a href="https://code.visualstudio.com/docs/setup/windows" target="_blank">https://code.visualstudio.com/docs/setup/windows</a></li>
+        <li>Extensions: <ul>
+            <li>HTML: Live Preview, Live Server</li>
+            <li></li>
+        </ul></li>
+    </ol>
+    <h4>Git bash</h4>
+    <ol>
+        <li>Visit <a href="https://git-scm.com/download/win" target="_blank">https://git-scm.com/download/win</a>. Or download using powershell <code>winget install --id Git.Git -e --source winget</code>. </li>
+        <li>I suggest to change Terminal in vscode from Powershell to Git Bash.</li>
+        <li>Generate ssh key <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent" target="_blank">https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent</a>. <code>ssh-keygen -t ed25519-sk -C "YOUR_EMAIL"</code></li>
+        <li>Copy the ssh key public pair <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account" target="_blank" rel="noopener noreferrer">https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account</a>. <code> clip < ~/.ssh/id_ed25519.pub</code></li>
+        <li>Add ssh key to github to authenticate. Profile Icon > Settings > Access > SSH and GPG keys > paste step 4.</li>
+        <li>Sign github via ssh. <code>ssh -T git@github.com</code></li>
+    </ol>
     <h3>References</h3>
     <hr>
     </div>
